@@ -1,0 +1,343 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.CostCalc.PrintModel
+@{
+    Layout = null;
+    var phone    = Model.Site.GetValueOrDefault("Phone", "");
+    var email    = Model.Site.GetValueOrDefault("Email", "");
+    var lineId   = Model.Site.GetValueOrDefault("LineId", "");
+    var address  = System.Text.RegularExpressions.Regex.Replace(
+                       Model.Site.GetValueOrDefault("Address", ""), "<.*?>", "").Trim();
+    var today    = DateTime.Now.ToString("dd/MM/yyyy");
+}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ราคาสินค้า GLUR CAFE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 13px;
+            color: #1a1a1a;
+            background: #f5f5f5;
+        }
+        /* Screen wrapper */
+        .page-wrapper {
+            max-width: 820px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 24px rgba(0,0,0,.12);
+            padding: 0;
+            overflow: hidden;
+        }
+        /* Toolbar (screen only) */
+        .toolbar {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+        .toolbar a { color: #aaa; text-decoration: none; font-size: 12px; }
+        .toolbar a:hover { color: #fff; }
+        .btn-print {
+            margin-left: auto;
+            background: #00a86b;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 7px 20px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-print:hover { background: #008a58; }
+        .btn-filter {
+            background: rgba(255,255,255,.15);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        /* Document */
+        .doc { padding: 36px 40px; }
+        /* Header */
+        .doc-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #00a86b;
+            margin-bottom: 24px;
+        }
+        .brand { display: flex; align-items: center; gap: 14px; }
+        .brand img { height: 52px; width: auto; }
+        .brand-name { font-size: 22px; font-weight: 700; color: #00a86b; line-height: 1.1; }
+        .brand-sub { font-size: 11px; color: #777; margin-top: 2px; }
+        .doc-meta { text-align: right; font-size: 12px; color: #555; line-height: 1.8; }
+        .doc-meta strong { font-size: 16px; font-weight: 700; color: #1a1a1a; display: block; }
+        /* Contact bar */
+        .contact-bar {
+            background: #f0faf5;
+            border: 1px solid #c8eedd;
+            border-radius: 8px;
+            padding: 10px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            font-size: 12px;
+            color: #444;
+        }
+        .contact-bar span { display: flex; align-items: center; gap: 5px; }
+        /* Section title */
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #00a86b;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            margin-bottom: 10px;
+        }
+        /* Price table */
+        .price-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+        .price-table thead tr {
+            background: #00a86b;
+            color: #fff;
+        }
+        .price-table thead th {
+            padding: 10px 14px;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: left;
+        }
+        .price-table thead th.right { text-align: right; }
+        .price-table thead th.center { text-align: center; }
+        .price-table tbody tr { border-bottom: 1px solid #e8e8e8; }
+        .price-table tbody tr:nth-child(even) { background: #f9fdfb; }
+        .price-table tbody td {
+            padding: 10px 14px;
+            vertical-align: middle;
+        }
+        .price-table tbody td.right { text-align: right; }
+        .price-table tbody td.center { text-align: center; }
+        .product-name { font-weight: 600; font-size: 13px; color: #1a1a1a; }
+        .product-blend { font-size: 11px; color: #888; margin-top: 2px; }
+        .price-selling { font-size: 16px; font-weight: 700; color: #00a86b; }
+        .price-unit { font-size: 11px; color: #888; }
+        .badge-profit {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-profit.pos { background: #dcf5e8; color: #16a34a; }
+        .badge-profit.neg { background: #fee2e2; color: #dc2626; }
+        /* Footer */
+        .doc-footer {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 16px;
+            margin-top: 8px;
+            font-size: 11px;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .watermark { color: #ccc; font-size: 11px; }
+        /* Note box */
+        .note-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #92400e;
+            margin-bottom: 24px;
+        }
+
+        /* =========  PRINT STYLES  ========= */
+        @@media print {
+            body { background: #fff; font-size: 12px; }
+            .toolbar { display: none !important; }
+            .page-wrapper {
+                max-width: 100%;
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .doc { padding: 20mm 15mm; }
+            .price-table thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .price-table tbody tr:nth-child(even) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .badge-profit { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .contact-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            a { text-decoration: none; color: inherit; }
+            @@page { margin: 0; size: A4; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- Toolbar (screen only) -->
+    <div class="toolbar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+            <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7z"/>
+        </svg>
+        <span>Pricing List Preview</span>
+        <a href="/Admin/CostCalc">← กลับ</a>
+
+        @if (Model.Filter == "all")
+        {
+            <a class="btn-filter" href="/Admin/CostCalc/Print">แสดงเฉพาะมีราคาขาย</a>
+        }
+        else
+        {
+            <a class="btn-filter" href="/Admin/CostCalc/Print?filter=all">แสดงทุกรายการ</a>
+        }
+
+        <button class="btn-print" onclick="window.print()">
+            🖨 พิมพ์ / บันทึก PDF
+        </button>
+    </div>
+
+    <!-- Document -->
+    <div class="doc">
+
+        <!-- Header -->
+        <div class="doc-header">
+            <div class="brand">
+                <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" onerror="this.style.display='none'" />
+                <div>
+                    <div class="brand-name">GLUR CAFE</div>
+                    <div class="brand-sub">เกลอ คาเฟ่ — โรงคั่วเมล็ดกาแฟ</div>
+                </div>
+            </div>
+            <div class="doc-meta">
+                <strong>รายการราคาสินค้า</strong>
+                <span>วันที่: @today</span><br/>
+                <span>@Model.Products.Count รายการ</span>
+            </div>
+        </div>
+
+        <!-- Contact bar -->
+        @if (!string.IsNullOrEmpty(phone) || !string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(lineId))
+        {
+            <div class="contact-bar">
+                @if (!string.IsNullOrEmpty(phone))
+                {
+                    <span>📞 @phone</span>
+                }
+                @if (!string.IsNullOrEmpty(email))
+                {
+                    <span>✉️ @email</span>
+                }
+                @if (!string.IsNullOrEmpty(lineId))
+                {
+                    <span>💬 Line: @lineId</span>
+                }
+                @if (!string.IsNullOrEmpty(address))
+                {
+                    <span>📍 @address</span>
+                }
+            </div>
+        }
+
+        <!-- Note -->
+        <div class="note-box">
+            ⚠️ ราคาในเอกสารนี้เป็นราคา <strong>ต่อ 1 กิโลกรัม</strong> (หลังคั่ว) — ราคาอาจเปลี่ยนแปลงได้ตามต้นทุนวัตถุดิบ
+        </div>
+
+        <!-- Price table -->
+        <div class="section-title">รายการสินค้าและราคา</div>
+
+        @if (!Model.Products.Any())
+        {
+            <p style="color:#888;text-align:center;padding:40px 0">ยังไม่มีรายการสินค้าที่มีราคาขาย<br/>กรุณากลับไปกรอก "ราคาขาย" ในหน้าคำนวณต้นทุนก่อน</p>
+        }
+        else
+        {
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th style="width:30px" class="center">#</th>
+                        <th>ชื่อสินค้า / ส่วนผสม</th>
+                        <th class="right" style="width:130px">ราคาขาย/กก.</th>
+                        @if (Model.Filter == "all")
+                        {
+                            <th class="right" style="width:110px">ต้นทุน/กก.</th>
+                            <th class="center" style="width:80px">กำไร</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int rowNum = 0; }
+                    @foreach (var p in Model.Products)
+                    {
+                        rowNum++;
+                        var blend = string.Join(" + ", p.Items.Select(i => $"{i.BeanName} {i.RatioPercent:0}%"));
+                        <tr>
+                            <td class="center" style="color:#aaa;font-size:11px">@rowNum</td>
+                            <td>
+                                <div class="product-name">@p.ProductName</div>
+                                @if (!string.IsNullOrEmpty(blend))
+                                {
+                                    <div class="product-blend">@blend</div>
+                                }
+                            </td>
+                            <td class="right">
+                                @if (p.SellingPrice > 0)
+                                {
+                                    <span class="price-selling">@p.SellingPrice.ToString("#,##0.00")</span>
+                                    <span class="price-unit"> ฿/กก.</span>
+                                }
+                                else
+                                {
+                                    <span style="color:#aaa">—</span>
+                                }
+                            </td>
+                            @if (Model.Filter == "all")
+                            {
+                                <td class="right" style="color:#555">@p.CostPerKg.ToString("#,##0.00") ฿</td>
+                                <td class="center">
+                                    @if (p.SellingPrice > 0)
+                                    {
+                                        <span class="badge-profit @(p.ProfitPercent >= 0 ? "pos" : "neg")">
+                                            @p.ProfitPercent.ToString("0.#")%
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color:#ccc">—</span>
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <!-- Footer -->
+        <div class="doc-footer">
+            <span>GLUR CAFE — โรงคั่วเมล็ดกาแฟ คั่วสดทุกออร์เดอร์</span>
+            <span class="watermark">พิมพ์เมื่อ @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span>
+        </div>
+
+    </div><!-- /doc -->
+</div><!-- /page-wrapper -->
+</body>
+</html>

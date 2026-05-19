@@ -1,0 +1,426 @@
+@page "{id:int}"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Quotations.PrintModel
+@{
+    Layout = null;
+    var q = Model.Quotation;
+    var discount = q.TotalAmount - q.NetAmount;
+    var remaining = q.NetAmount - q.PaidAmount;
+}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ใบเสนอราคา @q.QuotationNumber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 13px;
+            color: #1a1a1a;
+            background: #e5e5e5;
+        }
+
+        /* ── Print toolbar (screen only) ── */
+        .print-toolbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: #1e293b;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .print-toolbar .btn-print {
+            background: #10b981;
+            color: #fff;
+            border: none;
+            padding: 7px 18px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .print-toolbar .btn-back {
+            background: transparent;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .print-toolbar .btn-back:hover { color: #fff; border-color: #94a3b8; }
+        .print-toolbar span { font-size: 12px; color: #94a3b8; margin-left: auto; }
+
+        /* ── A4 page wrapper ── */
+        .page-wrapper {
+            padding: 60px 20px 40px;
+        }
+
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            background: #fff;
+            margin: 0 auto;
+            padding: 20mm 18mm 18mm;
+            box-shadow: 0 4px 24px rgba(0,0,0,.18);
+            position: relative;
+        }
+
+        /* ── Header ── */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #10b981;
+            margin-bottom: 16px;
+        }
+        .company-logo {
+            height: 52px;
+            width: auto;
+        }
+        .company-info {
+            font-size: 11.5px;
+            color: #475569;
+            line-height: 1.65;
+            text-align: left;
+        }
+        .company-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 3px;
+        }
+        .doc-title-block {
+            text-align: right;
+        }
+        .doc-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: 1px;
+        }
+        .doc-number {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        .doc-date {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        /* ── Customer & Notes section ── */
+        .info-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+        .info-box-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+        .info-box p {
+            font-size: 12.5px;
+            color: #334155;
+            line-height: 1.6;
+        }
+        .info-box .customer-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* ── Items table ── */
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0;
+        }
+        .items-table thead tr {
+            background: #1e293b;
+            color: #fff;
+        }
+        .items-table thead th {
+            padding: 8px 10px;
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: .4px;
+        }
+        .items-table tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .items-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        .items-table tbody td {
+            padding: 8px 10px;
+            font-size: 12.5px;
+            vertical-align: top;
+        }
+        .items-table tfoot td {
+            padding: 6px 10px;
+            font-size: 12.5px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .total-row td {
+            background: #f0fdf4;
+            border-top: 2px solid #10b981 !important;
+            font-weight: 700;
+            font-size: 14px;
+            color: #059669;
+        }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+        .text-muted { color: #94a3b8; }
+
+        /* ── Signature area ── */
+        .signature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .sig-box {
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 8px;
+            text-align: center;
+            font-size: 11.5px;
+            color: #64748b;
+        }
+        .sig-box .sig-space {
+            height: 40px;
+        }
+
+        /* ── Footer note ── */
+        .doc-footer {
+            margin-top: 24px;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 11px;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        /* ── Status badge ── */
+        .status-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .status-draft    { background:#f1f5f9; color:#475569; }
+        .status-sent     { background:#dbeafe; color:#1d4ed8; }
+        .status-accepted { background:#dcfce7; color:#15803d; }
+        .status-paid     { background:#d1fae5; color:#065f46; }
+        .status-completed{ background:#d1fae5; color:#065f46; }
+        .status-rejected { background:#fee2e2; color:#991b1b; }
+        .status-cancelled{ background:#f1f5f9; color:#475569; }
+
+        /* ── Print media ── */
+        @@media print {
+            body { background: #fff; }
+            .print-toolbar { display: none !important; }
+            .page-wrapper { padding: 0; }
+            .a4-page {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+                padding: 15mm 15mm 12mm;
+                margin: 0;
+            }
+            @@page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Print toolbar (hidden when printing) -->
+<div class="print-toolbar">
+    <a href="/Admin/Quotations/Detail/@q.Id" class="btn-back">
+        ← กลับ
+    </a>
+    <button class="btn-print" onclick="window.print()">
+        🖨️ พิมพ์ / บันทึก PDF
+    </button>
+    <span>ใบเสนอราคา @q.QuotationNumber — @q.CustomerName</span>
+</div>
+
+<div class="page-wrapper">
+<div class="a4-page">
+
+    <!-- ── Header ── -->
+    <div class="doc-header">
+        <div>
+            <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" class="company-logo" />
+            <div class="company-info" style="margin-top:6px;">
+                <div class="company-name">GLUR CAFE</div>
+                @if (!string.IsNullOrWhiteSpace(Model.S("Address")))
+                {
+                    <div>@Model.S("Address")</div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.S("Phone")))
+                {
+                    <div>โทร: @Model.S("Phone")</div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.S("Email")))
+                {
+                    <div>อีเมล: @Model.S("Email")</div>
+                }
+            </div>
+        </div>
+        <div class="doc-title-block">
+            <div class="doc-title">ใบเสนอราคา</div>
+            <div class="doc-number">เลขที่: @q.QuotationNumber</div>
+            <div class="doc-date">วันที่: @q.CreatedAt.ToString("dd/MM/yyyy")</div>
+            @{
+                string statusLabel = q.Status switch {
+                    "draft" => "ร่าง", "sent" => "ส่งแล้ว", "accepted" => "ตอบรับ",
+                    "rejected" => "ปฏิเสธ", "paid" => "ชำระแล้ว", "completed" => "เสร็จสิ้น",
+                    "cancelled" => "ยกเลิก", _ => q.Status };
+            }
+            <div style="margin-top:6px;">
+                <span class="status-pill status-@q.Status">@statusLabel</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Customer & Notes ── -->
+    <div class="info-row">
+        <div class="info-box">
+            <div class="info-box-title">ผู้รับใบเสนอราคา</div>
+            <p class="customer-name">@q.CustomerName</p>
+            @if (!string.IsNullOrWhiteSpace(q.Phone)) { <p>โทร: @q.Phone</p> }
+            @if (!string.IsNullOrWhiteSpace(q.Email)) { <p>อีเมล: @q.Email</p> }
+            @if (!string.IsNullOrWhiteSpace(q.Address)) { <p>ที่อยู่: @Html.Raw(q.Address)</p> }
+        </div>
+        <div class="info-box">
+            <div class="info-box-title">รายละเอียดเพิ่มเติม</div>
+            @if (!string.IsNullOrWhiteSpace(q.Notes))
+            {
+                <p style="white-space:pre-line;">@q.Notes</p>
+            }
+            else
+            {
+                <p class="text-muted" style="font-style:italic;">—</p>
+            }
+        </div>
+    </div>
+
+    <!-- ── Line Items ── -->
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th style="width:32px;">#</th>
+                <th>รายการสินค้า / บริการ</th>
+                <th class="text-center" style="width:64px;">จำนวน</th>
+                <th style="width:56px;">หน่วย</th>
+                <th class="text-right" style="width:100px;">ราคา/หน่วย</th>
+                <th class="text-right" style="width:110px;">จำนวนเงิน</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int no = 1; }
+            @foreach (var item in q.Items)
+            {
+                <tr>
+                    <td class="text-muted text-center">@no</td>
+                    <td>@item.Description</td>
+                    <td class="text-center">@item.Quantity</td>
+                    <td>@item.Unit</td>
+                    <td class="text-right">@item.UnitPrice.ToString("N2")</td>
+                    <td class="text-right">@item.Amount.ToString("N2")</td>
+                </tr>
+                no++;
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-right">รวมทั้งหมด</td>
+                <td class="text-right">@q.TotalAmount.ToString("N2") ฿</td>
+            </tr>
+            @if (q.DiscountPercent > 0)
+            {
+                <tr>
+                    <td colspan="5" class="text-right">ส่วนลด @q.DiscountPercent%</td>
+                    <td class="text-right" style="color:#ef4444;">- @discount.ToString("N2") ฿</td>
+                </tr>
+            }
+            <tr class="total-row">
+                <td colspan="5" class="text-right">ยอดสุทธิ</td>
+                <td class="text-right">@q.NetAmount.ToString("N2") ฿</td>
+            </tr>
+            @if (q.PaidAmount > 0)
+            {
+                <tr>
+                    <td colspan="5" class="text-right">ชำระแล้ว</td>
+                    <td class="text-right" style="color:#059669;">@q.PaidAmount.ToString("N2") ฿</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-right" style="font-weight:600;">คงเหลือ</td>
+                    <td class="text-right" style="font-weight:600;color:#d97706;">@remaining.ToString("N2") ฿</td>
+                </tr>
+            }
+        </tfoot>
+    </table>
+
+    <!-- ── Signature ── -->
+    <div class="signature-row">
+        <div class="sig-box">
+            <div class="sig-space"></div>
+            <div>ลงชื่อ ________________________________</div>
+            <div style="margin-top:4px;">( @q.CustomerName )</div>
+            <div class="text-muted" style="margin-top:2px;">ผู้รับใบเสนอราคา &nbsp; วันที่ ___________</div>
+        </div>
+        <div class="sig-box">
+            <div class="sig-space"></div>
+            <div>ลงชื่อ ________________________________</div>
+            <div style="margin-top:4px;">( GLUR CAFE )</div>
+            <div class="text-muted" style="margin-top:2px;">ผู้เสนอราคา &nbsp; วันที่ ___________</div>
+        </div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <div class="doc-footer">
+        ใบเสนอราคานี้มีอายุ 30 วัน นับจากวันที่ออกเอกสาร
+        @if (!string.IsNullOrWhiteSpace(Model.S("Phone"))) { <span>| โทร: @Model.S("Phone")</span> }
+        @if (!string.IsNullOrWhiteSpace(Model.S("Email"))) { <span>| @Model.S("Email")</span> }
+    </div>
+
+</div><!-- .a4-page -->
+</div><!-- .page-wrapper -->
+
+</body>
+</html>

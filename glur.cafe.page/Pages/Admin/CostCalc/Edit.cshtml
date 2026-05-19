@@ -1,0 +1,282 @@
+@page "{id:int}"
+@using Microsoft.AspNetCore.Authorization
+@using System.Text.Json
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.CostCalc.EditModel
+@{
+    ViewData["Title"] = "แก้ไขสูตรต้นทุน";
+    ViewData["ActiveMenu"] = "costcalc";
+    var beanOpts = new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase };
+    var beanJson = JsonSerializer.Serialize(Model.BeanMaster.Select(b => new { b.Id, b.Name, b.PricePerKg }), beanOpts);
+    var existingItems = JsonSerializer.Serialize(Model.Items.Select(i => new {
+        beanTypeId = i.BeanTypeId ?? 0,
+        beanName = i.BeanName,
+        pricePerKg = i.PricePerKg,
+        ratioPercent = i.RatioPercent
+    }));
+}
+
+<div class="admin-card">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-pencil me-2"></i>แก้ไขสูตร: @Model.Product.ProductName</span>
+        <a href="/Admin/CostCalc" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>กลับ</a>
+    </div>
+    <div class="p-4">
+        @if (!ModelState.IsValid && ModelState.ErrorCount > 0)
+        {
+            <div class="alert alert-danger">
+                @foreach (var e in ModelState.Values.SelectMany(v => v.Errors))
+                { <div><i class="bi bi-exclamation-circle me-1"></i>@e.ErrorMessage</div> }
+            </div>
+        }
+        <form method="post" id="costForm">
+            @Html.AntiForgeryToken()
+            <input asp-for="Product.Id" type="hidden" />
+
+            <!-- Product Info -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label asp-for="Product.ProductName" class="form-label fw-semibold"></label>
+                    <input asp-for="Product.ProductName" class="form-control" />
+                    <span asp-validation-for="Product.ProductName" class="text-danger small"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Product.LossRate" class="form-label fw-semibold">อัตราสูญหายจากการคั่ว (%)</label>
+                    <div class="input-group">
+                        <input asp-for="Product.LossRate" class="form-control calc-input" type="number"
+                               step="0.1" min="0" max="99" id="lossRate" />
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Product.ProcessingFee" class="form-label fw-semibold">ค่าดำเนินการ (฿/กก.)</label>
+                    <div class="input-group">
+                        <input asp-for="Product.ProcessingFee" class="form-control calc-input" type="number"
+                               step="1" min="0" id="procFee" />
+                        <span class="input-group-text">฿</span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Product.Notes" class="form-label fw-semibold"></label>
+                    <input asp-for="Product.Notes" class="form-control" />
+                </div>
+            </div>
+
+            <!-- Bean Ingredients -->
+            <h6 class="fw-bold border-bottom pb-2 mb-3">
+                <i class="bi bi-bag me-2"></i>ส่วนผสมสาร
+                <small class="text-muted fw-normal ms-2">รวมอัตราส่วนต้องเท่ากับ 100%</small>
+            </h6>
+            <div class="table-responsive mb-2">
+                <table class="table table-bordered align-middle" id="beansTable">
+                    <thead class="table-header">
+                        <tr>
+                            <th style="min-width:220px">สารกาแฟ</th>
+                            <th style="width:180px" class="text-end">ราคา/กก. (฿)</th>
+                            <th style="width:160px" class="text-center">อัตราส่วน (%)</th>
+                            <th style="width:160px" class="text-end">ต้นทุนสาร (฿/กก.)</th>
+                            <th style="width:48px"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="beansBody"></tbody>
+                    <tfoot>
+                        <tr class="table-light">
+                            <td colspan="2" class="text-end fw-semibold">รวมอัตราส่วน:</td>
+                            <td class="text-center fw-bold" id="totalRatio">0%</td>
+                            <td class="text-end fw-semibold">ต้นทุนสาร:</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <button type="button" id="btnAddBean" class="btn btn-sm btn-outline-teal mb-4">
+                <i class="bi bi-plus-lg me-1"></i>เพิ่มสาร
+            </button>
+
+            <!-- Result -->
+            <div class="row justify-content-end mb-4">
+                <div class="col-md-5">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title fw-bold mb-3"><i class="bi bi-receipt me-2"></i>สรุปต้นทุน</h6>
+                            <table class="table table-sm mb-0">
+                                <tr>
+                                    <td class="text-muted">ต้นทุนสาร (Loss <span id="lossDisplay">20</span>%)</td>
+                                    <td class="text-end" id="beanCostDisplay">0.00 ฿</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">ค่าดำเนินการ</td>
+                                    <td class="text-end" id="procDisplay">50.00 ฿</td>
+                                </tr>
+                                <tr class="table-active">
+                                    <td class="fw-bold fs-6">ต้นทุน/กก.</td>
+                                    <td class="text-end fw-bold fs-5 text-success" id="totalCostDisplay">0.00 ฿</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">ราคาขาย/กก. (฿)</td>
+                                    <td class="text-end">
+                                        <div class="input-group input-group-sm justify-content-end">
+                                            <input asp-for="Product.SellingPrice" type="number" step="0.01" min="0"
+                                                   class="form-control form-control-sm text-end" id="sellingPrice"
+                                                   style="max-width:110px" placeholder="0.00" />
+                                            <span class="input-group-text">฿</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="profitRow" style="display:none">
+                                    <td class="text-muted">กำไร (฿/กก.)</td>
+                                    <td class="text-end" id="profitAmtDisplay">0.00 ฿</td>
+                                </tr>
+                                <tr id="profitPctRow" style="display:none">
+                                    <td class="fw-bold">กำไร (%)</td>
+                                    <td class="text-end fw-bold fs-5" id="profitPctDisplay">0%</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-end">
+                <a href="/Admin/CostCalc" class="btn btn-outline-secondary">ยกเลิก</a>
+                <button type="submit" class="btn btn-teal px-4">
+                    <i class="bi bi-floppy me-1"></i>บันทึกการแก้ไข
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+const BEANS = @Html.Raw(beanJson);
+const EXISTING = @Html.Raw(existingItems);
+let rowIndex = 0;
+
+function fmt(n) { return n.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+function buildRow(idx, data) {
+    const options = BEANS.map(b =>
+        `<option value="${b.id}" data-price="${b.pricePerKg}" ${data && data.beanTypeId === b.id ? 'selected' : ''}>${b.name} (${fmt(b.pricePerKg)} ฿/กก.)</option>`
+    ).join('');
+    const nameVal = data ? data.beanName : '';
+    const priceVal = data ? data.pricePerKg : 0;
+    const ratioVal = data ? data.ratioPercent : 0;
+    return `
+    <tr data-index="${idx}">
+        <td>
+            <select name="Items[${idx}].BeanTypeId" class="form-select form-select-sm bean-select" onchange="onBeanSelect(this,${idx})">
+                <option value="0" ${!data || data.beanTypeId === 0 ? 'selected' : ''}>— พิมพ์ชื่อเอง —</option>
+                ${options}
+            </select>
+            <input type="text" name="Items[${idx}].BeanName" value="${nameVal}" class="form-control form-control-sm mt-1 bean-name"
+                   placeholder="ชื่อสาร" required />
+        </td>
+        <td>
+            <div class="input-group input-group-sm">
+                <input type="number" name="Items[${idx}].PricePerKg" value="${priceVal}" step="0.01" min="0"
+                       class="form-control form-control-sm text-end calc-input price-input" required />
+                <span class="input-group-text">฿</span>
+            </div>
+        </td>
+        <td>
+            <div class="input-group input-group-sm">
+                <input type="number" name="Items[${idx}].RatioPercent" value="${ratioVal}" step="0.1" min="0" max="100"
+                       class="form-control form-control-sm text-center calc-input ratio-input" required />
+                <span class="input-group-text">%</span>
+            </div>
+        </td>
+        <td class="text-end fw-semibold row-bean-cost text-success">0.00 ฿</td>
+        <td class="text-center">
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow(this)"><i class="bi bi-trash"></i></button>
+        </td>
+    </tr>`;
+}
+
+function onBeanSelect(sel, idx) {
+    const row = sel.closest('tr');
+    const opt = sel.options[sel.selectedIndex];
+    const price = parseFloat(opt.dataset.price || 0);
+    if (sel.value !== '0') {
+        row.querySelector('.bean-name').value = opt.text.split(' (')[0];
+        row.querySelector('.price-input').value = price;
+    } else {
+        row.querySelector('.bean-name').value = '';
+    }
+    recalc();
+}
+
+function removeRow(btn) {
+    const rows = document.querySelectorAll('#beansBody tr');
+    if (rows.length <= 1) { alert('ต้องมีสารอย่างน้อย 1 รายการ'); return; }
+    btn.closest('tr').remove();
+    recalc();
+}
+
+function recalc() {
+    const loss = parseFloat(document.getElementById('lossRate').value) || 0;
+    const proc = parseFloat(document.getElementById('procFee').value) || 0;
+    const mult = loss < 100 ? 1 / (1 - loss / 100) : 0;
+
+    document.getElementById('lossDisplay').textContent = loss;
+    document.getElementById('procDisplay').textContent = fmt(proc) + ' ฿';
+
+    let totalRatio = 0, beanCost = 0;
+    document.querySelectorAll('#beansBody tr').forEach(row => {
+        const price = parseFloat(row.querySelector('.price-input')?.value) || 0;
+        const ratio = parseFloat(row.querySelector('.ratio-input')?.value) || 0;
+        const contrib = ratio / 100 * mult * price;
+        row.querySelector('.row-bean-cost').textContent = fmt(contrib) + ' ฿';
+        totalRatio += ratio;
+        beanCost += contrib;
+    });
+
+    const ratioEl = document.getElementById('totalRatio');
+    ratioEl.textContent = fmt(totalRatio) + '%';
+    ratioEl.className = Math.abs(totalRatio - 100) < 0.01 ? 'text-center fw-bold text-success' : 'text-center fw-bold text-danger';
+
+    document.getElementById('beanCostDisplay').textContent = fmt(beanCost) + ' ฿';
+    document.getElementById('totalCostDisplay').textContent = fmt(beanCost + proc) + ' ฿';
+
+    const selling = parseFloat(document.getElementById('sellingPrice').value) || 0;
+    const total = beanCost + proc;
+    if (selling > 0 && total > 0) {
+        const profitAmt = selling - total;
+        const profitPct = profitAmt / total * 100;
+        const color = profitPct >= 0 ? 'text-success' : 'text-danger';
+        document.getElementById('profitAmtDisplay').textContent = fmt(profitAmt) + ' ฿';
+        document.getElementById('profitPctDisplay').textContent = profitPct.toFixed(2) + '%';
+        document.getElementById('profitPctDisplay').className = 'text-end fw-bold fs-5 ' + color;
+        document.getElementById('profitRow').style.display = '';
+        document.getElementById('profitPctRow').style.display = '';
+    } else {
+        document.getElementById('profitRow').style.display = 'none';
+        document.getElementById('profitPctRow').style.display = 'none';
+    }
+}
+
+document.getElementById('btnAddBean').addEventListener('click', () => {
+    document.getElementById('beansBody').insertAdjacentHTML('beforeend', buildRow(rowIndex, null));
+    rowIndex++;
+    recalc();
+});
+document.getElementById('beansTable').addEventListener('input', e => {
+    if (e.target.classList.contains('calc-input')) recalc();
+});
+document.getElementById('lossRate').addEventListener('input', recalc);
+document.getElementById('procFee').addEventListener('input', recalc);
+document.getElementById('sellingPrice').addEventListener('input', recalc);
+
+// Load existing items
+if (EXISTING && EXISTING.length > 0) {
+    EXISTING.forEach(item => {
+        document.getElementById('beansBody').insertAdjacentHTML('beforeend', buildRow(rowIndex, item));
+        rowIndex++;
+    });
+} else {
+    document.getElementById('beansBody').insertAdjacentHTML('beforeend', buildRow(0, null));
+    rowIndex = 1;
+}
+recalc();
+</script>
+}

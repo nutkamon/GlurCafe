@@ -1,0 +1,171 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ 8" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+        - generic [ref=e24]: "8"
+      - link " ตั้งค่า" [ref=e25] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e26]: 
+        - generic [ref=e27]: ตั้งค่า
+      - generic [ref=e28]: เพิ่มเติม
+      - link " ใบเสนอราคา" [ref=e29] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e30]: 
+        - generic [ref=e31]: ใบเสนอราคา
+      - link " รายงาน" [ref=e32] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e33]: 
+        - generic [ref=e34]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e35] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e36]: 
+        - generic [ref=e37]: ผู้ดูแลระบบ
+    - generic [ref=e38]:
+      - link " ดูเว็บไซต์" [ref=e39] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e40]: 
+        - generic [ref=e41]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e42] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e43]: 
+        - generic [ref=e44]: ออกจากระบบ
+  - generic [ref=e45]:
+    - generic [ref=e46]:
+      - text: 
+      - generic [ref=e47]: แก้ไขแพ็คเกจ
+      - generic [ref=e48]:
+        - generic [ref=e49]: 
+        - generic [ref=e50]: ผู้ดูแลระบบ
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]: 
+          - text: แก้ไขแพ็คเกจ
+        - link " กลับ" [ref=e56] [cursor=pointer]:
+          - /url: /Admin/Pricing
+          - generic [ref=e57]: 
+          - text: กลับ
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]: ชื่อแพ็คเกจ
+          - textbox "ชื่อแพ็คเกจ" [ref=e63]: เมล็ดกาแฟไทย
+        - generic [ref=e64]:
+          - generic [ref=e65]: ราคา
+          - textbox "ราคา" [ref=e66]: "150"
+        - generic [ref=e67]:
+          - generic [ref=e68]: หน่วยราคา
+          - textbox "หน่วยราคา" [ref=e69]: "180"
+        - generic [ref=e70]:
+          - generic [ref=e71]: คำอธิบาย
+          - application "Rich Text Editor" [ref=e72]:
+            - toolbar "Editor toolbar" [ref=e75]:
+              - generic [ref=e76]:
+                - button "Paragraph, Heading" [ref=e78]:
+                  - generic [ref=e79]: Paragraph
+                  - img
+                - button "Bold" [ref=e81]:
+                  - img [ref=e82]
+                - button "Italic" [ref=e84]:
+                  - img [ref=e85]
+                - button "Bulleted List" [ref=e88]:
+                  - img [ref=e89]
+                - button "Numbered List" [ref=e91]:
+                  - img [ref=e92]
+                - button "Block quote" [ref=e95]:
+                  - img [ref=e96]
+                - button "Link" [ref=e98]:
+                  - img [ref=e99]
+                - button "Undo" [disabled] [ref=e102]:
+                  - img [ref=e103]
+                - button "Redo" [disabled] [ref=e105]:
+                  - img [ref=e106]
+            - 'textbox "Editor editing area: main. Press Alt+0 for help." [ref=e108]':
+              - paragraph [ref=e109]: ดอยช้าง · แม่จันใต้ · แม่สลอง · เทพเสด็จ · แม่ฮ่องสอน · ไทยบลูมาเท่น · ดอยวาวี · น่าน · บ่อสี่เหลี่ยม · ปางขอน · แพร่ · เวียดนาม · รัฐฉาน · ลาว
+        - generic [ref=e110]:
+          - generic [ref=e111]: คุณสมบัติ (1 บรรทัด = 1 รายการ)
+          - application "Rich Text Editor" [ref=e112]:
+            - toolbar "Editor toolbar" [ref=e115]:
+              - generic [ref=e116]:
+                - button "Paragraph, Heading" [ref=e118]:
+                  - generic [ref=e119]: Paragraph
+                  - img
+                - button "Bold" [ref=e121]:
+                  - img [ref=e122]
+                - button "Italic" [ref=e124]:
+                  - img [ref=e125]
+                - button "Bulleted List" [pressed] [ref=e128]:
+                  - img [ref=e129]
+                - button "Numbered List" [ref=e131]:
+                  - img [ref=e132]
+                - button "Block quote" [ref=e135]:
+                  - img [ref=e136]
+                - button "Link" [ref=e138]:
+                  - img [ref=e139]
+                - button "Undo" [disabled] [ref=e142]:
+                  - img [ref=e143]
+                - button "Redo" [disabled] [ref=e145]:
+                  - img [ref=e146]
+            - 'textbox "Editor editing area: main. Press Alt+0 for help." [ref=e148]':
+              - list [ref=e149]:
+                - listitem [ref=e150]:
+                  - generic [ref=e151]: คั่วสดก่อนส่งทุกออร์เดอร์
+                - listitem [ref=e152]:
+                  - generic [ref=e153]: เลือกระดับการคั่วได้
+                - listitem [ref=e154]:
+                  - generic [ref=e155]: บรรจุถุง Valve ซีลสูญญากาศ
+        - generic [ref=e156]:
+          - generic [ref=e157]: ข้อความปุ่ม CTA
+          - textbox "ข้อความปุ่ม CTA" [ref=e158]: สั่งซื้อเลย
+        - generic [ref=e159]:
+          - generic [ref=e160]: ลำดับการแสดงผล
+          - spinbutton "ลำดับการแสดงผล" [ref=e161]: "1"
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - checkbox "ยอดนิยม" [ref=e164]
+            - generic [ref=e165]: ยอดนิยม
+          - generic [ref=e166]:
+            - checkbox "เปิดใช้งาน" [checked] [ref=e167]
+            - generic [ref=e168]: เปิดใช้งาน
+        - generic [ref=e169]:
+          - link "ยกเลิก" [ref=e170] [cursor=pointer]:
+            - /url: /Admin/Pricing
+          - button " บันทึก" [ref=e171] [cursor=pointer]:
+            - generic [ref=e172]: 
+            - text: บันทึก
+  - generic:
+    - generic:
+      - generic:
+        - region:
+          - list
+        - region:
+          - list
+    - generic:
+      - generic:
+        - region:
+          - list
+        - region:
+          - list

@@ -1,0 +1,97 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Settings.IndexModel
+@{
+    ViewData["Title"] = "ตั้งค่าเว็บไซต์";
+    var groups = Model.Settings.GroupBy(s => s.Group).OrderBy(g => g.Key);
+    var groupLabels = new Dictionary<string, (string Label, string Icon)>
+    {
+        ["Contact"] = ("ข้อมูลติดต่อ", "bi-telephone"),
+        ["Social"]  = ("โซเชียลมีเดีย", "bi-share"),
+        ["General"] = ("ทั่วไป", "bi-gear"),
+    };
+    var keyLabels = new Dictionary<string, string>
+    {
+        ["Phone"]           = "เบอร์โทรศัพท์",
+        ["Email"]           = "อีเมล",
+        ["LineId"]          = "Line ID",
+        ["Address"]         = "ที่อยู่",
+        ["WorkingHours"]    = "เวลาเปิด-ปิด",
+        ["Facebook"]        = "Facebook URL",
+        ["Line"]            = "Line URL",
+        ["Instagram"]       = "Instagram URL",
+        ["TikTok"]          = "TikTok URL",
+        ["GoogleMapsEmbed"] = "Google Maps Embed URL",
+    };
+}
+
+<div class="main-card">
+    <div class="page-header">
+        <h1><i class="bi bi-gear"></i> ตั้งค่าเว็บไซต์</h1>
+        <a class="btn btn-back" href="/Admin">
+            <i class="bi bi-arrow-left"></i> กลับ
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <form method="post">
+        @Html.AntiForgeryToken()
+
+        @for (int i = 0; i < Model.Settings.Count; i++)
+        {
+            <input type="hidden" asp-for="Settings[i].Id" />
+            <input type="hidden" asp-for="Settings[i].Key" />
+            <input type="hidden" asp-for="Settings[i].Group" />
+        }
+
+        @foreach (var group in groups)
+        {
+            var hasLabel = groupLabels.TryGetValue(group.Key, out var groupInfo);
+            var label = hasLabel ? groupInfo.Label : group.Key;
+            var icon  = hasLabel ? groupInfo.Icon  : "bi-folder";
+
+            <div class="admin-card mb-4">
+                <div class="admin-card-header">
+                    <h5 class="mb-0"><i class="bi @icon me-2"></i>@label</h5>
+                </div>
+                <div class="p-4">
+                    <div class="row g-3">
+                        @foreach (var setting in group)
+                        {
+                            var idx = Model.Settings.IndexOf(setting);
+                            var fieldLabel = keyLabels.TryGetValue(setting.Key, out var kl) ? kl : setting.Key;
+                            var isLong = setting.Key is "Address" or "GoogleMapsEmbed" or "WorkingHours";
+                            var isRichText = false; // Address/WorkingHours are plain text, not CKEditor
+
+                            <div class="col-12 col-md-@(isLong ? "12" : "6")">
+                                <label class="form-label fw-semibold">@fieldLabel</label>
+                                @if (isLong)
+                                {
+                                    <textarea asp-for="Settings[idx].Value" class="form-control" rows="2"></textarea>
+                                }
+                                else
+                                {
+                                    <input asp-for="Settings[idx].Value" class="form-control" />
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-teal px-4">
+                <i class="bi bi-floppy me-1"></i> บันทึกการตั้งค่า
+            </button>
+        </div>
+    </form>
+</div>

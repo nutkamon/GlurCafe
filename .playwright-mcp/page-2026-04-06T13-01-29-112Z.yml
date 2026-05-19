@@ -1,0 +1,359 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ 16" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+        - generic [ref=e24]: "16"
+      - link " ตั้งค่า" [ref=e25] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e26]: 
+        - generic [ref=e27]: ตั้งค่า
+      - generic [ref=e28]: เพิ่มเติม
+      - link " ใบเสนอราคา" [ref=e29] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e30]: 
+        - generic [ref=e31]: ใบเสนอราคา
+      - link " รายงาน" [ref=e32] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e33]: 
+        - generic [ref=e34]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e35] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e36]: 
+        - generic [ref=e37]: ผู้ดูแลระบบ
+    - generic [ref=e38]:
+      - link " ดูเว็บไซต์" [ref=e39] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e40]: 
+        - generic [ref=e41]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e42] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e43]: 
+        - generic [ref=e44]: ออกจากระบบ
+  - generic [ref=e45]:
+    - generic [ref=e46]:
+      - text: 
+      - generic [ref=e47]: จัดการแกลเลอรี่
+      - generic [ref=e48]:
+        - generic [ref=e49]: 
+        - generic [ref=e50]: ผู้ดูแลระบบ
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]: 
+          - text: แกลเลอรี่ทั้งหมด (16)
+        - link " เพิ่มรายการ" [ref=e56] [cursor=pointer]:
+          - /url: /Admin/Portfolios/Create
+          - generic [ref=e57]: 
+          - text: เพิ่มรายการ
+      - table [ref=e59]:
+        - rowgroup [ref=e60]:
+          - row "# ชื่อรายการ หมวดหมู่ รายละเอียด Icon ลำดับ สถานะ" [ref=e61]:
+            - columnheader "#" [ref=e62]
+            - columnheader "ชื่อรายการ" [ref=e63]
+            - columnheader "หมวดหมู่" [ref=e64]
+            - columnheader "รายละเอียด" [ref=e65]
+            - columnheader "Icon" [ref=e66]
+            - columnheader "ลำดับ" [ref=e67]
+            - columnheader "สถานะ" [ref=e68]
+            - columnheader [ref=e69]
+        - rowgroup [ref=e70]:
+          - row "1 GLUR Signature — Thai Latte กาแฟซิกเนเจอร์ เมนูซิกเนเจอร์ GLUR Signature — Thai Latte 1 เปิด  " [ref=e71]:
+            - cell "1" [ref=e72]
+            - cell "GLUR Signature — Thai Latte" [ref=e73]
+            - cell "กาแฟซิกเนเจอร์" [ref=e74]:
+              - generic [ref=e75]: กาแฟซิกเนเจอร์
+            - cell "เมนูซิกเนเจอร์" [ref=e76]
+            - cell "GLUR Signature — Thai Latte" [ref=e77]:
+              - img "GLUR Signature — Thai Latte" [ref=e78]
+            - cell "1" [ref=e79]
+            - cell "เปิด" [ref=e80]:
+              - button "เปิด" [ref=e82] [cursor=pointer]
+            - cell " " [ref=e83]:
+              - link "" [ref=e84] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/1
+                - generic [ref=e85]: 
+              - button "" [ref=e87] [cursor=pointer]:
+                - generic [ref=e88]: 
+          - row "2 Single Origin — Ethiopia Yirgacheffe Single Origin Light Roast Single Origin — Ethiopia Yirgacheffe 2 เปิด  " [ref=e89]:
+            - cell "2" [ref=e90]
+            - cell "Single Origin — Ethiopia Yirgacheffe" [ref=e91]
+            - cell "Single Origin" [ref=e92]:
+              - generic [ref=e93]: Single Origin
+            - cell "Light Roast" [ref=e94]
+            - cell "Single Origin — Ethiopia Yirgacheffe" [ref=e95]:
+              - img "Single Origin — Ethiopia Yirgacheffe" [ref=e96]
+            - cell "2" [ref=e97]
+            - cell "เปิด" [ref=e98]:
+              - button "เปิด" [ref=e100] [cursor=pointer]
+            - cell " " [ref=e101]:
+              - link "" [ref=e102] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/2
+                - generic [ref=e103]: 
+              - button "" [ref=e105] [cursor=pointer]:
+                - generic [ref=e106]: 
+          - row "3 Cold Brew Collection Cold Brew Cold Series Cold Brew Collection 3 เปิด  " [ref=e107]:
+            - cell "3" [ref=e108]
+            - cell "Cold Brew Collection" [ref=e109]
+            - cell "Cold Brew" [ref=e110]:
+              - generic [ref=e111]: Cold Brew
+            - cell "Cold Series" [ref=e112]
+            - cell "Cold Brew Collection" [ref=e113]:
+              - img "Cold Brew Collection" [ref=e114]
+            - cell "3" [ref=e115]
+            - cell "เปิด" [ref=e116]:
+              - button "เปิด" [ref=e118] [cursor=pointer]
+            - cell " " [ref=e119]:
+              - link "" [ref=e120] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/3
+                - generic [ref=e121]: 
+              - button "" [ref=e123] [cursor=pointer]:
+                - generic [ref=e124]: 
+          - row "4 Latte Art — Rosetta & Tulip Latte Art บาริสต้าซีรีส์ Latte Art — Rosetta & Tulip 4 เปิด  " [ref=e125]:
+            - cell "4" [ref=e126]
+            - cell "Latte Art — Rosetta & Tulip" [ref=e127]
+            - cell "Latte Art" [ref=e128]:
+              - generic [ref=e129]: Latte Art
+            - cell "บาริสต้าซีรีส์" [ref=e130]
+            - cell "Latte Art — Rosetta & Tulip" [ref=e131]:
+              - img "Latte Art — Rosetta & Tulip" [ref=e132]
+            - cell "4" [ref=e133]
+            - cell "เปิด" [ref=e134]:
+              - button "เปิด" [ref=e136] [cursor=pointer]
+            - cell " " [ref=e137]:
+              - link "" [ref=e138] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/4
+                - generic [ref=e139]: 
+              - button "" [ref=e141] [cursor=pointer]:
+                - generic [ref=e142]: 
+          - row "5 Matcha Series — Hojicha Latte ชา & ทางเลือก ชาพรีเมียม Matcha Series — Hojicha Latte 5 เปิด  " [ref=e143]:
+            - cell "5" [ref=e144]
+            - cell "Matcha Series — Hojicha Latte" [ref=e145]
+            - cell "ชา & ทางเลือก" [ref=e146]:
+              - generic [ref=e147]: ชา & ทางเลือก
+            - cell "ชาพรีเมียม" [ref=e148]
+            - cell "Matcha Series — Hojicha Latte" [ref=e149]:
+              - img "Matcha Series — Hojicha Latte" [ref=e150]
+            - cell "5" [ref=e151]
+            - cell "เปิด" [ref=e152]:
+              - button "เปิด" [ref=e154] [cursor=pointer]
+            - cell " " [ref=e155]:
+              - link "" [ref=e156] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/5
+                - generic [ref=e157]: 
+              - button "" [ref=e159] [cursor=pointer]:
+                - generic [ref=e160]: 
+          - row "6 บรรยากาศร้าน — Morning Vibe บรรยากาศร้าน Glur Cafe Space บรรยากาศร้าน — Morning Vibe 6 เปิด  " [ref=e161]:
+            - cell "6" [ref=e162]
+            - cell "บรรยากาศร้าน — Morning Vibe" [ref=e163]
+            - cell "บรรยากาศร้าน" [ref=e164]:
+              - generic [ref=e165]: บรรยากาศร้าน
+            - cell "Glur Cafe Space" [ref=e166]
+            - cell "บรรยากาศร้าน — Morning Vibe" [ref=e167]:
+              - img "บรรยากาศร้าน — Morning Vibe" [ref=e168]
+            - cell "6" [ref=e169]
+            - cell "เปิด" [ref=e170]:
+              - button "เปิด" [ref=e172] [cursor=pointer]
+            - cell " " [ref=e173]:
+              - link "" [ref=e174] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/6
+                - generic [ref=e175]: 
+              - button "" [ref=e177] [cursor=pointer]:
+                - generic [ref=e178]: 
+          - row "7 Wholesale — Bangkok Roasters Co. Wholesale Wholesale Partner Wholesale — Bangkok Roasters Co. 7 เปิด  " [ref=e179]:
+            - cell "7" [ref=e180]
+            - cell "Wholesale — Bangkok Roasters Co." [ref=e181]
+            - cell "Wholesale" [ref=e182]:
+              - generic [ref=e183]: Wholesale
+            - cell "Wholesale Partner" [ref=e184]
+            - cell "Wholesale — Bangkok Roasters Co." [ref=e185]:
+              - img "Wholesale — Bangkok Roasters Co." [ref=e186]
+            - cell "7" [ref=e187]
+            - cell "เปิด" [ref=e188]:
+              - button "เปิด" [ref=e190] [cursor=pointer]
+            - cell " " [ref=e191]:
+              - link "" [ref=e192] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/7
+                - generic [ref=e193]: 
+              - button "" [ref=e195] [cursor=pointer]:
+                - generic [ref=e196]: 
+          - row "8 Private Label — Baan Coffee Brand Private Label Baan Coffee Private Label — Baan Coffee Brand 8 เปิด  " [ref=e197]:
+            - cell "8" [ref=e198]
+            - cell "Private Label — Baan Coffee Brand" [ref=e199]
+            - cell "Private Label" [ref=e200]:
+              - generic [ref=e201]: Private Label
+            - cell "Baan Coffee" [ref=e202]
+            - cell "Private Label — Baan Coffee Brand" [ref=e203]:
+              - img "Private Label — Baan Coffee Brand" [ref=e204]
+            - cell "8" [ref=e205]
+            - cell "เปิด" [ref=e206]:
+              - button "เปิด" [ref=e208] [cursor=pointer]
+            - cell " " [ref=e209]:
+              - link "" [ref=e210] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/8
+                - generic [ref=e211]: 
+              - button "" [ref=e213] [cursor=pointer]:
+                - generic [ref=e214]: 
+          - row "9 Barista Class — Batch 12 Barista Class GLUR Training Barista Class — Batch 12 9 เปิด  " [ref=e215]:
+            - cell "9" [ref=e216]
+            - cell "Barista Class — Batch 12" [ref=e217]
+            - cell "Barista Class" [ref=e218]:
+              - generic [ref=e219]: Barista Class
+            - cell "GLUR Training" [ref=e220]
+            - cell "Barista Class — Batch 12" [ref=e221]:
+              - img "Barista Class — Batch 12" [ref=e222]
+            - cell "9" [ref=e223]
+            - cell "เปิด" [ref=e224]:
+              - button "เปิด" [ref=e226] [cursor=pointer]
+            - cell " " [ref=e227]:
+              - link "" [ref=e228] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/9
+                - generic [ref=e229]: 
+              - button "" [ref=e231] [cursor=pointer]:
+                - generic [ref=e232]: 
+          - row "10 Event Coffee — Tech Summit 2025 Event Catering Tech Summit Event Coffee — Tech Summit 2025 10 เปิด  " [ref=e233]:
+            - cell "10" [ref=e234]
+            - cell "Event Coffee — Tech Summit 2025" [ref=e235]
+            - cell "Event Catering" [ref=e236]:
+              - generic [ref=e237]: Event Catering
+            - cell "Tech Summit" [ref=e238]
+            - cell "Event Coffee — Tech Summit 2025" [ref=e239]:
+              - img "Event Coffee — Tech Summit 2025" [ref=e240]
+            - cell "10" [ref=e241]
+            - cell "เปิด" [ref=e242]:
+              - button "เปิด" [ref=e244] [cursor=pointer]
+            - cell " " [ref=e245]:
+              - link "" [ref=e246] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/10
+                - generic [ref=e247]: 
+              - button "" [ref=e249] [cursor=pointer]:
+                - generic [ref=e250]: 
+          - row "11 เบเกอรี่สด — Croissant & Pain Au Choc เบเกอรี่ GLUR Bakery เบเกอรี่สด — Croissant & Pain Au Choc 11 เปิด  " [ref=e251]:
+            - cell "11" [ref=e252]
+            - cell "เบเกอรี่สด — Croissant & Pain Au Choc" [ref=e253]
+            - cell "เบเกอรี่" [ref=e254]:
+              - generic [ref=e255]: เบเกอรี่
+            - cell "GLUR Bakery" [ref=e256]
+            - cell "เบเกอรี่สด — Croissant & Pain Au Choc" [ref=e257]:
+              - img "เบเกอรี่สด — Croissant & Pain Au Choc" [ref=e258]
+            - cell "11" [ref=e259]
+            - cell "เปิด" [ref=e260]:
+              - button "เปิด" [ref=e262] [cursor=pointer]
+            - cell " " [ref=e263]:
+              - link "" [ref=e264] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/11
+                - generic [ref=e265]: 
+              - button "" [ref=e267] [cursor=pointer]:
+                - generic [ref=e268]: 
+          - row "12 Cupping Session — Sudan Rume Coffee Cupping Coffee Lab Cupping Session — Sudan Rume 12 เปิด  " [ref=e269]:
+            - cell "12" [ref=e270]
+            - cell "Cupping Session — Sudan Rume" [ref=e271]
+            - cell "Coffee Cupping" [ref=e272]:
+              - generic [ref=e273]: Coffee Cupping
+            - cell "Coffee Lab" [ref=e274]
+            - cell "Cupping Session — Sudan Rume" [ref=e275]:
+              - img "Cupping Session — Sudan Rume" [ref=e276]
+            - cell "12" [ref=e277]
+            - cell "เปิด" [ref=e278]:
+              - button "เปิด" [ref=e280] [cursor=pointer]
+            - cell " " [ref=e281]:
+              - link "" [ref=e282] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/12
+                - generic [ref=e283]: 
+              - button "" [ref=e285] [cursor=pointer]:
+                - generic [ref=e286]: 
+          - row "13 Test Portfolio Test Category  13 เปิด  " [ref=e287]:
+            - cell "13" [ref=e288]
+            - cell "Test Portfolio" [ref=e289]
+            - cell "Test Category" [ref=e290]:
+              - generic [ref=e291]: Test Category
+            - cell [ref=e292]
+            - cell "" [ref=e293]:
+              - generic [ref=e294]: 
+            - cell "13" [ref=e295]
+            - cell "เปิด" [ref=e296]:
+              - button "เปิด" [ref=e298] [cursor=pointer]
+            - cell " " [ref=e299]:
+              - link "" [ref=e300] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/13
+                - generic [ref=e301]: 
+              - button "" [ref=e303] [cursor=pointer]:
+                - generic [ref=e304]: 
+          - row "14 Test Item Upload Test Category Test Item Upload 14 เปิด  " [ref=e305]:
+            - cell "14" [ref=e306]
+            - cell "Test Item Upload" [ref=e307]
+            - cell "Test Category" [ref=e308]:
+              - generic [ref=e309]: Test Category
+            - cell [ref=e310]
+            - cell "Test Item Upload" [ref=e311]:
+              - img "Test Item Upload" [ref=e312]
+            - cell "14" [ref=e313]
+            - cell "เปิด" [ref=e314]:
+              - button "เปิด" [ref=e316] [cursor=pointer]
+            - cell " " [ref=e317]:
+              - link "" [ref=e318] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/14
+                - generic [ref=e319]: 
+              - button "" [ref=e321] [cursor=pointer]:
+                - generic [ref=e322]: 
+          - row "15 Glur Cafe — Fruit Tea เครื่องดื่ม Glur Cafe — Fruit Tea 15 เปิด  " [ref=e323]:
+            - cell "15" [ref=e324]
+            - cell "Glur Cafe — Fruit Tea" [ref=e325]
+            - cell "เครื่องดื่ม" [ref=e326]:
+              - generic [ref=e327]: เครื่องดื่ม
+            - cell [ref=e328]
+            - cell "Glur Cafe — Fruit Tea" [ref=e329]:
+              - img "Glur Cafe — Fruit Tea" [ref=e330]
+            - cell "15" [ref=e331]
+            - cell "เปิด" [ref=e332]:
+              - button "เปิด" [ref=e334] [cursor=pointer]
+            - cell " " [ref=e335]:
+              - link "" [ref=e336] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/15
+                - generic [ref=e337]: 
+              - button "" [ref=e339] [cursor=pointer]:
+                - generic [ref=e340]: 
+          - row "16 ทดสอบแกลเลอรี่ ทดสอบ  16 เปิด  " [ref=e341]:
+            - cell "16" [ref=e342]
+            - cell "ทดสอบแกลเลอรี่" [ref=e343]
+            - cell "ทดสอบ" [ref=e344]:
+              - generic [ref=e345]: ทดสอบ
+            - cell [ref=e346]
+            - cell "" [ref=e347]:
+              - generic [ref=e348]: 
+            - cell "16" [ref=e349]
+            - cell "เปิด" [ref=e350]:
+              - button "เปิด" [ref=e352] [cursor=pointer]
+            - cell " " [ref=e353]:
+              - link "" [ref=e354] [cursor=pointer]:
+                - /url: /Admin/Portfolios/Edit/16
+                - generic [ref=e355]: 
+              - button "" [ref=e357] [cursor=pointer]:
+                - generic [ref=e358]: 
+  - alert "สำเร็จ" [ref=e359]:
+    - heading "สำเร็จ" [level=2] [ref=e367]
+    - generic [ref=e368]: เพิ่มรายการแกลเลอรี่เรียบร้อยแล้ว
+    - text: "!"

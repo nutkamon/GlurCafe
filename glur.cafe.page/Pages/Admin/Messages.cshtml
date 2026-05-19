@@ -1,0 +1,157 @@
+@page
+@model glur.cafe.page.Pages.Admin.MessagesModel
+@{
+    ViewData["Title"] = "ข้อความจากลูกค้า";
+    ViewData["ActiveMenu"] = "messages";
+    ViewData["UnreadCount"] = Model.UnreadCount;
+}
+
+<div class="admin-card">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-envelope me-2"></i>ข้อความทั้งหมด
+            @if (Model.UnreadCount > 0)
+            {
+                <span class="badge bg-teal ms-2">@Model.UnreadCount ใหม่</span>
+            }
+        </span>
+        <a href="?markAllRead=1" class="btn btn-sm btn-outline-teal" onclick="return confirm('ทำเครื่องหมายว่าอ่านทั้งหมด?')">
+            <i class="bi bi-check-all me-1"></i>อ่านทั้งหมด
+        </a>
+    </div>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+            <i class="bi bi-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    <!-- Bulk Action Bar -->
+    <div id="bulkActionBar" class="d-none px-3 py-2 border-bottom bg-light d-flex align-items-center gap-3">
+        <span id="selectedCount" class="small fw-semibold text-muted"></span>
+        <form id="bulkDeleteForm" method="post" asp-page-handler="BulkDelete" class="d-inline" onsubmit="return confirm('ลบข้อความที่เลือกทั้งหมด?')">
+            @Html.AntiForgeryToken()
+            <div id="bulkIdsContainer"></div>
+            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash me-1"></i>ลบที่เลือก</button>
+        </form>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="cancelBulk">ยกเลิก</button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-header">
+                <tr>
+                    <th style="width:40px"><input type="checkbox" id="selectAll" class="form-check-input"></th>
+                    <th>#</th>
+                    <th>ชื่อ</th>
+                    <th>เบอร์โทร</th>
+                    <th class="d-none d-md-table-cell">อีเมล</th>
+                    <th class="d-none d-lg-table-cell">สนใจเรื่อง</th>
+                    <th class="d-none d-lg-table-cell">วันที่</th>
+                    <th>สถานะ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var msg in Model.Messages)
+                {
+                    <tr class="@(msg.IsRead ? "" : "table-row-unread")" data-id="@msg.Id">
+                        <td><input type="checkbox" class="form-check-input row-check" data-id="@msg.Id"></td>
+                        <td class="text-muted small">@msg.Id</td>
+                        <td class="fw-semibold">@msg.FullName</td>
+                        <td>
+                            <a href="tel:@msg.Phone" class="text-decoration-none">@msg.Phone</a>
+                        </td>
+                        <td class="d-none d-md-table-cell small text-muted">@msg.Email</td>
+                        <td class="d-none d-lg-table-cell small text-muted">@msg.ServiceType</td>
+                        <td class="d-none d-lg-table-cell small text-muted">@msg.CreatedAt.ToString("dd/MM/yy HH:mm")</td>
+                        <td>
+                            @if (!msg.IsRead)
+                            {
+                                <span class="badge bg-teal">ใหม่</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">อ่านแล้ว</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary" type="button"
+                                    onclick="viewMessage(@msg.Id, '@System.Text.Json.JsonEncodedText.Encode(msg.FullName)', '@System.Text.Json.JsonEncodedText.Encode(msg.Phone)', '@System.Text.Json.JsonEncodedText.Encode(msg.Email ?? "")', '@System.Text.Json.JsonEncodedText.Encode(msg.ServiceType ?? "")', '@System.Text.Json.JsonEncodedText.Encode(msg.Message ?? "")', '@msg.CreatedAt.ToString("dd MMM yyyy HH:mm")')">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Messages.Any())
+                {
+                    <tr><td colspan="8" class="text-center text-muted py-5">ยังไม่มีข้อความ</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="px-3 pt-2 pb-1">
+            <ul class="pagination pagination-sm justify-content-center mb-0">
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.PageNum ? "active" : "")">
+                        <a class="page-link" href="?PageNum=@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</div>
+
+<!-- Message Detail Modal -->
+<div class="modal fade" id="msgModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold"><i class="bi bi-envelope-open me-2 text-teal"></i>รายละเอียดข้อความ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-4">
+                <p><strong>ชื่อ:</strong> <span id="mName"></span></p>
+                <p><strong>เบอร์โทร:</strong> <a id="mPhone" href="#"></a></p>
+                <p><strong>อีเมล:</strong> <span id="mEmail"></span></p>
+                <p><strong>สนใจเรื่อง:</strong> <span id="mService"></span></p>
+                <p><strong>วันที่:</strong> <span id="mDate"></span></p>
+                <hr />
+                <p><strong>ข้อความ:</strong></p>
+                <div id="mMsg" class="bg-light rounded p-3 small"></div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">ปิด</button>
+                <a id="mCallBtn" href="#" class="btn btn-teal btn-sm"><i class="bi bi-telephone me-1"></i>โทรหา</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function viewMessage(id, name, phone, email, service, message, date) {
+    document.getElementById('mName').textContent    = name;
+    document.getElementById('mPhone').textContent   = phone;
+    document.getElementById('mPhone').href          = 'tel:' + phone;
+    document.getElementById('mEmail').textContent   = email;
+    document.getElementById('mService').textContent = service;
+    document.getElementById('mDate').textContent    = date;
+    document.getElementById('mMsg').textContent     = message;
+    document.getElementById('mCallBtn').href        = 'tel:' + phone;
+    new bootstrap.Modal(document.getElementById('msgModal')).show();
+
+    // Mark as read via fetch
+    fetch('/Admin/Messages?handler=MarkRead&id=' + id, { method: 'POST',
+        headers: { 'RequestVerificationToken': document.querySelector('meta[name="request-verification-token"]')?.content ?? '' }
+    }).catch(() => {});
+    const row = document.querySelector('[data-id="' + id + '"]');
+    if (row) {
+        row.classList.remove('table-row-unread');
+        const badge = row.querySelector('.badge.bg-teal');
+        if (badge) { badge.className = 'badge bg-secondary'; badge.textContent = 'อ่านแล้ว'; }
+    }
+}
+</script>
+}

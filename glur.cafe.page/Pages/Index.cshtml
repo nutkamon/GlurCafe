@@ -1,0 +1,601 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "GLUR CAFE — โรงคั่วกาแฟ & กาแฟสด";
+}
+
+<!-- ======================== HERO SECTION ======================== -->
+<section id="hero" class="hero-section">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+        <div class="hero-logo-wrap">
+            <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" class="hero-logo-img" />
+        </div>
+        <p class="hero-tagline">โรงคั่วกาแฟ & กาแฟสด</p>
+        <p class="hero-description">
+            เราคัดสรรเมล็ดกาแฟจากแหล่งปลูกชั้นนำทั่วโลก<br />
+            คั่วสดทุกวัน ชงด้วยความใส่ใจ เพื่อทุกถ้วยที่ดีที่สุดสำหรับคุณ
+        </p>
+        <div class="hero-badges" data-aos="fade-up" data-aos-delay="200">
+            <span class="hero-badge"><i class="bi bi-globe-asia-australia me-1"></i> Single Origin</span>
+            <span class="hero-badge"><i class="bi bi-fire me-1"></i> Fresh Roasted Daily</span>
+            <span class="hero-badge"><i class="bi bi-award me-1"></i> SCA Certified Barista</span>
+            <span class="hero-badge"><i class="bi bi-truck me-1"></i> Wholesale ทั่วไทย</span>
+        </div>
+        <div class="hero-btns d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="300">
+            <a href="#services" class="btn btn-hero-primary">
+                <i class="bi bi-cup-hot me-2"></i>ดูบริการของเรา
+            </a>
+            <a href="#contact" class="btn btn-hero-outline">
+                <i class="bi bi-chat-dots me-2"></i>ติดต่อเรา
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-wave">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,80 C360,120 720,20 1440,80 L1440,120 L0,120 Z" fill="#ffffff" />
+        </svg>
+    </div>
+</section>
+
+<!-- ======================== STATS BAR ======================== -->
+<section class="stats-bar">
+    <div class="container">
+        <div class="stats-card" data-aos="fade-up" data-aos-duration="800">
+            <div class="row">
+                @foreach (var stat in Model.Stats)
+                {
+                    <div class="col-6 col-md-3">
+                        <div class="stat-item">
+                            <div class="stat-icon gradient-text"><i class="bi @stat.IconClassName"></i></div>
+                            <div class="stat-value gradient-text">@stat.Value</div>
+                            <div class="stat-label">@stat.Label</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================== GALLERY ======================== -->
+<section id="gallery" class="section-padding bg-cream">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title"><span class="gradient-text">สินค้าของเรา</span></h2>
+            <p class="section-subtitle">ลิ้มลองกาแฟและบรรยากาศที่ GLUR CAFE ทุกถ้วยบอกเล่าเรื่องราวของเมล็ดกาแฟที่เราคัดสรร</p>
+        </div>
+        <div class="row g-3">
+            @for (int i = 0; i < Model.Portfolios.Count; i++)
+            {
+                var item = Model.Portfolios[i];
+                <div class="col-6 col-lg-3" data-aos="zoom-in" data-aos-delay="@(i * 60)">
+                    <div class="portfolio-item @(string.IsNullOrEmpty(item.ImagePath) ? item.GradientClass : "")"
+                         data-name="@item.ProjectName"
+                         data-category="@item.Category"
+                         data-description="@(item.Description ?? "")"
+                         data-client="@(item.ClientName ?? "")"
+                         data-image="@(item.ImagePath ?? "")"
+                         data-icon="@item.IconClassName"
+                         data-gradient="@item.GradientClass"
+                         onclick="openPortfolioModal(this)">
+                        <div class="portfolio-item-bg">
+                            @if (!string.IsNullOrEmpty(item.ImagePath))
+                            {
+                                <img src="@item.ImagePath" alt="@item.ProjectName" style="width:100%;height:100%;object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <i class="bi @item.IconClassName portfolio-icon"></i>
+                            }
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h6>@item.ProjectName</h6>
+                            <small>@item.Category</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ======================== PORTFOLIO MODAL ======================== -->
+<div class="modal fade" id="portfolioModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content portfolio-modal-content">
+            <button type="button" class="btn-close portfolio-modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="row g-0">
+
+                <!-- ซ้าย : รูป / ไอคอน -->
+                <div class="col-lg-8">
+                    <div class="portfolio-modal-img-wrap" id="portfolioModalImgWrap">
+                        <img id="portfolioModalImg" src="" alt="" class="d-none" />
+                        <div class="portfolio-modal-icon-placeholder" id="portfolioModalIconPlaceholder">
+                            <i id="portfolioModalIcon" class="bi"></i>
+                        </div>
+                        <div class="portfolio-modal-details-overlay">
+                            <span class="portfolio-modal-category-badge" id="portfolioModalCategory"></span>
+                            <h4 class="portfolio-modal-name" id="portfolioModalName"></h4>
+                            <p class="portfolio-modal-client" id="portfolioModalClient"></p>
+                            <p class="portfolio-modal-desc" id="portfolioModalDesc"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ขวา : ฟอร์มติดต่อ -->
+                <div class="col-lg-4">
+                    <div class="service-modal-contact">
+                        <div class="service-modal-contact-header">
+                            <i class="bi bi-bag-heart-fill"></i>
+                            <h5>สนใจสินค้านี้?</h5>
+                            <p>กรอกข้อมูลเพื่อให้เราติดต่อกลับ</p>
+                        </div>
+                        <form id="portfolioContactForm" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="mb-3">
+                                <input type="text" name="ContactInput.FullName" class="form-control form-control-modal" placeholder="ชื่อ-นามสกุล *" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" name="ContactInput.Phone" class="form-control form-control-modal" placeholder="เบอร์โทรศัพท์ *" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" name="ContactInput.Email" class="form-control form-control-modal" placeholder="อีเมล (ถ้ามี)" />
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="ContactInput.ServiceType" id="portfolioContactItem" class="form-control form-control-modal" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="ContactInput.Message" id="portfolioContactMessage" class="form-control form-control-modal" rows="3" placeholder="รายละเอียดเพิ่มเติม..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-gradient w-100">
+                                <i class="bi bi-send me-2"></i>ส่งข้อความ
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================== PRICING ======================== -->
+<section id="pricing" class="section-padding pricing-section">
+    <div class="container position-relative">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title text-white">ราคาสินค้า</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.7);">เลือกแพ็คเกจที่เหมาะกับคุณ ทั้งสำหรับคนรักกาแฟในบ้านและธุรกิจ</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            @for (int i = 0; i < Model.PricingPlans.Count; i++)
+            {
+                var plan = Model.PricingPlans[i];
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="@(i * 150)">
+                    <div class="pricing-card @(plan.IsPopular ? "popular" : "")">
+                        @if (plan.IsPopular)
+                        {
+                            <div class="popular-badge">
+                                <i class="bi bi-star-fill me-1"></i> ยอดนิยม
+                            </div>
+                        }
+                        <h4 class="pricing-name">@plan.Name</h4>
+                        <!-- ราคา -->
+                        <div class="pricing-size-row">
+                            <div class="pricing-size-item">
+                                <span class="pricing-size-label">200 g.</span>
+                                <span class="pricing-price">@plan.Price<small>฿</small></span>
+                            </div>
+                            <div class="pricing-size-divider"></div>
+                            <div class="pricing-size-item">
+                                <span class="pricing-size-label">250 g.</span>
+                                <span class="pricing-price">@plan.PriceUnit<small>฿</small></span>
+                            </div>
+                        </div>
+                        <!-- แหล่งปลูก -->
+                        <div class="origin-tags-wrap">
+                            <p class="origin-tags-label"><i class="bi bi-geo-alt me-1"></i>แหล่งปลูก</p>
+                            <div class="origin-list">
+                                @Html.Raw(plan.Description ?? "")
+                            </div>
+                        </div>
+                        <hr class="pricing-divider" />
+                        <!-- สิ่งที่ได้รับ -->
+                        <ul class="pricing-features">
+                            @if (plan.FeaturesJson?.TrimStart().StartsWith("[") == true)
+                            {
+                                @foreach (var feature in IndexModel.ParseFeatures(plan.FeaturesJson))
+                                {
+                                    <li><i class="bi bi-check-circle-fill"></i> @feature</li>
+                                }
+                            }
+                            else
+                            {
+                                @Html.Raw(plan.FeaturesJson ?? "")
+                            }
+                        </ul>
+                        <button class="btn btn-pricing" onclick="handlePricingClick('@plan.Name')">
+                            @plan.CtaText <i class="bi bi-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- ตารางราคาเมล็ดกาแฟ -->
+        <div class="bean-price-table-wrap" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="bean-price-title"><i class="bi bi-bag-heart me-2"></i>ราคาเมล็ดกาแฟ</h3>
+            <div class="row g-4">
+                <!-- เมล็ดกาแฟไทย -->
+                <div class="col-lg-7">
+                    <div class="bean-price-card">
+                        <div class="bean-price-header">
+                            <span>เมล็ดกาแฟไทย</span>
+                            <span>200 g.</span>
+                            <span>250 g.</span>
+                        </div>
+                        <div class="bean-price-row">
+                            <div class="bean-origins">
+                                ดอยช้าง · แม่จันใต้ · แม่สลอง · เทพเสด็จ · แม่ฮ่องสอน<br />
+                                ไทยบลูมาเท่น · ดอยวาวี · น่าน · ห้วยน้ำขุ่น<br />
+                                บ่อสี่เหลี่ยม · ปางขอน · แพร่ · เวียดนาม · รัฐฉาน · ลาว
+                            </div>
+                            <span class="bean-price-val">150.-</span>
+                            <span class="bean-price-val">180.-</span>
+                        </div>
+                        <div class="bean-price-row">
+                            <div class="bean-origins">ขุนลาว · ดอยสะเก็ด · ห้วยตาด</div>
+                            <span class="bean-price-val">160.-</span>
+                            <span class="bean-price-val">190.-</span>
+                        </div>
+                        <div class="bean-price-row">
+                            <div class="bean-origins">ขุนช่างเคี่ยน · อินทนนท์</div>
+                            <span class="bean-price-val">170.-</span>
+                            <span class="bean-price-val">200.-</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- เมล็ดกาแฟต่างประเทศ -->
+                <div class="col-lg-5">
+                    <div class="bean-price-card">
+                        <div class="bean-price-header">
+                            <span>เมล็ดกาแฟต่างประเทศ</span>
+                            <span>200 g.</span>
+                            <span>250 g.</span>
+                        </div>
+                        <div class="bean-price-row">
+                            <div class="bean-origins">
+                                Brazil · Colombia · Ethiopia · Honduras<br />
+                                Indonesia · Kenya · Uganda
+                            </div>
+                            <span class="bean-price-val">260.-</span>
+                            <span class="bean-price-val">325.-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================== WHY GLUR ======================== -->
+<section id="why-us" class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title"><span class="gradient-text">ทำไมต้อง GLUR CAFE</span></h2>
+            <p class="section-subtitle">สิ่งที่ทำให้เราแตกต่าง คือความใส่ใจในทุกเมล็ดและทุกถ้วย</p>
+        </div>
+        <div class="row g-4">
+            @for (int i = 0; i < Model.WhyUsItems.Count; i++)
+            {
+                var item = Model.WhyUsItems[i];
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="@(i * 100)">
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <i class="bi @item.IconClassName"></i>
+                        </div>
+                        <h5>@item.Title</h5>
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contact" class="section-padding contact-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title"><span class="gradient-text">ติดต่อเรา</span></h2>
+            <p class="section-subtitle">พร้อมตอบทุกคำถาม ไม่ว่าจะเป็นเรื่องกาแฟสด Wholesale หรือ Barista Class</p>
+        </div>
+        <div class="row g-4">
+            <!-- Contact Form -->
+            <div class="col-lg-7" data-aos="fade-right">
+                <div class="contact-form-card">
+                    <h4 class="mb-4 fw-bold">ส่งข้อความถึงเรา ☕</h4>
+                    <form id="contactForm" method="post" asp-page-handler="Contact">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">ชื่อ-นามสกุล</label>
+                                <input type="text" name="ContactInput.FullName" class="form-control form-control-custom" placeholder="กรุณากรอกชื่อ" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">เบอร์โทรศัพท์</label>
+                                <input type="tel" name="ContactInput.Phone" class="form-control form-control-custom" placeholder="0xx-xxx-xxxx" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">อีเมล</label>
+                                <input type="email" name="ContactInput.Email" class="form-control form-control-custom" placeholder="email@@example.com" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">สนใจเรื่อง</label>
+                                <select name="ContactInput.ServiceType" class="form-select form-control-custom">
+                                    <option selected disabled>เลือกประเภทที่สนใจ</option>
+                                    <option>กาแฟสด</option>
+                                    <option>เมล็ดกาแฟ Wholesale</option>
+                                    <option>Barista Training Class</option>
+                                    <option>Subscription Monthly</option>
+                                    <option>Private Label Roasting</option>
+                                    <option>Event & Catering Coffee</option>
+                                    <option>Cold Brew</option>
+                                    <option>ชา & เครื่องดื่มทางเลือก</option>
+                                    <option>อื่นๆ</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">รายละเอียดเพิ่มเติม</label>
+                                <textarea name="ContactInput.Message" class="form-control form-control-custom" rows="4"
+                                          placeholder="บอกเล่าความต้องการของคุณ เช่น ปริมาณเมล็ดกาแฟ สายพันธุ์ที่สนใจ ฯลฯ"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-gradient btn-lg">
+                                    <i class="bi bi-send me-2"></i>ส่งข้อความ
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @{
+    string StripHtml(string s) => System.Text.RegularExpressions.Regex.Replace(s ?? "", "<.*?>", "").Trim();
+}
+<!-- Contact Info -->
+            <div class="col-lg-5" data-aos="fade-left">
+                <div class="contact-info-card">
+                    <h4 class="fw-bold mb-4">ข้อมูลติดต่อ</h4>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <strong>ที่อยู่</strong>
+                            <p class="mb-0 opacity-75 small">@StripHtml(Model.Site.GetValueOrDefault("Address", "123 ถ.กาแฟดี อ.เมือง เชียงใหม่"))</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <strong>โทรศัพท์</strong>
+                            <p class="mb-0 opacity-75 small">@Model.Site.GetValueOrDefault("Phone", "080-123-4567")</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="bi bi-line"></i></div>
+                        <div>
+                            <strong>Line ID</strong>
+                            <p class="mb-0 opacity-75 small">@Model.Site.GetValueOrDefault("LineId", "@glurcafe")</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="bi bi-clock-fill"></i></div>
+                        <div>
+                            <strong>เวลาเปิด-ปิด</strong>
+                            <p class="mb-0 opacity-75 small">@StripHtml(Model.Site.GetValueOrDefault("WorkingHours", "ทุกวัน 07:00 - 19:00 น."))</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+                        <div>
+                            <strong>อีเมล</strong>
+                            <p class="mb-0 opacity-75 small">@Model.Site.GetValueOrDefault("Email", "hello@glurcafe.com")</p>
+                        </div>
+                    </div>
+                    <hr class="opacity-25 my-3" />
+                    <div class="social-links">
+                        <a href="@Model.Site.GetValueOrDefault("Facebook", "#")" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="@Model.Site.GetValueOrDefault("Line", "#")" title="Line"><i class="bi bi-line"></i></a>
+                        <a href="@Model.Site.GetValueOrDefault("Instagram", "#")" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="@Model.Site.GetValueOrDefault("TikTok", "#")" title="TikTok"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Google Maps -->
+        <div class="mt-5 map-container" data-aos="fade-up">
+            <iframe src="@StripHtml(Model.Site.GetValueOrDefault("GoogleMapsEmbed", "https://maps.google.com/maps?q=18.7883,98.9853&z=15&output=embed"))"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- ======================== SERVICES ======================== -->
+<section id="services" class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title"><span class="gradient-text">บริการของเรา</span></h2>
+            <p class="section-subtitle">ครบทุกความต้องการด้านกาแฟ ตั้งแต่กาแฟสดหน้าร้าน จนถึงเมล็ดกาแฟ Wholesale สำหรับธุรกิจ</p>
+        </div>
+        <div class="row g-4">
+            @for (int i = 0; i < Model.Services.Count; i++)
+            {
+                var service = Model.Services[i];
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="@(i * 80)">
+                    <div class="service-card @service.GradientClass service-card-clickable"
+                         data-title="@service.Title"
+                         data-description="@(service.Description ?? "")"
+                         data-image="@(service.ImagePath ?? "")"
+                         data-icon="@service.IconClassName"
+                         data-gradient="@service.GradientClass"
+                         onclick="openServiceModal(this)">
+                        <div class="service-icon-wrap @(!string.IsNullOrEmpty(service.ImagePath) ? "service-icon-wrap--img" : "")">
+                            @if (!string.IsNullOrEmpty(service.ImagePath))
+                            {
+                                <img src="@service.ImagePath" alt="@service.Title" />
+                            }
+                            else
+                            {
+                                <i class="bi @service.IconClassName"></i>
+                            }
+                        </div>
+                        <h5>@service.Title</h5>
+                        <div>@Html.Raw(service.Description)</div>
+                        <div class="service-card-cta"><i class="bi bi-zoom-in me-1"></i>ดูรายละเอียด</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ======================== SERVICE MODAL ======================== -->
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content service-modal-content">
+            <button type="button" class="btn-close service-modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="row g-0">
+
+                <!-- ซ้าย : รูป / ไอคอน -->
+                <div class="col-lg-8">
+                    <div class="service-modal-image-wrap" id="serviceModalImageWrap">
+                        <img id="serviceModalImg" src="" alt="" class="d-none" />
+                        <div class="service-modal-icon-placeholder" id="serviceModalIconPlaceholder">
+                            <i id="serviceModalIcon" class="bi"></i>
+                        </div>
+                        <div class="service-modal-details-overlay">
+                            <h4 class="service-modal-name" id="serviceModalName"></h4>
+                            <div class="service-modal-divider my-2"></div>
+                            <div class="service-modal-desc" id="serviceModalDesc"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ขวา : ฟอร์มติดต่อ -->
+                <div class="col-lg-4">
+                    <div class="service-modal-contact">
+                        <div class="service-modal-contact-header">
+                            <i class="bi bi-chat-heart-fill"></i>
+                            <h5>สนใจสั่งชื่อกาแฟหรือพาร์ทเนอร์?</h5>
+                            <p>กรอกข้อมูลเพื่อให้เราติดต่อกลับ</p>
+                        </div>
+                        <form id="serviceContactForm" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="mb-3">
+                                <input type="text" name="ContactInput.FullName" class="form-control form-control-modal" placeholder="ชื่อ-นามสกุล *" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" name="ContactInput.Phone" class="form-control form-control-modal" placeholder="เบอร์โทรศัพท์ *" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" name="ContactInput.Email" class="form-control form-control-modal" placeholder="อีเมล (ถ้ามี)" />
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="ContactInput.ServiceType" id="serviceContactService" class="form-control form-control-modal" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="ContactInput.Message" id="serviceContactMessage" class="form-control form-control-modal" rows="3" placeholder="รายละเอียดเพิ่มเติม..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-gradient w-100">
+                                <i class="bi bi-send me-2"></i>ส่งข้อความ
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================== PROCESS ======================== -->
+<section id="process" class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title"><span class="gradient-text">กระบวนการของเรา</span></h2>
+            <p class="section-subtitle">ทุกถ้วยผ่านกระบวนการที่พิถีพิถัน เพื่อให้คุณได้รับประสบการณ์กาแฟที่ดีที่สุด</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var step in Model.ProcessSteps)
+            {
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="@((step.StepNumber - 1) * 150)">
+                    <div class="process-step">
+                        @if (step.StepNumber < 4)
+                        {
+                            <div class="process-connector d-none d-lg-block"></div>
+                        }
+                        <div class="process-number">
+                            <i class="bi @step.IconClassName"></i>
+                        </div>
+                        <h5>@step.Title</h5>
+                        <p>@step.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="footer-brand">
+                    <i class="bi bi-cup-hot me-2"></i>GLUR CAFE
+                </div>
+                <div class="footer-tagline">โรงคั่วกาแฟ & กาแฟสด</div>
+                <p class="small opacity-75">คัดสรรเมล็ดกาแฟคุณภาพจากแหล่งปลูกชั้นนำ คั่วสดทุกวัน ชงด้วยความใส่ใจ เพื่อทุกถ้วยที่ดีที่สุดสำหรับคุณ</p>
+                <div class="social-links mt-3">
+                    <a href="@Model.Site.GetValueOrDefault("Facebook", "#")" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="@Model.Site.GetValueOrDefault("Line", "#")" title="Line"><i class="bi bi-line"></i></a>
+                    <a href="@Model.Site.GetValueOrDefault("Instagram", "#")" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="@Model.Site.GetValueOrDefault("TikTok", "#")" title="TikTok"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6 class="footer-heading">บริการ</h6>
+                <ul class="footer-links">
+                    <li><a href="#services">กาแฟสด</a></li>
+                    <li><a href="#services">โรงคั่วกาแฟ</a></li>
+                    <li><a href="#services">Wholesale</a></li>
+                    <li><a href="#services">Barista Class</a></li>
+                    <li><a href="#services">Event Catering</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6 class="footer-heading">ลิงก์ด่วน</h6>
+                <ul class="footer-links">
+                    <li><a href="#hero">หน้าแรก</a></li>
+                    <li><a href="#gallery">สินค้าของเรา</a></li>
+                    <li><a href="#pricing">ราคาสินค้า</a></li>
+                    <li><a href="#why-us">ทำไมต้อง GLUR</a></li>
+                    <li><a href="#contact">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h6 class="footer-heading">ติดต่อ</h6>
+                <p class="small opacity-75 mb-1"><i class="bi bi-geo-alt me-2 text-teal"></i>@StripHtml(Model.Site.GetValueOrDefault("Address", "123 ถ.กาแฟดี อ.เมือง เชียงใหม่"))</p>
+                <p class="small opacity-75 mb-1"><i class="bi bi-telephone me-2"></i>@Model.Site.GetValueOrDefault("Phone", "080-123-4567")</p>
+                <p class="small opacity-75 mb-1"><i class="bi bi-line me-2"></i>@Model.Site.GetValueOrDefault("LineId", "@glurcafe")</p>
+                <p class="small opacity-75 mb-1"><i class="bi bi-clock me-2"></i>@StripHtml(Model.Site.GetValueOrDefault("WorkingHours", "ทุกวัน 07:00 - 19:00 น."))</p>
+            </div>
+        </div>
+        <hr class="footer-divider" />
+        <div class="footer-bottom text-center">
+            &copy; @DateTime.Now.Year GLUR CAFE — เกลอ คาเฟ่. All rights reserved.
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,120 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ 8" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+        - generic [ref=e24]: "8"
+      - link " ตั้งค่า" [ref=e25] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e26]: 
+        - generic [ref=e27]: ตั้งค่า
+      - generic [ref=e28]: เพิ่มเติม
+      - link " ใบเสนอราคา" [ref=e29] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e30]: 
+        - generic [ref=e31]: ใบเสนอราคา
+      - link " รายงาน" [ref=e32] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e33]: 
+        - generic [ref=e34]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e35] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e36]: 
+        - generic [ref=e37]: ผู้ดูแลระบบ
+    - generic [ref=e38]:
+      - link " ดูเว็บไซต์" [ref=e39] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e40]: 
+        - generic [ref=e41]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e42] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e43]: 
+        - generic [ref=e44]: ออกจากระบบ
+  - generic [ref=e45]:
+    - generic [ref=e46]:
+      - text: 
+      - generic [ref=e47]: เพิ่มรายการแกลเลอรี่
+      - generic [ref=e48]:
+        - generic [ref=e49]: 
+        - generic [ref=e50]: ผู้ดูแลระบบ
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]: 
+          - text: เพิ่มรายการใหม่
+        - link " กลับ" [ref=e56] [cursor=pointer]:
+          - /url: /Admin/Portfolios
+          - generic [ref=e57]: 
+          - text: กลับ
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]: ชื่อรายการ
+          - textbox "ชื่อรายการ" [ref=e63]:
+            - /placeholder: เช่น GLUR Signature Thai Latte
+        - generic [ref=e64]:
+          - generic [ref=e65]: หมวดหมู่
+          - textbox "หมวดหมู่" [ref=e66]:
+            - /placeholder: เช่น กาแฟซิกเนเจอร์
+        - generic [ref=e67]:
+          - generic [ref=e68]: รายละเอียดเพิ่มเติม
+          - textbox "รายละเอียดเพิ่มเติม" [ref=e69]
+        - generic [ref=e70]:
+          - generic [ref=e71]: รูปภาพ (ถ้ามี จะแสดงแทนไอคอน)
+          - button "Choose File" [ref=e72] [cursor=pointer]
+        - generic [ref=e73]:
+          - generic [ref=e74]: คำอธิบาย
+          - textbox "คำอธิบาย" [ref=e75]
+        - generic [ref=e76]:
+          - generic [ref=e77]: Bootstrap Icon Class
+          - generic [ref=e78]:
+            - generic [ref=e80]: 
+            - textbox "Bootstrap Icon Class" [ref=e81]:
+              - /placeholder: bi-cup-hot
+        - generic [ref=e82]:
+          - generic [ref=e83]: Gradient CSS Class
+          - combobox "Gradient CSS Class" [ref=e84]:
+            - option "port-1" [selected]
+            - option "port-2"
+            - option "port-3"
+            - option "port-4"
+            - option "port-5"
+            - option "port-6"
+            - option "port-7"
+            - option "port-8"
+            - option "port-9"
+            - option "port-10"
+        - generic [ref=e85]:
+          - generic [ref=e86]: ลำดับการแสดงผล
+          - spinbutton "ลำดับการแสดงผล" [ref=e87]: "16"
+        - generic [ref=e89]:
+          - checkbox "เปิดใช้งาน" [checked] [ref=e90]
+          - generic [ref=e91]: เปิดใช้งาน
+        - generic [ref=e92]:
+          - link "ยกเลิก" [ref=e93] [cursor=pointer]:
+            - /url: /Admin/Portfolios
+          - button " บันทึก" [ref=e94] [cursor=pointer]:
+            - generic [ref=e95]: 
+            - text: บันทึก

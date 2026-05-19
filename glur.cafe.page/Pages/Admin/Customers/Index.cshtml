@@ -1,0 +1,212 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Customers.IndexModel
+@{
+    ViewData["Title"] = "CRM ลูกค้า";
+    string active = Model.StatusFilter ?? "";
+    string typeFilter = Model.TypeFilter ?? "";
+    string search = Model.Search ?? "";
+}
+
+<div class="admin-card mb-3">
+    <div class="admin-card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex flex-wrap gap-1">
+            <a href="?StatusFilter=&TypeFilter=@typeFilter&Search=@search" class="btn btn-sm @(active == "" ? "btn-teal" : "btn-outline-teal")">
+                ทั้งหมด <span class="badge @(active == "" ? "bg-white text-teal" : "bg-teal") ms-1">@Model.CountAll</span>
+            </a>
+            <a href="?StatusFilter=lead&TypeFilter=@typeFilter&Search=@search" class="btn btn-sm @(active == "lead" ? "btn-teal" : "btn-outline-teal")">
+                <i class="bi bi-funnel me-1"></i>Lead <span class="badge @(active == "lead" ? "bg-white text-teal" : "bg-secondary") ms-1">@Model.CountLead</span>
+            </a>
+            <a href="?StatusFilter=prospect&TypeFilter=@typeFilter&Search=@search" class="btn btn-sm @(active == "prospect" ? "btn-teal" : "btn-outline-teal")">
+                <i class="bi bi-eye me-1"></i>Prospect <span class="badge @(active == "prospect" ? "bg-white text-teal" : "bg-secondary") ms-1">@Model.CountProspect</span>
+            </a>
+            <a href="?StatusFilter=active&TypeFilter=@typeFilter&Search=@search" class="btn btn-sm @(active == "active" ? "btn-teal" : "btn-outline-teal")">
+                <i class="bi bi-check-circle me-1"></i>ลูกค้าปัจจุบัน <span class="badge @(active == "active" ? "bg-white text-teal" : "bg-success") ms-1">@Model.CountActive</span>
+            </a>
+            <a href="?StatusFilter=vip&TypeFilter=@typeFilter&Search=@search" class="btn btn-sm @(active == "vip" ? "btn-warning" : "btn-outline-warning")">
+                <i class="bi bi-star me-1"></i>VIP <span class="badge @(active == "vip" ? "bg-white text-warning" : "bg-warning text-dark") ms-1">@Model.CountVip</span>
+            </a>
+            <a href="?StatusFilter=inactive&TypeFilter=@typeFilter&Search=@search" class="btn btn-sm @(active == "inactive" ? "btn-secondary" : "btn-outline-secondary")">
+                <i class="bi bi-pause-circle me-1"></i>ไม่ใช้งาน <span class="badge bg-secondary ms-1">@Model.CountInactive</span>
+            </a>
+        </div>
+        <div class="d-flex gap-2 align-items-center flex-wrap">
+            <select class="form-select form-select-sm" style="width:140px"
+                onchange="location.href='?StatusFilter=@active&TypeFilter='+this.value+'&Search=@search'">
+                <option value="">ทุกประเภท</option>
+                <option value="individual">บุคคลทั่วไป</option>
+                <option value="business">ธุรกิจ</option>
+                <option value="reseller">ตัวแทนจำหน่าย</option>
+            </select>
+            <form method="get" class="d-flex gap-2">
+                <input type="hidden" name="StatusFilter" value="@active" />
+                <input type="hidden" name="TypeFilter" value="@typeFilter" />
+                <input type="search" name="Search" value="@search" class="form-control form-control-sm"
+                    placeholder="ค้นหาชื่อ / เบอร์ / อีเมล" style="width:220px" />
+                <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
+            </form>
+            <a href="/Admin/Customers/Create" class="btn btn-sm btn-teal">
+                <i class="bi bi-plus-lg me-1"></i>เพิ่มลูกค้า
+            </a>
+        </div>
+    </div>
+
+    <!-- Bulk Action Bar -->
+    <div id="bulkActionBar" class="d-none px-3 py-2 border-bottom bg-light d-flex align-items-center gap-3">
+        <span id="selectedCount" class="small fw-semibold text-muted"></span>
+        <form method="post" asp-page-handler="BulkDelete" id="bulkDeleteForm">
+            <div id="bulkIdsContainer"></div>
+            <button type="submit" class="btn btn-sm btn-danger"
+                onclick="return confirm('ลบรายการที่เลือกทั้งหมดใช่ไหม?')">
+                <i class="bi bi-trash me-1"></i>ลบที่เลือก
+            </button>
+        </form>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width:40px">
+                        <input type="checkbox" class="form-check-input" id="selectAll" />
+                    </th>
+                    <th>ชื่อลูกค้า</th>
+                    <th>เบอร์โทร</th>
+                    <th>ประเภท</th>
+                    <th>สถานะ</th>
+                    <th>แหล่งที่มา</th>
+                    <th>ติดต่อล่าสุด</th>
+                    <th>วันที่สร้าง</th>
+                    <th style="width:100px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Customers.Any())
+                {
+                    <tr><td colspan="9" class="text-center text-muted py-4">ไม่มีข้อมูลลูกค้า</td></tr>
+                }
+                @foreach (var c in Model.Customers)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input row-check" value="@c.Id" />
+                        </td>
+                        <td>
+                            <a href="/Admin/Customers/Detail?id=@c.Id" class="fw-semibold text-decoration-none">
+                                @c.FullName
+                            </a>
+                            @if (!string.IsNullOrEmpty(c.Company))
+                            {
+                                <div class="text-muted small">@c.Company</div>
+                            }
+                            @if (!string.IsNullOrEmpty(c.Tags))
+                            {
+                                <div>
+                                    @foreach (var tag in c.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                                    {
+                                        <span class="badge bg-light text-secondary border me-1" style="font-size:.7rem">@tag</span>
+                                    }
+                                </div>
+                            }
+                        </td>
+                        <td>@(c.Phone ?? "-")</td>
+                        <td>
+                            @switch (c.CustomerType)
+                            {
+                                case "business": <span class="badge bg-primary-subtle text-primary">ธุรกิจ</span> break;
+                                case "reseller": <span class="badge bg-info-subtle text-info">ตัวแทน</span> break;
+                                default: <span class="badge bg-light text-secondary border">บุคคล</span> break;
+                            }
+                        </td>
+                        <td>
+                            @switch (c.Status)
+                            {
+                                case "lead":     <span class="badge bg-secondary">Lead</span> break;
+                                case "prospect": <span class="badge bg-info text-dark">Prospect</span> break;
+                                case "active":   <span class="badge bg-success">ลูกค้าปัจจุบัน</span> break;
+                                case "vip":      <span class="badge bg-warning text-dark"><i class="bi bi-star-fill me-1"></i>VIP</span> break;
+                                case "inactive": <span class="badge bg-light text-secondary border">ไม่ใช้งาน</span> break;
+                                default:         <span class="badge bg-secondary">@c.Status</span> break;
+                            }
+                        </td>
+                        <td>
+                            @switch (c.Source)
+                            {
+                                case "contact_form": <span class="text-muted small"><i class="bi bi-envelope me-1"></i>ฟอร์มติดต่อ</span> break;
+                                case "quotation":    <span class="text-muted small"><i class="bi bi-receipt me-1"></i>ใบเสนอราคา</span> break;
+                                case "walk_in":      <span class="text-muted small"><i class="bi bi-person-walking me-1"></i>Walk-in</span> break;
+                                case "referral":     <span class="text-muted small"><i class="bi bi-share me-1"></i>แนะนำ</span> break;
+                                default:             <span class="text-muted small">-</span> break;
+                            }
+                        </td>
+                        <td class="text-muted small">
+                            @(c.LastContactedAt.HasValue ? c.LastContactedAt.Value.ToString("d MMM yy") : "-")
+                        </td>
+                        <td class="text-muted small">@c.CreatedAt.ToString("d MMM yy")</td>
+                        <td>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="/Admin/Customers/Detail?id=@c.Id" class="btn btn-sm btn-outline-teal" title="ดูรายละเอียด">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="/Admin/Customers/Edit?id=@c.Id" class="btn btn-sm btn-outline-secondary" title="แก้ไข">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@c.Id" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="ลบ"
+                                        onclick="return confirm('ลบลูกค้า @c.FullName ใช่ไหม?')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="d-flex justify-content-center py-3">
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    @for (int p = 1; p <= Model.TotalPages; p++)
+                    {
+                        <li class="page-item @(p == Model.PageNum ? "active" : "")">
+                            <a class="page-link" href="?StatusFilter=@active&TypeFilter=@typeFilter&Search=@search&PageNum=@p">@p</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+</div>
+
+@section Scripts {
+<script>
+// Restore select value from URL
+document.querySelector('select.form-select').value = '@typeFilter';
+
+const selectAll = document.getElementById('selectAll');
+const checks = () => document.querySelectorAll('.row-check');
+const bar = document.getElementById('bulkActionBar');
+const countEl = document.getElementById('selectedCount');
+const container = document.getElementById('bulkIdsContainer');
+
+function updateBar() {
+    const selected = [...checks()].filter(c => c.checked);
+    if (selected.length > 0) {
+        bar.classList.remove('d-none');
+        bar.classList.add('d-flex');
+        countEl.textContent = `เลือก ${selected.length} รายการ`;
+        container.innerHTML = selected.map(c => `<input type="hidden" name="ids" value="${c.value}">`).join('');
+    } else {
+        bar.classList.add('d-none');
+        bar.classList.remove('d-flex');
+    }
+}
+selectAll.addEventListener('change', () => { checks().forEach(c => c.checked = selectAll.checked); updateBar(); });
+document.addEventListener('change', e => { if (e.target.classList.contains('row-check')) updateBar(); });
+</script>
+}

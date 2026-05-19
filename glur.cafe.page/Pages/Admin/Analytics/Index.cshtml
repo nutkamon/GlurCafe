@@ -1,0 +1,272 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@using System.Text.Json
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Analytics.IndexModel
+@{
+    ViewData["Title"] = "รายงาน & วิเคราะห์";
+    ViewData["ActiveMenu"] = "analytics";
+}
+
+<!-- Summary Cards -->
+<div class="row g-4 mb-4">
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-teal">
+            <div class="dash-icon"><i class="bi bi-envelope"></i></div>
+            <div class="dash-value">@Model.TotalMessages</div>
+            <div class="dash-label">ข้อความทั้งหมด</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-brown">
+            <div class="dash-icon"><i class="bi bi-envelope-exclamation"></i></div>
+            <div class="dash-value">@Model.UnreadMessages</div>
+            <div class="dash-label">ยังไม่อ่าน</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-amber">
+            <div class="dash-icon"><i class="bi bi-receipt"></i></div>
+            <div class="dash-value">@Model.TotalQuotations</div>
+            <div class="dash-label">ใบเสนอราคา</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-green">
+            <div class="dash-icon"><i class="bi bi-cash-stack"></i></div>
+            <div class="dash-value">@Model.TotalRevenue.ToString("#,##0")</div>
+            <div class="dash-label">รายได้ (บาท)</div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 1 -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-8">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <i class="bi bi-graph-up me-2"></i>ข้อความติดต่อ 30 วันล่าสุด
+            </div>
+            <div class="p-3">
+                <canvas id="messagesChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="admin-card h-100">
+            <div class="admin-card-header">
+                <i class="bi bi-pie-chart me-2"></i>ประเภทบริการที่สนใจ
+            </div>
+            <div class="p-3 d-flex align-items-center justify-content-center" style="min-height:220px">
+                @if (Model.MessagesByServiceType.Any())
+                {
+                    <div style="position:relative;height:200px;width:100%">
+                        <canvas id="serviceTypeChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted text-center mb-0">ยังไม่มีข้อมูล</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 2 -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-8">
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <i class="bi bi-bar-chart me-2"></i>รายได้ 6 เดือนล่าสุด
+            </div>
+            <div class="p-3">
+                <canvas id="revenueChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="admin-card h-100">
+            <div class="admin-card-header">
+                <i class="bi bi-clipboard-data me-2"></i>สถานะใบเสนอราคา
+            </div>
+            <div class="p-3 d-flex align-items-center justify-content-center" style="min-height:220px">
+                @if (Model.QuotationsByStatus.Any())
+                {
+                    <div style="position:relative;height:200px;width:100%">
+                        <canvas id="quotationStatusChart"></canvas>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted text-center mb-0">ยังไม่มีข้อมูล</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="admin-card">
+            <div class="admin-card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-envelope me-2"></i>ข้อความล่าสุด</span>
+                <a href="/Admin/Messages" class="btn btn-sm btn-outline-teal">ดูทั้งหมด</a>
+            </div>
+            @if (Model.RecentMessages.Any())
+            {
+                <div class="list-group list-group-flush">
+                    @foreach (var msg in Model.RecentMessages)
+                    {
+                        <div class="list-group-item d-flex justify-content-between align-items-center px-3 py-2">
+                            <div>
+                                <strong class="small">@msg.FullName</strong>
+                                <div class="text-muted small">@(msg.ServiceType ?? "-") · @msg.CreatedAt.ToString("dd/MM/yy HH:mm")</div>
+                            </div>
+                            @if (!msg.IsRead) { <span class="badge bg-teal">ใหม่</span> }
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-center text-muted py-4">ยังไม่มีข้อความ</p>
+            }
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="admin-card">
+            <div class="admin-card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-receipt me-2"></i>ใบเสนอราคาล่าสุด</span>
+                <a href="/Admin/Quotations" class="btn btn-sm btn-outline-teal">ดูทั้งหมด</a>
+            </div>
+            @if (Model.RecentQuotations.Any())
+            {
+                <div class="list-group list-group-flush">
+                    @foreach (var q in Model.RecentQuotations)
+                    {
+                        <div class="list-group-item d-flex justify-content-between align-items-center px-3 py-2">
+                            <div>
+                                <strong class="small">@q.QuotationNumber</strong> — @q.CustomerName
+                                <div class="text-muted small">@q.NetAmount.ToString("#,##0") ฿ · @q.CreatedAt.ToString("dd/MM/yy")</div>
+                            </div>
+                            <span class="badge @GetStatusBadge(q.Status)" style="font-size:.7rem">@GetStatusLabel(q.Status)</span>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-center text-muted py-4">ยังไม่มีใบเสนอราคา</p>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Content Overview -->
+<div class="admin-card">
+    <div class="admin-card-header"><i class="bi bi-database me-2"></i>ภาพรวมเนื้อหา</div>
+    <div class="p-3">
+        <div class="row g-3 text-center">
+            <div class="col-4 col-md-2">
+                <div class="fw-bold fs-4 text-teal">@Model.TotalServices</div>
+                <small class="text-muted">บริการ</small>
+            </div>
+            <div class="col-4 col-md-2">
+                <div class="fw-bold fs-4 text-teal">@Model.TotalPortfolios</div>
+                <small class="text-muted">แกลเลอรี่</small>
+            </div>
+            <div class="col-4 col-md-2">
+                <div class="fw-bold fs-4 text-teal">@Model.TotalPricingPlans</div>
+                <small class="text-muted">แพ็คเกจ</small>
+            </div>
+            <div class="col-4 col-md-2">
+                <div class="fw-bold fs-4 text-teal">@Model.TotalMessages</div>
+                <small class="text-muted">ข้อความ</small>
+            </div>
+            <div class="col-4 col-md-2">
+                <div class="fw-bold fs-4 text-teal">@Model.TotalQuotations</div>
+                <small class="text-muted">ใบเสนอราคา</small>
+            </div>
+            <div class="col-4 col-md-2">
+                <div class="fw-bold fs-4 text-teal">@Model.TotalAdminUsers</div>
+                <small class="text-muted">ผู้ดูแล</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStatusLabel(string s) => s switch { "draft" => "ร่าง", "sent" => "ส่งแล้ว", "accepted" => "ตอบรับ", "rejected" => "ปฏิเสธ", "paid" => "ชำระแล้ว", "completed" => "เสร็จสิ้น", "cancelled" => "ยกเลิก", _ => s };
+    string GetStatusBadge(string s) => s switch { "draft" => "bg-secondary", "sent" => "bg-info", "accepted" => "bg-success", "rejected" => "bg-danger", "paid" => "bg-success", "completed" => "bg-success", "cancelled" => "bg-secondary", _ => "bg-secondary" };
+}
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+    const gradientColors = ['#00a59a','#c8943a','#6b4423','#2e7d5c','#2563eb','#7c3aed','#ec4899','#f97316'];
+
+    new Chart(document.getElementById('messagesChart'), {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(JsonSerializer.Serialize(Model.MessagesByDay.Select(d => d.Label))),
+            datasets: [{
+                label: 'ข้อความ',
+                data: @Html.Raw(JsonSerializer.Serialize(Model.MessagesByDay.Select(d => d.Value))),
+                borderColor: '#00a59a', backgroundColor: 'rgba(0,165,154,0.1)',
+                fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#00a59a'
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        }
+    });
+
+    @if (Model.MessagesByServiceType.Any())
+    {
+        <text>
+    new Chart(document.getElementById('serviceTypeChart'), {
+        type: 'doughnut',
+        data: {
+            labels: @Html.Raw(JsonSerializer.Serialize(Model.MessagesByServiceType.Select(d => d.Label))),
+            datasets: [{ data: @Html.Raw(JsonSerializer.Serialize(Model.MessagesByServiceType.Select(d => d.Value))),
+                backgroundColor: gradientColors.slice(0, @Model.MessagesByServiceType.Count), borderWidth: 2 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } } }
+    });
+        </text>
+    }
+
+    new Chart(document.getElementById('revenueChart'), {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(JsonSerializer.Serialize(Model.RevenueByMonth.Select(d => d.Label))),
+            datasets: [{ label: 'รายได้ (บาท)',
+                data: @Html.Raw(JsonSerializer.Serialize(Model.RevenueByMonth.Select(d => d.Value))),
+                backgroundColor: 'rgba(0,165,154,0.7)', borderColor: '#00a59a', borderWidth: 1, borderRadius: 6 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    });
+
+    @if (Model.QuotationsByStatus.Any())
+    {
+        <text>
+    new Chart(document.getElementById('quotationStatusChart'), {
+        type: 'pie',
+        data: {
+            labels: @Html.Raw(JsonSerializer.Serialize(Model.QuotationsByStatus.Select(d => d.Label))),
+            datasets: [{ data: @Html.Raw(JsonSerializer.Serialize(Model.QuotationsByStatus.Select(d => d.Value))),
+                backgroundColor: ['#94a3b8','#06b6d4','#10b981','#ef4444','#f59e0b','#7c3aed','#6b7280'], borderWidth: 2 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } } }
+    });
+        </text>
+    }
+</script>
+}

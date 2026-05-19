@@ -1,0 +1,94 @@
+- generic [active] [ref=e1]:
+  - heading "An unhandled exception occurred while processing the request." [level=1] [ref=e2]
+  - generic [ref=e3]: "SqliteException: SQLite Error 19: 'NOT NULL constraint failed: PricingPlans.PriceUnit'."
+  - paragraph [ref=e4]: Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
+  - generic [ref=e5]: "DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details."
+  - paragraph [ref=e6]: Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  - list [ref=e7]:
+    - listitem [ref=e8] [cursor=pointer]: Stack
+    - listitem [ref=e9] [cursor=pointer]: Query
+    - listitem [ref=e10] [cursor=pointer]: Cookies
+    - listitem [ref=e11] [cursor=pointer]: Headers
+    - listitem [ref=e12] [cursor=pointer]: Routing
+  - list [ref=e14]:
+    - listitem [ref=e15]:
+      - 'heading "SqliteException: SQLite Error 19: ''NOT NULL constraint failed: PricingPlans.PriceUnit''." [level=2] [ref=e16]'
+      - list [ref=e17]:
+        - listitem [ref=e18]:
+          - heading "Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)" [level=3] [ref=e19]
+        - listitem [ref=e20]:
+          - heading "Microsoft.Data.Sqlite.SqliteDataReader.NextResult()" [level=3] [ref=e21]
+        - listitem [ref=e22]:
+          - heading "Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)" [level=3] [ref=e23]
+        - listitem [ref=e24]:
+          - heading "Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)" [level=3] [ref=e25]
+        - listitem [ref=e26]:
+          - heading "Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)" [level=3] [ref=e27]
+        - listitem [ref=e28]:
+          - heading "Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)" [level=3] [ref=e29]
+        - listitem [ref=e30]:
+          - heading "Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)" [level=3] [ref=e31]
+        - listitem [ref=e32]:
+          - heading "Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)" [level=3] [ref=e33]
+    - listitem [ref=e34]:
+      - button "Show raw exception details" [ref=e36] [cursor=pointer]
+    - listitem [ref=e37]:
+      - 'heading "DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details." [level=2] [ref=e38]'
+      - list [ref=e39]:
+        - listitem [ref=e40]:
+          - heading "Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)" [level=3] [ref=e41]
+        - listitem [ref=e42]:
+          - heading "Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable<ModificationCommandBatch> commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)" [level=3] [ref=e43]
+        - listitem [ref=e44]:
+          - heading "Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable<ModificationCommandBatch> commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)" [level=3] [ref=e45]
+        - listitem [ref=e46]:
+          - heading "Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable<ModificationCommandBatch> commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)" [level=3] [ref=e47]
+        - listitem [ref=e48]:
+          - heading "Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList<IUpdateEntry> entriesToSave, CancellationToken cancellationToken)" [level=3] [ref=e49]
+        - listitem [ref=e50]:
+          - heading "Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, bool acceptAllChangesOnSuccess, CancellationToken cancellationToken)" [level=3] [ref=e51]
+        - listitem [ref=e52]:
+          - heading "Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken)" [level=3] [ref=e53]
+        - listitem [ref=e54]:
+          - heading "Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken)" [level=3] [ref=e55]
+        - listitem [ref=e56]:
+          - heading "glur.cafe.page.Pages.Admin.Pricing.CreateModel.OnPostAsync() in Create.cshtml.cs" [level=3] [ref=e57]:
+            - text: glur.cafe.page.Pages.Admin.Pricing.CreateModel.OnPostAsync() in
+            - code [ref=e58]: Create.cshtml.cs
+          - button "+" [ref=e59] [cursor=pointer]
+          - list [ref=e61]:
+            - listitem [ref=e62]: await _db.SaveChangesAsync();
+        - listitem [ref=e63]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory+GenericTaskHandlerMethod.Convert<T>(object taskAsObject)" [level=3] [ref=e64]
+        - listitem [ref=e65]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory+GenericTaskHandlerMethod.Execute(object receiver, object[] arguments)" [level=3] [ref=e66]
+        - listitem [ref=e67]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeHandlerMethodAsync()" [level=3] [ref=e68]
+        - listitem [ref=e69]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeNextPageFilterAsync()" [level=3] [ref=e70]
+        - listitem [ref=e71]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)" [level=3] [ref=e72]
+        - listitem [ref=e73]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(ref State next, ref Scope scope, ref object state, ref bool isCompleted)" [level=3] [ref=e74]
+        - listitem [ref=e75]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()" [level=3] [ref=e76]
+        - listitem [ref=e77]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, object state, bool isCompleted)" [level=3] [ref=e78]
+        - listitem [ref=e79]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)" [level=3] [ref=e80]
+        - listitem [ref=e81]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(ref State next, ref Scope scope, ref object state, ref bool isCompleted)" [level=3] [ref=e82]
+        - listitem [ref=e83]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()" [level=3] [ref=e84]
+        - listitem [ref=e85]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)" [level=3] [ref=e86]
+        - listitem [ref=e87]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)" [level=3] [ref=e88]
+        - listitem [ref=e89]:
+          - heading "Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)" [level=3] [ref=e90]
+        - listitem [ref=e91]:
+          - heading "Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)" [level=3] [ref=e92]
+        - listitem [ref=e93]:
+          - heading "Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)" [level=3] [ref=e94]
+    - listitem [ref=e95]:
+      - button "Show raw exception details" [ref=e97] [cursor=pointer]

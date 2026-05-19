@@ -1,0 +1,58 @@
+- generic [active] [ref=e1]:
+  - heading "An unhandled exception occurred while processing the request." [level=1] [ref=e2]
+  - generic [ref=e3]: "NullReferenceException: Object reference not set to an instance of an object."
+  - paragraph [ref=e4]:
+    - text: glur.cafe.page.Pages.Admin.Pricing.CreateModel.OnPostAsync() in
+    - code [ref=e5]: Create.cshtml.cs
+    - text: ", line 36"
+  - list [ref=e6]:
+    - listitem [ref=e7] [cursor=pointer]: Stack
+    - listitem [ref=e8] [cursor=pointer]: Query
+    - listitem [ref=e9] [cursor=pointer]: Cookies
+    - listitem [ref=e10] [cursor=pointer]: Headers
+    - listitem [ref=e11] [cursor=pointer]: Routing
+  - list [ref=e13]:
+    - listitem [ref=e14]:
+      - 'heading "NullReferenceException: Object reference not set to an instance of an object." [level=2] [ref=e15]'
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - heading "glur.cafe.page.Pages.Admin.Pricing.CreateModel.OnPostAsync() in Create.cshtml.cs" [level=3] [ref=e18]:
+            - text: glur.cafe.page.Pages.Admin.Pricing.CreateModel.OnPostAsync() in
+            - code [ref=e19]: Create.cshtml.cs
+          - button "+" [ref=e20] [cursor=pointer]
+          - list [ref=e22]:
+            - listitem [ref=e23]: var features = FeaturesText.Split('\n', StringSplitOptions.RemoveEmptyEntries)
+        - listitem [ref=e24]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory+GenericTaskHandlerMethod.Convert<T>(object taskAsObject)" [level=3] [ref=e25]
+        - listitem [ref=e26]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory+GenericTaskHandlerMethod.Execute(object receiver, object[] arguments)" [level=3] [ref=e27]
+        - listitem [ref=e28]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeHandlerMethodAsync()" [level=3] [ref=e29]
+        - listitem [ref=e30]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeNextPageFilterAsync()" [level=3] [ref=e31]
+        - listitem [ref=e32]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)" [level=3] [ref=e33]
+        - listitem [ref=e34]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(ref State next, ref Scope scope, ref object state, ref bool isCompleted)" [level=3] [ref=e35]
+        - listitem [ref=e36]:
+          - heading "Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()" [level=3] [ref=e37]
+        - listitem [ref=e38]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, object state, bool isCompleted)" [level=3] [ref=e39]
+        - listitem [ref=e40]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)" [level=3] [ref=e41]
+        - listitem [ref=e42]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(ref State next, ref Scope scope, ref object state, ref bool isCompleted)" [level=3] [ref=e43]
+        - listitem [ref=e44]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()" [level=3] [ref=e45]
+        - listitem [ref=e46]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)" [level=3] [ref=e47]
+        - listitem [ref=e48]:
+          - heading "Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)" [level=3] [ref=e49]
+        - listitem [ref=e50]:
+          - heading "Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)" [level=3] [ref=e51]
+        - listitem [ref=e52]:
+          - heading "Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)" [level=3] [ref=e53]
+        - listitem [ref=e54]:
+          - heading "Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)" [level=3] [ref=e55]
+    - listitem [ref=e56]:
+      - button "Show raw exception details" [ref=e58] [cursor=pointer]

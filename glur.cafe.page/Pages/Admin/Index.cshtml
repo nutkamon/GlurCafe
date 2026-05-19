@@ -1,0 +1,176 @@
+@page
+@model glur.cafe.page.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "แดชบอร์ด";
+    ViewData["ActiveMenu"] = "dashboard";
+    ViewData["UnreadCount"] = Model.UnreadCount;
+}
+
+<div class="row g-4 mb-4">
+    <!-- Stat cards -->
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-teal">
+            <div class="dash-icon"><i class="bi bi-grid-3x3-gap"></i></div>
+            <div class="dash-value">@Model.ServiceCount</div>
+            <div class="dash-label">บริการ</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-amber">
+            <div class="dash-icon"><i class="bi bi-images"></i></div>
+            <div class="dash-value">@Model.PortfolioCount</div>
+            <div class="dash-label">แกลเลอรี่</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-brown">
+            <div class="dash-icon"><i class="bi bi-envelope"></i></div>
+            <div class="dash-value">@Model.UnreadCount</div>
+            <div class="dash-label">ข้อความใหม่</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-green">
+            <div class="dash-icon"><i class="bi bi-chat-dots"></i></div>
+            <div class="dash-value">@Model.TotalMessages</div>
+            <div class="dash-label">ข้อความทั้งหมด</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-teal">
+            <div class="dash-icon"><i class="bi bi-receipt"></i></div>
+            <div class="dash-value">@Model.QuotationCount</div>
+            <div class="dash-label">ใบเสนอราคา</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="dash-card dash-amber">
+            <div class="dash-icon"><i class="bi bi-tags"></i></div>
+            <div class="dash-value">@Model.PricingPlanCount</div>
+            <div class="dash-label">แพ็คเกจ</div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions + System Info -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-8">
+        <div class="admin-card mb-0">
+            <div class="admin-card-header">
+                <i class="bi bi-lightning-charge me-2"></i>ทางลัด
+            </div>
+            <div class="p-3">
+                <div class="row g-3">
+                    <div class="col-6 col-md-4 col-lg">
+                        <a href="/Admin/Services/Create" class="quick-action-card">
+                            <i class="bi bi-grid-3x3-gap text-primary"></i>
+                            <span>เพิ่มบริการ</span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg">
+                        <a href="/Admin/Portfolios/Create" class="quick-action-card">
+                            <i class="bi bi-images text-success"></i>
+                            <span>เพิ่มแกลเลอรี่</span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg">
+                        <a href="/Admin/Quotations/Create" class="quick-action-card">
+                            <i class="bi bi-receipt text-info"></i>
+                            <span>ใบเสนอราคา</span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg">
+                        <a href="/Admin/Messages" class="quick-action-card">
+                            <i class="bi bi-envelope-paper text-danger"></i>
+                            <span>ข้อความ (@Model.UnreadCount)</span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg">
+                        <a href="/Admin/Analytics" class="quick-action-card">
+                            <i class="bi bi-graph-up text-secondary"></i>
+                            <span>รายงาน</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="admin-card mb-0 h-100">
+            <div class="admin-card-header">
+                <i class="bi bi-info-circle me-2"></i>ข้อมูลระบบ
+            </div>
+            <div class="p-3">
+                <ul class="list-unstyled mb-0">
+                    <li class="d-flex align-items-center py-2 border-bottom">
+                        <i class="bi bi-person-circle me-3 text-primary fs-5"></i>
+                        <div>
+                            <small class="text-muted d-block">ผู้ดูแลระบบ</small>
+                            <strong>@User.Identity?.Name</strong>
+                        </div>
+                    </li>
+                    <li class="d-flex align-items-center py-2 border-bottom">
+                        <i class="bi bi-database me-3 text-success fs-5"></i>
+                        <div>
+                            <small class="text-muted d-block">ฐานข้อมูล</small>
+                            <strong>SQLite</strong>
+                        </div>
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <i class="bi bi-gear me-3 text-secondary fs-5"></i>
+                        <div>
+                            <small class="text-muted d-block">Framework</small>
+                            <strong>.NET 10</strong>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Messages -->
+<div class="admin-card">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-envelope me-2"></i>ข้อความล่าสุด</span>
+        <a href="/Admin/Messages" class="btn btn-sm btn-outline-teal">ดูทั้งหมด</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-header">
+                <tr>
+                    <th>ชื่อ</th>
+                    <th>เบอร์โทร</th>
+                    <th class="d-none d-md-table-cell">สนใจเรื่อง</th>
+                    <th class="d-none d-md-table-cell">วันที่</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var msg in Model.RecentMessages)
+                {
+                    <tr class="@(msg.IsRead ? "" : "table-row-unread")">
+                        <td class="fw-semibold">@msg.FullName</td>
+                        <td>@msg.Phone</td>
+                        <td class="d-none d-md-table-cell text-muted small">@msg.ServiceType</td>
+                        <td class="d-none d-md-table-cell text-muted small">@msg.CreatedAt.ToString("dd/MM/yy HH:mm")</td>
+                        <td>
+                            @if (!msg.IsRead)
+                            {
+                                <span class="badge bg-teal">ใหม่</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">อ่านแล้ว</span>
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (!Model.RecentMessages.Any())
+                {
+                    <tr><td colspan="5" class="text-center text-muted py-4">ยังไม่มีข้อความ</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

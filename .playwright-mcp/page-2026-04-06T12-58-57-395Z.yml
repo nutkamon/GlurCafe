@@ -1,0 +1,122 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+      - link " ตั้งค่า" [ref=e24] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e25]: 
+        - generic [ref=e26]: ตั้งค่า
+      - generic [ref=e27]: เพิ่มเติม
+      - link " ใบเสนอราคา" [ref=e28] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e29]: 
+        - generic [ref=e30]: ใบเสนอราคา
+      - link " รายงาน" [ref=e31] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e32]: 
+        - generic [ref=e33]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e34] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e35]: 
+        - generic [ref=e36]: ผู้ดูแลระบบ
+    - generic [ref=e37]:
+      - link " ดูเว็บไซต์" [ref=e38] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e39]: 
+        - generic [ref=e40]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e41] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e42]: 
+        - generic [ref=e43]: ออกจากระบบ
+  - generic [ref=e44]:
+    - generic [ref=e45]:
+      - text: 
+      - generic [ref=e46]: เพิ่มบริการ
+      - generic [ref=e47]:
+        - generic [ref=e48]: 
+        - generic [ref=e49]: ผู้ดูแลระบบ
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e54]: 
+          - text: เพิ่มบริการใหม่
+        - link " กลับ" [ref=e55] [cursor=pointer]:
+          - /url: /Admin/Services
+          - generic [ref=e56]: 
+          - text: กลับ
+      - generic [ref=e58]:
+        - list [ref=e60]:
+          - listitem [ref=e61]: กรุณากรอก Icon Class
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - generic [ref=e64]: ชื่อบริการ
+            - textbox "ชื่อบริการ" [ref=e65]:
+              - /placeholder: เช่น กาแฟสดทุกเมนู
+              - text: ทดสอบ
+          - generic [ref=e66]:
+            - generic [ref=e67]: คำอธิบาย
+            - textbox "คำอธิบาย" [ref=e68]:
+              - /placeholder: คำอธิบายบริการ...
+              - text: ทดสอบ
+          - generic [ref=e69]:
+            - generic [ref=e70]: รูปภาพ (ถ้ามี จะแสดงแทนไอคอน)
+            - button "Choose File" [ref=e71] [cursor=pointer]
+          - generic [ref=e72]:
+            - generic [ref=e73]: Bootstrap Icon Class
+            - generic [ref=e74]:
+              - generic [ref=e76]: 
+              - textbox "Bootstrap Icon Class" [ref=e77]:
+                - /placeholder: bi-cup-hot
+            - generic [ref=e78]:
+              - text: ใช้เมื่อไม่มีรูปภาพ —
+              - link "icons.getbootstrap.com" [ref=e79] [cursor=pointer]:
+                - /url: https://icons.getbootstrap.com/
+          - generic [ref=e80]:
+            - generic [ref=e81]: Gradient CSS Class
+            - combobox "Gradient CSS Class" [ref=e82]:
+              - option "grad-1" [selected]
+              - option "grad-2"
+              - option "grad-3"
+              - option "grad-4"
+              - option "grad-5"
+              - option "grad-6"
+              - option "grad-7"
+              - option "grad-8"
+              - option "grad-9"
+              - option "grad-10"
+          - generic [ref=e83]:
+            - generic [ref=e84]: ลำดับการแสดงผล
+            - spinbutton "ลำดับการแสดงผล" [ref=e85]: "14"
+          - generic [ref=e87]:
+            - checkbox "เปิดใช้งาน" [checked] [ref=e88]
+            - generic [ref=e89]: เปิดใช้งาน
+          - generic [ref=e90]:
+            - link "ยกเลิก" [ref=e91] [cursor=pointer]:
+              - /url: /Admin/Services
+            - button " บันทึก" [ref=e92] [cursor=pointer]:
+              - generic [ref=e93]: 
+              - text: บันทึก

@@ -1,0 +1,55 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Users.CreateModel
+@{
+    ViewData["Title"] = "เพิ่มผู้ดูแลระบบ";
+    ViewData["ActiveMenu"] = "users";
+}
+
+<div class="admin-card">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-person-plus me-2"></i>เพิ่มผู้ดูแลระบบ</span>
+        <a href="/Admin/Users" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>กลับ
+        </a>
+    </div>
+    <div class="p-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="AdminUser.Username" class="form-label fw-semibold">ชื่อผู้ใช้ <span class="text-danger">*</span></label>
+                    <input asp-for="AdminUser.Username" class="form-control" placeholder="กรอกชื่อผู้ใช้" />
+                    <span asp-validation-for="AdminUser.Username" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="AdminUser.DisplayName" class="form-label fw-semibold">ชื่อที่แสดง</label>
+                    <input asp-for="AdminUser.DisplayName" class="form-control" placeholder="กรอกชื่อที่แสดง" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Password" class="form-label fw-semibold">รหัสผ่าน <span class="text-danger">*</span></label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="อย่างน้อย 6 ตัวอักษร" />
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ConfirmPassword" class="form-label fw-semibold">ยืนยันรหัสผ่าน <span class="text-danger">*</span></label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="กรอกรหัสผ่านอีกครั้ง" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                </div>
+                <div class="col-12">
+                    <div class="form-check form-switch">
+                        <input asp-for="AdminUser.IsActive" class="form-check-input" />
+                        <label asp-for="AdminUser.IsActive" class="form-check-label">เปิดใช้งาน</label>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end mt-4">
+                <a href="/Admin/Users" class="btn btn-outline-secondary me-2">ยกเลิก</a>
+                <button type="submit" class="btn btn-teal">
+                    <i class="bi bi-check-circle me-1"></i>สร้างผู้ดูแล
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

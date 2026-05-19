@@ -1,0 +1,108 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Customers.CreateModel
+@{
+    ViewData["Title"] = "เพิ่มลูกค้าใหม่";
+    ViewData["ActiveMenu"] = "customers";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="admin-card">
+            <div class="admin-card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-person-plus me-2"></i>เพิ่มลูกค้าใหม่</span>
+                <a href="/Admin/Customers" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i>กลับ
+                </a>
+            </div>
+            <div class="p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none" id="valSummary"></div>
+
+                    <h6 class="text-muted mb-3 border-bottom pb-2">ข้อมูลพื้นฐาน</h6>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="Input.FullName" class="form-label"></label>
+                            <input asp-for="Input.FullName" class="form-control" placeholder="ชื่อ-นามสกุล" />
+                            <span asp-validation-for="Input.FullName" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Input.Company" class="form-label"></label>
+                            <input asp-for="Input.Company" class="form-control" placeholder="บริษัท / ร้านค้า (ถ้ามี)" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Input.Phone" class="form-label"></label>
+                            <input asp-for="Input.Phone" class="form-control" placeholder="0xx-xxx-xxxx" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Input.Email" class="form-label"></label>
+                            <input asp-for="Input.Email" class="form-control" placeholder="email@example.com" />
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Input.Address" class="form-label"></label>
+                            <textarea asp-for="Input.Address" class="form-control" rows="2" placeholder="ที่อยู่"></textarea>
+                        </div>
+                    </div>
+
+                    <h6 class="text-muted mb-3 border-bottom pb-2 mt-4">การจัดประเภท</h6>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label asp-for="Input.CustomerType" class="form-label"></label>
+                            <select asp-for="Input.CustomerType" class="form-select">
+                                <option value="individual">บุคคลทั่วไป</option>
+                                <option value="business">ธุรกิจ</option>
+                                <option value="reseller">ตัวแทนจำหน่าย</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Input.Status" class="form-label"></label>
+                            <select asp-for="Input.Status" class="form-select">
+                                <option value="lead">Lead (สนใจ)</option>
+                                <option value="prospect">Prospect (กำลังพิจารณา)</option>
+                                <option value="active">ลูกค้าปัจจุบัน</option>
+                                <option value="vip">VIP</option>
+                                <option value="inactive">ไม่ใช้งาน</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Input.Source" class="form-label"></label>
+                            <select asp-for="Input.Source" class="form-select">
+                                <option value="">-- ไม่ระบุ --</option>
+                                <option value="contact_form">ฟอร์มติดต่อ</option>
+                                <option value="quotation">ใบเสนอราคา</option>
+                                <option value="walk_in">Walk-in</option>
+                                <option value="referral">แนะนำ</option>
+                                <option value="other">อื่นๆ</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Input.Tags" class="form-label"></label>
+                            <input asp-for="Input.Tags" class="form-control" placeholder="เช่น ลูกค้าประจำ, B2B, สั่งปริมาณมาก (คั่นด้วยเครื่องหมาย ,)" />
+                            <div class="form-text">คั่นแต่ละแท็กด้วย , เช่น ลูกค้าประจำ, B2B</div>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Input.Notes" class="form-label"></label>
+                            <textarea asp-for="Input.Notes" class="form-control" rows="3" placeholder="หมายเหตุเพิ่มเติม..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 justify-content-end mt-4">
+                        <a href="/Admin/Customers" class="btn btn-outline-secondary">ยกเลิก</a>
+                        <button type="submit" class="btn btn-teal">
+                            <i class="bi bi-check-lg me-1"></i>บันทึก
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        const vs = document.getElementById('valSummary');
+        if (vs && vs.querySelectorAll('li').length > 0) vs.classList.remove('d-none');
+    </script>
+}

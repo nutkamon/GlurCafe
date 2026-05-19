@@ -1,0 +1,300 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ 14" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+        - generic [ref=e24]: "14"
+      - link " ตั้งค่า" [ref=e25] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e26]: 
+        - generic [ref=e27]: ตั้งค่า
+      - generic [ref=e28]: เพิ่มเติม
+      - link " ใบเสนอราคา" [ref=e29] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e30]: 
+        - generic [ref=e31]: ใบเสนอราคา
+      - link " รายงาน" [ref=e32] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e33]: 
+        - generic [ref=e34]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e35] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e36]: 
+        - generic [ref=e37]: ผู้ดูแลระบบ
+    - generic [ref=e38]:
+      - link " ดูเว็บไซต์" [ref=e39] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e40]: 
+        - generic [ref=e41]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e42] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e43]: 
+        - generic [ref=e44]: ออกจากระบบ
+  - generic [ref=e45]:
+    - generic [ref=e46]:
+      - text: 
+      - generic [ref=e47]: จัดการบริการ
+      - generic [ref=e48]:
+        - generic [ref=e49]: 
+        - generic [ref=e50]: ผู้ดูแลระบบ
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]: 
+          - text: บริการทั้งหมด (14)
+        - link " เพิ่มบริการ" [ref=e56] [cursor=pointer]:
+          - /url: /Admin/Services/Create
+          - generic [ref=e57]: 
+          - text: เพิ่มบริการ
+      - alert [ref=e58]:
+        - generic [ref=e59]: 
+        - text: เพิ่มบริการเรียบร้อยแล้ว
+        - button [ref=e60] [cursor=pointer]
+      - table [ref=e62]:
+        - rowgroup [ref=e63]:
+          - row "# ชื่อบริการ คำอธิบาย Icon ลำดับ สถานะ" [ref=e64]:
+            - columnheader "#" [ref=e65]
+            - columnheader "ชื่อบริการ" [ref=e66]
+            - columnheader "คำอธิบาย" [ref=e67]
+            - columnheader "Icon" [ref=e68]
+            - columnheader "ลำดับ" [ref=e69]
+            - columnheader "สถานะ" [ref=e70]
+            - columnheader [ref=e71]
+        - rowgroup [ref=e72]:
+          - row "1 กาแฟสดทุกเมนู กาแฟสดชงโดยบาริสต้ามืออาชีพ ตั้งแต่ Espresso, Latte, Cappuccino ไปจนถึง Signature Drinks กาแฟสดทุกเมนู 1 เปิด  " [ref=e73]:
+            - cell "1" [ref=e74]
+            - cell "กาแฟสดทุกเมนู" [ref=e75]
+            - cell "กาแฟสดชงโดยบาริสต้ามืออาชีพ ตั้งแต่ Espresso, Latte, Cappuccino ไปจนถึง Signature Drinks" [ref=e76]
+            - cell "กาแฟสดทุกเมนู" [ref=e77]:
+              - img "กาแฟสดทุกเมนู" [ref=e78]
+            - cell "1" [ref=e79]
+            - cell "เปิด" [ref=e80]:
+              - button "เปิด" [ref=e82] [cursor=pointer]
+            - cell " " [ref=e83]:
+              - link "" [ref=e84] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/1
+                - generic [ref=e85]: 
+              - button "" [ref=e87] [cursor=pointer]:
+                - generic [ref=e88]: 
+          - row "2 โรงคั่วเมล็ดกาแฟ คั่วเมล็ดกาแฟสดทุกวัน ควบคุมระดับการคั่วอย่างแม่นยำ ตั้งแต่ Light Roast จนถึง Dark Roast  2 เปิด  " [ref=e89]:
+            - cell "2" [ref=e90]
+            - cell "โรงคั่วเมล็ดกาแฟ" [ref=e91]
+            - cell "คั่วเมล็ดกาแฟสดทุกวัน ควบคุมระดับการคั่วอย่างแม่นยำ ตั้งแต่ Light Roast จนถึง Dark Roast" [ref=e92]
+            - cell "" [ref=e93]:
+              - generic [ref=e94]: 
+            - cell "2" [ref=e95]
+            - cell "เปิด" [ref=e96]:
+              - button "เปิด" [ref=e98] [cursor=pointer]
+            - cell " " [ref=e99]:
+              - link "" [ref=e100] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/2
+                - generic [ref=e101]: 
+              - button "" [ref=e103] [cursor=pointer]:
+                - generic [ref=e104]: 
+          - row "3 เมล็ดกาแฟ Wholesale จำหน่ายเมล็ดกาแฟคั่วสดส่งให้ร้านกาแฟและธุรกิจ ราคาพิเศษสำหรับออร์เดอร์จำนวนมาก  3 เปิด  " [ref=e105]:
+            - cell "3" [ref=e106]
+            - cell "เมล็ดกาแฟ Wholesale" [ref=e107]
+            - cell "จำหน่ายเมล็ดกาแฟคั่วสดส่งให้ร้านกาแฟและธุรกิจ ราคาพิเศษสำหรับออร์เดอร์จำนวนมาก" [ref=e108]
+            - cell "" [ref=e109]:
+              - generic [ref=e110]: 
+            - cell "3" [ref=e111]
+            - cell "เปิด" [ref=e112]:
+              - button "เปิด" [ref=e114] [cursor=pointer]
+            - cell " " [ref=e115]:
+              - link "" [ref=e116] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/3
+                - generic [ref=e117]: 
+              - button "" [ref=e119] [cursor=pointer]:
+                - generic [ref=e120]: 
+          - row "4 Barista Training Class คอร์สสอนทำกาแฟมืออาชีพ เรียนรู้เทคนิคการชง Latte Art และการเลือกใช้เมล็ดกาแฟ  4 เปิด  " [ref=e121]:
+            - cell "4" [ref=e122]
+            - cell "Barista Training Class" [ref=e123]
+            - cell "คอร์สสอนทำกาแฟมืออาชีพ เรียนรู้เทคนิคการชง Latte Art และการเลือกใช้เมล็ดกาแฟ" [ref=e124]
+            - cell "" [ref=e125]:
+              - generic [ref=e126]: 
+            - cell "4" [ref=e127]
+            - cell "เปิด" [ref=e128]:
+              - button "เปิด" [ref=e130] [cursor=pointer]
+            - cell " " [ref=e131]:
+              - link "" [ref=e132] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/4
+                - generic [ref=e133]: 
+              - button "" [ref=e135] [cursor=pointer]:
+                - generic [ref=e136]: 
+          - row "5 ชา & เครื่องดื่มทางเลือก ชาไทย ชาเขียว Matcha Hojicha และเครื่องดื่มสมุนไพร สำหรับคนไม่ดื่มกาแฟ  5 เปิด  " [ref=e137]:
+            - cell "5" [ref=e138]
+            - cell "ชา & เครื่องดื่มทางเลือก" [ref=e139]
+            - cell "ชาไทย ชาเขียว Matcha Hojicha และเครื่องดื่มสมุนไพร สำหรับคนไม่ดื่มกาแฟ" [ref=e140]
+            - cell "" [ref=e141]:
+              - generic [ref=e142]: 
+            - cell "5" [ref=e143]
+            - cell "เปิด" [ref=e144]:
+              - button "เปิด" [ref=e146] [cursor=pointer]
+            - cell " " [ref=e147]:
+              - link "" [ref=e148] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/5
+                - generic [ref=e149]: 
+              - button "" [ref=e151] [cursor=pointer]:
+                - generic [ref=e152]: 
+          - row "6 เค้ก & เบเกอรี่ เบเกอรี่สดทำทุกวัน เค้กโฮมเมด ครัวซองต์ และขนมปังอบร้อน คู่กาแฟได้ลงตัว  6 เปิด  " [ref=e153]:
+            - cell "6" [ref=e154]
+            - cell "เค้ก & เบเกอรี่" [ref=e155]
+            - cell "เบเกอรี่สดทำทุกวัน เค้กโฮมเมด ครัวซองต์ และขนมปังอบร้อน คู่กาแฟได้ลงตัว" [ref=e156]
+            - cell "" [ref=e157]:
+              - generic [ref=e158]: 
+            - cell "6" [ref=e159]
+            - cell "เปิด" [ref=e160]:
+              - button "เปิด" [ref=e162] [cursor=pointer]
+            - cell " " [ref=e163]:
+              - link "" [ref=e164] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/6
+                - generic [ref=e165]: 
+              - button "" [ref=e167] [cursor=pointer]:
+                - generic [ref=e168]: 
+          - row "7 กาแฟ Subscription สั่งสมัครสมาชิก รับเมล็ดกาแฟคั่วสดส่งถึงบ้านทุกเดือน เลือกสายพันธุ์และระดับการคั่วได้เอง  7 เปิด  " [ref=e169]:
+            - cell "7" [ref=e170]
+            - cell "กาแฟ Subscription" [ref=e171]
+            - cell "สั่งสมัครสมาชิก รับเมล็ดกาแฟคั่วสดส่งถึงบ้านทุกเดือน เลือกสายพันธุ์และระดับการคั่วได้เอง" [ref=e172]
+            - cell "" [ref=e173]:
+              - generic [ref=e174]: 
+            - cell "7" [ref=e175]
+            - cell "เปิด" [ref=e176]:
+              - button "เปิด" [ref=e178] [cursor=pointer]
+            - cell " " [ref=e179]:
+              - link "" [ref=e180] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/7
+                - generic [ref=e181]: 
+              - button "" [ref=e183] [cursor=pointer]:
+                - generic [ref=e184]: 
+          - row "8 Private Label Roasting บริการคั่วกาแฟและบรรจุภัณฑ์สำหรับแบรนด์ของคุณ พร้อมออกแบบฉลากและสูตรพิเศษ  8 เปิด  " [ref=e185]:
+            - cell "8" [ref=e186]
+            - cell "Private Label Roasting" [ref=e187]
+            - cell "บริการคั่วกาแฟและบรรจุภัณฑ์สำหรับแบรนด์ของคุณ พร้อมออกแบบฉลากและสูตรพิเศษ" [ref=e188]
+            - cell "" [ref=e189]:
+              - generic [ref=e190]: 
+            - cell "8" [ref=e191]
+            - cell "เปิด" [ref=e192]:
+              - button "เปิด" [ref=e194] [cursor=pointer]
+            - cell " " [ref=e195]:
+              - link "" [ref=e196] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/8
+                - generic [ref=e197]: 
+              - button "" [ref=e199] [cursor=pointer]:
+                - generic [ref=e200]: 
+          - row "9 Cold Brew & Batch Coffee Cold Brew คั่วเป็นพิเศษ หมักนาน 18 ชั่วโมง และ Batch Coffee สำหรับออฟฟิศหรืองาน Event  9 เปิด  " [ref=e201]:
+            - cell "9" [ref=e202]
+            - cell "Cold Brew & Batch Coffee" [ref=e203]
+            - cell "Cold Brew คั่วเป็นพิเศษ หมักนาน 18 ชั่วโมง และ Batch Coffee สำหรับออฟฟิศหรืองาน Event" [ref=e204]
+            - cell "" [ref=e205]:
+              - generic [ref=e206]: 
+            - cell "9" [ref=e207]
+            - cell "เปิด" [ref=e208]:
+              - button "เปิด" [ref=e210] [cursor=pointer]
+            - cell " " [ref=e211]:
+              - link "" [ref=e212] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/9
+                - generic [ref=e213]: 
+              - button "" [ref=e215] [cursor=pointer]:
+                - generic [ref=e216]: 
+          - row "10 Coffee Cupping Sessions นั่งชิมกาแฟแบบ Professional Cupping เรียนรู้ Flavor Profile ของกาแฟจากแหล่งต่างๆ ทั่วโลก  10 เปิด  " [ref=e217]:
+            - cell "10" [ref=e218]
+            - cell "Coffee Cupping Sessions" [ref=e219]
+            - cell "นั่งชิมกาแฟแบบ Professional Cupping เรียนรู้ Flavor Profile ของกาแฟจากแหล่งต่างๆ ทั่วโลก" [ref=e220]
+            - cell "" [ref=e221]:
+              - generic [ref=e222]: 
+            - cell "10" [ref=e223]
+            - cell "เปิด" [ref=e224]:
+              - button "เปิด" [ref=e226] [cursor=pointer]
+            - cell " " [ref=e227]:
+              - link "" [ref=e228] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/10
+                - generic [ref=e229]: 
+              - button "" [ref=e231] [cursor=pointer]:
+                - generic [ref=e232]: 
+          - row "11 Event & Catering Coffee บริการกาแฟสดสำหรับงาน Event, สัมมนา, งานแต่งงาน พร้อมบาริสต้าและอุปกรณ์ครบ  11 เปิด  " [ref=e233]:
+            - cell "11" [ref=e234]
+            - cell "Event & Catering Coffee" [ref=e235]
+            - cell "บริการกาแฟสดสำหรับงาน Event, สัมมนา, งานแต่งงาน พร้อมบาริสต้าและอุปกรณ์ครบ" [ref=e236]
+            - cell "" [ref=e237]:
+              - generic [ref=e238]: 
+            - cell "11" [ref=e239]
+            - cell "เปิด" [ref=e240]:
+              - button "เปิด" [ref=e242] [cursor=pointer]
+            - cell " " [ref=e243]:
+              - link "" [ref=e244] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/11
+                - generic [ref=e245]: 
+              - button "" [ref=e247] [cursor=pointer]:
+                - generic [ref=e248]: 
+          - row "12 จัดส่งทั่วประเทศ ส่งเมล็ดกาแฟคั่วสดและผลิตภัณฑ์ทั่วประเทศ บรรจุพิเศษรักษาความสดได้นาน 30 วัน  12 เปิด  " [ref=e249]:
+            - cell "12" [ref=e250]
+            - cell "จัดส่งทั่วประเทศ" [ref=e251]
+            - cell "ส่งเมล็ดกาแฟคั่วสดและผลิตภัณฑ์ทั่วประเทศ บรรจุพิเศษรักษาความสดได้นาน 30 วัน" [ref=e252]
+            - cell "" [ref=e253]:
+              - generic [ref=e254]: 
+            - cell "12" [ref=e255]
+            - cell "เปิด" [ref=e256]:
+              - button "เปิด" [ref=e258] [cursor=pointer]
+            - cell " " [ref=e259]:
+              - link "" [ref=e260] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/12
+                - generic [ref=e261]: 
+              - button "" [ref=e263] [cursor=pointer]:
+                - generic [ref=e264]: 
+          - row "13 ทดสอบบริการ ทดสอบคำอธิบาย  13 เปิด  " [ref=e265]:
+            - cell "13" [ref=e266]
+            - cell "ทดสอบบริการ" [ref=e267]
+            - cell "ทดสอบคำอธิบาย" [ref=e268]
+            - cell "" [ref=e269]:
+              - generic [ref=e270]: 
+            - cell "13" [ref=e271]
+            - cell "เปิด" [ref=e272]:
+              - button "เปิด" [ref=e274] [cursor=pointer]
+            - cell " " [ref=e275]:
+              - link "" [ref=e276] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/13
+                - generic [ref=e277]: 
+              - button "" [ref=e279] [cursor=pointer]:
+                - generic [ref=e280]: 
+          - row "14 ทดสอบบริการใหม่ ทดสอบคำอธิบาย  14 เปิด  " [ref=e281]:
+            - cell "14" [ref=e282]
+            - cell "ทดสอบบริการใหม่" [ref=e283]
+            - cell "ทดสอบคำอธิบาย" [ref=e284]
+            - cell "" [ref=e285]:
+              - generic [ref=e286]: 
+            - cell "14" [ref=e287]
+            - cell "เปิด" [ref=e288]:
+              - button "เปิด" [ref=e290] [cursor=pointer]
+            - cell " " [ref=e291]:
+              - link "" [ref=e292] [cursor=pointer]:
+                - /url: /Admin/Services/Edit/14
+                - generic [ref=e293]: 
+              - button "" [ref=e295] [cursor=pointer]:
+                - generic [ref=e296]: 
+  - alert "สำเร็จ" [ref=e297]:
+    - heading "สำเร็จ" [level=2] [ref=e305]
+    - generic [ref=e306]: เพิ่มบริการเรียบร้อยแล้ว
+    - text: "!"

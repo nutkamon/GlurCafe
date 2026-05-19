@@ -1,0 +1,76 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Portfolios.CreateModel
+@{
+    ViewData["Title"] = "เพิ่มรายการแกลเลอรี่";
+    ViewData["ActiveMenu"] = "portfolios";
+}
+
+<div class="admin-card">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-plus-lg me-2"></i>เพิ่มรายการใหม่</span>
+        <a href="/Admin/Portfolios" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>กลับ
+        </a>
+    </div>
+    <div class="p-4">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="alert alert-danger" style="display:@(ViewContext.ModelState.ErrorCount > 0 ? "block" : "none")"></div>
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <label asp-for="Portfolio.ProjectName" class="form-label fw-semibold"></label>
+                    <input asp-for="Portfolio.ProjectName" class="form-control" placeholder="เช่น GLUR Signature Thai Latte" />
+                    <span asp-validation-for="Portfolio.ProjectName" class="text-danger small"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Portfolio.Category" class="form-label fw-semibold"></label>
+                    <input asp-for="Portfolio.Category" class="form-control" placeholder="เช่น กาแฟซิกเนเจอร์" />
+                    <span asp-validation-for="Portfolio.Category" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8">
+                    <label asp-for="Portfolio.ClientName" class="form-label fw-semibold"></label>
+                    <input asp-for="Portfolio.ClientName" class="form-control" placeholder="รายละเอียดเพิ่มเติม" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">รูปภาพ (เลือกได้หลายรูป — แต่ละรูปจะสร้างเป็นรายการแยก)</label>
+                    <input type="file" name="ImageFiles" class="form-control" accept="image/*" multiple />
+                </div>
+                <div class="col-12">
+                    <label asp-for="Portfolio.Description" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Portfolio.Description" class="form-control ck-editor-target" rows="2"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Portfolio.IconClassName" class="form-label fw-semibold"></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i id="iconPreview" class="bi bi-cup-hot"></i></span>
+                        <input asp-for="Portfolio.IconClassName" class="form-control" placeholder="bi-cup-hot" oninput="document.getElementById('iconPreview').className='bi '+this.value" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Portfolio.GradientClass" class="form-label fw-semibold"></label>
+                    <select asp-for="Portfolio.GradientClass" class="form-select">
+                        @for (int i = 1; i <= 10; i++) { <option value="port-@i">port-@i</option> }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Portfolio.DisplayOrder" class="form-label fw-semibold"></label>
+                    <input asp-for="Portfolio.DisplayOrder" class="form-control" type="number" min="1" />
+                </div>
+                <div class="col-12">
+                    <div class="form-check form-switch">
+                        <input asp-for="Portfolio.IsActive" class="form-check-input" type="checkbox" />
+                        <label asp-for="Portfolio.IsActive" class="form-check-label">เปิดใช้งาน</label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex gap-2 justify-content-end">
+                    <a href="/Admin/Portfolios" class="btn btn-outline-secondary">ยกเลิก</a>
+                    <button type="submit" class="btn btn-teal px-4">
+                        <i class="bi bi-floppy me-1"></i>บันทึก
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

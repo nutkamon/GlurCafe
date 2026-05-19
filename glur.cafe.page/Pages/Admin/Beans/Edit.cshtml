@@ -1,0 +1,53 @@
+@page "{id:int}"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Beans.EditModel
+@{
+    ViewData["Title"] = "แก้ไขสารกาแฟ";
+    ViewData["ActiveMenu"] = "beans";
+}
+
+<div class="admin-card" style="max-width:600px">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-pencil me-2"></i>แก้ไขสาร: @Model.Bean.Name</span>
+        <a href="/Admin/Beans" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>กลับ</a>
+    </div>
+    <div class="p-4">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <input asp-for="Bean.Id" type="hidden" />
+            <div asp-validation-summary="All" class="alert alert-danger"
+                 style="display:@(ViewContext.ModelState.ErrorCount > 0 ? "block" : "none")"></div>
+            <div class="row g-3">
+                <div class="col-12">
+                    <label asp-for="Bean.Name" class="form-label fw-semibold"></label>
+                    <input asp-for="Bean.Name" class="form-control" />
+                    <span asp-validation-for="Bean.Name" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Bean.PricePerKg" class="form-label fw-semibold"></label>
+                    <div class="input-group">
+                        <input asp-for="Bean.PricePerKg" class="form-control" type="number" step="0.01" min="0" />
+                        <span class="input-group-text">฿/กก.</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check form-switch mt-4">
+                        <input asp-for="Bean.IsActive" class="form-check-input" type="checkbox" />
+                        <label asp-for="Bean.IsActive" class="form-check-label">เปิดใช้งาน</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Bean.Notes" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Bean.Notes" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="col-12 d-flex gap-2 justify-content-end">
+                    <a href="/Admin/Beans" class="btn btn-outline-secondary">ยกเลิก</a>
+                    <button type="submit" class="btn btn-teal px-4">
+                        <i class="bi bi-floppy me-1"></i>บันทึก
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

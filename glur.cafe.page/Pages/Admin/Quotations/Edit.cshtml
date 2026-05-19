@@ -1,0 +1,202 @@
+@page "{id:int}"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Quotations.EditModel
+@{
+    ViewData["Title"] = "แก้ไขใบเสนอราคา";
+    ViewData["ActiveMenu"] = "quotations";
+}
+
+<div class="admin-card">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-pencil me-2"></i>แก้ไขใบเสนอราคา — @Model.Quotation.QuotationNumber</span>
+        <a href="/Admin/Quotations/Detail/@Model.Quotation.Id" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>ย้อนกลับ</a>
+    </div>
+    <div class="p-4">
+        @if (!ModelState.IsValid && ModelState.ErrorCount > 0)
+        {
+            <div class="alert alert-danger">
+                @foreach (var e in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@e.ErrorMessage</div>
+                }
+            </div>
+        }
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Quotation.Id" />
+            <input type="hidden" asp-for="Quotation.QuotationNumber" />
+            <input type="hidden" asp-for="Quotation.CreatedAt" />
+            <input type="hidden" asp-for="Quotation.PaymentStatus" />
+            <input type="hidden" asp-for="Quotation.PaidAmount" />
+
+            <!-- Header -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">เลขที่ใบเสนอราคา</label>
+                    <input value="@Model.Quotation.QuotationNumber" class="form-control" readonly />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">สถานะ</label>
+                    <select asp-for="Quotation.Status" class="form-select">
+                        <option value="draft">ร่าง</option>
+                        <option value="sent">ส่งแล้ว</option>
+                        <option value="accepted">ตอบรับ</option>
+                        <option value="rejected">ปฏิเสธ</option>
+                        <option value="paid">ชำระแล้ว</option>
+                        <option value="completed">เสร็จสิ้น</option>
+                        <option value="cancelled">ยกเลิก</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">อัปเดตล่าสุด</label>
+                    <input value="@Model.Quotation.UpdatedAt.ToString("dd/MM/yyyy HH:mm")" class="form-control" readonly />
+                </div>
+            </div>
+
+            <!-- Customer -->
+            <h6 class="fw-bold mb-3 border-bottom pb-2">ข้อมูลลูกค้า</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">ชื่อลูกค้า <span class="text-danger">*</span></label>
+                    <input asp-for="Quotation.CustomerName" class="form-control" />
+                    <span asp-validation-for="Quotation.CustomerName" class="text-danger small"></span>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">เบอร์โทรศัพท์</label>
+                    <input asp-for="Quotation.Phone" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">อีเมล</label>
+                    <input asp-for="Quotation.Email" class="form-control" type="email" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label">ที่อยู่</label>
+                    <textarea asp-for="Quotation.Address" class="form-control ck-editor-target" rows="2"></textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">หมายเหตุ</label>
+                    <textarea asp-for="Quotation.Notes" class="form-control ck-editor-target" rows="2"></textarea>
+                </div>
+            </div>
+
+            <!-- Line Items -->
+            <h6 class="fw-bold mb-3 border-bottom pb-2">รายการสินค้า/บริการ</h6>
+            <div class="table-responsive mb-2">
+                <table class="table table-bordered align-middle" id="itemsTable">
+                    <thead class="table-header">
+                        <tr>
+                            <th style="min-width:250px">รายการ</th>
+                            <th style="width:80px" class="text-center">จำนวน</th>
+                            <th style="width:100px">หน่วย</th>
+                            <th style="width:130px" class="text-end">ราคาต่อหน่วย</th>
+                            <th style="width:130px" class="text-end">จำนวนเงิน</th>
+                            <th style="width:50px"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsBody">
+                        @for (int i = 0; i < Model.Items.Count; i++)
+                        {
+                            var item = Model.Items[i];
+                            decimal amount = item.Quantity * item.UnitPrice;
+                            <tr data-index="@i">
+                                <input type="hidden" name="Items[@i].Id" value="@item.Id" />
+                                <td><input type="text" name="Items[@i].Description" value="@item.Description" class="form-control form-control-sm" /></td>
+                                <td><input type="number" name="Items[@i].Quantity" value="@item.Quantity" min="1" class="form-control form-control-sm text-center qty-input" /></td>
+                                <td><input type="text" name="Items[@i].Unit" value="@item.Unit" class="form-control form-control-sm" /></td>
+                                <td><input type="number" name="Items[@i].UnitPrice" value="@item.UnitPrice" step="0.01" min="0" class="form-control form-control-sm text-end price-input" /></td>
+                                <td class="text-end fw-semibold row-amount">@amount.ToString("F2")</td>
+                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger btn-remove-row"><i class="bi bi-trash"></i></button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" id="btnAddRow" class="btn btn-sm btn-outline-teal mb-4">
+                <i class="bi bi-plus-lg me-1"></i>เพิ่มรายการ
+            </button>
+
+            <!-- Totals -->
+            <div class="row justify-content-end mb-4">
+                <div class="col-md-4">
+                    <table class="table table-sm mb-0">
+                        <tr>
+                            <td class="fw-semibold">รวมทั้งสิ้น</td>
+                            <td class="text-end" id="subtotalDisplay">@Model.Quotation.TotalAmount.ToString("N2") ฿</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-semibold">ส่วนลด (%)</td>
+                            <td class="text-end">
+                                <input asp-for="Quotation.DiscountPercent" type="number" min="0" max="100" step="0.01"
+                                       class="form-control form-control-sm text-end" id="discountInput" style="max-width:90px;display:inline-block" />
+                            </td>
+                        </tr>
+                        <tr class="table-active fw-bold">
+                            <td>ยอดสุทธิ</td>
+                            <td class="text-end text-teal" id="netDisplay">@Model.Quotation.NetAmount.ToString("N2") ฿</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-teal"><i class="bi bi-save me-1"></i>บันทึก</button>
+                <a href="/Admin/Quotations/Detail/@Model.Quotation.Id" class="btn btn-outline-secondary">ยกเลิก</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+let rowIndex = @Model.Items.Count;
+
+function recalcRow(row) {
+    const qty = parseFloat(row.querySelector('.qty-input')?.value || 0);
+    const price = parseFloat(row.querySelector('.price-input')?.value || 0);
+    row.querySelector('.row-amount').textContent = (qty * price).toFixed(2);
+    recalcTotals();
+}
+
+function recalcTotals() {
+    let subtotal = 0;
+    document.querySelectorAll('.row-amount').forEach(el => subtotal += parseFloat(el.textContent || 0));
+    const discount = parseFloat(document.getElementById('discountInput').value || 0);
+    const net = subtotal * (1 - discount / 100);
+    document.getElementById('subtotalDisplay').textContent = subtotal.toLocaleString('th-TH', {minimumFractionDigits:2}) + ' ฿';
+    document.getElementById('netDisplay').textContent = net.toLocaleString('th-TH', {minimumFractionDigits:2}) + ' ฿';
+}
+
+document.getElementById('discountInput').addEventListener('input', recalcTotals);
+
+document.getElementById('itemsBody').addEventListener('input', function (e) {
+    const row = e.target.closest('tr');
+    if (row && (e.target.classList.contains('qty-input') || e.target.classList.contains('price-input')))
+        recalcRow(row);
+});
+
+document.getElementById('itemsBody').addEventListener('click', function (e) {
+    const btn = e.target.closest('.btn-remove-row');
+    if (btn) {
+        const rows = document.querySelectorAll('#itemsBody tr');
+        if (rows.length > 1) { btn.closest('tr').remove(); recalcTotals(); }
+    }
+});
+
+document.getElementById('btnAddRow').addEventListener('click', function () {
+    const tbody = document.getElementById('itemsBody');
+    const tr = document.createElement('tr');
+    tr.dataset.index = rowIndex;
+    tr.innerHTML = `
+        <input type="hidden" name="Items[${rowIndex}].Id" value="0" />
+        <td><input type="text" name="Items[${rowIndex}].Description" class="form-control form-control-sm" placeholder="รายละเอียด" /></td>
+        <td><input type="number" name="Items[${rowIndex}].Quantity" value="1" min="1" class="form-control form-control-sm text-center qty-input" /></td>
+        <td><input type="text" name="Items[${rowIndex}].Unit" value="ชิ้น" class="form-control form-control-sm" /></td>
+        <td><input type="number" name="Items[${rowIndex}].UnitPrice" value="0" step="0.01" min="0" class="form-control form-control-sm text-end price-input" /></td>
+        <td class="text-end fw-semibold row-amount">0.00</td>
+        <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger btn-remove-row"><i class="bi bi-trash"></i></button></td>`;
+    tbody.appendChild(tr);
+    rowIndex++;
+});
+</script>
+}

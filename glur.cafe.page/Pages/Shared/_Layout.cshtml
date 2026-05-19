@@ -1,0 +1,115 @@
+﻿@using glur.cafe.page.Data
+@using Microsoft.EntityFrameworkCore
+@inject ApplicationDbContext _layoutDb
+@{
+    var _siteSettings = await _layoutDb.SiteSettings.ToDictionaryAsync(s => s.Key, s => s.Value);
+    var _fbUrl       = _siteSettings.GetValueOrDefault("Facebook", "#");
+    var _lineUrl     = _siteSettings.GetValueOrDefault("Line", "https://line.me/ti/p/~glurcafe");
+    var _instaUrl    = _siteSettings.GetValueOrDefault("Instagram", "#");
+    var _tiktokUrl   = _siteSettings.GetValueOrDefault("TikTok", "#");
+    var _phone       = _siteSettings.GetValueOrDefault("Phone", "081-425-2592");
+}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GLUR CAFE เกลอ คาเฟ่ — โรงคั่วกาแฟและกาแฟสดคุณภาพพรีเมียม" />
+    <meta name="keywords" content="กาแฟสด, โรงคั่วกาแฟ, เมล็ดกาแฟ, Wholesale, Barista Class, GLUR CAFE, เกลอ คาเฟ่" />
+    <title>@ViewData["Title"] - GLUR CAFE</title>
+    <link rel="icon" type="image/png" href="/img/Logo-removebg-preview.png" />
+
+    <!-- Google Fonts: Noto Sans Thai + Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+    <!-- AOS - Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- ===== Sticky Navbar ===== -->
+    <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#hero">
+                <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" style="height:44px;width:auto;" />
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                    aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#hero">หน้าแรก</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">สินค้าของเรา</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">ราคาสินค้า</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#why-us">ทำไมต้อง GLUR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">บริการ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">กระบวนการ</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-nav-cta btn-sm px-4 rounded-pill fw-semibold" href="#contact">
+                            <i class="bi bi-cup-hot me-1"></i> ติดต่อเรา
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== Main Content ===== -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- ===== Floating Buttons ===== -->
+    <div class="floating-buttons">
+        <button id="backToTop" class="float-btn top-btn" title="กลับขึ้นด้านบน" style="display:none;">
+            <i class="bi bi-chevron-up"></i>
+        </button>
+        @if (_fbUrl != "#")
+        {
+            <a href="@_fbUrl" target="_blank" rel="noopener noreferrer" class="float-btn fb-btn" title="Facebook">
+                <i class="bi bi-facebook"></i>
+            </a>
+        }
+        @if (_tiktokUrl != "#")
+        {
+            <a href="@_tiktokUrl" target="_blank" rel="noopener noreferrer" class="float-btn tiktok-btn" title="TikTok">
+                <i class="bi bi-tiktok"></i>
+            </a>
+        }
+        @if (_instaUrl != "#")
+        {
+            <a href="@_instaUrl" target="_blank" rel="noopener noreferrer" class="float-btn insta-btn" title="Instagram">
+                <i class="bi bi-instagram"></i>
+            </a>
+        }
+        <a href="@_lineUrl" target="_blank" rel="noopener noreferrer" class="float-btn line-btn" title="ติดต่อผ่าน Line">
+            <i class="bi bi-line"></i>
+        </a>
+        <a href="tel:@_phone.Replace("-", "")" class="float-btn phone-btn" title="โทรหาเรา (@_phone)">
+            <i class="bi bi-telephone-fill"></i>
+        </a>
+    </div>
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

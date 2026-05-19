@@ -1,0 +1,220 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ 8" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+        - generic [ref=e24]: "8"
+      - link " ตั้งค่า" [ref=e25] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e26]: 
+        - generic [ref=e27]: ตั้งค่า
+      - generic [ref=e28]: เพิ่มเติม
+      - link " ใบเสนอราคา" [ref=e29] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e30]: 
+        - generic [ref=e31]: ใบเสนอราคา
+      - link " รายงาน" [ref=e32] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e33]: 
+        - generic [ref=e34]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e35] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e36]: 
+        - generic [ref=e37]: ผู้ดูแลระบบ
+    - generic [ref=e38]:
+      - link " ดูเว็บไซต์" [ref=e39] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e40]: 
+        - generic [ref=e41]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e42] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e43]: 
+        - generic [ref=e44]: ออกจากระบบ
+  - generic [ref=e45]:
+    - generic [ref=e46]:
+      - text: 
+      - generic [ref=e47]: แดชบอร์ด
+      - generic [ref=e48]:
+        - generic [ref=e49]: 
+        - generic [ref=e50]: ผู้ดูแลระบบ
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e54]:
+          - generic [ref=e56]: 
+          - generic [ref=e57]: "14"
+          - generic [ref=e58]: บริการ
+        - generic [ref=e60]:
+          - generic [ref=e62]: 
+          - generic [ref=e63]: "16"
+          - generic [ref=e64]: แกลเลอรี่
+        - generic [ref=e66]:
+          - generic [ref=e68]: 
+          - generic [ref=e69]: "8"
+          - generic [ref=e70]: ข้อความใหม่
+        - generic [ref=e72]:
+          - generic [ref=e74]: 
+          - generic [ref=e75]: "20"
+          - generic [ref=e76]: ข้อความทั้งหมด
+        - generic [ref=e78]:
+          - generic [ref=e80]: 
+          - generic [ref=e81]: "10"
+          - generic [ref=e82]: ใบเสนอราคา
+        - generic [ref=e84]:
+          - generic [ref=e86]: 
+          - generic [ref=e87]: "3"
+          - generic [ref=e88]: แพ็คเกจ
+      - generic [ref=e89]:
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e93]: 
+            - text: ทางลัด
+          - generic [ref=e95]:
+            - link " เพิ่มบริการ" [ref=e97] [cursor=pointer]:
+              - /url: /Admin/Services/Create
+              - generic [ref=e98]: 
+              - generic [ref=e99]: เพิ่มบริการ
+            - link " เพิ่มแกลเลอรี่" [ref=e101] [cursor=pointer]:
+              - /url: /Admin/Portfolios/Create
+              - generic [ref=e102]: 
+              - generic [ref=e103]: เพิ่มแกลเลอรี่
+            - link " ใบเสนอราคา" [ref=e105] [cursor=pointer]:
+              - /url: /Admin/Quotations/Create
+              - generic [ref=e106]: 
+              - generic [ref=e107]: ใบเสนอราคา
+            - link " ข้อความ (8)" [ref=e109] [cursor=pointer]:
+              - /url: /Admin/Messages
+              - generic [ref=e110]: 
+              - generic [ref=e111]: ข้อความ (8)
+            - link " รายงาน" [ref=e113] [cursor=pointer]:
+              - /url: /Admin/Analytics
+              - generic [ref=e114]: 
+              - generic [ref=e115]: รายงาน
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: 
+            - text: ข้อมูลระบบ
+          - list [ref=e121]:
+            - listitem [ref=e122]:
+              - generic [ref=e123]: 
+              - generic [ref=e124]:
+                - generic [ref=e125]: ผู้ดูแลระบบ
+                - strong [ref=e126]: ผู้ดูแลระบบ
+            - listitem [ref=e127]:
+              - generic [ref=e128]: 
+              - generic [ref=e129]:
+                - generic [ref=e130]: ฐานข้อมูล
+                - strong [ref=e131]: SQLite
+            - listitem [ref=e132]:
+              - generic [ref=e133]: 
+              - generic [ref=e134]:
+                - generic [ref=e135]: Framework
+                - strong [ref=e136]: .NET 10
+      - generic [ref=e137]:
+        - generic [ref=e138]:
+          - generic [ref=e139]:
+            - generic [ref=e140]: 
+            - text: ข้อความล่าสุด
+          - link "ดูทั้งหมด" [ref=e141] [cursor=pointer]:
+            - /url: /Admin/Messages
+        - table [ref=e143]:
+          - rowgroup [ref=e144]:
+            - row "ชื่อ เบอร์โทร สนใจเรื่อง วันที่ สถานะ" [ref=e145]:
+              - columnheader "ชื่อ" [ref=e146]
+              - columnheader "เบอร์โทร" [ref=e147]
+              - columnheader "สนใจเรื่อง" [ref=e148]
+              - columnheader "วันที่" [ref=e149]
+              - columnheader "สถานะ" [ref=e150]
+          - rowgroup [ref=e151]:
+            - row "อรพรรณ สว่างใจ 082-222-4444 Subscription 19/03/26 04:21 ใหม่" [ref=e152]:
+              - cell "อรพรรณ สว่างใจ" [ref=e153]
+              - cell "082-222-4444" [ref=e154]
+              - cell "Subscription" [ref=e155]
+              - cell "19/03/26 04:21" [ref=e156]
+              - cell "ใหม่" [ref=e157]:
+                - generic [ref=e158]: ใหม่
+            - row "วัชรพล โชคดี 081-111-3333 Event Catering 18/03/26 05:21 ใหม่" [ref=e159]:
+              - cell "วัชรพล โชคดี" [ref=e160]
+              - cell "081-111-3333" [ref=e161]
+              - cell "Event Catering" [ref=e162]
+              - cell "18/03/26 05:21" [ref=e163]
+              - cell "ใหม่" [ref=e164]:
+                - generic [ref=e165]: ใหม่
+            - row "กัลยา ใจงาม 089-012-3456 Barista Class 17/03/26 06:21 ใหม่" [ref=e166]:
+              - cell "กัลยา ใจงาม" [ref=e167]
+              - cell "089-012-3456" [ref=e168]
+              - cell "Barista Class" [ref=e169]
+              - cell "17/03/26 06:21" [ref=e170]
+              - cell "ใหม่" [ref=e171]:
+                - generic [ref=e172]: ใหม่
+            - row "ตรีวิทย์ สมบูรณ์ 088-901-2345 เมล็ดกาแฟ Wholesale 16/03/26 07:21 ใหม่" [ref=e173]:
+              - cell "ตรีวิทย์ สมบูรณ์" [ref=e174]
+              - cell "088-901-2345" [ref=e175]
+              - cell "เมล็ดกาแฟ Wholesale" [ref=e176]
+              - cell "16/03/26 07:21" [ref=e177]
+              - cell "ใหม่" [ref=e178]:
+                - generic [ref=e179]: ใหม่
+            - row "นงลักษณ์ ดีงาม 087-890-1234 Private Label 15/03/26 08:21 ใหม่" [ref=e180]:
+              - cell "นงลักษณ์ ดีงาม" [ref=e181]
+              - cell "087-890-1234" [ref=e182]
+              - cell "Private Label" [ref=e183]
+              - cell "15/03/26 08:21" [ref=e184]
+              - cell "ใหม่" [ref=e185]:
+                - generic [ref=e186]: ใหม่
+            - row "ปรีชา อยู่ดี 086-789-0123 Subscription 14/03/26 09:21 ใหม่" [ref=e187]:
+              - cell "ปรีชา อยู่ดี" [ref=e188]
+              - cell "086-789-0123" [ref=e189]
+              - cell "Subscription" [ref=e190]
+              - cell "14/03/26 09:21" [ref=e191]
+              - cell "ใหม่" [ref=e192]:
+                - generic [ref=e193]: ใหม่
+            - row "สิริวรรณ มั่งมี 085-678-9012 เมล็ดกาแฟ Wholesale 13/03/26 10:21 ใหม่" [ref=e194]:
+              - cell "สิริวรรณ มั่งมี" [ref=e195]
+              - cell "085-678-9012" [ref=e196]
+              - cell "เมล็ดกาแฟ Wholesale" [ref=e197]
+              - cell "13/03/26 10:21" [ref=e198]
+              - cell "ใหม่" [ref=e199]:
+                - generic [ref=e200]: ใหม่
+            - row "เอกชัย พลอยงาม 084-567-8901 เมล็ดกาแฟ Wholesale 12/03/26 11:21 ใหม่" [ref=e201]:
+              - cell "เอกชัย พลอยงาม" [ref=e202]
+              - cell "084-567-8901" [ref=e203]
+              - cell "เมล็ดกาแฟ Wholesale" [ref=e204]
+              - cell "12/03/26 11:21" [ref=e205]
+              - cell "ใหม่" [ref=e206]:
+                - generic [ref=e207]: ใหม่
+            - row "จิตรา บุญมาก 083-456-7890 Event Catering 11/03/26 12:21 อ่านแล้ว" [ref=e208]:
+              - cell "จิตรา บุญมาก" [ref=e209]
+              - cell "083-456-7890" [ref=e210]
+              - cell "Event Catering" [ref=e211]
+              - cell "11/03/26 12:21" [ref=e212]
+              - cell "อ่านแล้ว" [ref=e213]:
+                - generic [ref=e214]: อ่านแล้ว
+            - row "มนตรี ศิริวัฒน์ 082-345-6789 Private Label 10/03/26 13:21 อ่านแล้ว" [ref=e215]:
+              - cell "มนตรี ศิริวัฒน์" [ref=e216]
+              - cell "082-345-6789" [ref=e217]
+              - cell "Private Label" [ref=e218]
+              - cell "10/03/26 13:21" [ref=e219]
+              - cell "อ่านแล้ว" [ref=e220]:
+                - generic [ref=e221]: อ่านแล้ว

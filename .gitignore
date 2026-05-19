@@ -1,0 +1,33 @@
+## .gitignore for ASP.NET Core / .NET project
+
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+
+# Visual Studio
+.vs/
+*.rsuser
+
+# Publish profiles (keep templates, ignore secrets)
+**/PublishProfiles/*.user
+
+# Local settings (may contain secrets)
+appsettings.Development.json
+
+# Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# NuGet
+*.nupkg
+packages/
+
+# Logs
+*.log

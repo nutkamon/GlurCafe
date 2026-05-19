@@ -1,0 +1,255 @@
+@page "{id:int}"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Quotations.DetailModel
+@{
+    ViewData["Title"] = $"ใบเสนอราคา {Model.Quotation.QuotationNumber}";
+    ViewData["ActiveMenu"] = "quotations";
+    var q = Model.Quotation;
+    string[] stepLabels = { "ร่าง", "ส่งแล้ว", "ตอบรับ", "ชำระแล้ว", "เสร็จสิ้น" };
+    int currentStep = q.Status switch {
+        "draft" => 0, "sent" => 1, "accepted" => 2, "paid" => 3, "completed" => 4, _ => -1
+    };
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+        <h5 class="mb-0 fw-bold">@q.QuotationNumber</h5>
+        <small class="text-muted">สร้างเมื่อ @q.CreatedAt.ToString("dd/MM/yyyy HH:mm")</small>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a href="/Admin/Quotations/Print/@q.Id" target="_blank" class="btn btn-sm btn-teal"><i class="bi bi-printer me-1"></i>พิมพ์/ส่งลูกค้า</a>
+        <a href="/Admin/Quotations/Edit/@q.Id" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil me-1"></i>แก้ไข</a>
+        <a href="/Admin/Quotations" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>รายการ</a>
+    </div>
+</div>
+
+<!-- Step Progress Bar -->
+<div class="quotation-steps">
+    @for (int si = 0; si < stepLabels.Length; si++)
+    {
+        string stepCls = si < currentStep ? "done" : (si == currentStep ? "active" : "");
+        <div class="step @stepCls">
+            <div class="step-circle">
+                @if (si < currentStep) { <i class="bi bi-check-lg"></i> }
+                else { <span>@(si + 1)</span> }
+            </div>
+            <div class="step-label">@stepLabels[si]</div>
+        </div>
+    }
+</div>
+
+@if (q.Status == "cancelled" || q.Status == "rejected")
+{
+    <div class="alert alert-danger d-flex align-items-center gap-2 mb-3" role="alert">
+        <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+        <div>
+            @if (q.Status == "cancelled") { <strong>ใบเสนอราคานี้ถูกยกเลิกแล้ว</strong> }
+            else { <strong>ใบเสนอราคานี้ถูกปฏิเสธโดยลูกค้า</strong> }
+        </div>
+    </div>
+}
+@if (q.Status == "accepted")
+{
+    <div class="alert alert-info d-flex align-items-center gap-2 mb-3" role="alert">
+        <i class="bi bi-info-circle-fill fs-5"></i>
+        <div>ลูกค้าตอบรับใบเสนอราคาแล้ว — <a href="#paymentForm" class="alert-link">คลิกเพื่อบันทึกการชำระเงิน</a></div>
+    </div>
+}
+
+<!-- Status + Payment -->
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="admin-card h-100">
+            <div class="admin-card-header"><i class="bi bi-info-circle me-2"></i>สถานะ</div>
+            <div class="p-3">
+                <div class="mb-2">
+                    สถานะ: <span class="badge @GetStatusBadge(q.Status) fs-6">@GetStatusLabel(q.Status)</span>
+                </div>
+                <div class="mb-3">
+                    การชำระ: <span class="badge @GetPaymentBadge(q.PaymentStatus) fs-6">@GetPaymentLabel(q.PaymentStatus)</span>
+                    @if (q.PaidAmount > 0)
+                    {
+                        <small class="text-muted ms-2">ชำระแล้ว @q.PaidAmount.ToString("N2") / @q.NetAmount.ToString("N2") ฿</small>
+                    }
+                </div>
+                <!-- Workflow buttons -->
+                <div class="d-flex flex-wrap gap-2">
+                    @if (q.Status == "draft")
+                    {
+                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@q.Id" asp-route-status="sent">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-info"><i class="bi bi-send me-1"></i>ส่งแล้ว</button>
+                        </form>
+                    }
+                    @if (q.Status == "sent")
+                    {
+                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@q.Id" asp-route-status="accepted">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-check-circle me-1"></i>ตอบรับ</button>
+                        </form>
+                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@q.Id" asp-route-status="rejected">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-x-circle me-1"></i>ปฏิเสธ</button>
+                        </form>
+                    }
+                    @if (q.Status == "accepted" || q.Status == "paid")
+                    {
+                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@q.Id" asp-route-status="completed">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-teal"><i class="bi bi-check2-all me-1"></i>เสร็จสิ้น</button>
+                        </form>
+                    }
+                    @if (q.Status != "cancelled" && q.Status != "completed")
+                    {
+                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@q.Id" asp-route-status="cancelled">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-slash-circle me-1"></i>ยกเลิก</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+@if (q.Status == "accepted")
+{
+    <div class="col-md-6" id="paymentForm">
+        <div class="admin-card h-100">
+            <div class="admin-card-header"><i class="bi bi-cash me-2"></i>บันทึกการชำระ</div>
+            <div class="p-3">
+                <form method="post" asp-page-handler="RecordPayment" asp-route-id="@q.Id">
+                    @Html.AntiForgeryToken()
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <label class="form-label small">จำนวนเงิน (฿)</label>
+                            <input asp-for="PaymentAmount" type="number" step="0.01" min="0" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small">วิธีชำระ</label>
+                            <select asp-for="PaymentMethod" class="form-select form-select-sm">
+                                <option value="">-- เลือก --</option>
+                                <option value="cash">เงินสด</option>
+                                <option value="transfer">โอนเงิน</option>
+                                <option value="credit">บัตรเครดิต</option>
+                                <option value="qr">QR Code</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small">หมายเหตุ</label>
+                            <input asp-for="PaymentNote" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-sm btn-teal w-100"><i class="bi bi-save me-1"></i>บันทึกการชำระ</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+<!-- Customer Info -->
+<div class="admin-card mb-4">
+    <div class="admin-card-header"><i class="bi bi-person me-2"></i>ข้อมูลลูกค้า</div>
+    <div class="p-3">
+        <div class="row g-2">
+            <div class="col-md-4"><strong>ชื่อ:</strong> @q.CustomerName</div>
+            <div class="col-md-4"><strong>โทร:</strong> @(q.Phone ?? "-")</div>
+            <div class="col-md-4"><strong>อีเมล:</strong> @(q.Email ?? "-")</div>
+            @if (!string.IsNullOrWhiteSpace(q.Address))
+            {
+                <div class="col-12"><strong>ที่อยู่:</strong> @Html.Raw(q.Address)</div>
+            }
+            @if (!string.IsNullOrWhiteSpace(q.Notes))
+            {
+                <div class="col-12"><strong>หมายเหตุ:</strong> @Html.Raw(q.Notes)</div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Line Items -->
+<div class="admin-card mb-4">
+    <div class="admin-card-header"><i class="bi bi-list-ul me-2"></i>รายการสินค้า/บริการ</div>
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle mb-0">
+            <thead class="table-header">
+                <tr>
+                    <th>#</th>
+                    <th>รายการ</th>
+                    <th class="text-center">จำนวน</th>
+                    <th>หน่วย</th>
+                    <th class="text-end">ราคา/หน่วย</th>
+                    <th class="text-end">จำนวนเงิน</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int no = 1;}
+                @foreach (var item in q.Items)
+                {
+                    <tr>
+                        <td class="text-muted">@no</td>
+                        <td>@item.Description</td>
+                        <td class="text-center">@item.Quantity</td>
+                        <td>@item.Unit</td>
+                        <td class="text-end">@item.UnitPrice.ToString("N2")</td>
+                        <td class="text-end fw-semibold">@item.Amount.ToString("N2")</td>
+                    </tr>
+                    no++;
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-end fw-semibold">รวม</td>
+                    <td class="text-end fw-semibold">@q.TotalAmount.ToString("N2") ฿</td>
+                </tr>
+                @if (q.DiscountPercent > 0)
+                {
+                    <tr>
+                        <td colspan="5" class="text-end">ส่วนลด @q.DiscountPercent%</td>
+                        <td class="text-end text-danger">-@((q.TotalAmount - q.NetAmount).ToString("N2")) ฿</td>
+                    </tr>
+                }
+                <tr class="table-active">
+                    <td colspan="5" class="text-end fw-bold fs-6">ยอดสุทธิ</td>
+                    <td class="text-end fw-bold fs-6 text-teal">@q.NetAmount.ToString("N2") ฿</td>
+                </tr>
+                @if (q.PaidAmount > 0)
+                {
+                    <tr>
+                        <td colspan="5" class="text-end">ชำระแล้ว</td>
+                        <td class="text-end text-success">@q.PaidAmount.ToString("N2") ฿</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-end fw-semibold">คงเหลือ</td>
+                        <td class="text-end fw-semibold text-warning">@((q.NetAmount - q.PaidAmount).ToString("N2")) ฿</td>
+                    </tr>
+                }
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@functions {
+    string GetStatusLabel(string s) => s switch {
+        "draft" => "ร่าง", "sent" => "ส่งแล้ว", "accepted" => "ตอบรับ",
+        "rejected" => "ปฏิเสธ", "paid" => "ชำระแล้ว", "completed" => "เสร็จสิ้น",
+        "cancelled" => "ยกเลิก", _ => s };
+    string GetStatusBadge(string s) => s switch {
+        "draft" => "bg-secondary", "sent" => "bg-info text-dark", "accepted" => "bg-success",
+        "rejected" => "bg-danger", "paid" => "bg-success", "completed" => "bg-success",
+        "cancelled" => "bg-secondary", _ => "bg-secondary" };
+    string GetPaymentLabel(string s) => s switch {
+        "unpaid" => "ยังไม่ชำระ", "partial" => "ชำระบางส่วน", "paid" => "ชำระครบ", _ => s };
+    string GetPaymentBadge(string s) => s switch {
+        "unpaid" => "bg-secondary", "partial" => "bg-warning text-dark", "paid" => "bg-teal", _ => "bg-secondary" };
+}

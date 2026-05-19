@@ -1,0 +1,363 @@
+@page "{id:int}"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Customers.DetailModel
+@{
+    ViewData["Title"] = Model.Customer.FullName;
+    ViewData["ActiveMenu"] = "customers";
+    var c = Model.Customer;
+}
+
+<div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
+    <div>
+        <a href="/Admin/Customers" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left me-1"></i>กลับ
+        </a>
+        <span class="fs-5 fw-semibold">@c.FullName</span>
+        @if (!string.IsNullOrEmpty(c.Company))
+        {
+            <span class="text-muted ms-2">— @c.Company</span>
+        }
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <!-- Quick status change -->
+        <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                @switch (c.Status)
+                {
+                    case "lead":     <text>Lead</text> break;
+                    case "prospect": <text>Prospect</text> break;
+                    case "active":   <text>ลูกค้าปัจจุบัน</text> break;
+                    case "vip":      <text>⭐ VIP</text> break;
+                    case "inactive": <text>ไม่ใช้งาน</text> break;
+                    default:         @c.Status break;
+                }
+            </button>
+            <ul class="dropdown-menu">
+                @foreach (var s in new[] { ("lead","Lead"), ("prospect","Prospect"), ("active","ลูกค้าปัจจุบัน"), ("vip","⭐ VIP"), ("inactive","ไม่ใช้งาน") })
+                {
+                    <li>
+                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@c.Id">
+                            <input type="hidden" name="status" value="@s.Item1" />
+                            <button type="submit" class="dropdown-item @(c.Status == s.Item1 ? "active" : "")">
+                                @s.Item2
+                            </button>
+                        </form>
+                    </li>
+                }
+            </ul>
+        </div>
+        <a href="/Admin/Customers/Edit/@c.Id" class="btn btn-sm btn-teal">
+            <i class="bi bi-pencil me-1"></i>แก้ไข
+        </a>
+    </div>
+</div>
+
+<div class="row g-3">
+    <!-- Left: Customer Info -->
+    <div class="col-lg-4">
+        <!-- Info Card -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header"><i class="bi bi-person-badge me-2"></i>ข้อมูลลูกค้า</div>
+            <div class="p-3">
+                <table class="table table-sm table-borderless mb-0">
+                    <tr>
+                        <td class="text-muted small" style="width:90px">เบอร์โทร</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(c.Phone))
+                            {
+                                <a href="tel:@c.Phone">@c.Phone</a>
+                            }
+                            else { <span class="text-muted">-</span> }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted small">อีเมล</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(c.Email))
+                            {
+                                <a href="mailto:@c.Email">@c.Email</a>
+                            }
+                            else { <span class="text-muted">-</span> }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted small">ที่อยู่</td>
+                        <td class="small">@(c.Address ?? "-")</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted small">ประเภท</td>
+                        <td>
+                            @switch (c.CustomerType)
+                            {
+                                case "business": <span class="badge bg-primary-subtle text-primary">ธุรกิจ</span> break;
+                                case "reseller": <span class="badge bg-info-subtle text-info">ตัวแทน</span> break;
+                                default:         <span class="badge bg-light text-secondary border">บุคคล</span> break;
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted small">แหล่งที่มา</td>
+                        <td class="small">
+                            @switch (c.Source)
+                            {
+                                case "contact_form": <text>ฟอร์มติดต่อ</text> break;
+                                case "quotation":    <text>ใบเสนอราคา</text> break;
+                                case "walk_in":      <text>Walk-in</text> break;
+                                case "referral":     <text>แนะนำ</text> break;
+                                case "other":        <text>อื่นๆ</text> break;
+                                default:             <span class="text-muted">-</span> break;
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted small">ติดต่อล่าสุด</td>
+                        <td class="small">@(c.LastContactedAt.HasValue ? c.LastContactedAt.Value.ToString("d MMM yyyy HH:mm") : "-")</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted small">เพิ่มเมื่อ</td>
+                        <td class="small">@c.CreatedAt.ToString("d MMM yyyy")</td>
+                    </tr>
+                </table>
+
+                @if (!string.IsNullOrEmpty(c.Tags))
+                {
+                    <div class="mt-2 border-top pt-2">
+                        @foreach (var tag in c.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                        {
+                            <span class="badge bg-light text-secondary border me-1 mb-1">@tag</span>
+                        }
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(c.Notes))
+                {
+                    <div class="mt-2 border-top pt-2">
+                        <div class="text-muted small mb-1">หมายเหตุ</div>
+                        <div class="small" style="white-space:pre-wrap">@c.Notes</div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header"><i class="bi bi-bar-chart me-2"></i>สรุปยอด</div>
+            <div class="p-3">
+                @{
+                    var paidQuots = Model.Quotations.Where(q => q.Status == "paid" || q.Status == "completed").ToList();
+                    var totalRevenue = paidQuots.Sum(q => q.NetAmount);
+                    var pendingQuots = Model.Quotations.Where(q => q.Status == "accepted" || q.Status == "sent").ToList();
+                    var pendingAmount = pendingQuots.Sum(q => q.NetAmount);
+                }
+                <div class="row g-2 text-center">
+                    <div class="col-6">
+                        <div class="p-2 rounded bg-success-subtle">
+                            <div class="fw-bold text-success">@totalRevenue.ToString("#,##0") ฿</div>
+                            <div class="text-muted" style="font-size:.72rem">รายได้รวม (@paidQuots.Count ใบ)</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-2 rounded bg-warning-subtle">
+                            <div class="fw-bold text-warning">@pendingAmount.ToString("#,##0") ฿</div>
+                            <div class="text-muted" style="font-size:.72rem">รอดำเนินการ (@pendingQuots.Count ใบ)</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-2 rounded bg-light">
+                            <div class="fw-bold">@Model.Quotations.Count</div>
+                            <div class="text-muted" style="font-size:.72rem">ใบเสนอราคาทั้งหมด</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-2 rounded bg-light">
+                            <div class="fw-bold">@c.Interactions.Count</div>
+                            <div class="text-muted" style="font-size:.72rem">ประวัติการติดต่อ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Activity & History -->
+    <div class="col-lg-8">
+        <!-- Add Interaction -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header"><i class="bi bi-plus-circle me-2"></i>บันทึกการติดต่อ</div>
+            <div class="p-3">
+                <form method="post" asp-page-handler="AddInteraction" asp-route-id="@c.Id">
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <select name="InteractionType" class="form-select form-select-sm">
+                                <option value="note">📝 บันทึก</option>
+                                <option value="call">📞 โทรศัพท์</option>
+                                <option value="email">📧 อีเมล</option>
+                                <option value="line">💬 LINE</option>
+                                <option value="meeting">🤝 ประชุม</option>
+                                <option value="visit">🏪 เยี่ยมชม</option>
+                                <option value="order">🛒 สั่งซื้อ</option>
+                            </select>
+                        </div>
+                        <div class="col-md-9">
+                            <input name="InteractionSubject" class="form-control form-control-sm" placeholder="หัวข้อ (เช่น โทรถามราคา, ส่งใบเสนอราคา)" />
+                        </div>
+                        <div class="col-12">
+                            <textarea name="InteractionNotes" class="form-control form-control-sm" rows="2"
+                                placeholder="รายละเอียดการติดต่อ..."></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small text-muted mb-1">วันที่นัดติดตาม (ถ้ามี)</label>
+                            <input type="datetime-local" name="FollowUpDate" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button type="submit" class="btn btn-sm btn-teal w-100">
+                                <i class="bi bi-save me-1"></i>บันทึก
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Interaction Timeline -->
+        <div class="admin-card mb-3">
+            <div class="admin-card-header"><i class="bi bi-clock-history me-2"></i>ประวัติการติดต่อ</div>
+            <div class="p-3">
+                @if (!c.Interactions.Any())
+                {
+                    <p class="text-muted small mb-0">ยังไม่มีประวัติการติดต่อ</p>
+                }
+                <div class="timeline">
+                    @foreach (var interaction in c.Interactions)
+                    {
+                        string typeIcon = interaction.Type switch {
+                            "call" => "📞",
+                            "email" => "📧",
+                            "line" => "💬",
+                            "meeting" => "🤝",
+                            "visit" => "🏪",
+                            "order" => "🛒",
+                            _ => "📝"
+                        };
+                        <div class="timeline-item mb-3 pb-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <span class="me-2">@typeIcon</span>
+                                    <strong class="small">@(interaction.Subject ?? interaction.Type)</strong>
+                                    <span class="text-muted small ms-2">@interaction.CreatedAt.ToString("d MMM yyyy HH:mm")</span>
+                                    @if (!string.IsNullOrEmpty(interaction.CreatedByAdmin))
+                                    {
+                                        <span class="text-muted small ms-1">โดย @interaction.CreatedByAdmin</span>
+                                    }
+                                </div>
+                                <div class="d-flex gap-1 align-items-center">
+                                    @if (interaction.FollowUpDate.HasValue && !interaction.IsFollowUpDone)
+                                    {
+                                        <span class="badge @(interaction.FollowUpDate.Value < DateTime.Now ? "bg-danger" : "bg-warning text-dark") small">
+                                            <i class="bi bi-calendar-check me-1"></i>@interaction.FollowUpDate.Value.ToString("d MMM HH:mm")
+                                        </span>
+                                        <form method="post" asp-page-handler="MarkFollowUpDone" asp-route-id="@c.Id">
+                                            <input type="hidden" name="interactionId" value="@interaction.Id" />
+                                            <button type="submit" class="btn btn-xs btn-outline-success" title="ติดตามแล้ว" style="padding:1px 6px;font-size:.7rem">
+                                                <i class="bi bi-check"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    @if (interaction.FollowUpDate.HasValue && interaction.IsFollowUpDone)
+                                    {
+                                        <span class="badge bg-success-subtle text-success small">ติดตามแล้ว</span>
+                                    }
+                                    <form method="post" asp-page-handler="DeleteInteraction" asp-route-id="@c.Id">
+                                        <input type="hidden" name="interactionId" value="@interaction.Id" />
+                                        <button type="submit" class="btn btn-xs btn-outline-danger"
+                                            onclick="return confirm('ลบบันทึกนี้?')"
+                                            style="padding:1px 6px;font-size:.7rem">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(interaction.Notes))
+                            {
+                                <div class="mt-1 ms-4 text-muted small" style="white-space:pre-wrap">@interaction.Notes</div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Quotations -->
+        @if (Model.Quotations.Any())
+        {
+            <div class="admin-card mb-3">
+                <div class="admin-card-header"><i class="bi bi-receipt me-2"></i>ใบเสนอราคา</div>
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>เลขที่</th>
+                                <th>วันที่</th>
+                                <th>สถานะ</th>
+                                <th class="text-end">ยอดสุทธิ</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var q in Model.Quotations)
+                            {
+                                <tr>
+                                    <td class="small fw-semibold">@q.QuotationNumber</td>
+                                    <td class="small text-muted">@q.CreatedAt.ToString("d MMM yy")</td>
+                                    <td>
+                                        @switch (q.Status)
+                                        {
+                                            case "draft":     <span class="badge bg-secondary">ร่าง</span> break;
+                                            case "sent":      <span class="badge bg-info text-dark">ส่งแล้ว</span> break;
+                                            case "accepted":  <span class="badge bg-primary">ตอบรับ</span> break;
+                                            case "paid":      <span class="badge bg-success">ชำระแล้ว</span> break;
+                                            case "completed": <span class="badge bg-teal">เสร็จสิ้น</span> break;
+                                            case "rejected":  <span class="badge bg-danger">ปฏิเสธ</span> break;
+                                            case "cancelled": <span class="badge bg-danger">ยกเลิก</span> break;
+                                            default:          <span class="badge bg-secondary">@q.Status</span> break;
+                                        }
+                                    </td>
+                                    <td class="text-end small">@q.NetAmount.ToString("#,##0") ฿</td>
+                                    <td>
+                                        <a href="/Admin/Quotations/Detail?id=@q.Id" class="btn btn-xs btn-outline-teal" style="padding:1px 8px;font-size:.72rem">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+
+        <!-- Contact Messages -->
+        @if (Model.ContactMessages.Any())
+        {
+            <div class="admin-card mb-3">
+                <div class="admin-card-header"><i class="bi bi-envelope me-2"></i>ข้อความจากฟอร์มติดต่อ</div>
+                <div class="p-3">
+                    @foreach (var msg in Model.ContactMessages)
+                    {
+                        <div class="mb-2 pb-2 border-bottom small">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-semibold">@(msg.ServiceType ?? "ไม่ระบุประเภท")</span>
+                                <span class="text-muted">@msg.CreatedAt.ToString("d MMM yy HH:mm")</span>
+                            </div>
+                            @if (!string.IsNullOrEmpty(msg.Message))
+                            {
+                                <div class="text-muted mt-1" style="white-space:pre-wrap">@msg.Message</div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
