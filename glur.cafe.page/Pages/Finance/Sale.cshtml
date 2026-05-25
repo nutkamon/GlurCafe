@@ -1,0 +1,239 @@
+@page
+@model glur.cafe.page.Pages.Finance.SaleModel
+@{
+    ViewData["Title"] = "บันทึกการขาย";
+    Layout = "_FinanceLayout";
+}
+
+<div style="max-width:860px">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-semibold mb-0"><i class="bi bi-receipt me-2"></i>บันทึกการขาย</h4>
+        <a href="/Finance" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>กลับ
+        </a>
+    </div>
+
+    @if (!ModelState.IsValid && ModelState.ErrorCount > 0)
+    {
+        <div class="alert alert-danger mb-3">
+            @foreach (var err in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@err.ErrorMessage</div>
+            }
+        </div>
+    }
+
+    <form method="post" id="saleForm">
+        @Html.AntiForgeryToken()
+
+        <!-- Header -->
+        <div class="card shadow-sm border-0 mb-3">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold small">วันที่</label>
+                        <input asp-for="Order.Date" type="date" class="form-control"
+                               value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold small">เลขที่ใบเสร็จ</label>
+                        <input asp-for="Order.OrderNumber" type="text" class="form-control"
+                               value="@Model.Order.OrderNumber" readonly style="background:#f8f9fa" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold small">หมายเหตุ</label>
+                        <input asp-for="Order.Note" type="text" class="form-control" placeholder="(ไม่บังคับ)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Items Table -->
+        <div class="card shadow-sm border-0 mb-3">
+            <div class="card-header bg-white fw-semibold small">รายการสินค้า</div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0" id="itemsTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width:34px" class="text-center ps-3">#</th>
+                                <th style="width:220px">สินค้า / บริการ</th>
+                                <th>รายละเอียด</th>
+                                <th style="width:95px" class="text-center">จำนวน</th>
+                                <th style="width:80px" class="text-center">หน่วย</th>
+                                <th style="width:120px" class="text-end">ราคา/หน่วย</th>
+                                <th style="width:120px" class="text-end pe-3">รวม</th>
+                                <th style="width:44px"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsBody">
+                            <!-- rows injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white">
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="addRow()">
+                    <i class="bi bi-plus-lg me-1"></i>เพิ่มรายการ
+                </button>
+            </div>
+        </div>
+
+        <!-- Totals -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <div class="row justify-content-end">
+                    <div class="col-md-5">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">ยอดรวมสินค้า</span>
+                            <span id="itemsTotalDisplay" class="fw-semibold">0.00 ฿</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label asp-for="Order.DeliveryFee" class="text-muted mb-0">ค่าส่ง</label>
+                            <div class="d-flex align-items-center gap-1">
+                                <input asp-for="Order.DeliveryFee" id="deliveryInput" type="number" step="0.01" min="0"
+                                       class="form-control form-control-sm text-end" style="width:120px"
+                                       placeholder="0.00" value="0" oninput="updateTotals()" />
+                                <span class="text-muted">฿</span>
+                            </div>
+                        </div>
+                        <hr class="my-2" />
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">ยอดรวมทั้งสิ้น</span>
+                            <span id="grandTotalDisplay" class="fw-bold fs-5 text-success">0.00 ฿</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+            <a href="/Finance" class="btn btn-outline-secondary">ยกเลิก</a>
+            <button type="submit" class="btn btn-success px-4">
+                <i class="bi bi-check-lg me-1"></i>บันทึกใบเสร็จ
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<!-- Row template (hidden) -->
+<template id="rowTemplate">
+    <tr class="item-row">
+        <td class="text-center ps-3 row-num text-muted small"></td>
+        <td>
+            <select class="form-select form-select-sm product-select">
+                <option value="">— เลือกสินค้า —</option>
+                @foreach (var p in Model.ProductOptions)
+                {
+                    <option value="@p.Id" data-name="@p.Name" data-price="@p.Price">
+                        @p.Name
+                    </option>
+                }
+            </select>
+        </td>
+        <td>
+            <input type="text" class="form-control form-control-sm desc-input" placeholder="รายละเอียด" />
+        </td>
+        <td>
+            <input type="number" class="form-control form-control-sm text-center qty-input" value="1" min="0.01" step="0.01" />
+        </td>
+        <td>
+            <input type="text" class="form-control form-control-sm text-center unit-input" value="กก." style="width:70px" />
+        </td>
+        <td>
+            <input type="number" class="form-control form-control-sm text-end price-input" value="0" min="0" step="0.01" placeholder="0.00" />
+        </td>
+        <td class="text-end pe-3">
+            <span class="row-total fw-semibold text-success">0.00</span>
+        </td>
+        <td>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRow(this)">
+                <i class="bi bi-trash"></i>
+            </button>
+        </td>
+    </tr>
+</template>
+
+@section Scripts {
+<script>
+let rowIndex = 0;
+
+function addRow() {
+    const tmpl = document.getElementById('rowTemplate');
+    const clone = tmpl.content.cloneNode(true);
+    const tr = clone.querySelector('tr');
+
+    // Wire up hidden inputs for model binding
+    const descInput  = tr.querySelector('.desc-input');
+    const qtyInput   = tr.querySelector('.qty-input');
+    const unitInput  = tr.querySelector('.unit-input');
+    const priceInput = tr.querySelector('.price-input');
+
+    descInput.name  = `Items[${rowIndex}].Description`;
+    qtyInput.name   = `Items[${rowIndex}].Quantity`;
+    unitInput.name  = `Items[${rowIndex}].Unit`;
+    priceInput.name = `Items[${rowIndex}].UnitPrice`;
+
+    // Product dropdown → fill description + price
+    tr.querySelector('.product-select').addEventListener('change', function () {
+        const opt = this.options[this.selectedIndex];
+        if (opt.value) {
+            descInput.value  = opt.dataset.name;
+            priceInput.value = parseFloat(opt.dataset.price).toFixed(2);
+            calcRowTotal(tr);
+        }
+    });
+
+    qtyInput.addEventListener('input',   () => calcRowTotal(tr));
+    priceInput.addEventListener('input', () => calcRowTotal(tr));
+
+    document.getElementById('itemsBody').appendChild(clone);
+    rowIndex++;
+    renumber();
+}
+
+function removeRow(btn) {
+    btn.closest('tr').remove();
+    renumber();
+    updateTotals();
+}
+
+function renumber() {
+    document.querySelectorAll('#itemsBody .item-row').forEach((tr, i) => {
+        tr.querySelector('.row-num').textContent = i + 1;
+        // Re-index names for model binding
+        tr.querySelector('.desc-input').name  = `Items[${i}].Description`;
+        tr.querySelector('.qty-input').name   = `Items[${i}].Quantity`;
+        tr.querySelector('.unit-input').name  = `Items[${i}].Unit`;
+        tr.querySelector('.price-input').name = `Items[${i}].UnitPrice`;
+    });
+}
+
+function calcRowTotal(tr) {
+    const qty   = parseFloat(tr.querySelector('.qty-input').value)   || 0;
+    const price = parseFloat(tr.querySelector('.price-input').value) || 0;
+    const total = qty * price;
+    tr.querySelector('.row-total').textContent = total.toLocaleString('th-TH', {minimumFractionDigits:2});
+    updateTotals();
+}
+
+function updateTotals() {
+    let itemsTotal = 0;
+    document.querySelectorAll('#itemsBody .row-total').forEach(el => {
+        itemsTotal += parseFloat(el.textContent.replace(/,/g,'')) || 0;
+    });
+    const delivery = parseFloat(document.getElementById('deliveryInput').value) || 0;
+    const grand = itemsTotal + delivery;
+
+    document.getElementById('itemsTotalDisplay').textContent =
+        itemsTotal.toLocaleString('th-TH', {minimumFractionDigits:2}) + ' ฿';
+    document.getElementById('grandTotalDisplay').textContent =
+        grand.toLocaleString('th-TH', {minimumFractionDigits:2}) + ' ฿';
+}
+
+// Start with one row
+addRow();
+</script>
+}

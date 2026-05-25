@@ -1,0 +1,257 @@
+@page "{id:int}"
+@model glur.cafe.page.Pages.Finance.SalePrintModel
+@{
+    Layout = null;
+    var siteName  = Model.Site.GetValueOrDefault("SiteName", "GLUR CAFE");
+    var phone     = Model.Site.GetValueOrDefault("Phone", "");
+    var email     = Model.Site.GetValueOrDefault("Email", "");
+    var lineId    = Model.Site.GetValueOrDefault("LineId", "");
+    var address   = System.Text.RegularExpressions.Regex.Replace(
+                        Model.Site.GetValueOrDefault("Address", ""), "<.*?>", "").Trim();
+    var s = Model.Order;
+    int rowNo = 1;
+}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ใบเสร็จ @s.OrderNumber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; color: #1a1a1a; background: #f5f5f5; }
+
+        .page-wrapper {
+            max-width: 780px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 24px rgba(0,0,0,.12);
+            overflow: hidden;
+        }
+
+        /* Toolbar (screen only) */
+        .toolbar {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 11px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+        .toolbar a { color: #aaa; text-decoration: none; font-size: 12px; }
+        .toolbar a:hover { color: #fff; }
+        .btn-print {
+            margin-left: auto;
+            background: #00a86b;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 7px 22px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-print:hover { background: #008a58; }
+
+        /* Document body */
+        .doc { padding: 36px 40px; }
+
+        /* Header */
+        .doc-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding-bottom: 18px;
+            border-bottom: 3px solid #00a86b;
+            margin-bottom: 24px;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand img { height: 50px; width: auto; }
+        .brand-name { font-size: 20px; font-weight: 700; color: #00a86b; line-height: 1.2; }
+        .brand-sub { font-size: 11px; color: #777; margin-top: 2px; }
+        .doc-meta { text-align: right; }
+        .doc-meta .receipt-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: .05em; }
+        .doc-meta .receipt-num { font-size: 20px; font-weight: 700; color: #1a1a1a; margin: 2px 0; }
+        .doc-meta .receipt-date { font-size: 12px; color: #555; }
+
+        /* Info bar */
+        .info-bar {
+            background: #f0faf5;
+            border: 1px solid #c8eedd;
+            border-radius: 8px;
+            padding: 10px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 24px;
+            font-size: 12px;
+            color: #444;
+        }
+        .info-bar span { display: flex; align-items: center; gap: 5px; }
+
+        /* Items table */
+        .items-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+        .items-table thead tr { background: #00a86b; color: #fff; }
+        .items-table thead th { padding: 10px 12px; font-weight: 600; font-size: 12px; }
+        .items-table thead th.right { text-align: right; }
+        .items-table thead th.center { text-align: center; }
+        .items-table tbody tr { border-bottom: 1px solid #eee; }
+        .items-table tbody tr:nth-child(even) { background: #f9fdfb; }
+        .items-table tbody td { padding: 9px 12px; vertical-align: middle; }
+        .items-table tbody td.right { text-align: right; }
+        .items-table tbody td.center { text-align: center; }
+
+        /* Totals */
+        .totals { margin-left: auto; width: 280px; margin-bottom: 28px; }
+        .totals-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; }
+        .totals-row.grand { border-top: 2px solid #00a86b; margin-top: 6px; padding-top: 10px; font-size: 16px; font-weight: 700; color: #00a86b; }
+        .totals-row .label { color: #555; }
+
+        /* Note */
+        .note-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 9px 14px; font-size: 12px; color: #92400e; margin-bottom: 24px; }
+
+        /* Footer */
+        .doc-footer { border-top: 1px solid #e5e5e5; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #999; }
+        .doc-footer .thank { font-size: 13px; color: #00a86b; font-weight: 600; }
+
+        /* ========= PRINT ========= */
+        @@media print {
+            body { background: #fff; font-size: 12px; }
+            .toolbar { display: none !important; }
+            .page-wrapper { max-width: 100%; margin: 0; box-shadow: none; border-radius: 0; }
+            .doc { padding: 16mm 14mm; }
+            .items-table thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .items-table tbody tr:nth-child(even) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .info-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            @@page { margin: 0; size: A4; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+            <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7z"/>
+        </svg>
+        <span>ใบเสร็จรับเงิน — @s.OrderNumber</span>
+        <a href="/Finance">← กลับ</a>
+        <button class="btn-print" onclick="window.print()">🖨 พิมพ์ / บันทึก PDF</button>
+    </div>
+
+    <!-- Document -->
+    <div class="doc">
+
+        <!-- Header -->
+        <div class="doc-header">
+            <div class="brand">
+                <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" />
+                <div>
+                    <div class="brand-name">@siteName</div>
+                    <div class="brand-sub">โรงคั่วกาแฟ &amp; กาแฟสด</div>
+                </div>
+            </div>
+            <div class="doc-meta">
+                <div class="receipt-label">ใบเสร็จรับเงิน</div>
+                <div class="receipt-num">@s.OrderNumber</div>
+                <div class="receipt-date">
+                    วันที่ @s.Date.ToString("dd/MM/") @(s.Date.Year + 543)
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact info bar -->
+        @if (!string.IsNullOrEmpty(phone) || !string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(lineId))
+        {
+            <div class="info-bar">
+                @if (!string.IsNullOrEmpty(phone))
+                {
+                    <span>📞 @phone</span>
+                }
+                @if (!string.IsNullOrEmpty(email))
+                {
+                    <span>✉️ @email</span>
+                }
+                @if (!string.IsNullOrEmpty(lineId))
+                {
+                    <span>💬 Line: @lineId</span>
+                }
+                @if (!string.IsNullOrEmpty(address))
+                {
+                    <span>📍 @address</span>
+                }
+            </div>
+        }
+
+        <!-- Items table -->
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th style="width:34px" class="center">#</th>
+                    <th>รายละเอียด</th>
+                    <th class="center" style="width:80px">จำนวน</th>
+                    <th class="center" style="width:55px">หน่วย</th>
+                    <th class="right" style="width:110px">ราคา/หน่วย</th>
+                    <th class="right" style="width:110px">รวม</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in s.Items)
+                {
+                    <tr>
+                        <td class="center" style="color:#999">@rowNo</td>
+                        <td>@item.Description</td>
+                        <td class="center">@item.Quantity.ToString("0.##")</td>
+                        <td class="center" style="color:#777">@item.Unit</td>
+                        <td class="right">@item.UnitPrice.ToString("#,##0.00")</td>
+                        <td class="right" style="font-weight:600">@item.Amount.ToString("#,##0.00")</td>
+                    </tr>
+                    rowNo++;
+                }
+            </tbody>
+        </table>
+
+        <!-- Totals -->
+        <div class="totals">
+            <div class="totals-row">
+                <span class="label">ยอดรวมสินค้า</span>
+                <span>@s.ItemsTotal.ToString("#,##0.00") ฿</span>
+            </div>
+            @if (s.DeliveryFee > 0)
+            {
+                <div class="totals-row">
+                    <span class="label">ค่าส่ง</span>
+                    <span>@s.DeliveryFee.ToString("#,##0.00") ฿</span>
+                </div>
+            }
+            <div class="totals-row grand">
+                <span>ยอดรวมทั้งสิ้น</span>
+                <span>@s.GrandTotal.ToString("#,##0.00") ฿</span>
+            </div>
+        </div>
+
+        <!-- Note -->
+        @if (!string.IsNullOrEmpty(s.Note))
+        {
+            <div class="note-box">📝 @s.Note</div>
+        }
+
+        <!-- Footer -->
+        <div class="doc-footer">
+            <span class="thank">ขอบคุณที่ใช้บริการ GLUR CAFE 🙏</span>
+            <span>พิมพ์วันที่ @DateTime.Now.ToString("dd/MM/") @(DateTime.Now.Year + 543)</span>
+        </div>
+
+    </div>
+</div>
+<script>
+    // Auto-open print dialog if ?print=1
+    if (new URLSearchParams(location.search).get('print') === '1') window.print();
+</script>
+</body>
+</html>

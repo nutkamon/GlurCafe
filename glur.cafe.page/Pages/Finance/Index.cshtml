@@ -1,0 +1,303 @@
+@page
+@model glur.cafe.page.Pages.Finance.IndexModel
+@{
+    ViewData["Title"] = "รายรับ - รายจ่าย";
+    Layout = "_FinanceLayout";
+    var months = new[] { "มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
+                         "กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม" };
+    int currentYear = DateTime.Today.Year;
+    int totalEntries = Model.SaleOrders.Count + Model.Expenses.Count;
+}
+
+<div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-4">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body py-3">
+                    <div class="text-muted small mb-1"><i class="bi bi-arrow-down-circle me-1 text-success"></i>รายรับ</div>
+                    <div class="fw-bold fs-5 text-success">@Model.TotalIncome.ToString("#,##0.00") ฿</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body py-3">
+                    <div class="text-muted small mb-1"><i class="bi bi-arrow-up-circle me-1 text-danger"></i>รายจ่าย</div>
+                    <div class="fw-bold fs-5 text-danger">@Model.TotalExpense.ToString("#,##0.00") ฿</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body py-3">
+                    <div class="text-muted small mb-1"><i class="bi bi-wallet2 me-1"></i>คงเหลือสุทธิ</div>
+                    <div class="fw-bold fs-5 @(Model.NetBalance >= 0 ? "text-success" : "text-danger")">
+                        @Model.NetBalance.ToString("#,##0.00") ฿
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter + Actions -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white d-flex flex-wrap justify-content-between align-items-center gap-2 py-2">
+            <form method="get" class="d-flex flex-wrap gap-2 align-items-center">
+                <select name="Year" class="form-select form-select-sm" style="width:105px">
+                    @for (int y = currentYear + 1; y >= currentYear - 3; y--)
+                    {
+                        <option value="@y" selected="@(Model.Year == y)">@(y + 543)</option>
+                    }
+                </select>
+                <select name="Month" class="form-select form-select-sm" style="width:135px">
+                    @for (int m = 1; m <= 12; m++)
+                    {
+                        <option value="@m" selected="@(Model.Month == m)">@months[m - 1]</option>
+                    }
+                </select>
+                <select name="TypeFilter" class="form-select form-select-sm" style="width:120px">
+                    <option value="">ทั้งหมด</option>
+                    <option value="income" selected="@(Model.TypeFilter == "income")">รายรับ</option>
+                    <option value="expense" selected="@(Model.TypeFilter == "expense")">รายจ่าย</option>
+                </select>
+                <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-filter me-1"></i>กรอง</button>
+            </form>
+            <div class="d-flex gap-2">
+                <a href="/Finance/Sale" class="btn btn-sm btn-success">
+                    <i class="bi bi-receipt me-1"></i>บันทึกการขาย
+                </a>
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="collapse" data-bs-target="#expenseForm">
+                    <i class="bi bi-plus-lg me-1"></i>เพิ่มรายจ่าย
+                </button>
+            </div>
+        </div>
+
+        <!-- Expense Quick Add Form -->
+        <div class="collapse" id="expenseForm">
+            <div class="card-body border-top bg-light">
+                <form method="post" asp-page-handler="AddExpense">
+                    @Html.AntiForgeryToken()
+                    <div class="row g-2 align-items-end">
+                        <div class="col-6 col-md-2">
+                            <label class="form-label small mb-1">หมวดหมู่</label>
+                            <input asp-for="ExpenseInput.Category" class="form-control form-control-sm" list="categoryList" placeholder="เช่น ค่าวัตถุดิบ" />
+                            <datalist id="categoryList">
+                                <option value="ค่าวัตถุดิบ" />
+                                <option value="ค่าแรงงาน" />
+                                <option value="ค่าเช่า" />
+                                <option value="ค่าสาธารณูปโภค" />
+                                <option value="ค่าขนส่ง" />
+                                <option value="ค่าการตลาด" />
+                                <option value="ค่าอุปกรณ์" />
+                                <option value="ค่าใช้จ่ายอื่นๆ" />
+                            </datalist>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <label class="form-label small mb-1">รายละเอียด</label>
+                            <input asp-for="ExpenseInput.Description" class="form-control form-control-sm" placeholder="รายละเอียด" />
+                            <span asp-validation-for="ExpenseInput.Description" class="text-danger small"></span>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <label class="form-label small mb-1">จำนวนเงิน (฿)</label>
+                            <input asp-for="ExpenseInput.Amount" type="number" step="0.01" min="0" class="form-control form-control-sm" placeholder="0.00" />
+                            <span asp-validation-for="ExpenseInput.Amount" class="text-danger small"></span>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <label class="form-label small mb-1">วันที่</label>
+                            <input asp-for="ExpenseInput.Date" type="date" class="form-control form-control-sm"
+                                   value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <label class="form-label small mb-1">หมายเหตุ</label>
+                            <input asp-for="ExpenseInput.Note" class="form-control form-control-sm" placeholder="(ไม่บังคับ)" />
+                        </div>
+                        <div class="col-6 col-md-1 d-flex align-items-end">
+                            <button type="submit" class="btn btn-sm btn-danger w-100">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Income: SaleOrders -->
+    @if (Model.TypeFilter != "expense")
+    {
+    <div class="card shadow-sm border-0 mb-3">
+        <div class="card-header bg-white d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-down-circle text-success"></i>
+            <span class="fw-semibold">รายรับ — @months[Model.Month - 1] @(Model.Year + 543)</span>
+            <span class="text-muted small">(@Model.SaleOrders.Count ใบ)</span>
+        </div>
+        @if (Model.SaleOrders.Count == 0)
+        {
+            <div class="text-center text-muted py-4">
+                <i class="bi bi-inbox fs-2 d-block mb-1"></i>ยังไม่มีรายการขายในเดือนนี้
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:34px"></th>
+                            <th style="width:110px">วันที่</th>
+                            <th style="width:160px">เลขที่ใบเสร็จ</th>
+                            <th>รายการ</th>
+                            <th>หมายเหตุ</th>
+                            <th class="text-end" style="width:110px">สินค้า</th>
+                            <th class="text-end" style="width:100px">ค่าส่ง</th>
+                            <th class="text-end" style="width:130px">รวมทั้งสิ้น</th>
+                            <th style="width:60px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var s in Model.SaleOrders)
+                        {
+                            var colId = $"sale-{s.Id}";
+                            <tr data-bs-toggle="collapse" data-bs-target="#@colId" style="cursor:pointer">
+                                <td class="text-center text-muted ps-2">
+                                    <i class="bi bi-chevron-down small"></i>
+                                </td>
+                                <td class="text-muted small">@s.Date.ToString("dd/MM/")@(s.Date.Year + 543)</td>
+                                <td><span class="badge bg-success-subtle text-success">@s.OrderNumber</span></td>
+                                <td class="small text-muted">@s.Items.Count รายการ</td>
+                                <td class="text-muted small">@s.Note</td>
+                                <td class="text-end">@s.ItemsTotal.ToString("#,##0.00")</td>
+                                <td class="text-end text-muted small">@(s.DeliveryFee > 0 ? s.DeliveryFee.ToString("#,##0.00") : "-")</td>
+                                <td class="text-end fw-bold text-success">+@s.GrandTotal.ToString("#,##0.00")</td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <a href="/Finance/SalePrint/@s.Id" target="_blank"
+                                           class="btn btn-sm btn-outline-secondary" title="พิมพ์ใบเสร็จ">
+                                            <i class="bi bi-printer"></i>
+                                        </a>
+                                        <form method="post" asp-page-handler="DeleteSale" asp-route-id="@s.Id"
+                                              onsubmit="return confirm('ลบใบเสร็จ @s.OrderNumber ?')">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="Year" value="@Model.Year" />
+                                            <input type="hidden" name="Month" value="@Model.Month" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="collapse" id="@colId">
+                                <td colspan="9" class="p-0">
+                                    <div class="bg-light px-4 py-2">
+                                        <table class="table table-sm mb-0">
+                                            <thead>
+                                                <tr class="text-muted small">
+                                                    <th>#</th>
+                                                    <th>รายละเอียด</th>
+                                                    <th class="text-center">จำนวน</th>
+                                                    <th class="text-center">หน่วย</th>
+                                                    <th class="text-end">ราคา/หน่วย</th>
+                                                    <th class="text-end">รวม</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{int rowNo = 1;}
+                                                @foreach (var item in s.Items)
+                                                {
+                                                    <tr>
+                                                        <td class="text-muted">@rowNo</td>
+                                                        <td>@item.Description</td>
+                                                        <td class="text-center">@item.Quantity.ToString("0.##")</td>
+                                                        <td class="text-center">@item.Unit</td>
+                                                        <td class="text-end">@item.UnitPrice.ToString("#,##0.00")</td>
+                                                        <td class="text-end fw-semibold">@item.Amount.ToString("#,##0.00")</td>
+                                                    </tr>
+                                                    rowNo++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    }
+
+    <!-- Expense: Transactions -->
+    @if (Model.TypeFilter != "income")
+    {
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-up-circle text-danger"></i>
+            <span class="fw-semibold">รายจ่าย — @months[Model.Month - 1] @(Model.Year + 543)</span>
+            <span class="text-muted small">(@Model.Expenses.Count รายการ)</span>
+        </div>
+        @if (Model.Expenses.Count == 0)
+        {
+            <div class="text-center text-muted py-4">
+                <i class="bi bi-inbox fs-2 d-block mb-1"></i>ยังไม่มีรายจ่ายในเดือนนี้
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:110px">วันที่</th>
+                            <th style="width:130px">หมวดหมู่</th>
+                            <th>รายละเอียด</th>
+                            <th>หมายเหตุ</th>
+                            <th class="text-end" style="width:140px">จำนวนเงิน</th>
+                            <th style="width:60px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in Model.Expenses)
+                        {
+                            <tr>
+                                <td class="text-muted small">@t.Date.ToString("dd/MM/")@(t.Date.Year + 543)</td>
+                                <td class="small">@t.Category</td>
+                                <td>@t.Description</td>
+                                <td class="text-muted small">@t.Note</td>
+                                <td class="text-end fw-semibold text-danger">-@t.Amount.ToString("#,##0.00")</td>
+                                <td>
+                                    <form method="post" asp-page-handler="DeleteExpense" asp-route-id="@t.Id"
+                                          onsubmit="return confirm('ลบรายการนี้?')">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="Year" value="@Model.Year" />
+                                        <input type="hidden" name="Month" value="@Model.Month" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    }
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

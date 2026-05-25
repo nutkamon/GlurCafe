@@ -1,0 +1,206 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Finance.IndexModel
+@{
+    ViewData["Title"] = "รายรับ - รายจ่าย";
+    ViewData["ActiveMenu"] = "finance";
+
+    var months = new[] { "มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
+                         "กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม" };
+    int currentYear = DateTime.Today.Year;
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+        <i class="bi bi-check-circle me-2"></i>@TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<!-- Summary Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-4">
+        <div class="admin-card p-3 text-center">
+            <div class="text-muted small mb-1"><i class="bi bi-arrow-down-circle me-1 text-success"></i>รายรับ</div>
+            <div class="fw-bold fs-5 text-success">@Model.TotalIncome.ToString("#,##0.00") ฿</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="admin-card p-3 text-center">
+            <div class="text-muted small mb-1"><i class="bi bi-arrow-up-circle me-1 text-danger"></i>รายจ่าย</div>
+            <div class="fw-bold fs-5 text-danger">@Model.TotalExpense.ToString("#,##0.00") ฿</div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="admin-card p-3 text-center">
+            <div class="text-muted small mb-1"><i class="bi bi-wallet2 me-1"></i>คงเหลือสุทธิ</div>
+            <div class="fw-bold fs-5 @(Model.NetBalance >= 0 ? "text-teal" : "text-danger")">
+                @Model.NetBalance.ToString("#,##0.00") ฿
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter + Quick Add -->
+<div class="admin-card mb-4">
+    <div class="admin-card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <!-- Month/Year filter -->
+        <form method="get" class="d-flex flex-wrap gap-2 align-items-center">
+            <select name="Year" class="form-select form-select-sm" style="width:100px">
+                @for (int y = currentYear + 1; y >= currentYear - 3; y--)
+                {
+                    <option value="@y" selected="@(Model.Year == y)">@(y + 543)</option>
+                }
+            </select>
+            <select name="Month" class="form-select form-select-sm" style="width:130px">
+                @for (int m = 1; m <= 12; m++)
+                {
+                    <option value="@m" selected="@(Model.Month == m)">@months[m - 1]</option>
+                }
+            </select>
+            <select name="TypeFilter" class="form-select form-select-sm" style="width:120px">
+                <option value="">ทั้งหมด</option>
+                <option value="income" selected="@(Model.TypeFilter == "income")">รายรับ</option>
+                <option value="expense" selected="@(Model.TypeFilter == "expense")">รายจ่าย</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-filter me-1"></i>กรอง</button>
+        </form>
+        <!-- Add button -->
+        <button class="btn btn-sm btn-teal" data-bs-toggle="collapse" data-bs-target="#addForm">
+            <i class="bi bi-plus-lg me-1"></i>เพิ่มรายการ
+        </button>
+    </div>
+
+    <!-- Quick Add Form -->
+    <div class="collapse" id="addForm">
+        <div class="p-3 border-top bg-light">
+            <form method="post" asp-page-handler="Add">
+                @Html.AntiForgeryToken()
+                <div class="row g-2 align-items-end">
+                    <div class="col-6 col-md-2">
+                        <label class="form-label small mb-1">ประเภท</label>
+                        <select asp-for="Input.Type" class="form-select form-select-sm">
+                            <option value="income">รายรับ</option>
+                            <option value="expense">รายจ่าย</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <label class="form-label small mb-1">หมวดหมู่</label>
+                        <input asp-for="Input.Category" class="form-control form-control-sm" list="categoryList" placeholder="เช่น ค่าวัตถุดิบ" />
+                        <datalist id="categoryList">
+                            <option value="รายได้จากบริการ" />
+                            <option value="รายได้อื่นๆ" />
+                            <option value="ค่าวัตถุดิบ" />
+                            <option value="ค่าแรงงาน" />
+                            <option value="ค่าเช่า" />
+                            <option value="ค่าสาธารณูปโภค" />
+                            <option value="ค่าขนส่ง" />
+                            <option value="ค่าการตลาด" />
+                            <option value="ค่าอุปกรณ์" />
+                            <option value="ค่าใช้จ่ายอื่นๆ" />
+                        </datalist>
+                        <span asp-validation-for="Input.Category" class="text-danger small"></span>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label small mb-1">รายละเอียด</label>
+                        <input asp-for="Input.Description" class="form-control form-control-sm" placeholder="รายละเอียด" />
+                        <span asp-validation-for="Input.Description" class="text-danger small"></span>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <label class="form-label small mb-1">จำนวนเงิน (฿)</label>
+                        <input asp-for="Input.Amount" type="number" step="0.01" min="0" class="form-control form-control-sm" placeholder="0.00" />
+                        <span asp-validation-for="Input.Amount" class="text-danger small"></span>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <label class="form-label small mb-1">วันที่</label>
+                        <input asp-for="Input.Date" type="date" class="form-control form-control-sm"
+                               value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label small mb-1">หมายเหตุ</label>
+                        <input asp-for="Input.Note" class="form-control form-control-sm" placeholder="(ไม่บังคับ)" />
+                    </div>
+                    <div class="col-12 col-md-1 d-flex align-items-end">
+                        <button type="submit" class="btn btn-sm btn-teal w-100">
+                            <i class="bi bi-check-lg"></i> บันทึก
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Transactions Table -->
+<div class="admin-card">
+    <div class="admin-card-header">
+        <span>รายการ @months[Model.Month - 1] @(Model.Year + 543)</span>
+        <span class="text-muted small ms-2">(@Model.Transactions.Count รายการ)</span>
+    </div>
+    @if (Model.Transactions.Count == 0)
+    {
+        <div class="text-center text-muted py-5">
+            <i class="bi bi-inbox fs-2 d-block mb-2"></i>ยังไม่มีรายการในเดือนนี้
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:110px">วันที่</th>
+                        <th style="width:90px">ประเภท</th>
+                        <th style="width:130px">หมวดหมู่</th>
+                        <th>รายละเอียด</th>
+                        <th>หมายเหตุ</th>
+                        <th class="text-end" style="width:130px">จำนวนเงิน</th>
+                        <th style="width:60px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model.Transactions)
+                    {
+                        <tr>
+                            <td class="text-muted small">@t.Date.ToString("dd/MM/") @(t.Date.Year + 543)</td>
+                            <td>
+                                @if (t.Type == "income")
+                                {
+                                    <span class="badge bg-success-subtle text-success">รายรับ</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger-subtle text-danger">รายจ่าย</span>
+                                }
+                            </td>
+                            <td class="small">@t.Category</td>
+                            <td>@t.Description</td>
+                            <td class="text-muted small">@t.Note</td>
+                            <td class="text-end fw-semibold @(t.Type == "income" ? "text-success" : "text-danger")">
+                                @(t.Type == "income" ? "+" : "-")@t.Amount.ToString("#,##0.00")
+                            </td>
+                            <td>
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@t.Id"
+                                      onsubmit="return confirm('ลบรายการนี้?')">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="Year" value="@Model.Year" />
+                                    <input type="hidden" name="Month" value="@Model.Month" />
+                                    <input type="hidden" name="TypeFilter" value="@Model.TypeFilter" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using glur.cafe.page.Data;
 
@@ -10,9 +11,11 @@ using glur.cafe.page.Data;
 namespace glur.cafe.page.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260525034556_AddTransactionTable")]
+    partial class AddTransactionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
@@ -590,81 +593,6 @@ namespace glur.cafe.page.Migrations
                     b.ToTable("QuotationItems");
                 });
 
-            modelBuilder.Entity("glur.cafe.page.Models.SaleOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("DeliveryFee")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("GrandTotal")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("ItemsTotal")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Note")
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("OrderNumber")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Date");
-
-                    b.HasIndex("OrderNumber")
-                        .IsUnique();
-
-                    b.ToTable("SaleOrders");
-                });
-
-            modelBuilder.Entity("glur.cafe.page.Models.SaleOrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SaleOrderId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SaleOrderId");
-
-                    b.ToTable("SaleOrderItems");
-                });
-
             modelBuilder.Entity("glur.cafe.page.Models.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -913,17 +841,6 @@ namespace glur.cafe.page.Migrations
                     b.Navigation("Quotation");
                 });
 
-            modelBuilder.Entity("glur.cafe.page.Models.SaleOrderItem", b =>
-                {
-                    b.HasOne("glur.cafe.page.Models.SaleOrder", "SaleOrder")
-                        .WithMany("Items")
-                        .HasForeignKey("SaleOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SaleOrder");
-                });
-
             modelBuilder.Entity("glur.cafe.page.Models.Customer", b =>
                 {
                     b.Navigation("ContactMessages");
@@ -939,11 +856,6 @@ namespace glur.cafe.page.Migrations
                 });
 
             modelBuilder.Entity("glur.cafe.page.Models.Quotation", b =>
-                {
-                    b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("glur.cafe.page.Models.SaleOrder", b =>
                 {
                     b.Navigation("Items");
                 });

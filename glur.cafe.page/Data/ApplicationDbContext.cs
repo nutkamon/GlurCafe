@@ -24,6 +24,9 @@ namespace glur.cafe.page.Data
         public DbSet<ProductCostItem> ProductCostItems => Set<ProductCostItem>();
         public DbSet<Customer> Customers => Set<Customer>();
         public DbSet<CustomerInteraction> CustomerInteractions => Set<CustomerInteraction>();
+        public DbSet<Transaction> Transactions => Set<Transaction>();
+        public DbSet<SaleOrder> SaleOrders => Set<SaleOrder>();
+        public DbSet<SaleOrderItem> SaleOrderItems => Set<SaleOrderItem>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -83,6 +86,14 @@ namespace glur.cafe.page.Data
                 .HasForeignKey(m => m.CustomerId)
                 .OnDelete(DeleteBehavior.SetNull)
                 .IsRequired(false);
+
+            modelBuilder.Entity<SaleOrder>().HasIndex(s => s.OrderNumber).IsUnique();
+            modelBuilder.Entity<SaleOrder>().HasIndex(s => s.Date);
+            modelBuilder.Entity<SaleOrderItem>()
+                .HasOne(i => i.SaleOrder)
+                .WithMany(s => s.Items)
+                .HasForeignKey(i => i.SaleOrderId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — GLUR CAFE</title>
+    <link rel="icon" type="image/png" href="/img/Logo-removebg-preview.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <style>
+        body { font-family: 'Noto Sans Thai', sans-serif; background: #f4f6f9; }
+        .topbar {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 1.5rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0,0,0,.06);
+        }
+        .topbar-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+        .topbar-brand img { height: 32px; }
+        .topbar-brand span { font-weight: 700; font-size: .95rem; color: #1a1a1a; }
+        .topbar-title { font-size: .9rem; color: #6b7280; border-left: 1px solid #e5e7eb; padding-left: 12px; margin-left: 4px; }
+        .topbar-nav { margin-left: auto; display: flex; gap: 6px; }
+        .topbar-nav a { font-size: .82rem; color: #6b7280; text-decoration: none; padding: 4px 10px; border-radius: 6px; }
+        .topbar-nav a:hover, .topbar-nav a.active { background: #f0faf5; color: #00a86b; }
+        .page-content { padding: 1.5rem; }
+        .admin-card { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+        .text-teal { color: #00a86b; }
+        .btn-teal { background: #00a86b; color: #fff; border: none; }
+        .btn-teal:hover { background: #008a58; color: #fff; }
+        .btn-outline-teal { border: 1px solid #00a86b; color: #00a86b; }
+        .btn-outline-teal:hover { background: #00a86b; color: #fff; }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <a href="/" class="topbar-brand">
+        <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" />
+        <span>GLUR CAFE</span>
+    </a>
+    <span class="topbar-title">@ViewData["Title"]</span>
+    <nav class="topbar-nav">
+        <a href="/Finance" class="@(ViewContext.RouteData.Values["page"]?.ToString() == "/Finance/Index" ? "active" : "")">
+            <i class="bi bi-house me-1"></i>รายรับ-รายจ่าย
+        </a>
+        <a href="/Finance/Sale" class="@(ViewContext.RouteData.Values["page"]?.ToString()?.StartsWith("/Finance/Sale") == true && ViewContext.RouteData.Values["page"]?.ToString() != "/Finance/SalePrint" ? "active" : "")">
+            <i class="bi bi-receipt me-1"></i>บันทึกการขาย
+        </a>
+    </nav>
+</div>
+
+<div class="page-content">
+    @RenderBody()
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

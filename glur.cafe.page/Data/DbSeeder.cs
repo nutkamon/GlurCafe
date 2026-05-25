@@ -148,6 +148,49 @@ namespace glur.cafe.page.Data
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_CustomerInteractions_CustomerId"" ON ""CustomerInteractions"" (""CustomerId"");"); } catch { }
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_CustomerInteractions_FollowUpDate"" ON ""CustomerInteractions"" (""FollowUpDate"");"); } catch { }
 
+            // --- Transactions (รายรับ-รายจ่าย) ---
+            context.Database.ExecuteSqlRaw(@"
+                CREATE TABLE IF NOT EXISTS ""Transactions"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_Transactions"" PRIMARY KEY AUTOINCREMENT,
+                    ""Type"" TEXT NOT NULL,
+                    ""Category"" TEXT NOT NULL,
+                    ""Description"" TEXT NOT NULL,
+                    ""Amount"" TEXT NOT NULL,
+                    ""Date"" TEXT NOT NULL,
+                    ""Note"" TEXT NULL,
+                    ""CreatedAt"" TEXT NOT NULL
+                );");
+
+            // --- SaleOrders (ใบเสร็จ) ---
+            context.Database.ExecuteSqlRaw(@"
+                CREATE TABLE IF NOT EXISTS ""SaleOrders"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_SaleOrders"" PRIMARY KEY AUTOINCREMENT,
+                    ""OrderNumber"" TEXT NOT NULL,
+                    ""Date"" TEXT NOT NULL,
+                    ""ItemsTotal"" TEXT NOT NULL,
+                    ""DeliveryFee"" TEXT NOT NULL,
+                    ""GrandTotal"" TEXT NOT NULL,
+                    ""Note"" TEXT NULL,
+                    ""CreatedAt"" TEXT NOT NULL
+                );");
+            try { context.Database.ExecuteSqlRaw(@"CREATE UNIQUE INDEX IF NOT EXISTS ""IX_SaleOrders_OrderNumber"" ON ""SaleOrders"" (""OrderNumber"");"); } catch { }
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_SaleOrders_Date"" ON ""SaleOrders"" (""Date"");"); } catch { }
+
+            // --- SaleOrderItems ---
+            context.Database.ExecuteSqlRaw(@"
+                CREATE TABLE IF NOT EXISTS ""SaleOrderItems"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_SaleOrderItems"" PRIMARY KEY AUTOINCREMENT,
+                    ""SaleOrderId"" INTEGER NOT NULL,
+                    ""Description"" TEXT NOT NULL,
+                    ""Quantity"" TEXT NOT NULL,
+                    ""Unit"" TEXT NOT NULL,
+                    ""UnitPrice"" TEXT NOT NULL,
+                    ""Amount"" TEXT NOT NULL,
+                    CONSTRAINT ""FK_SaleOrderItems_SaleOrders_SaleOrderId""
+                        FOREIGN KEY (""SaleOrderId"") REFERENCES ""SaleOrders"" (""Id"") ON DELETE CASCADE
+                );");
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_SaleOrderItems_SaleOrderId"" ON ""SaleOrderItems"" (""SaleOrderId"");"); } catch { }
+
             // --- New columns added by migrations (safe to re-run) ---
             try { context.Database.ExecuteSqlRaw(@"ALTER TABLE ""Quotations"" ADD COLUMN ""CustomerId"" INTEGER NULL;"); } catch { }
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_Quotations_CustomerId"" ON ""Quotations"" (""CustomerId"");"); } catch { }

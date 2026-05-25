@@ -65,6 +65,10 @@
         <a href="/Admin/CostCalc" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "costcalc" ? "active" : "")">
             <i class="bi bi-calculator"></i><span>คำนวณต้นทุน</span>
         </a>
+        <div class="nav-section-label mt-3">การเงิน</div>
+        <a href="/Admin/Finance" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "finance" ? "active" : "")">
+            <i class="bi bi-cash-coin"></i><span>รายรับ - รายจ่าย</span>
+        </a>
     </nav>
     <div class="sidebar-footer">
         <a href="/" target="_blank" class="sidebar-link">
