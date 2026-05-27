@@ -6,9 +6,19 @@
     ViewData["Title"] = "รายรับ - รายจ่าย";
     ViewData["ActiveMenu"] = "finance";
 
+    var monthsShort = new[] { "ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.",
+                              "ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค." };
     var months = new[] { "มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
                          "กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม" };
     int currentYear = DateTime.Today.Year;
+
+    var chartLabels   = Model.MonthlyTrend.Select(m => $"{monthsShort[m.Month-1]} {m.Year+543}").ToArray();
+    var chartIncome   = Model.MonthlyTrend.Select(m => m.Income).ToArray();
+    var chartExpense  = Model.MonthlyTrend.Select(m => m.Expense).ToArray();
+    var chartProfit   = Model.MonthlyTrend.Select(m => m.Profit).ToArray();
+    var catLabels     = Model.ExpenseByCategory.Select(e => e.Category).ToArray();
+    var catAmounts    = Model.ExpenseByCategory.Select(e => e.Amount).ToArray();
+    string[] pieColors = ["#ef4444","#f97316","#eab308","#22c55e","#06b6d4","#8b5cf6","#ec4899","#14b8a6","#64748b"];
 }
 
 @if (TempData["Success"] != null)
@@ -20,26 +30,138 @@
 }
 
 <!-- Summary Cards -->
-<div class="row g-3 mb-4">
-    <div class="col-6 col-md-4">
-        <div class="admin-card p-3 text-center">
+<div class="row g-2 mb-4">
+    <div class="col-6 col-lg">
+        <div class="admin-card p-3 text-center h-100">
             <div class="text-muted small mb-1"><i class="bi bi-arrow-down-circle me-1 text-success"></i>รายรับ</div>
             <div class="fw-bold fs-5 text-success">@Model.TotalIncome.ToString("#,##0.00") ฿</div>
         </div>
     </div>
-    <div class="col-6 col-md-4">
-        <div class="admin-card p-3 text-center">
-            <div class="text-muted small mb-1"><i class="bi bi-arrow-up-circle me-1 text-danger"></i>รายจ่าย</div>
-            <div class="fw-bold fs-5 text-danger">@Model.TotalExpense.ToString("#,##0.00") ฿</div>
+    <div class="col-6 col-lg">
+        <div class="admin-card p-3 text-center h-100">
+            <div class="text-muted small mb-1"><i class="bi bi-box-seam me-1 text-warning"></i>ต้นทุนสินค้า</div>
+            <div class="fw-bold fs-5 text-warning">@Model.TotalCOGS.ToString("#,##0.00") ฿</div>
+            <div class="text-muted" style="font-size:0.68rem">ค่าวัตถุดิบ + ค่าแรงงาน</div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
-        <div class="admin-card p-3 text-center">
-            <div class="text-muted small mb-1"><i class="bi bi-wallet2 me-1"></i>คงเหลือสุทธิ</div>
-            <div class="fw-bold fs-5 @(Model.NetBalance >= 0 ? "text-teal" : "text-danger")">
-                @Model.NetBalance.ToString("#,##0.00") ฿
+    <div class="col-6 col-lg">
+        <div class="admin-card p-3 text-center h-100">
+            <div class="text-muted small mb-1"><i class="bi bi-graph-up-arrow me-1"></i>กำไรขั้นต้น</div>
+            <div class="fw-bold fs-5 @(Model.GrossProfit >= 0 ? "text-teal" : "text-danger")">@Model.GrossProfit.ToString("#,##0.00") ฿</div>
+            @if (Model.TotalIncome > 0)
+            {
+                <div class="text-muted" style="font-size:0.68rem">margin @Model.GrossMargin.ToString("0.0")%</div>
+            }
+        </div>
+    </div>
+    <div class="col-6 col-lg">
+        <div class="admin-card p-3 text-center h-100">
+            <div class="text-muted small mb-1"><i class="bi bi-arrow-up-circle me-1 text-danger"></i>ค่าดำเนินงาน</div>
+            <div class="fw-bold fs-5 text-danger">@Model.TotalOpEx.ToString("#,##0.00") ฿</div>
+            <div class="text-muted" style="font-size:0.68rem">ค่าเช่า สาธารณูปโภค ฯลฯ</div>
+        </div>
+    </div>
+    <div class="col-12 col-lg">
+        <div class="admin-card p-3 text-center h-100">
+            <div class="text-muted small mb-1"><i class="bi bi-wallet2 me-1"></i>กำไรสุทธิ</div>
+            <div class="fw-bold fs-5 @(Model.NetBalance >= 0 ? "text-teal" : "text-danger")">@Model.NetBalance.ToString("#,##0.00") ฿</div>
+            @if (Model.TotalIncome > 0)
+            {
+                <div class="text-muted" style="font-size:0.68rem">margin @Model.NetMargin.ToString("0.0")%</div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- P&L + Expense Breakdown -->
+<div class="row g-3 mb-4">
+    <!-- P&L Statement -->
+    <div class="col-md-5">
+        <div class="admin-card h-100">
+            <div class="admin-card-header">
+                <i class="bi bi-file-earmark-bar-graph me-2"></i>งบกำไร-ขาดทุน — @months[Model.Month-1] @(Model.Year+543)
+            </div>
+            <div class="p-3 small">
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                    <span class="fw-semibold">รายรับทั้งหมด</span>
+                    <span class="text-success fw-bold">+@Model.TotalIncome.ToString("#,##0.00") ฿</span>
+                </div>
+                <div class="d-flex justify-content-between py-2 text-muted">
+                    <span><i class="bi bi-dash"></i> ต้นทุนสินค้า (COGS)</span>
+                    <span class="text-warning">−@Model.TotalCOGS.ToString("#,##0.00") ฿</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2 px-2 rounded mb-1" style="background:var(--bs-teal-bg-subtle,#e6fff8)">
+                    <span class="fw-bold">กำไรขั้นต้น</span>
+                    <span class="fw-bold @(Model.GrossProfit >= 0 ? "text-teal" : "text-danger")">
+                        @Model.GrossProfit.ToString("#,##0.00") ฿
+                        @if (Model.TotalIncome > 0) { <small class="fw-normal ms-1">(@Model.GrossMargin.ToString("0.0")%)</small> }
+                    </span>
+                </div>
+                <div class="d-flex justify-content-between py-2 text-muted">
+                    <span><i class="bi bi-dash"></i> ค่าใช้จ่ายดำเนินงาน</span>
+                    <span class="text-danger">−@Model.TotalOpEx.ToString("#,##0.00") ฿</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2 px-2 rounded border-top mt-1 @(Model.NetBalance >= 0 ? "bg-success-subtle" : "bg-danger-subtle")">
+                    <span class="fw-bold fs-6">กำไรสุทธิ</span>
+                    <span class="fw-bold fs-6 @(Model.NetBalance >= 0 ? "text-success" : "text-danger")">
+                        @Model.NetBalance.ToString("#,##0.00") ฿
+                        @if (Model.TotalIncome > 0) { <small class="fw-normal ms-1">(@Model.NetMargin.ToString("0.0")%)</small> }
+                    </span>
+                </div>
             </div>
         </div>
+    </div>
+    <!-- Expense Breakdown -->
+    <div class="col-md-7">
+        <div class="admin-card h-100">
+            <div class="admin-card-header">
+                <i class="bi bi-pie-chart me-2"></i>สัดส่วนค่าใช้จ่าย
+            </div>
+            @if (Model.ExpenseByCategory.Count == 0)
+            {
+                <div class="text-center text-muted py-5">
+                    <i class="bi bi-inbox fs-2 d-block mb-2"></i>ยังไม่มีรายจ่ายในเดือนนี้
+                </div>
+            }
+            else
+            {
+                <div class="row g-0 align-items-center">
+                    <div class="col-sm-4 p-3 d-flex align-items-center justify-content-center">
+                        <canvas id="expensePieChart" style="max-height:180px"></canvas>
+                    </div>
+                    <div class="col-sm-8 p-3">
+                        @{ int ci = 0; }
+                        @foreach (var (cat, amt) in Model.ExpenseByCategory)
+                        {
+                            var pct = Model.TotalExpense > 0 ? (double)(amt / Model.TotalExpense * 100) : 0;
+                            var isCogs = IndexModel.CogsCategories.Contains(cat);
+                            <div class="d-flex justify-content-between align-items-center mb-1 small">
+                                <span>
+                                    <span class="badge me-1" style="background:@pieColors[ci % pieColors.Length];font-size:0.55rem">&nbsp;&nbsp;</span>
+                                    @cat
+                                    @if (isCogs) { <span class="badge bg-warning-subtle text-warning ms-1" style="font-size:0.6rem">ทุน</span> }
+                                </span>
+                                <span class="fw-semibold">@amt.ToString("#,##0.00") ฿ <span class="text-muted fw-normal">(@pct.ToString("0")%)</span></span>
+                            </div>
+                            <div class="progress mb-2" style="height:4px">
+                                <div class="progress-bar" style="width:@pct.ToString("0.0")%;background:@pieColors[ci % pieColors.Length]"></div>
+                            </div>
+                            ci++;
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Monthly Trend Chart -->
+<div class="admin-card mb-4">
+    <div class="admin-card-header">
+        <i class="bi bi-bar-chart-line me-2"></i>แนวโน้ม 6 เดือนย้อนหลัง
+    </div>
+    <div class="p-3">
+        <canvas id="trendChart" style="max-height:220px"></canvas>
     </div>
 </div>
 
@@ -203,4 +325,108 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Keep addForm open on validation error
+            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.Keys.Any(k => k.StartsWith("Input")))
+            {
+                <text>
+                var el = document.getElementById('addForm');
+                if (el) new bootstrap.Collapse(el, { toggle: false }).show();
+                </text>
+            }
+
+            // Monthly trend chart
+            var trendCtx = document.getElementById('trendChart');
+            if (trendCtx) {
+                new Chart(trendCtx, {
+                    data: {
+                        labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(chartLabels)),
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: 'รายรับ',
+                                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(chartIncome)),
+                                backgroundColor: 'rgba(34,197,94,0.75)',
+                                borderRadius: 4,
+                                order: 2
+                            },
+                            {
+                                type: 'bar',
+                                label: 'รายจ่าย',
+                                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(chartExpense)),
+                                backgroundColor: 'rgba(239,68,68,0.75)',
+                                borderRadius: 4,
+                                order: 2
+                            },
+                            {
+                                type: 'line',
+                                label: 'กำไรสุทธิ',
+                                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(chartProfit)),
+                                borderColor: '#0d9488',
+                                backgroundColor: 'rgba(13,148,136,0.1)',
+                                borderWidth: 2,
+                                pointRadius: 4,
+                                pointBackgroundColor: '#0d9488',
+                                fill: true,
+                                tension: 0.35,
+                                order: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => ` ${ctx.dataset.label}: ${Number(ctx.raw).toLocaleString('th-TH', { minimumFractionDigits: 2 })} ฿`
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { callback: v => Number(v).toLocaleString('th-TH') + ' ฿' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Expense pie chart
+            @if (Model.ExpenseByCategory.Count > 0)
+            {
+                <text>
+                var pieCtx = document.getElementById('expensePieChart');
+                if (pieCtx) {
+                    new Chart(pieCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(catLabels)),
+                            datasets: [{
+                                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(catAmounts)),
+                                backgroundColor: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(pieColors.Take(catLabels.Length).ToArray())),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: ctx => ` ${ctx.label}: ${Number(ctx.raw).toLocaleString('th-TH', { minimumFractionDigits: 2 })} ฿`
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+                </text>
+            }
+        });
+    </script>
 }

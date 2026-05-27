@@ -11,13 +11,31 @@ public class IndexModel : PageModel
     private readonly ApplicationDbContext _db;
     public IndexModel(ApplicationDbContext db) => _db = db;
 
+    public static readonly HashSet<string> CogsCategories = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "ค่าวัตถุดิบ", "ค่าแรงงาน"
+    };
+
     [BindProperty(SupportsGet = true)] public int Year { get; set; } = DateTime.Today.Year;
     [BindProperty(SupportsGet = true)] public int Month { get; set; } = DateTime.Today.Month;
     [BindProperty(SupportsGet = true)] public string? TypeFilter { get; set; }
 
     public decimal TotalIncome { get; set; }
     public decimal TotalExpense { get; set; }
+    public decimal TotalCOGS { get; set; }
+    public decimal TotalOpEx { get; set; }
+    public decimal GrossProfit => TotalIncome - TotalCOGS;
     public decimal NetBalance => TotalIncome - TotalExpense;
+    public decimal GrossMargin => TotalIncome > 0 ? GrossProfit / TotalIncome * 100 : 0;
+    public decimal NetMargin => TotalIncome > 0 ? NetBalance / TotalIncome * 100 : 0;
+
+    public List<(string Category, decimal Amount)> ExpenseByCategory { get; set; } = [];
+    public List<MonthSummary> MonthlyTrend { get; set; } = [];
+    public record MonthSummary(int Year, int Month, decimal Income, decimal Expense)
+    {
+        public decimal Profit => Income - Expense;
+    }
+
     public List<SaleOrder> SaleOrders { get; set; } = [];
     public List<Transaction> Expenses { get; set; } = [];
 
@@ -78,8 +96,37 @@ public class IndexModel : PageModel
             .OrderByDescending(t => t.Date).ThenByDescending(t => t.CreatedAt)
             .ToListAsync();
         TotalExpense = expensesAll.Sum(t => t.Amount);
+        TotalCOGS    = expensesAll.Where(t => CogsCategories.Contains(t.Category)).Sum(t => t.Amount);
+        TotalOpEx    = TotalExpense - TotalCOGS;
+
+        ExpenseByCategory = expensesAll
+            .GroupBy(t => t.Category)
+            .Select(g => (g.Key, g.Sum(t => t.Amount)))
+            .OrderByDescending(x => x.Item2)
+            .ToList();
 
         SaleOrders = TypeFilter == "expense" ? [] : salesAll;
-        Expenses = TypeFilter == "income" ? [] : expensesAll;
+        Expenses   = TypeFilter == "income"  ? [] : expensesAll;
+
+        // Monthly trend 6 เดือนย้อนหลัง
+        var trendStart = new DateTime(Year, Month, 1).AddMonths(-5);
+        var trendEnd   = new DateTime(Year, Month, DateTime.DaysInMonth(Year, Month));
+
+        var trendSales = await _db.SaleOrders
+            .Where(s => s.Date >= trendStart && s.Date <= trendEnd)
+            .ToListAsync();
+        var trendExp = await _db.Transactions
+            .Where(t => t.Date >= trendStart && t.Date <= trendEnd && t.Type == "expense")
+            .ToListAsync();
+
+        MonthlyTrend = Enumerable.Range(0, 6)
+            .Select(i =>
+            {
+                var d = trendStart.AddMonths(i);
+                var inc = trendSales.Where(s => s.Date.Year == d.Year && s.Date.Month == d.Month).Sum(s => s.GrandTotal);
+                var exp = trendExp.Where(t => t.Date.Year == d.Year && t.Date.Month == d.Month).Sum(t => t.Amount);
+                return new MonthSummary(d.Year, d.Month, inc, exp);
+            })
+            .ToList();
     }
 }
