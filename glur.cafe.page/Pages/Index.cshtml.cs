@@ -32,7 +32,7 @@ namespace glur.cafe.page.Pages
         public async Task OnGetAsync()
         {
             Services     = await _db.Services.Where(s => s.IsActive).OrderBy(s => s.DisplayOrder).ToListAsync();
-            Portfolios   = await _db.Portfolios.Where(p => p.IsActive).OrderBy(p => p.DisplayOrder).ToListAsync();
+            Portfolios   = await _db.Portfolios.Where(p => p.IsActive).OrderByDescending(p => p.Id).ToListAsync();
             PricingPlans = await _db.PricingPlans.Where(p => p.IsActive).OrderBy(p => p.DisplayOrder).ToListAsync();
             ProcessSteps = await _db.ProcessSteps.Where(p => p.IsActive).OrderBy(p => p.StepNumber).ToListAsync();
             WhyUsItems   = await _db.WhyUsItems.Where(w => w.IsActive).OrderBy(w => w.DisplayOrder).ToListAsync();
