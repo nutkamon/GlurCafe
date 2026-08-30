@@ -1,0 +1,297 @@
+- generic [ref=e5]:
+  - banner:
+    - generic [ref=e6]:
+      - generic:
+        - generic:
+          - button [disabled]:
+            - img
+      - link "Facebook" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img [ref=e8]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic:
+          - generic:
+            - generic:
+              - button:
+                - img
+      - generic [ref=e19]:
+        - generic:
+          - img
+        - combobox "ค้นหาบน Facebook" [ref=e20] [cursor=pointer]
+    - navigation "Facebook" [ref=e24]:
+      - list [ref=e25]:
+        - listitem [ref=e26]:
+          - link "หน้าหลัก" [ref=e29] [cursor=pointer]:
+            - /url: /
+            - img [ref=e31]
+        - listitem [ref=e33]:
+          - link "Reels" [ref=e36] [cursor=pointer]:
+            - /url: /reel/?s=tab
+            - img [ref=e38]
+        - listitem [ref=e41]:
+          - link "แดชบอร์ด" [ref=e44] [cursor=pointer]:
+            - /url: /professional_dashboard/?ref=tab_bar
+            - img [ref=e46]
+        - listitem [ref=e49]:
+          - link "Marketplace" [ref=e52] [cursor=pointer]:
+            - /url: /marketplace/?ref=app_tab
+            - img [ref=e54]
+        - listitem [ref=e56]:
+          - link "กลุ่ม" [ref=e59] [cursor=pointer]:
+            - /url: /groups/
+            - img [ref=e61]
+    - navigation "การควบคุมและการตั้งค่าบัญชี" [ref=e64]:
+      - button "เมนู Facebook" [ref=e68] [cursor=pointer]:
+        - img [ref=e69]
+      - button "Messenger" [ref=e75] [cursor=pointer]:
+        - img [ref=e76]
+      - button "การแจ้งเตือน" [ref=e82] [cursor=pointer]:
+        - img [ref=e83]
+      - button "โปรไฟล์ของคุณ" [ref=e87] [cursor=pointer]:
+        - generic [ref=e88]:
+          - img "โปรไฟล์ของคุณ" [ref=e89]
+          - img [ref=e96]
+  - generic [ref=e103]:
+    - navigation "การนำทางเพจ" [ref=e104]:
+      - generic [ref=e105]:
+        - generic [ref=e108]:
+          - heading "จัดการเพจ" [level=1] [ref=e113]
+          - button "ซ่อนเมนู" [ref=e117] [cursor=pointer]:
+            - img [ref=e118]
+        - generic [ref=e122]:
+          - button "Glur Café" [ref=e127] [cursor=pointer]:
+            - img [ref=e130]
+            - heading "Glur Café" [level=2] [ref=e134]:
+              - generic [ref=e136]: Glur Café
+            - img [ref=e139]
+          - separator [ref=e141]
+          - generic [ref=e143]:
+            - button "แดชบอร์ด" [ref=e147] [cursor=pointer]:
+              - generic [ref=e148]:
+                - img [ref=e150]
+                - generic [ref=e151]:
+                  - generic [ref=e159]: แดชบอร์ด
+                  - img [ref=e163]
+            - button "ข้อมูลเชิงลึก" [ref=e168] [cursor=pointer]:
+              - generic [ref=e169]:
+                - img [ref=e171]
+                - generic [ref=e172]:
+                  - generic [ref=e177]: ข้อมูลเชิงลึก
+                  - img [ref=e181]
+            - button "ตัววางแผน" [ref=e186] [cursor=pointer]:
+              - generic [ref=e189]:
+                - generic [ref=e194]: ตัววางแผน
+                - img [ref=e198]
+            - button "การสร้างรายได้" [ref=e203] [cursor=pointer]:
+              - generic [ref=e206]:
+                - generic [ref=e211]: การสร้างรายได้
+                - img [ref=e215]
+            - link "ศูนย์โฆษณา" [ref=e220] [cursor=pointer]:
+              - /url: /100064048719402/ad_center/?ref_source=www_profile_plus_left_nav_ad_center_button
+              - generic [ref=e221]:
+                - img [ref=e223]
+                - generic [ref=e229]: ศูนย์โฆษณา
+            - link "สร้างโฆษณา" [ref=e233] [cursor=pointer]:
+              - /url: /ad_center/create/consolidatedad/?entry_point=www_pages_product_picker&page_id=1764644990529564
+              - generic [ref=e234]:
+                - img [ref=e236]
+                - generic [ref=e242]: สร้างโฆษณา
+            - button "โปรโมทโพสต์บน Instagram" [ref=e246] [cursor=pointer]:
+              - generic [ref=e249]:
+                - generic [ref=e254]: โปรโมทโพสต์บน Instagram
+                - img [ref=e258]
+            - button "การตั้งค่า" [ref=e263] [cursor=pointer]:
+              - generic [ref=e266]:
+                - generic [ref=e271]: การตั้งค่า
+                - img [ref=e275]
+            - generic [ref=e279]:
+              - generic [ref=e284]:
+                - generic [ref=e287]:
+                  - heading "เครื่องมือเพิ่มเติม" [level=2] [ref=e289]:
+                    - generic [ref=e291]: เครื่องมือเพิ่มเติม
+                  - generic [ref=e296]:
+                    - generic [ref=e297]:
+                      - generic [ref=e298]: รายการสิ่งที่ต้องทำ 2 รายการ
+                      - generic [ref=e299]: "2"
+                    - button "ย่อ" [ref=e300] [cursor=pointer]:
+                      - img [ref=e301]
+                - generic [ref=e305]: จัดการธุรกิจของคุณในแอพต่างๆ ของ Meta
+              - generic [ref=e308]:
+                - link "Meta Verified" [ref=e312] [cursor=pointer]:
+                  - /url: https://business.facebook.com/latest/settings/mv4b/?nav_ref=mv4b_fb_profile_plus_nav_action_section&entry_point=mv4b_fb_profile_plus_nav_action_section&lp_entry_point=mv4b_fb_profile_plus_nav_action_section
+                  - generic [ref=e320]: Meta Verified
+                - link "ศูนย์ข้อมูลลูกค้า" [ref=e324] [cursor=pointer]:
+                  - /url: https://www.facebook.com/latest/leads_center?asset_id=1764644990529564&nav_ref=manage_page_ap_plus_left_nav_leads_center_button
+                  - generic [ref=e327]:
+                    - generic [ref=e332]: ศูนย์ข้อมูลลูกค้า
+                    - img [ref=e336]
+                - link "Meta Business Suite การแจ้งเตือน" [ref=e341] [cursor=pointer]:
+                  - /url: https://www.facebook.com/latest/?asset_id=1764644990529564&nav_ref=manage_page_ap_plus_left_nav_mbs_button
+                  - generic [ref=e344]:
+                    - generic [ref=e350]:
+                      - generic [ref=e352]: Meta Business Suite
+                      - generic [ref=e357]:
+                        - generic [ref=e358]: การแจ้งเตือน
+                        - generic [ref=e359]: "2"
+                    - img [ref=e363]
+                - button "Manus AI" [ref=e368] [cursor=pointer]:
+                  - generic [ref=e371]:
+                    - generic [ref=e376]: Manus AI
+                    - img [ref=e380]
+            - generic [ref=e387]:
+              - generic [ref=e392]: สลับไปใช้เพจ Glur Café เพื่อดำเนินการเพิ่มเติม
+              - button "สลับ" [ref=e394] [cursor=pointer]:
+                - generic [ref=e397]: สลับ
+        - separator [ref=e398]
+        - button "ลงโฆษณา" [ref=e400] [cursor=pointer]:
+          - generic [ref=e401]:
+            - img [ref=e402]
+            - generic [ref=e406]: ลงโฆษณา
+    - main "เนื้อหาของโปรไฟล์เพจ" [ref=e407]:
+      - main [ref=e411]:
+        - generic [ref=e412]:
+          - link "ดูรูปภาพหน้าปกโปรไฟล์" [ref=e423] [cursor=pointer]:
+            - /url: https://www.facebook.com/photo/?fbid=844950570983226&set=a.448305510647736
+          - generic [ref=e431]:
+            - link "Glur Café" [ref=e435] [cursor=pointer]:
+              - /url: https://www.facebook.com/photo/?fbid=555937953217824&set=a.448305500647737&__tn__=%3C
+              - generic [ref=e436]:
+                - img "Glur Café" [ref=e437]
+                - generic [ref=e444]: ตัวระบุสถานะกำลังใช้งาน
+            - generic [ref=e447]:
+              - generic [ref=e449]:
+                - generic [ref=e452]:
+                  - heading "Glur Café" [level=1] [ref=e457]:
+                    - button "Glur Café" [ref=e458] [cursor=pointer]: Glur Café
+                  - generic [ref=e460]:
+                    - link "2.3 พัน การกดถูกใจ" [ref=e461] [cursor=pointer]:
+                      - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                      - strong [ref=e462]: 2.3 พัน
+                      - text: การกดถูกใจ
+                    - text: •
+                    - link "ผู้ติดตาม 2.3 พัน คน" [ref=e463] [cursor=pointer]:
+                      - /url: https://www.facebook.com/glurcoffee/followers/
+                      - text: ผู้ติดตาม
+                      - strong [ref=e464]: 2.3 พัน
+                      - text: คน
+                - generic [ref=e467]:
+                  - button "ส่งข้อความ" [ref=e470] [cursor=pointer]:
+                    - generic [ref=e473]: ส่งข้อความ
+                  - button "ถูกใจแล้ว" [ref=e476] [cursor=pointer]:
+                    - generic [ref=e479]: ถูกใจแล้ว
+                  - button "ค้นหาโปรไฟล์ของ Glur Café" [ref=e482] [cursor=pointer]:
+                    - generic [ref=e485]: ค้นหา
+              - generic [ref=e487]:
+                - text: Glur Café & Coffee Roaster
+                - text: เกอลคาเฟ่ กาแฟสด & โรงคั่วกาแฟ
+              - list "รายละเอียดที่ไฮไลท์" [ref=e491]:
+                - listitem [ref=e492]:
+                  - generic [ref=e493]:
+                    - img [ref=e495]
+                    - button "ร้านกาแฟ" [ref=e496] [cursor=pointer]
+                - listitem [ref=e497]:
+                  - generic [ref=e498]: ฿
+              - list [ref=e503]:
+                - listitem [ref=e504]:
+                  - link "Maytinee Supajak" [ref=e505] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e507]
+                - listitem [ref=e511]:
+                  - link "เปรม จันทวี" [ref=e512] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e514]
+                - listitem [ref=e518]:
+                  - link "Pipatphol Sricharoenchit" [ref=e519] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e521]
+                - listitem [ref=e525]:
+                  - link "Jirakan Chantawee" [ref=e526] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e528]
+                - listitem [ref=e532]:
+                  - link "Sudarat Aup" [ref=e533] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e535]
+                - listitem [ref=e539]:
+                  - link "San Sabye" [ref=e540] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e542]
+                - listitem [ref=e546]:
+                  - link "Pongpon Oip" [ref=e547] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e549]
+                - listitem [ref=e553]:
+                  - link "Thongkam Chan" [ref=e554] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e556]
+                - listitem [ref=e560]:
+                  - link "Tuangtipa Indamra" [ref=e561] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e563]
+                - listitem [ref=e567]:
+                  - link "Kittanai Pinket" [ref=e568] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e570]
+                - listitem [ref=e574]:
+                  - link "เอส โอเล่" [ref=e575] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e577]
+                - listitem [ref=e581]:
+                  - link "กัลยา มณีกอง" [ref=e582] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e584]
+                - listitem:
+                  - link "ดูทุกคน" [ref=e588] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e589]
+        - generic [ref=e599]:
+          - tablist [ref=e607]:
+            - generic:
+              - generic:
+                - generic [ref=e609]:
+                  - generic [ref=e610]: เพิ่มเติม
+                  - img [ref=e612]
+                - tab "ทั้งหมด" [ref=e615] [cursor=pointer]:
+                  - generic [ref=e617]: ทั้งหมด
+                - tab "เกี่ยวกับ" [selected] [ref=e619] [cursor=pointer]:
+                  - generic [ref=e621]: เกี่ยวกับ
+                - tab "Reels" [ref=e623] [cursor=pointer]:
+                  - generic [ref=e625]: Reels
+                - tab "รูปภาพ" [ref=e627] [cursor=pointer]:
+                  - generic [ref=e629]: รูปภาพ
+                - tab "ผู้ติดตาม" [ref=e631] [cursor=pointer]:
+                  - generic [ref=e633]: ผู้ติดตาม
+                - tab "ส่วนโปรไฟล์เพิ่มเติม" [ref=e635] [cursor=pointer]:
+                  - generic [ref=e636]:
+                    - generic [ref=e637]: เพิ่มเติม
+                    - img [ref=e639]
+          - button "ตัวเลือกการดูเพิ่มเติมของการตั้งค่าโปรไฟล์" [ref=e644] [cursor=pointer]:
+            - img [ref=e646]
+        - generic [ref=e653]:
+          - generic [ref=e658]:
+            - tablist [ref=e659]:
+              - heading "เกี่ยวกับ" [level=2] [ref=e661]:
+                - generic [ref=e662]: เกี่ยวกับ
+              - generic [ref=e663]:
+                - tab "แนะนำตัว" [selected] [ref=e664] [cursor=pointer]:
+                  - generic [ref=e665]: แนะนำตัว
+                - tab "หมวดหมู่" [ref=e666] [cursor=pointer]:
+                  - generic [ref=e667]: หมวดหมู่
+                - tab "รายละเอียด" [ref=e668] [cursor=pointer]:
+                  - generic [ref=e669]: รายละเอียด
+                - tab "ลิงก์" [ref=e670] [cursor=pointer]:
+                  - generic [ref=e671]: ลิงก์
+                - tab "ข้อมูลการติดต่อ" [ref=e672] [cursor=pointer]:
+                  - generic [ref=e673]: ข้อมูลการติดต่อ
+                - tab "ข้อมูลความเป็นส่วนตัวและข้อมูลทางกฎหมาย" [ref=e674] [cursor=pointer]:
+                  - generic [ref=e675]: ข้อมูลความเป็นส่วนตัวและข้อมูลทางกฎหมาย
+            - region "คำอธิบายตัวเอง" [ref=e681]:
+              - heading "คำอธิบายตัวเอง" [level=2] [ref=e684]:
+                - generic [ref=e685]: คำอธิบายตัวเอง
+              - generic [ref=e690]:
+                - img [ref=e692]
+                - generic [ref=e699]:
+                  - generic [ref=e700]: Glur Café & Coffee Roaster
+                  - generic [ref=e701]: เกอลคาเฟ่ กาแฟสด & โรงคั่วกาแฟ
+          - status "กำลังโหลด..." [ref=e703]

@@ -1,0 +1,405 @@
+- generic:
+  - generic:
+    - generic:
+      - iframe
+    - generic:
+      - iframe
+    - generic:
+      - iframe
+    - generic:
+      - iframe
+    - generic [ref=e10]:
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - link "โลโก้ Meta" [ref=e16] [cursor=pointer]:
+            - /url: /?no_redirect=true
+            - img "โลโก้ Meta" [ref=e18]
+          - tablist [ref=e27]:
+            - link "แอพของฉัน" [ref=e28] [cursor=pointer]:
+              - /url: /apps/
+              - generic [ref=e31]: แอพของฉัน
+            - link "การดำเนินการที่จำเป็น" [ref=e32] [cursor=pointer]:
+              - /url: /required-actions/
+              - generic [ref=e35]: การดำเนินการที่จำเป็น
+            - tab "เอกสาร" [ref=e36] [cursor=pointer]:
+              - generic [ref=e39]: เอกสาร
+            - button "เพิ่มเติม" [ref=e41] [cursor=pointer]:
+              - generic [ref=e44]: เพิ่มเติม
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e53]: คำค้นหา
+            - textbox "คำค้นหา" [ref=e64]:
+              - /placeholder: ค้นหา...
+          - link [ref=e67] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=e72] [cursor=pointer]:
+            - /url: "#"
+            - img "Facebook" [ref=e77]
+      - generic [ref=e78]:
+        - generic [ref=e80]:
+          - generic [ref=e83]:
+            - generic [ref=e86]:
+              - generic [ref=e92]: Searchable selector for all apps
+              - combobox "Searchable selector for all apps Glur Cafe Web" [ref=e97] [cursor=pointer]:
+                - generic [ref=e102]:
+                  - generic:
+                    - generic: Glur Cafe Web
+            - navigation [ref=e106]:
+              - list [ref=e107]:
+                - listitem [ref=e108]:
+                  - button "แดชบอร์ด" [ref=e110] [cursor=pointer]
+                  - generic:
+                    - listitem:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: แดชบอร์ด
+                - listitem [ref=e116]:
+                  - button "การดำเนินการที่จำเป็น" [ref=e118] [cursor=pointer]
+                  - generic:
+                    - listitem:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: การดำเนินการที่จำเป็น
+                - listitem [ref=e124]:
+                  - button "กรณีการใช้งาน" [ref=e126] [cursor=pointer]
+                  - generic:
+                    - listitem:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: กรณีการใช้งาน
+                - listitem [ref=e132]:
+                  - generic [ref=e133]:
+                    - button "การเข้าสู่ระบบด้วย Facebook สำหรับธุรกิจ" [ref=e135] [cursor=pointer]
+                    - generic:
+                      - listitem:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: การเข้าสู่ระบบด้วย Facebook สำหรับธุรกิจ
+                          - button "เปิด/ปิดกลุ่ม" [disabled] [ref=e141]:
+                            - generic [ref=e144]: เปิด/ปิดกลุ่ม
+                  - list [ref=e147]:
+                    - generic [ref=e148]:
+                      - button "การตั้งค่า" [ref=e150] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การตั้งค่า
+                    - generic [ref=e155]:
+                      - button "การเริ่มใช้งานอย่างง่าย" [ref=e157] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การเริ่มใช้งานอย่างง่าย
+                    - generic [ref=e162]:
+                      - button "การกำหนดค่า" [ref=e164] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การกำหนดค่า
+                    - generic [ref=e169]:
+                      - button "เทมเพลต" [ref=e171] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: เทมเพลต
+                - listitem [ref=e176]:
+                  - generic [ref=e177]:
+                    - button "ตรวจสอบ" [ref=e179] [cursor=pointer]
+                    - generic:
+                      - listitem:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: ตรวจสอบ
+                          - button "เปิด/ปิดกลุ่ม" [disabled] [ref=e185]:
+                            - generic [ref=e188]: เปิด/ปิดกลุ่ม
+                  - list [ref=e191]:
+                    - generic [ref=e192]:
+                      - button "การทดสอบ" [ref=e194] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การทดสอบ
+                    - generic [ref=e199]:
+                      - button "การตรวจสอบยืนยัน" [ref=e201] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การตรวจสอบยืนยัน
+                    - generic [ref=e206]:
+                      - button "การตรวจพิจารณาแอพ" [ref=e208] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การตรวจพิจารณาแอพ
+                - listitem [ref=e213]:
+                  - button "เผยแพร่" [ref=e215] [cursor=pointer]
+                  - generic:
+                    - listitem:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: เผยแพร่
+          - generic [ref=e222]:
+            - navigation [ref=e223]:
+              - list [ref=e224]:
+                - listitem [ref=e225]:
+                  - generic [ref=e226]:
+                    - button "การตั้งค่าแอพ" [ref=e228] [cursor=pointer]
+                    - generic:
+                      - listitem:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: การตั้งค่าแอพ
+                          - button "เปิด/ปิดกลุ่ม" [disabled] [ref=e234]:
+                            - generic [ref=e237]: เปิด/ปิดกลุ่ม
+                  - list [ref=e240]:
+                    - generic [ref=e241]:
+                      - button "ข้อมูลพื้นฐาน" [ref=e243] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: ข้อมูลพื้นฐาน
+                    - generic [ref=e248]:
+                      - button "ขั้นสูง" [ref=e250] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: ขั้นสูง
+                - listitem [ref=e255]:
+                  - generic [ref=e256]:
+                    - button "บทบาทในแอพ" [ref=e258] [cursor=pointer]
+                    - generic:
+                      - listitem:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: บทบาทในแอพ
+                          - button "เปิด/ปิดกลุ่ม" [disabled] [ref=e264]:
+                            - generic [ref=e267]: เปิด/ปิดกลุ่ม
+                  - list [ref=e270]:
+                    - generic [ref=e271]:
+                      - button "บทบาท" [ref=e273] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: บทบาท
+                    - generic [ref=e278]:
+                      - button "ผู้ใช้ขั้นทดสอบ" [ref=e280] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: ผู้ใช้ขั้นทดสอบ
+                - listitem [ref=e285]:
+                  - button "กล่องข้อความการแจ้งเตือน" [ref=e287] [cursor=pointer]
+                  - generic:
+                    - listitem:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: กล่องข้อความการแจ้งเตือน
+            - separator [ref=e293]
+            - generic [ref=e294]:
+              - button "บันทึกกิจกรรม" [ref=e295] [cursor=pointer]:
+                - generic [ref=e298]: บันทึกกิจกรรม
+              - button "ความช่วยเหลือ" [ref=e302] [cursor=pointer]:
+                - generic [ref=e305]: ความช่วยเหลือ
+              - button "เปิด/ปิดการนำทางด้านข้าง" [ref=e310] [cursor=pointer]:
+                - generic [ref=e313]: เปิด/ปิดการนำทางด้านข้าง
+        - generic [ref=e333]:
+          - navigation "การแสดงเส้นทาง" [ref=e335]:
+            - generic [ref=e336]:
+              - link "กรณีการใช้งาน" [ref=e337] [cursor=pointer]:
+                - /url: "#"
+                - heading "กรณีการใช้งาน" [level=4] [ref=e338]
+              - heading "ปรับแต่ง" [level=4] [ref=e340]
+          - generic [ref=e344]:
+            - heading "ปรับแต่งกรณีการใช้งาน" [level=2] [ref=e345]
+            - generic [ref=e346]: ปรับแต่งการตั้งค่าและสิทธิ์การอนุญาตสำหรับกรณีการใช้งานเพื่อให้แอพทำงานตามที่คุณต้องการ
+          - generic [ref=e347]:
+            - generic [ref=e353]:
+              - generic [ref=e355]:
+                - generic [ref=e361]: เครื่องมือเปลี่ยนกรณีการใช้งาน
+                - combobox "เครื่องมือเปลี่ยนกรณีการใช้งาน สร้างและจัดการโฆษณา" [ref=e366] [cursor=pointer]:
+                  - generic [ref=e375]: สร้างและจัดการโฆษณา
+              - navigation "กรณีการใช้งานหลัก" [ref=e382]:
+                - list [ref=e383]:
+                  - generic [ref=e384]:
+                    - listitem [ref=e386]:
+                      - button "สิทธิ์การอนุญาตและฟีเจอร์" [ref=e388] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: สิทธิ์การอนุญาตและฟีเจอร์
+                    - listitem [ref=e392]:
+                      - button "การเริ่มใช้งานอย่างง่าย" [ref=e394] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การเริ่มใช้งานอย่างง่าย
+                    - listitem [ref=e398]:
+                      - button "เครื่องมือ" [ref=e400] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: เครื่องมือ
+                    - listitem [ref=e404]:
+                      - button "การตั้งค่า" [ref=e406] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: การตั้งค่า
+                    - listitem [ref=e410]:
+                      - button "Webhooks" [ref=e412] [cursor=pointer]
+                      - generic:
+                        - listitem:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: Webhooks
+            - generic [ref=e421]:
+              - generic [ref=e423]:
+                - heading "การตั้งค่า Messenger API" [level=1] [ref=e424]
+                - generic [ref=e425]: ทำตามขั้นตอนเพื่อตั้งค่า API ของคุณ เมื่อตั้งค่าเสร็จแล้ว เพจธุรกิจบน Facebook ของคุณจะเริ่มส่งและรับข้อความได้
+              - generic [ref=e426]:
+                - generic [ref=e432]:
+                  - generic [ref=e433]:
+                    - heading "แพลตฟอร์ม Messenger" [level=4] [ref=e440]
+                    - button "ปิด" [ref=e441] [cursor=pointer]:
+                      - generic [ref=e444]: ปิด
+                  - generic [ref=e449]:
+                    - generic [ref=e450]: ยินดีต้อนรับสู่แพลตฟอร์ม Messenger!
+                    - generic [ref=e451]: แพลตฟอร์ม Messenger จะมีชุด API ปลั๊กอินเว็บ และมุมมองเว็บที่สมบูรณ์อย่างหลากหลายซึ่งคุณจะมีทุกสิ่งทุกอย่างที่คุณต้องการเพื่อสร้างประสบการณ์ที่ดีเยี่ยม เข้าถึงผู้คนบนอุปกรณ์และแพลตฟอร์มต่างๆ ที่ใช้อยู่ สนับสนุนช่องทางติดต่อสื่อสารหลายช่องทาง สร้างประสบการณ์แบบบูรณาการที่มีทั้งการแชทแบบอัตโนมัติและแบบสด และอื่นๆ อีกมากมาย ทั้งหมดนี้ใน Messenger
+                    - generic [ref=e452]: เพื่อการใช้แพลตฟอร์มอย่างมีคุณภาพและป้องกันการใช้งานในทางที่ผิด คุณต้องส่งแอพ Messenger ทั้งหมดให้ตรวจพิจารณาก่อนที่จะสามารถโต้ตอบกับทุกคนบน Messenger ได้ ระหว่างการพัฒนา คุณจะสามารถส่งข้อความให้คนที่ได้รับบทบาทผู้ดูแล ผู้พัฒนา หรือผู้ทดสอบแอพของคุณได้
+                    - generic [ref=e453]:
+                      - text: หากต้องการเริ่มต้นใช้งาน โปรดอ่านรายละเอียดทั้งหมดใน
+                      - link "เอกสารประกอบสำหรับผู้พัฒนา" [active] [ref=e454] [cursor=pointer]:
+                        - /url: /docs/messenger-platform/
+                      - text: การเข้าถึงและใช้งานแพลตฟอร์มของคุณต้องเป็นไปตาม
+                      - link "นโยบายแพลตฟอร์ม" [ref=e455] [cursor=pointer]:
+                        - /url: /terms/dfc_platform_terms/
+                      - text: และ
+                      - link "นโยบายผู้พัฒนา" [ref=e456] [cursor=pointer]:
+                        - /url: /devpolicy/
+                      - text: ร่วมกับข้อกำหนดและนโยบายอื่นๆ ทั้งหมดที่เกี่ยวข้อง
+                - generic [ref=e462]:
+                  - generic [ref=e463]:
+                    - heading "เพิ่มปริมาณการใช้งาน Messenger" [level=4] [ref=e470]
+                    - button "ปิด" [ref=e471] [cursor=pointer]:
+                      - generic [ref=e474]: ปิด
+                  - generic [ref=e480]:
+                    - generic [ref=e481]: สร้างโฆษณาเพื่อช่วยให้ผู้คนมากขึ้นได้ค้นพบประสบการณ์ของคุณใน Messenger
+                    - link "เรียนรู้เพิ่มเติม" [ref=e482] [cursor=pointer]:
+                      - /url: https://developers.facebook.com/business/ads/messenger-ads/
+                      - generic [ref=e486]: เรียนรู้เพิ่มเติม
+                - generic [ref=e491]:
+                  - generic [ref=e494]:
+                    - generic [ref=e497]:
+                      - heading "1. กำหนดค่า Webhooks" [level=3] [ref=e498]
+                      - generic [ref=e499]:
+                        - text: กำหนดค่า Webhook URL ที่กำหนดเองหรือใช้บริการที่ช่วยคุณตั้งค่าตำแหน่งข้อมูล
+                        - link "เรียนรู้เพิ่มเติม" [ref=e500] [cursor=pointer]:
+                          - /url: https://developers.facebook.com/docs/messenger-platform/webhooks
+                    - button "ปิด" [expanded] [ref=e502] [cursor=pointer]:
+                      - generic [ref=e505]: ปิด
+                  - generic "1. กำหนดค่า Webhooks" [ref=e508]:
+                    - generic [ref=e509]:
+                      - generic [ref=e511]:
+                        - generic [ref=e517]: URL การเรียกกลับ
+                        - textbox "URL การเรียกกลับ" [ref=e528]
+                      - generic [ref=e530]:
+                        - generic [ref=e536]: ตรวจสอบยืนยันโทเค็น
+                        - textbox "ตรวจสอบยืนยันโทเค็น" [ref=e547]
+                      - generic [ref=e548]:
+                        - generic [ref=e549]:
+                          - switch "แนบใบรับรองของลูกค้าไว้กับคำขอ Webhooks" [disabled]
+                        - generic [ref=e556]:
+                          - text: แนบใบรับรองของลูกค้าไว้กับคำขอ Webhooks
+                          - link "เรียนรู้เพิ่มเติม" [ref=e557] [cursor=pointer]:
+                            - /url: https://developers.facebook.com/docs/graph-api/webhooks/getting-started/#mtls-for-webhooks
+                      - generic [ref=e558]:
+                        - button "ลบการสมัครรับข้อมูล" [disabled] [ref=e559]:
+                          - generic [ref=e563]: ลบการสมัครรับข้อมูล
+                        - button "ตรวจสอบยืนยันและบันทึก" [disabled] [ref=e564]:
+                          - generic [ref=e568]: ตรวจสอบยืนยันและบันทึก
+                    - button "แสดงข้อผิดพลาดล่าสุด" [ref=e569] [cursor=pointer]:
+                      - generic [ref=e573]: แสดงข้อผิดพลาดล่าสุด
+                - generic [ref=e578]:
+                  - generic [ref=e581]:
+                    - generic [ref=e584]:
+                      - heading "2. สร้างโทเค็นการเข้าถึง" [level=3] [ref=e585]
+                      - generic [ref=e586]: เชื่อมต่อเพจ Facebook เพื่อสร้างโทเค็นการเข้าถึงและตั้งค่าการสมัครใช้งาน Webhooks
+                    - button "ปิด" [expanded] [ref=e588] [cursor=pointer]:
+                      - generic [ref=e591]: ปิด
+                  - generic "2. สร้างโทเค็นการเข้าถึง" [ref=e594]:
+                    - generic [ref=e595]:
+                      - generic [ref=e599]:
+                        - heading "ยังไม่มีเพจ FB" [level=2] [ref=e600]
+                        - generic [ref=e601]: เชื่อมต่อกับเพจ FB ของคุณ
+                      - button "เชื่อมต่อ" [ref=e603] [cursor=pointer]:
+                        - generic [ref=e607]: เชื่อมต่อ
+                - generic [ref=e612]:
+                  - generic [ref=e615]:
+                    - generic [ref=e618]:
+                      - heading "3. ตรวจสอบแอพให้เสร็จ" [level=3] [ref=e619]
+                      - generic [ref=e620]: หากต้องการใช้สิทธิ์การอนุญาตหรือฟีเจอร์นี้ แอพของคุณต้องตรวจสอบแอพให้สำเร็จก่อนที่แอพจะเข้าถึงข้อมูลสดได้
+                    - button "ปิด" [expanded] [ref=e622] [cursor=pointer]:
+                      - generic [ref=e625]: ปิด
+                  - generic "3. ตรวจสอบแอพให้เสร็จ" [ref=e628]:
+                    - generic [ref=e629]:
+                      - generic [ref=e630]:
+                        - generic [ref=e631]: คุณควรสร้างต้นแบบและส่งเข้ารับการตรวจสอบแอพ ซึ่งจะช่วยให้เราตรวจสอบประสบการณ์การใช้งานโดยรวมของแอพคุณได้
+                        - link "เรียนรู้เพิ่มเติม" [ref=e632] [cursor=pointer]:
+                          - /url: /docs/messenger-platform/app-review/
+                          - generic [ref=e636]: เรียนรู้เพิ่มเติม
+                      - generic [ref=e637]:
+                        - generic [ref=e638]:
+                          - text: หากต้องการส่งและรับข้อความ ให้ขอสิทธิ์การอนุญาตpages_messaging หากต้องการเข้าถึงฟีเจอร์การส่งข้อความได้มากขึ้น โปรดอ่านเอกสารประกอบของเรา
+                          - link "เรียนรู้เพิ่มเติม" [ref=e639] [cursor=pointer]:
+                            - /url: /docs/permissions/
+                        - button "ขอสิทธิ์การอนุญาต" [ref=e640] [cursor=pointer]:
+                          - generic [ref=e644]: ขอสิทธิ์การอนุญาต
+                - generic [ref=e652]:
+                  - generic [ref=e655]:
+                    - heading "ขั้นสูง∙ระบุหรือไม่ก็ได้" [level=3] [ref=e656]:
+                      - text: ขั้นสูง
+                      - heading "∙" [level=3] [ref=e657]
+                      - heading "ระบุหรือไม่ก็ได้" [level=3] [ref=e658]
+                    - generic [ref=e659]: การตั้งค่าขั้นสูงเพิ่มเติม
+                  - button "ดูเพิ่มเติม" [ref=e661] [cursor=pointer]:
+                    - generic [ref=e664]: ดูเพิ่มเติม

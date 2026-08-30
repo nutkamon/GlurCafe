@@ -1,0 +1,897 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "GLUR CAFE" [ref=e4] [cursor=pointer]:
+        - /url: "#hero"
+        - img "GLUR CAFE" [ref=e5]
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "หน้าแรก" [ref=e9] [cursor=pointer]:
+            - /url: "#hero"
+        - listitem [ref=e10]:
+          - link "สินค้าของเรา" [ref=e11] [cursor=pointer]:
+            - /url: "#gallery"
+        - listitem [ref=e12]:
+          - link "ราคาสินค้า" [ref=e13] [cursor=pointer]:
+            - /url: "#pricing"
+        - listitem [ref=e14]:
+          - link "ทำไมต้อง GLUR" [ref=e15] [cursor=pointer]:
+            - /url: "#why-us"
+        - listitem [ref=e16]:
+          - link "บริการ" [ref=e17] [cursor=pointer]:
+            - /url: "#services"
+        - listitem [ref=e18]:
+          - link "กระบวนการ" [ref=e19] [cursor=pointer]:
+            - /url: "#process"
+        - listitem [ref=e20]:
+          - link " ติดต่อเรา" [ref=e21] [cursor=pointer]:
+            - /url: "#contact"
+            - generic [ref=e22]: 
+            - text: ติดต่อเรา
+  - main [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e28]:
+        - img "GLUR CAFE" [ref=e30]
+        - paragraph [ref=e31]: โรงคั่วกาแฟ & กาแฟสด
+        - paragraph [ref=e32]:
+          - text: เราคัดสรรเมล็ดกาแฟจากแหล่งปลูกชั้นนำทั่วโลก
+          - text: คั่วสดทุกวัน ชงด้วยความใส่ใจ เพื่อทุกถ้วยที่ดีที่สุดสำหรับคุณ
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]: 
+            - text: Single Origin
+          - generic [ref=e36]:
+            - generic [ref=e37]: 
+            - text: Fresh Roasted Daily
+          - generic [ref=e38]:
+            - generic [ref=e39]: 
+            - text: SCA Certified Barista
+          - generic [ref=e40]:
+            - generic [ref=e41]: 
+            - text: Wholesale ทั่วไทย
+        - generic [ref=e42]:
+          - link " ดูบริการของเรา" [ref=e43] [cursor=pointer]:
+            - /url: "#services"
+            - generic [ref=e44]: 
+            - text: ดูบริการของเรา
+          - link " ติดต่อเรา" [ref=e45] [cursor=pointer]:
+            - /url: "#contact"
+            - generic [ref=e46]: 
+            - text: ติดต่อเรา
+      - img [ref=e48]
+    - generic [ref=e53]:
+      - generic [ref=e55]:
+        - generic [ref=e57]: 
+        - generic [ref=e58]: 5+
+        - generic [ref=e59]: ปีแห่งประสบการณ์
+      - generic [ref=e61]:
+        - generic [ref=e63]: 
+        - generic [ref=e64]: 50+
+        - generic [ref=e65]: สายพันธุ์กาแฟ
+      - generic [ref=e67]:
+        - generic [ref=e69]: 
+        - generic [ref=e70]: 500+
+        - generic [ref=e71]: ลูกค้า Wholesale
+      - generic [ref=e73]:
+        - generic [ref=e75]: 
+        - generic [ref=e76]: 10,000+
+        - generic [ref=e77]: ถ้วยต่อเดือน
+    - generic [ref=e79]:
+      - generic [ref=e80]:
+        - heading "สินค้าของเรา" [level=2] [ref=e81]
+        - paragraph [ref=e82]: ลิ้มลองกาแฟและบรรยากาศที่ GLUR CAFE ทุกถ้วยบอกเล่าเรื่องราวของเมล็ดกาแฟที่เราคัดสรร
+      - generic [ref=e83]:
+        - generic [ref=e85] [cursor=pointer]:
+          - img "Coffee bean" [ref=e87]
+          - generic [ref=e88]:
+            - heading "Coffee bean" [level=6] [ref=e89]
+            - text: Coffee bean
+        - generic [ref=e91] [cursor=pointer]:
+          - img "Coffee bean" [ref=e93]
+          - generic [ref=e94]:
+            - heading "Coffee bean" [level=6] [ref=e95]
+            - text: Coffee bean
+        - generic [ref=e97] [cursor=pointer]:
+          - img "Coffee bean" [ref=e99]
+          - generic [ref=e100]:
+            - heading "Coffee bean" [level=6] [ref=e101]
+            - text: Coffee bean
+        - generic [ref=e103] [cursor=pointer]:
+          - img "Coffee bean" [ref=e105]
+          - generic [ref=e106]:
+            - heading "Coffee bean" [level=6] [ref=e107]
+            - text: Coffee bean
+        - generic [ref=e109] [cursor=pointer]:
+          - img "Coffee bean" [ref=e111]
+          - generic [ref=e112]:
+            - heading "Coffee bean" [level=6] [ref=e113]
+            - text: Coffee bean
+        - generic [ref=e115] [cursor=pointer]:
+          - img "Coffee bean" [ref=e117]
+          - generic [ref=e118]:
+            - heading "Coffee bean" [level=6] [ref=e119]
+            - text: Coffee bean
+        - generic [ref=e121] [cursor=pointer]:
+          - img "Coffee bean" [ref=e123]
+          - generic [ref=e124]:
+            - heading "Coffee bean" [level=6] [ref=e125]
+            - text: Coffee bean
+        - generic [ref=e127] [cursor=pointer]:
+          - img "Coffee bean" [ref=e129]
+          - generic [ref=e130]:
+            - heading "Coffee bean" [level=6] [ref=e131]
+            - text: Coffee bean
+        - generic [ref=e133] [cursor=pointer]:
+          - img "Coffee bean" [ref=e135]
+          - generic [ref=e136]:
+            - heading "Coffee bean" [level=6] [ref=e137]
+            - text: Coffee bean
+        - generic [ref=e139] [cursor=pointer]:
+          - img "Coffee bean" [ref=e141]
+          - generic [ref=e142]:
+            - heading "Coffee bean" [level=6] [ref=e143]
+            - text: Coffee bean
+        - generic [ref=e145] [cursor=pointer]:
+          - img "Coffee bean" [ref=e147]
+          - generic [ref=e148]:
+            - heading "Coffee bean" [level=6] [ref=e149]
+            - text: Coffee bean
+        - generic [ref=e151] [cursor=pointer]:
+          - img "Coffee bean" [ref=e153]
+          - generic [ref=e154]:
+            - heading "Coffee bean" [level=6] [ref=e155]
+            - text: Coffee bean
+        - generic [ref=e157] [cursor=pointer]:
+          - img "Coffee bean" [ref=e159]
+          - generic [ref=e160]:
+            - heading "Coffee bean" [level=6] [ref=e161]
+            - text: Coffee bean
+        - generic [ref=e163] [cursor=pointer]:
+          - img "Coffee bean" [ref=e165]
+          - generic [ref=e166]:
+            - heading "Coffee bean" [level=6] [ref=e167]
+            - text: Coffee bean
+        - generic [ref=e169] [cursor=pointer]:
+          - img "Coffee bean" [ref=e171]
+          - generic [ref=e172]:
+            - heading "Coffee bean" [level=6] [ref=e173]
+            - text: Coffee bean
+        - generic [ref=e175] [cursor=pointer]:
+          - img "Coffee bean" [ref=e177]
+          - generic [ref=e178]:
+            - heading "Coffee bean" [level=6] [ref=e179]
+            - text: Coffee bean
+        - generic [ref=e181] [cursor=pointer]:
+          - img "Coffee bean" [ref=e183]
+          - generic [ref=e184]:
+            - heading "Coffee bean" [level=6] [ref=e185]
+            - text: Coffee bean
+        - generic [ref=e187] [cursor=pointer]:
+          - img "Coffee bean" [ref=e189]
+          - generic [ref=e190]:
+            - heading "Coffee bean" [level=6] [ref=e191]
+            - text: Coffee bean
+        - generic [ref=e193] [cursor=pointer]:
+          - img "Coffee bean" [ref=e195]
+          - generic [ref=e196]:
+            - heading "Coffee bean" [level=6] [ref=e197]
+            - text: Coffee bean
+        - generic [ref=e199] [cursor=pointer]:
+          - img "Coffee bean" [ref=e201]
+          - generic [ref=e202]:
+            - heading "Coffee bean" [level=6] [ref=e203]
+            - text: Coffee bean
+        - generic [ref=e205] [cursor=pointer]:
+          - img "Coffee bean" [ref=e207]
+          - generic [ref=e208]:
+            - heading "Coffee bean" [level=6] [ref=e209]
+            - text: Coffee bean
+        - generic [ref=e211] [cursor=pointer]:
+          - img "Coffee bean" [ref=e213]
+          - generic [ref=e214]:
+            - heading "Coffee bean" [level=6] [ref=e215]
+            - text: Coffee bean
+        - generic [ref=e217] [cursor=pointer]:
+          - img "Coffee bean" [ref=e219]
+          - generic [ref=e220]:
+            - heading "Coffee bean" [level=6] [ref=e221]
+            - text: Coffee bean
+        - generic [ref=e223] [cursor=pointer]:
+          - img "Coffee bean" [ref=e225]
+          - generic [ref=e226]:
+            - heading "Coffee bean" [level=6] [ref=e227]
+            - text: Coffee bean
+        - generic [ref=e229] [cursor=pointer]:
+          - img "Coffee bean" [ref=e231]
+          - generic [ref=e232]:
+            - heading "Coffee bean" [level=6] [ref=e233]
+            - text: Coffee bean
+        - generic [ref=e235] [cursor=pointer]:
+          - img "Coffee bean" [ref=e237]
+          - generic [ref=e238]:
+            - heading "Coffee bean" [level=6] [ref=e239]
+            - text: Coffee bean
+        - generic [ref=e241] [cursor=pointer]:
+          - img "Coffee bean" [ref=e243]
+          - generic [ref=e244]:
+            - heading "Coffee bean" [level=6] [ref=e245]
+            - text: Coffee bean
+        - generic [ref=e247] [cursor=pointer]:
+          - img "Coffee bean" [ref=e249]
+          - generic [ref=e250]:
+            - heading "Coffee bean" [level=6] [ref=e251]
+            - text: Coffee bean
+        - generic [ref=e253] [cursor=pointer]:
+          - img "Coffee bean" [ref=e255]
+          - generic [ref=e256]:
+            - heading "Coffee bean" [level=6] [ref=e257]
+            - text: Coffee bean
+        - generic [ref=e259] [cursor=pointer]:
+          - img "Coffee bean" [ref=e261]
+          - generic [ref=e262]:
+            - heading "Coffee bean" [level=6] [ref=e263]
+            - text: Coffee bean
+        - generic [ref=e265] [cursor=pointer]:
+          - img "Coffee bean" [ref=e267]
+          - generic [ref=e268]:
+            - heading "Coffee bean" [level=6] [ref=e269]
+            - text: Coffee bean
+        - generic [ref=e271] [cursor=pointer]:
+          - img "Coffee bean" [ref=e273]
+          - generic [ref=e274]:
+            - heading "Coffee bean" [level=6] [ref=e275]
+            - text: Coffee bean
+        - generic [ref=e277] [cursor=pointer]:
+          - img "Coffee bean" [ref=e279]
+          - generic [ref=e280]:
+            - heading "Coffee bean" [level=6] [ref=e281]
+            - text: Coffee bean
+        - generic [ref=e283] [cursor=pointer]:
+          - img "Coffee bean" [ref=e285]
+          - generic [ref=e286]:
+            - heading "Coffee bean" [level=6] [ref=e287]
+            - text: Coffee bean
+        - generic [ref=e289] [cursor=pointer]:
+          - img "Coffee bean" [ref=e291]
+          - generic [ref=e292]:
+            - heading "Coffee bean" [level=6] [ref=e293]
+            - text: Coffee bean
+        - generic [ref=e295] [cursor=pointer]:
+          - img "Coffee bean" [ref=e297]
+          - generic [ref=e298]:
+            - heading "Coffee bean" [level=6] [ref=e299]
+            - text: Coffee bean
+        - generic [ref=e301] [cursor=pointer]:
+          - img "Coffee bean" [ref=e303]
+          - generic [ref=e304]:
+            - heading "Coffee bean" [level=6] [ref=e305]
+            - text: Coffee bean
+        - generic [ref=e307] [cursor=pointer]:
+          - img "Coffee bean" [ref=e309]
+          - generic [ref=e310]:
+            - heading "Coffee bean" [level=6] [ref=e311]
+            - text: Coffee bean
+        - generic [ref=e313] [cursor=pointer]:
+          - img "Coffee bean" [ref=e315]
+          - generic [ref=e316]:
+            - heading "Coffee bean" [level=6] [ref=e317]
+            - text: Coffee bean
+        - generic [ref=e319] [cursor=pointer]:
+          - img "Coffee bean" [ref=e321]
+          - generic [ref=e322]:
+            - heading "Coffee bean" [level=6] [ref=e323]
+            - text: Coffee bean
+        - generic [ref=e325] [cursor=pointer]:
+          - img "Coffee bean" [ref=e327]
+          - generic [ref=e328]:
+            - heading "Coffee bean" [level=6] [ref=e329]
+            - text: Coffee bean
+        - generic [ref=e331] [cursor=pointer]:
+          - img "Coffee bean" [ref=e333]
+          - generic [ref=e334]:
+            - heading "Coffee bean" [level=6] [ref=e335]
+            - text: Coffee bean
+        - generic [ref=e337] [cursor=pointer]:
+          - img "Coffee bean" [ref=e339]
+          - generic [ref=e340]:
+            - heading "Coffee bean" [level=6] [ref=e341]
+            - text: Coffee bean
+        - generic [ref=e343] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e345]
+          - generic [ref=e346]:
+            - heading "Coffee Bean" [level=6] [ref=e347]
+            - text: Coffee Bean
+        - generic [ref=e349] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e351]
+          - generic [ref=e352]:
+            - heading "Coffee Bean" [level=6] [ref=e353]
+            - text: Coffee Bean
+        - generic [ref=e355] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e357]
+          - generic [ref=e358]:
+            - heading "Coffee Bean" [level=6] [ref=e359]
+            - text: Coffee Bean
+        - generic [ref=e361] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e363]
+          - generic [ref=e364]:
+            - heading "Coffee Bean" [level=6] [ref=e365]
+            - text: Coffee Bean
+        - generic [ref=e367] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e369]
+          - generic [ref=e370]:
+            - heading "Coffee Bean" [level=6] [ref=e371]
+            - text: Coffee Bean
+        - generic [ref=e373] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e375]
+          - generic [ref=e376]:
+            - heading "Coffee Bean" [level=6] [ref=e377]
+            - text: Coffee Bean
+        - generic [ref=e379] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e381]
+          - generic [ref=e382]:
+            - heading "Fruit Tea" [level=6] [ref=e383]
+            - text: Fruit Tea
+        - generic [ref=e385] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e387]
+          - generic [ref=e388]:
+            - heading "Fruit Tea" [level=6] [ref=e389]
+            - text: Fruit Tea
+        - generic [ref=e391] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e393]
+          - generic [ref=e394]:
+            - heading "Fruit Tea" [level=6] [ref=e395]
+            - text: Fruit Tea
+        - generic [ref=e397] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e399]
+          - generic [ref=e400]:
+            - heading "Fruit Tea" [level=6] [ref=e401]
+            - text: Fruit Tea
+        - generic [ref=e403] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e405]
+          - generic [ref=e406]:
+            - heading "Fruit Tea" [level=6] [ref=e407]
+            - text: Fruit Tea
+        - generic [ref=e409] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e411]
+          - generic [ref=e412]:
+            - heading "Fruit Tea" [level=6] [ref=e413]
+            - text: Fruit Tea
+        - generic [ref=e415] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e417]
+          - generic [ref=e418]:
+            - heading "Fruit Tea" [level=6] [ref=e419]
+            - text: Fruit Tea
+        - generic [ref=e421] [cursor=pointer]:
+          - img "Fruit Tea" [ref=e423]
+          - generic [ref=e424]:
+            - heading "Fruit Tea" [level=6] [ref=e425]
+            - text: Fruit Tea
+        - generic [ref=e427] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e429]
+          - generic [ref=e430]:
+            - heading "Coffee Bean" [level=6] [ref=e431]
+            - text: Coffee Bean
+        - generic [ref=e433] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e435]
+          - generic [ref=e436]:
+            - heading "Coffee Bean" [level=6] [ref=e437]
+            - text: Coffee Bean
+        - generic [ref=e439] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e441]
+          - generic [ref=e442]:
+            - heading "Coffee Bean" [level=6] [ref=e443]
+            - text: Coffee Bean
+        - generic [ref=e445] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e447]
+          - generic [ref=e448]:
+            - heading "Coffee Bean" [level=6] [ref=e449]
+            - text: Coffee Bean
+        - generic [ref=e451] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e453]
+          - generic [ref=e454]:
+            - heading "Coffee Bean" [level=6] [ref=e455]
+            - text: Coffee Bean
+        - generic [ref=e457] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e459]
+          - generic [ref=e460]:
+            - heading "Coffee Bean" [level=6] [ref=e461]
+            - text: Coffee Bean
+        - generic [ref=e463] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e465]
+          - generic [ref=e466]:
+            - heading "Coffee Bean" [level=6] [ref=e467]
+            - text: Coffee Bean
+        - generic [ref=e469] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e471]
+          - generic [ref=e472]:
+            - heading "Coffee Bean" [level=6] [ref=e473]
+            - text: Coffee Bean
+        - generic [ref=e475] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e477]
+          - generic [ref=e478]:
+            - heading "Coffee Bean" [level=6] [ref=e479]
+            - text: Coffee Bean
+        - generic [ref=e481] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e483]
+          - generic [ref=e484]:
+            - heading "Coffee Bean" [level=6] [ref=e485]
+            - text: Coffee Bean
+        - generic [ref=e487] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e489]
+          - generic [ref=e490]:
+            - heading "Coffee Bean" [level=6] [ref=e491]
+            - text: Coffee Bean
+        - generic [ref=e493] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e495]
+          - generic [ref=e496]:
+            - heading "Coffee Bean" [level=6] [ref=e497]
+            - text: Coffee Bean
+        - generic [ref=e499] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e501]
+          - generic [ref=e502]:
+            - heading "Coffee Bean" [level=6] [ref=e503]
+            - text: Coffee Bean
+        - generic [ref=e505] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e507]
+          - generic [ref=e508]:
+            - heading "Coffee Bean" [level=6] [ref=e509]
+            - text: Coffee Bean
+        - generic [ref=e511] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e513]
+          - generic [ref=e514]:
+            - heading "Coffee Bean" [level=6] [ref=e515]
+            - text: Coffee Bean
+        - generic [ref=e517] [cursor=pointer]:
+          - img "Coffee Bean" [ref=e519]
+          - generic [ref=e520]:
+            - heading "Coffee Bean" [level=6] [ref=e521]
+            - text: Coffee Bean
+    - text:  
+    - generic [ref=e523]:
+      - generic [ref=e524]:
+        - heading "ราคาสินค้า" [level=2] [ref=e525]
+        - paragraph [ref=e526]: เลือกแพ็คเกจที่เหมาะกับคุณ ทั้งสำหรับคนรักกาแฟในบ้านและธุรกิจ
+      - generic [ref=e527]:
+        - generic [ref=e529]:
+          - heading "เมล็ดกาแฟไทย" [level=4] [ref=e530]
+          - generic [ref=e531]:
+            - generic [ref=e532]:
+              - generic [ref=e533]: 200 g.
+              - generic [ref=e534]: 150฿
+            - generic [ref=e536]:
+              - generic [ref=e537]: 250 g.
+              - generic [ref=e538]: 180฿
+          - generic [ref=e539]:
+            - paragraph [ref=e540]:
+              - generic [ref=e541]: 
+              - text: แหล่งปลูก
+            - generic [ref=e542]: ดอยช้าง · แม่จันใต้ · แม่สลอง · เทพเสด็จ · แม่ฮ่องสอน · ไทยบลูมาเท่น · ดอยวาวี · น่าน · บ่อสี่เหลี่ยม · ปางขอน · แพร่ · เวียดนาม · รัฐฉาน · ลาว
+          - separator [ref=e543]
+          - list [ref=e544]:
+            - listitem [ref=e545]:
+              - generic [ref=e546]: 
+              - text: คั่วสดก่อนส่งทุกออร์เดอร์
+            - listitem [ref=e547]:
+              - generic [ref=e548]: 
+              - text: เลือกระดับการคั่วได้
+            - listitem [ref=e549]:
+              - generic [ref=e550]: 
+              - text: บรรจุถุง Valve ซีลสูญญากาศ
+          - button "สั่งซื้อเลย " [ref=e551] [cursor=pointer]:
+            - text: สั่งซื้อเลย
+            - generic [ref=e552]: 
+        - generic [ref=e554]:
+          - generic [ref=e555]:
+            - generic [ref=e556]: 
+            - text: ยอดนิยม
+          - heading "เมล็ดกาแฟไทย พิเศษ" [level=4] [ref=e557]
+          - generic [ref=e558]:
+            - generic [ref=e559]:
+              - generic [ref=e560]: 200 g.
+              - generic [ref=e561]: 160฿
+            - generic [ref=e563]:
+              - generic [ref=e564]: 250 g.
+              - generic [ref=e565]: 190฿
+          - generic [ref=e566]:
+            - paragraph [ref=e567]:
+              - generic [ref=e568]: 
+              - text: แหล่งปลูก
+            - generic [ref=e569]: ขุนลาว · ดอยสะเก็ด · ห้วยตาด · ขุนช่างเคี่ยน · อินทนนท์
+          - separator [ref=e570]
+          - list [ref=e571]:
+            - listitem [ref=e572]:
+              - generic [ref=e573]: 
+              - text: ขุนลาว · ดอยสะเก็ด · ห้วยตาด = 160฿
+            - listitem [ref=e574]:
+              - generic [ref=e575]: 
+              - text: ขุนช่างเคี่ยน · อินทนนท์ = 170฿
+            - listitem [ref=e576]:
+              - generic [ref=e577]: 
+              - text: คั่วสดก่อนส่งทุกออร์เดอร์
+            - listitem [ref=e578]:
+              - generic [ref=e579]: 
+              - text: เลือกระดับการคั่วได้
+            - listitem [ref=e580]:
+              - generic [ref=e581]: 
+              - text: บรรจุถุง Valve ซีลสูญญากาศ
+          - button "สั่งซื้อเลย " [ref=e582] [cursor=pointer]:
+            - text: สั่งซื้อเลย
+            - generic [ref=e583]: 
+        - generic [ref=e585]:
+          - heading "เมล็ดกาแฟต่างประเทศ" [level=4] [ref=e586]
+          - generic [ref=e587]:
+            - generic [ref=e588]:
+              - generic [ref=e589]: 200 g.
+              - generic [ref=e590]: 260฿
+            - generic [ref=e592]:
+              - generic [ref=e593]: 250 g.
+              - generic [ref=e594]: 325฿
+          - generic [ref=e595]:
+            - paragraph [ref=e596]:
+              - generic [ref=e597]: 
+              - text: แหล่งปลูก
+            - generic [ref=e598]: Brazil · Colombia · Ethiopia · Honduras · Indonesia · Kenya · Uganda
+          - separator [ref=e599]
+          - list [ref=e600]:
+            - listitem [ref=e601]:
+              - generic [ref=e602]: 
+              - text: Single Origin คัดเกรดพิเศษ
+            - listitem [ref=e603]:
+              - generic [ref=e604]: 
+              - text: คั่วสดก่อนส่งทุกออร์เดอร์
+            - listitem [ref=e605]:
+              - generic [ref=e606]: 
+              - text: เลือกระดับการคั่วได้
+            - listitem [ref=e607]:
+              - generic [ref=e608]: 
+              - text: มี Tasting Note ทุกถุง
+            - listitem [ref=e609]:
+              - generic [ref=e610]: 
+              - text: บรรจุถุง Valve ซีลสูญญากาศ
+          - button "สั่งซื้อเลย " [ref=e611] [cursor=pointer]:
+            - text: สั่งซื้อเลย
+            - generic [ref=e612]: 
+      - generic [ref=e613]:
+        - heading " ราคาเมล็ดกาแฟ" [level=3] [ref=e614]:
+          - generic [ref=e615]: 
+          - text: ราคาเมล็ดกาแฟ
+        - generic [ref=e616]:
+          - generic [ref=e618]:
+            - generic [ref=e619]:
+              - generic [ref=e620]: เมล็ดกาแฟไทย
+              - generic [ref=e621]: 200 g.
+              - generic [ref=e622]: 250 g.
+            - generic [ref=e623]:
+              - generic [ref=e624]:
+                - text: ดอยช้าง · แม่จันใต้ · แม่สลอง · เทพเสด็จ · แม่ฮ่องสอน
+                - text: ไทยบลูมาเท่น · ดอยวาวี · น่าน · ห้วยน้ำขุ่น
+                - text: บ่อสี่เหลี่ยม · ปางขอน · แพร่ · เวียดนาม · รัฐฉาน · ลาว
+              - generic [ref=e625]: 150.-
+              - generic [ref=e626]: 180.-
+            - generic [ref=e627]:
+              - generic [ref=e628]: ขุนลาว · ดอยสะเก็ด · ห้วยตาด
+              - generic [ref=e629]: 160.-
+              - generic [ref=e630]: 190.-
+            - generic [ref=e631]:
+              - generic [ref=e632]: ขุนช่างเคี่ยน · อินทนนท์
+              - generic [ref=e633]: 170.-
+              - generic [ref=e634]: 200.-
+          - generic [ref=e636]:
+            - generic [ref=e637]:
+              - generic [ref=e638]: เมล็ดกาแฟต่างประเทศ
+              - generic [ref=e639]: 200 g.
+              - generic [ref=e640]: 250 g.
+            - generic [ref=e641]:
+              - generic [ref=e642]:
+                - text: Brazil · Colombia · Ethiopia · Honduras
+                - text: Indonesia · Kenya · Uganda
+              - generic [ref=e643]: 260.-
+              - generic [ref=e644]: 325.-
+    - generic [ref=e646]:
+      - generic [ref=e647]:
+        - heading "ทำไมต้อง GLUR CAFE" [level=2] [ref=e648]
+        - paragraph [ref=e649]: สิ่งที่ทำให้เราแตกต่าง คือความใส่ใจในทุกเมล็ดและทุกถ้วย
+      - generic [ref=e650]:
+        - generic [ref=e652]:
+          - generic [ref=e654]: 
+          - heading "Single Origin คัดสรร" [level=5] [ref=e655]
+          - paragraph [ref=e656]: เมล็ดกาแฟจากแหล่งปลูกชั้นนำ Ethiopia, Colombia, Thailand Doi Chaang และอีกมากมาย
+        - generic [ref=e658]:
+          - generic [ref=e660]: 
+          - heading "คั่วสดทุกวัน" [level=5] [ref=e661]
+          - paragraph [ref=e662]: คั่วเมล็ดกาแฟสดทุกวัน ไม่มีการสต็อกนาน รับประกันความสดและกลิ่นหอมสูงสุด
+        - generic [ref=e664]:
+          - generic [ref=e666]: 
+          - heading "บาริสต้ามืออาชีพ" [level=5] [ref=e667]
+          - paragraph [ref=e668]: ทีมบาริสต้าผ่านการอบรมระดับสากล SCA Certified ความชำนาญกว่า 5 ปี
+        - generic [ref=e670]:
+          - generic [ref=e672]: 
+          - heading "Wholesale ทั่วไทย" [level=5] [ref=e673]
+          - paragraph [ref=e674]: ส่งเมล็ดกาแฟให้ร้านค้าและธุรกิจทั่วประเทศ ราคาพิเศษ ส่งตรงเวลา
+        - generic [ref=e676]:
+          - generic [ref=e678]: 
+          - heading "Sustainable Sourcing" [level=5] [ref=e679]
+          - paragraph [ref=e680]: สนับสนุนเกษตรกรท้องถิ่น Trade Fairly และใส่ใจสิ่งแวดล้อมในทุกขั้นตอน
+        - generic [ref=e682]:
+          - generic [ref=e684]: 
+          - heading "รับประกันความพึงพอใจ" [level=5] [ref=e685]
+          - paragraph [ref=e686]: หากไม่พอใจรสชาติ เราพร้อมเปลี่ยนหรือคืนเงิน ไม่มีเงื่อนไข
+    - generic [ref=e688]:
+      - generic [ref=e689]:
+        - heading "ติดต่อเรา" [level=2] [ref=e690]
+        - paragraph [ref=e691]: พร้อมตอบทุกคำถาม ไม่ว่าจะเป็นเรื่องกาแฟสด Wholesale หรือ Barista Class
+      - generic [ref=e692]:
+        - generic [ref=e694]:
+          - heading "ส่งข้อความถึงเรา ☕" [level=4] [ref=e695]
+          - generic [ref=e697]:
+            - generic [ref=e698]:
+              - generic [ref=e699]: ชื่อ-นามสกุล
+              - textbox "กรุณากรอกชื่อ" [ref=e700]
+            - generic [ref=e701]:
+              - generic [ref=e702]: เบอร์โทรศัพท์
+              - textbox "0xx-xxx-xxxx" [ref=e703]
+            - generic [ref=e704]:
+              - generic [ref=e705]: อีเมล
+              - textbox "email@example.com" [ref=e706]
+            - generic [ref=e707]:
+              - generic [ref=e708]: สนใจเรื่อง
+              - combobox [ref=e709]:
+                - option "เลือกประเภทที่สนใจ" [disabled] [selected]
+                - option "กาแฟสด"
+                - option "เมล็ดกาแฟ Wholesale"
+                - option "Barista Training Class"
+                - option "Subscription Monthly"
+                - option "Private Label Roasting"
+                - option "Event & Catering Coffee"
+                - option "Cold Brew"
+                - option "ชา & เครื่องดื่มทางเลือก"
+                - option "อื่นๆ"
+            - generic [ref=e710]:
+              - generic [ref=e711]: รายละเอียดเพิ่มเติม
+              - textbox "บอกเล่าความต้องการของคุณ เช่น ปริมาณเมล็ดกาแฟ สายพันธุ์ที่สนใจ ฯลฯ" [ref=e712]
+            - button " ส่งข้อความ" [ref=e714] [cursor=pointer]:
+              - generic [ref=e715]: 
+              - text: ส่งข้อความ
+        - generic [ref=e717]:
+          - heading "ข้อมูลติดต่อ" [level=4] [ref=e718]
+          - generic [ref=e719]:
+            - generic [ref=e721]: 
+            - generic [ref=e722]:
+              - strong [ref=e723]: ที่อยู่
+              - paragraph [ref=e724]: 602, 36 ถ.พหลโยธิน ตำบลคูคต อำเภอลำลูกกา ปทุมธานี 12130
+          - generic [ref=e725]:
+            - generic [ref=e727]: 
+            - generic [ref=e728]:
+              - strong [ref=e729]: โทรศัพท์
+              - paragraph [ref=e730]: 096-224-5194
+          - generic [ref=e731]:
+            - generic [ref=e733]: 
+            - generic [ref=e734]:
+              - strong [ref=e735]: Line ID
+              - paragraph [ref=e736]: "@glurcafe"
+          - generic [ref=e737]:
+            - generic [ref=e739]: 
+            - generic [ref=e740]:
+              - strong [ref=e741]: เวลาเปิด-ปิด
+              - paragraph [ref=e742]: "ทุกวัน: 07:00 - 17:00 น."
+          - generic [ref=e743]:
+            - generic [ref=e745]: 
+            - generic [ref=e746]:
+              - strong [ref=e747]: อีเมล
+              - paragraph [ref=e748]: contact@glurcoffee.com
+          - separator [ref=e749]
+          - generic [ref=e750]:
+            - link "" [ref=e751] [cursor=pointer]:
+              - /url: https://www.facebook.com/glurcoffee
+              - generic [ref=e752]: 
+            - link "" [ref=e753] [cursor=pointer]:
+              - /url: https://line.me/ti/p/~glurcafe
+              - generic [ref=e754]: 
+            - link "" [ref=e755] [cursor=pointer]:
+              - /url: https://www.facebook.com/glurcoffee
+              - generic [ref=e756]: 
+            - link "" [ref=e757] [cursor=pointer]:
+              - /url: https://www.facebook.com/glurcoffee
+              - generic [ref=e758]: 
+      - iframe [ref=e760]
+    - generic [ref=e762]:
+      - generic [ref=e763]:
+        - heading "บริการของเรา" [level=2] [ref=e764]
+        - paragraph [ref=e765]: ครบทุกความต้องการด้านกาแฟ ตั้งแต่กาแฟสดหน้าร้าน จนถึงเมล็ดกาแฟ Wholesale สำหรับธุรกิจ
+      - generic [ref=e766]:
+        - generic [ref=e768] [cursor=pointer]:
+          - img "กาแฟสดทุกเมนู" [ref=e770]
+          - heading "กาแฟสดทุกเมนู" [level=5] [ref=e771]
+          - generic [ref=e772]: กาแฟสดชงโดยบาริสต้ามืออาชีพ ตั้งแต่ Espresso, Latte, Cappuccino ไปจนถึง Signature Drinks
+          - generic [ref=e773]:
+            - generic [ref=e774]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e776] [cursor=pointer]:
+          - generic [ref=e778]: 
+          - heading "โรงคั่วเมล็ดกาแฟ" [level=5] [ref=e779]
+          - generic [ref=e780]: คั่วเมล็ดกาแฟสดทุกวัน ควบคุมระดับการคั่วอย่างแม่นยำ ตั้งแต่ Light Roast จนถึง Dark Roast
+          - generic [ref=e781]:
+            - generic [ref=e782]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e784] [cursor=pointer]:
+          - generic [ref=e786]: 
+          - heading "เมล็ดกาแฟ Wholesale" [level=5] [ref=e787]
+          - generic [ref=e788]: จำหน่ายเมล็ดกาแฟคั่วสดส่งให้ร้านกาแฟและธุรกิจ ราคาพิเศษสำหรับออร์เดอร์จำนวนมาก
+          - generic [ref=e789]:
+            - generic [ref=e790]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e792] [cursor=pointer]:
+          - generic [ref=e794]: 
+          - heading "Barista Training Class" [level=5] [ref=e795]
+          - generic [ref=e796]: คอร์สสอนทำกาแฟมืออาชีพ เรียนรู้เทคนิคการชง Latte Art และการเลือกใช้เมล็ดกาแฟ
+          - generic [ref=e797]:
+            - generic [ref=e798]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e800] [cursor=pointer]:
+          - generic [ref=e802]: 
+          - heading "ชา & เครื่องดื่มทางเลือก" [level=5] [ref=e803]
+          - generic [ref=e804]: ชาไทย ชาเขียว Matcha Hojicha และเครื่องดื่มสมุนไพร สำหรับคนไม่ดื่มกาแฟ
+          - generic [ref=e805]:
+            - generic [ref=e806]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e808] [cursor=pointer]:
+          - generic [ref=e810]: 
+          - heading "เค้ก & เบเกอรี่" [level=5] [ref=e811]
+          - generic [ref=e812]: เบเกอรี่สดทำทุกวัน เค้กโฮมเมด ครัวซองต์ และขนมปังอบร้อน คู่กาแฟได้ลงตัว
+          - generic [ref=e813]:
+            - generic [ref=e814]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e816] [cursor=pointer]:
+          - generic [ref=e818]: 
+          - heading "กาแฟ Subscription" [level=5] [ref=e819]
+          - generic [ref=e820]: สั่งสมัครสมาชิก รับเมล็ดกาแฟคั่วสดส่งถึงบ้านทุกเดือน เลือกสายพันธุ์และระดับการคั่วได้เอง
+          - generic [ref=e821]:
+            - generic [ref=e822]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e824] [cursor=pointer]:
+          - generic [ref=e826]: 
+          - heading "Private Label Roasting" [level=5] [ref=e827]
+          - generic [ref=e828]: บริการคั่วกาแฟและบรรจุภัณฑ์สำหรับแบรนด์ของคุณ พร้อมออกแบบฉลากและสูตรพิเศษ
+          - generic [ref=e829]:
+            - generic [ref=e830]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e832] [cursor=pointer]:
+          - generic [ref=e834]: 
+          - heading "Cold Brew & Batch Coffee" [level=5] [ref=e835]
+          - generic [ref=e836]: Cold Brew คั่วเป็นพิเศษ หมักนาน 18 ชั่วโมง และ Batch Coffee สำหรับออฟฟิศหรืองาน Event
+          - generic [ref=e837]:
+            - generic [ref=e838]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e840] [cursor=pointer]:
+          - generic [ref=e842]: 
+          - heading "Coffee Cupping Sessions" [level=5] [ref=e843]
+          - generic [ref=e844]: นั่งชิมกาแฟแบบ Professional Cupping เรียนรู้ Flavor Profile ของกาแฟจากแหล่งต่างๆ ทั่วโลก
+          - generic [ref=e845]:
+            - generic [ref=e846]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e848] [cursor=pointer]:
+          - generic [ref=e850]: 
+          - heading "Event & Catering Coffee" [level=5] [ref=e851]
+          - generic [ref=e852]: บริการกาแฟสดสำหรับงาน Event, สัมมนา, งานแต่งงาน พร้อมบาริสต้าและอุปกรณ์ครบ
+          - generic [ref=e853]:
+            - generic [ref=e854]: 
+            - text: ดูรายละเอียด
+        - generic [ref=e856] [cursor=pointer]:
+          - generic [ref=e858]: 
+          - heading "จัดส่งทั่วประเทศ" [level=5] [ref=e859]
+          - generic [ref=e860]: ส่งเมล็ดกาแฟคั่วสดและผลิตภัณฑ์ทั่วประเทศ บรรจุพิเศษรักษาความสดได้นาน 30 วัน
+          - generic [ref=e861]:
+            - generic [ref=e862]: 
+            - text: ดูรายละเอียด
+    - text:  
+    - generic [ref=e864]:
+      - generic [ref=e865]:
+        - heading "กระบวนการของเรา" [level=2] [ref=e866]
+        - paragraph [ref=e867]: ทุกถ้วยผ่านกระบวนการที่พิถีพิถัน เพื่อให้คุณได้รับประสบการณ์กาแฟที่ดีที่สุด
+      - generic [ref=e868]:
+        - generic [ref=e870]:
+          - generic [ref=e873]: 
+          - heading "คัดสรรเมล็ด" [level=5] [ref=e874]
+          - paragraph [ref=e875]: คัดเลือกเมล็ดกาแฟจากแหล่งปลูกชั้นนำทั่วโลก ตรวจสอบคุณภาพทุกล็อต
+        - generic [ref=e877]:
+          - generic [ref=e880]: 
+          - heading "คั่วด้วยใจ" [level=5] [ref=e881]
+          - paragraph [ref=e882]: ควบคุมอุณหภูมิการคั่วอย่างละเอียด ดึงรสชาติที่ดีที่สุดออกมาจากเมล็ดกาแฟ
+        - generic [ref=e884]:
+          - generic [ref=e887]: 
+          - heading "ชงด้วยเทคนิค" [level=5] [ref=e888]
+          - paragraph [ref=e889]: บาริสต้ามืออาชีพชงทุกแก้วด้วยความใส่ใจ สัดส่วนที่สมดุลทุกครั้ง
+        - generic [ref=e891]:
+          - generic [ref=e893]: 
+          - heading "ส่งมอบความสุข" [level=5] [ref=e894]
+          - paragraph [ref=e895]: เพลิดเพลินกับกาแฟคุณภาพสูง ทุกแก้วคือประสบการณ์ที่ดีที่สุด
+    - generic [ref=e897]:
+      - generic [ref=e898]:
+        - generic [ref=e899]:
+          - generic [ref=e900]:
+            - generic [ref=e901]: 
+            - text: GLUR CAFE
+          - generic [ref=e902]: โรงคั่วกาแฟ & กาแฟสด
+          - paragraph [ref=e903]: คัดสรรเมล็ดกาแฟคุณภาพจากแหล่งปลูกชั้นนำ คั่วสดทุกวัน ชงด้วยความใส่ใจ เพื่อทุกถ้วยที่ดีที่สุดสำหรับคุณ
+          - generic [ref=e904]:
+            - link "" [ref=e905] [cursor=pointer]:
+              - /url: https://www.facebook.com/glurcoffee
+              - generic [ref=e906]: 
+            - link "" [ref=e907] [cursor=pointer]:
+              - /url: https://line.me/ti/p/~glurcafe
+              - generic [ref=e908]: 
+            - link "" [ref=e909] [cursor=pointer]:
+              - /url: https://www.facebook.com/glurcoffee
+              - generic [ref=e910]: 
+            - link "" [ref=e911] [cursor=pointer]:
+              - /url: https://www.facebook.com/glurcoffee
+              - generic [ref=e912]: 
+        - generic [ref=e913]:
+          - heading "บริการ" [level=6] [ref=e914]
+          - list [ref=e915]:
+            - listitem [ref=e916]:
+              - link "กาแฟสด" [ref=e917] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e918]:
+              - link "โรงคั่วกาแฟ" [ref=e919] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e920]:
+              - link "Wholesale" [ref=e921] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e922]:
+              - link "Barista Class" [ref=e923] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e924]:
+              - link "Event Catering" [ref=e925] [cursor=pointer]:
+                - /url: "#services"
+        - generic [ref=e926]:
+          - heading "ลิงก์ด่วน" [level=6] [ref=e927]
+          - list [ref=e928]:
+            - listitem [ref=e929]:
+              - link "หน้าแรก" [ref=e930] [cursor=pointer]:
+                - /url: "#hero"
+            - listitem [ref=e931]:
+              - link "สินค้าของเรา" [ref=e932] [cursor=pointer]:
+                - /url: "#gallery"
+            - listitem [ref=e933]:
+              - link "ราคาสินค้า" [ref=e934] [cursor=pointer]:
+                - /url: "#pricing"
+            - listitem [ref=e935]:
+              - link "ทำไมต้อง GLUR" [ref=e936] [cursor=pointer]:
+                - /url: "#why-us"
+            - listitem [ref=e937]:
+              - link "ติดต่อเรา" [ref=e938] [cursor=pointer]:
+                - /url: "#contact"
+        - generic [ref=e939]:
+          - heading "ติดต่อ" [level=6] [ref=e940]
+          - paragraph [ref=e941]:
+            - generic [ref=e942]: 
+            - text: 602, 36 ถ.พหลโยธิน ตำบลคูคต อำเภอลำลูกกา ปทุมธานี 12130
+          - paragraph [ref=e943]:
+            - generic [ref=e944]: 
+            - text: 096-224-5194
+          - paragraph [ref=e945]:
+            - generic [ref=e946]: 
+            - text: "@glurcafe"
+          - paragraph [ref=e947]:
+            - generic [ref=e948]: 
+            - text: "ทุกวัน: 07:00 - 17:00 น."
+      - separator [ref=e949]
+      - generic [ref=e950]: © 2026 GLUR CAFE — เกลอ คาเฟ่. All rights reserved.
+  - generic [ref=e951]:
+    - text: 
+    - link "" [ref=e952] [cursor=pointer]:
+      - /url: https://www.facebook.com/glurcoffee
+      - generic [ref=e953]: 
+    - link "" [ref=e954] [cursor=pointer]:
+      - /url: https://www.facebook.com/glurcoffee
+      - generic [ref=e955]: 
+    - link "" [ref=e956] [cursor=pointer]:
+      - /url: https://www.facebook.com/glurcoffee
+      - generic [ref=e957]: 
+    - link "" [ref=e958] [cursor=pointer]:
+      - /url: https://line.me/ti/p/~glurcafe
+      - generic [ref=e959]: 
+    - link "" [ref=e960] [cursor=pointer]:
+      - /url: tel:0962245194
+      - generic [ref=e961]: 

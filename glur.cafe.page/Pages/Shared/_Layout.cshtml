@@ -1,4 +1,4 @@
-﻿@using glur.cafe.page.Data
+@using glur.cafe.page.Data
 @using Microsoft.EntityFrameworkCore
 @inject ApplicationDbContext _layoutDb
 @{
@@ -8,6 +8,17 @@
     var _instaUrl    = _siteSettings.GetValueOrDefault("Instagram", "#");
     var _tiktokUrl   = _siteSettings.GetValueOrDefault("TikTok", "#");
     var _phone       = _siteSettings.GetValueOrDefault("Phone", "081-425-2592");
+    // Facebook & SEO
+    var _fbAppId     = _siteSettings.GetValueOrDefault("FacebookAppId", "");
+    var _fbPageId    = _siteSettings.GetValueOrDefault("FacebookPageId", "");
+    var _pixelId     = _siteSettings.GetValueOrDefault("FacebookPixelId", "");
+    var _pixelOn     = _siteSettings.GetValueOrDefault("PixelEnabled", "false") == "true";
+    var _msgrOn      = _siteSettings.GetValueOrDefault("MessengerEnabled", "false") == "true";
+    var _msgrColor   = _siteSettings.GetValueOrDefault("MessengerThemeColor", "#00A59A");
+    var _msgrGreet   = _siteSettings.GetValueOrDefault("MessengerGreeting", "สวัสดี! มีอะไรให้ช่วยไหมครับ? ☕");
+    var _ogImage     = _siteSettings.GetValueOrDefault("OgImage", "/img/Logo-removebg-preview.png");
+    var _ogSiteName  = _siteSettings.GetValueOrDefault("OgSiteName", "GLUR CAFE");
+    var _ogDesc      = _siteSettings.GetValueOrDefault("OgDescription", "GLUR CAFE โรงคั่วกาแฟ & กาแฟสดคุณภาพพรีเมียม");
 }
 <!DOCTYPE html>
 <html lang="th">
@@ -18,6 +29,17 @@
     <meta name="keywords" content="กาแฟสด, โรงคั่วกาแฟ, เมล็ดกาแฟ, Wholesale, Barista Class, GLUR CAFE, เกลอ คาเฟ่" />
     <title>@ViewData["Title"] - GLUR CAFE</title>
     <link rel="icon" type="image/png" href="/img/Logo-removebg-preview.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="@_ogSiteName" />
+    <meta property="og:title"       content="@(ViewData["OgTitle"] ?? ViewData["Title"] ?? _ogSiteName)" />
+    <meta property="og:description" content="@(ViewData["OgDescription"] ?? _ogDesc)" />
+    <meta property="og:image"       content="@(ViewData["OgImage"] ?? _ogImage)" />
+    @if (!string.IsNullOrWhiteSpace(_fbAppId))
+    {
+        <meta property="fb:app_id" content="@_fbAppId" />
+    }
 
     <!-- Google Fonts: Noto Sans Thai + Prompt -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,12 +71,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link" href="#hero">หน้าแรก</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">สินค้าของเรา</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pricing">ราคาสินค้า</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#why-us">ทำไมต้อง GLUR</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">บริการ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#process">กระบวนการ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#hero">หน้าแรก</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Menu">เมนูหน้าร้าน</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#gallery">สินค้าของเรา</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#pricing">ราคาสินค้า</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#why-us">ทำไมต้อง GLUR</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#services">บริการ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#process">กระบวนการ</a></li>
                     <li class="nav-item ms-lg-3">
                         <a class="btn btn-nav-cta btn-sm px-4 rounded-pill fw-semibold" href="#contact">
                             <i class="bi bi-cup-hot me-1"></i> ติดต่อเรา
@@ -109,6 +132,52 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom JS -->
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* Facebook Pixel (browser-side) *@
+    @if (_pixelOn && !string.IsNullOrWhiteSpace(_pixelId))
+    {
+        <script>
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '@_pixelId');
+            fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img height="1" width="1" style="display:none"
+                 src="https://www.facebook.com/tr?id=@_pixelId&ev=PageView&noscript=1" />
+        </noscript>
+    }
+
+    @* Facebook Messenger Customer Chat *@
+    @if (_msgrOn && !string.IsNullOrWhiteSpace(_fbPageId) && !string.IsNullOrWhiteSpace(_fbAppId))
+    {
+        <div id="fb-root"></div>
+        <div class="fb-customerchat"
+             attribution="setup_tool"
+             page_id="@_fbPageId"
+             theme_color="@_msgrColor"
+             logged_in_greeting="@_msgrGreet"
+             logged_out_greeting="@_msgrGreet">
+        </div>
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({ xfbml: true, version: 'v20.0', appId: '@_fbAppId' });
+            };
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/th_TH/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+    }
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

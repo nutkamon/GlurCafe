@@ -1,0 +1,198 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+      - link " ตั้งค่า" [ref=e24] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e25]: 
+        - generic [ref=e26]: ตั้งค่า
+      - generic [ref=e27]: เพิ่มเติม
+      - link " CRM ลูกค้า" [ref=e28] [cursor=pointer]:
+        - /url: /Admin/Customers
+        - generic [ref=e29]: 
+        - generic [ref=e30]: CRM ลูกค้า
+      - link " ใบเสนอราคา" [ref=e31] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e32]: 
+        - generic [ref=e33]: ใบเสนอราคา
+      - link " รายงาน" [ref=e34] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e35]: 
+        - generic [ref=e36]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e37] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e38]: 
+        - generic [ref=e39]: ผู้ดูแลระบบ
+      - generic [ref=e40]: ต้นทุนสินค้า
+      - link " สารกาแฟ (Master)" [ref=e41] [cursor=pointer]:
+        - /url: /Admin/Beans
+        - generic [ref=e42]: 
+        - generic [ref=e43]: สารกาแฟ (Master)
+      - link " คำนวณต้นทุน" [ref=e44] [cursor=pointer]:
+        - /url: /Admin/CostCalc
+        - generic [ref=e45]: 
+        - generic [ref=e46]: คำนวณต้นทุน
+      - generic [ref=e47]: การเงิน
+      - link " รายรับ - รายจ่าย" [ref=e48] [cursor=pointer]:
+        - /url: /Admin/Finance
+        - generic [ref=e49]: 
+        - generic [ref=e50]: รายรับ - รายจ่าย
+      - generic [ref=e51]: Facebook & Social
+      - link " Facebook Overview" [ref=e52] [cursor=pointer]:
+        - /url: /Admin/Facebook
+        - generic [ref=e53]: 
+        - generic [ref=e54]: Facebook Overview
+      - link " Messenger Chat" [ref=e55] [cursor=pointer]:
+        - /url: /Admin/Facebook/Messenger
+        - generic [ref=e56]: 
+        - generic [ref=e57]: Messenger Chat
+      - link " Pixel & Conversions" [ref=e58] [cursor=pointer]:
+        - /url: /Admin/Facebook/Pixel
+        - generic [ref=e59]: 
+        - generic [ref=e60]: Pixel & Conversions
+      - link " Social Feed" [ref=e61] [cursor=pointer]:
+        - /url: /Admin/Facebook/Feed
+        - generic [ref=e62]: 
+        - generic [ref=e63]: Social Feed
+    - generic [ref=e64]:
+      - link " ดูเว็บไซต์" [ref=e65] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e66]: 
+        - generic [ref=e67]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e68] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e69]: 
+        - generic [ref=e70]: ออกจากระบบ
+  - generic [ref=e71]:
+    - generic [ref=e72]:
+      - text: 
+      - generic [ref=e73]: แดชบอร์ด
+      - generic [ref=e74]:
+        - generic [ref=e75]: 
+        - generic [ref=e76]: ผู้ดูแลระบบ
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - generic [ref=e80]:
+          - generic [ref=e82]: 
+          - generic [ref=e83]: "14"
+          - generic [ref=e84]: บริการ
+        - generic [ref=e86]:
+          - generic [ref=e88]: 
+          - generic [ref=e89]: "47"
+          - generic [ref=e90]: แกลเลอรี่
+        - generic [ref=e92]:
+          - generic [ref=e94]: 
+          - generic [ref=e95]: "0"
+          - generic [ref=e96]: ข้อความใหม่
+        - generic [ref=e98]:
+          - generic [ref=e100]: 
+          - generic [ref=e101]: "2"
+          - generic [ref=e102]: ข้อความทั้งหมด
+        - generic [ref=e104]:
+          - generic [ref=e106]: 
+          - generic [ref=e107]: "10"
+          - generic [ref=e108]: ใบเสนอราคา
+        - generic [ref=e110]:
+          - generic [ref=e112]: 
+          - generic [ref=e113]: "3"
+          - generic [ref=e114]: แพ็คเกจ
+      - generic [ref=e115]:
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: 
+            - text: ทางลัด
+          - generic [ref=e121]:
+            - link " เพิ่มบริการ" [ref=e123] [cursor=pointer]:
+              - /url: /Admin/Services/Create
+              - generic [ref=e124]: 
+              - generic [ref=e125]: เพิ่มบริการ
+            - link " เพิ่มแกลเลอรี่" [ref=e127] [cursor=pointer]:
+              - /url: /Admin/Portfolios/Create
+              - generic [ref=e128]: 
+              - generic [ref=e129]: เพิ่มแกลเลอรี่
+            - link " ใบเสนอราคา" [ref=e131] [cursor=pointer]:
+              - /url: /Admin/Quotations/Create
+              - generic [ref=e132]: 
+              - generic [ref=e133]: ใบเสนอราคา
+            - link " ข้อความ (0)" [ref=e135] [cursor=pointer]:
+              - /url: /Admin/Messages
+              - generic [ref=e136]: 
+              - generic [ref=e137]: ข้อความ (0)
+            - link " รายงาน" [ref=e139] [cursor=pointer]:
+              - /url: /Admin/Analytics
+              - generic [ref=e140]: 
+              - generic [ref=e141]: รายงาน
+        - generic [ref=e143]:
+          - generic [ref=e144]:
+            - generic [ref=e145]: 
+            - text: ข้อมูลระบบ
+          - list [ref=e147]:
+            - listitem [ref=e148]:
+              - generic [ref=e149]: 
+              - generic [ref=e150]:
+                - generic [ref=e151]: ผู้ดูแลระบบ
+                - strong [ref=e152]: ผู้ดูแลระบบ
+            - listitem [ref=e153]:
+              - generic [ref=e154]: 
+              - generic [ref=e155]:
+                - generic [ref=e156]: ฐานข้อมูล
+                - strong [ref=e157]: SQLite
+            - listitem [ref=e158]:
+              - generic [ref=e159]: 
+              - generic [ref=e160]:
+                - generic [ref=e161]: Framework
+                - strong [ref=e162]: .NET 10
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - generic [ref=e166]: 
+            - text: ข้อความล่าสุด
+          - link "ดูทั้งหมด" [ref=e167] [cursor=pointer]:
+            - /url: /Admin/Messages
+        - table [ref=e169]:
+          - rowgroup [ref=e170]:
+            - row "ชื่อ เบอร์โทร สนใจเรื่อง วันที่ สถานะ" [ref=e171]:
+              - columnheader "ชื่อ" [ref=e172]
+              - columnheader "เบอร์โทร" [ref=e173]
+              - columnheader "สนใจเรื่อง" [ref=e174]
+              - columnheader "วันที่" [ref=e175]
+              - columnheader "สถานะ" [ref=e176]
+          - rowgroup [ref=e177]:
+            - row "วิไลพร ใจดี 082-222-3344 Subscription 01/03/26 22:21 อ่านแล้ว" [ref=e178]:
+              - cell "วิไลพร ใจดี" [ref=e179]
+              - cell "082-222-3344" [ref=e180]
+              - cell "Subscription" [ref=e181]
+              - cell "01/03/26 22:21" [ref=e182]
+              - cell "อ่านแล้ว" [ref=e183]:
+                - generic [ref=e184]: อ่านแล้ว
+            - row "สมชาย กาแฟรัก 081-111-2233 เมล็ดกาแฟ Wholesale 28/02/26 23:21 อ่านแล้ว" [ref=e185]:
+              - cell "สมชาย กาแฟรัก" [ref=e186]
+              - cell "081-111-2233" [ref=e187]
+              - cell "เมล็ดกาแฟ Wholesale" [ref=e188]
+              - cell "28/02/26 23:21" [ref=e189]
+              - cell "อ่านแล้ว" [ref=e190]:
+                - generic [ref=e191]: อ่านแล้ว

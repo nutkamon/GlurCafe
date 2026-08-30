@@ -12,11 +12,13 @@ namespace glur.cafe.page.Pages
     {
         private readonly ApplicationDbContext _db;
         private readonly IEmailService _email;
+        private readonly FacebookConversionsService _fbCv;
 
-        public IndexModel(ApplicationDbContext db, IEmailService email)
+        public IndexModel(ApplicationDbContext db, IEmailService email, FacebookConversionsService fbCv)
         {
-            _db = db;
+            _db   = db;
             _email = email;
+            _fbCv  = fbCv;
         }
 
         public List<Service> Services { get; set; } = new();
@@ -53,6 +55,15 @@ namespace glur.cafe.page.Pages
             ContactInput.IsRead    = false;
             _db.ContactMessages.Add(ContactInput);
             await _db.SaveChangesAsync();
+
+            // Fire Facebook Conversions API event (server-side, token from appsettings)
+            var pixelId = Site.GetValueOrDefault("FacebookPixelId", "");
+            var pixelOn = Site.GetValueOrDefault("PixelEnabled", "false") == "true";
+            if (pixelOn && !string.IsNullOrWhiteSpace(pixelId))
+            {
+                _ = _fbCv.SendEventAsync("Contact", HttpContext, pixelId,
+                    email: ContactInput.Email, phone: ContactInput.Phone);
+            }
 
             await OnGetAsync();
 

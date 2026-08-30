@@ -1,0 +1,212 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+      - link " ตั้งค่า" [ref=e24] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e25]: 
+        - generic [ref=e26]: ตั้งค่า
+      - generic [ref=e27]: เพิ่มเติม
+      - link " CRM ลูกค้า" [ref=e28] [cursor=pointer]:
+        - /url: /Admin/Customers
+        - generic [ref=e29]: 
+        - generic [ref=e30]: CRM ลูกค้า
+      - link " ใบเสนอราคา" [ref=e31] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e32]: 
+        - generic [ref=e33]: ใบเสนอราคา
+      - link " รายงาน" [ref=e34] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e35]: 
+        - generic [ref=e36]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e37] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e38]: 
+        - generic [ref=e39]: ผู้ดูแลระบบ
+      - generic [ref=e40]: ต้นทุนสินค้า
+      - link " สารกาแฟ (Master)" [ref=e41] [cursor=pointer]:
+        - /url: /Admin/Beans
+        - generic [ref=e42]: 
+        - generic [ref=e43]: สารกาแฟ (Master)
+      - link " คำนวณต้นทุน" [ref=e44] [cursor=pointer]:
+        - /url: /Admin/CostCalc
+        - generic [ref=e45]: 
+        - generic [ref=e46]: คำนวณต้นทุน
+      - generic [ref=e47]: การเงิน
+      - link " รายรับ - รายจ่าย" [ref=e48] [cursor=pointer]:
+        - /url: /Admin/Finance
+        - generic [ref=e49]: 
+        - generic [ref=e50]: รายรับ - รายจ่าย
+      - generic [ref=e51]: Facebook & Social
+      - link " Facebook Overview" [ref=e52] [cursor=pointer]:
+        - /url: /Admin/Facebook
+        - generic [ref=e53]: 
+        - generic [ref=e54]: Facebook Overview
+      - link " Messenger Inbox" [ref=e55] [cursor=pointer]:
+        - /url: /Admin/Messenger
+        - generic [ref=e56]: 
+        - generic [ref=e57]: Messenger Inbox
+      - link " สร้างโพส" [ref=e58] [cursor=pointer]:
+        - /url: /Admin/Facebook/Post
+        - generic [ref=e59]: 
+        - generic [ref=e60]: สร้างโพส
+      - link " Messenger Chat" [ref=e61] [cursor=pointer]:
+        - /url: /Admin/Facebook/Messenger
+        - generic [ref=e62]: 
+        - generic [ref=e63]: Messenger Chat
+      - link " Pixel & Conversions" [ref=e64] [cursor=pointer]:
+        - /url: /Admin/Facebook/Pixel
+        - generic [ref=e65]: 
+        - generic [ref=e66]: Pixel & Conversions
+      - link " Social Feed" [ref=e67] [cursor=pointer]:
+        - /url: /Admin/Facebook/Feed
+        - generic [ref=e68]: 
+        - generic [ref=e69]: Social Feed
+    - generic [ref=e70]:
+      - link " ดูเว็บไซต์" [ref=e71] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e72]: 
+        - generic [ref=e73]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e74] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e75]: 
+        - generic [ref=e76]: ออกจากระบบ
+  - generic [ref=e77]:
+    - generic [ref=e78]:
+      - text: 
+      - generic [ref=e79]: สร้างโพส Facebook
+      - generic [ref=e80]:
+        - generic [ref=e81]: 
+        - generic [ref=e82]: ผู้ดูแลระบบ
+    - generic [ref=e83]:
+      - generic [ref=e85]:
+        - link "" [ref=e86] [cursor=pointer]:
+          - /url: /Admin/Facebook
+          - generic [ref=e87]: 
+        - heading " สร้างโพส Facebook" [level=5] [ref=e88]:
+          - generic [ref=e89]: 
+          - text: สร้างโพส Facebook
+      - generic [ref=e90]:
+        - generic [ref=e91]: 
+        - strong [ref=e92]: Mock Mode
+        - text: — ดูหน้าจอได้ แต่โพสจริงได้หลัง Meta App Review อนุมัติ permission
+        - code [ref=e93]: pages_manage_posts
+      - generic [ref=e94]:
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - generic [ref=e98]: G
+            - generic [ref=e99]:
+              - generic [ref=e100]: Glur Café
+              - generic [ref=e101]: Facebook Page
+            - combobox [ref=e103]:
+              - option "🌍 สาธารณะ" [selected]
+              - option "👥 เพื่อน"
+          - generic [ref=e104]:
+            - textbox "เขียนบางอย่าง..." [ref=e105]: ☕ กาแฟสดคั่วใหม่ทุกวัน จาก GLUR CAFE โรงคั่วกาแฟของเรา ✅ Arabica Thailand Grade A ✅ คั่วกลาง - คั่วเข้ม ✅ จัดส่ง Flash Express ทั่วประเทศ 🛒 สั่งออนไลน์ได้ที่ glurcoffee.com
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: เลือกรูปจากแกลเลอรี่
+                - generic [ref=e109]: เลือกได้หลายรูป
+              - generic [ref=e110]:
+                - generic [ref=e111] [cursor=pointer]:
+                  - generic [ref=e112]:
+                    - generic [ref=e113]: 
+                    - generic [ref=e114]: กาแฟ 1
+                  - text: ✓
+                - generic [ref=e116] [cursor=pointer]:
+                  - generic [ref=e117]: 
+                  - generic [ref=e118]: สินค้า 1
+                - generic [ref=e120] [cursor=pointer]:
+                  - generic [ref=e121]: 
+                  - generic [ref=e122]: แกลเลอรี่
+                - generic [ref=e124] [cursor=pointer]:
+                  - generic [ref=e125]: 
+                  - generic [ref=e126]: กาแฟ 2
+                - generic [ref=e128] [cursor=pointer]:
+                  - generic [ref=e129]: 
+                  - generic [ref=e130]: รีวิว
+                - generic [ref=e132] [cursor=pointer]:
+                  - generic [ref=e133]: 
+                  - generic [ref=e134]: เพิ่มรูป
+            - generic [ref=e136]:
+              - checkbox "ตั้งเวลาโพส" [ref=e137]
+              - generic [ref=e138]: ตั้งเวลาโพส
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - button "☕" [ref=e141] [cursor=pointer]
+              - button "✅" [ref=e142] [cursor=pointer]
+              - button "🛒" [ref=e143] [cursor=pointer]
+              - button "📦" [ref=e144] [cursor=pointer]
+            - generic [ref=e145]:
+              - button " Draft" [ref=e146] [cursor=pointer]:
+                - generic [ref=e147]: 
+                - text: Draft
+              - button " โพสเลย" [ref=e148] [cursor=pointer]:
+                - generic [ref=e149]: 
+                - text: โพสเลย
+        - generic [ref=e150]:
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - generic [ref=e153]: 
+              - text: ตัวอย่างโพส
+            - generic [ref=e154]:
+              - generic [ref=e155]:
+                - generic [ref=e156]: G
+                - generic [ref=e157]:
+                  - generic [ref=e158]: Glur Café
+                  - generic [ref=e159]:
+                    - text: เดี๋ยวนี้ ·
+                    - generic [ref=e160]: 
+                - generic [ref=e161]: ···
+              - generic [ref=e162]: ☕ กาแฟสดคั่วใหม่ทุกวัน จาก GLUR CAFE โรงคั่วกาแฟของเรา ✅ Arabica Thailand Grade A ✅ คั่วกลาง - คั่วเข้ม ✅ จัดส่ง Flash Express ทั่วประเทศ 🛒 สั่งออนไลน์ได้ที่ glurcoffee.com
+              - generic [ref=e164]:
+                - generic [ref=e165]: 
+                - generic [ref=e166]: รูปที่เลือก
+              - generic [ref=e167]:
+                - button " ถูกใจ" [ref=e168] [cursor=pointer]:
+                  - generic [ref=e169]: 
+                  - text: ถูกใจ
+                - button " แสดงความคิดเห็น" [ref=e170] [cursor=pointer]:
+                  - generic [ref=e171]: 
+                  - text: แสดงความคิดเห็น
+                - button " แชร์" [ref=e172] [cursor=pointer]:
+                  - generic [ref=e173]: 
+                  - text: แชร์
+          - generic [ref=e174]:
+            - heading "สถิติโพสล่าสุด" [level=6] [ref=e175]
+            - generic [ref=e176]:
+              - generic [ref=e177]: ❤️ Reactions
+              - generic [ref=e178]: "247"
+            - generic [ref=e179]:
+              - generic [ref=e180]: 💬 Comments
+              - generic [ref=e181]: "38"
+            - generic [ref=e182]:
+              - generic [ref=e183]: ↗️ Shares
+              - generic [ref=e184]: "15"
+            - generic [ref=e185]:
+              - generic [ref=e186]: 👁️ Reach
+              - generic [ref=e187]: 1,842

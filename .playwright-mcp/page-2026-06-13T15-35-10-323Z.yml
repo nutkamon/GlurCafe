@@ -1,0 +1,189 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+      - link " ตั้งค่า" [ref=e24] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e25]: 
+        - generic [ref=e26]: ตั้งค่า
+      - generic [ref=e27]: เพิ่มเติม
+      - link " CRM ลูกค้า" [ref=e28] [cursor=pointer]:
+        - /url: /Admin/Customers
+        - generic [ref=e29]: 
+        - generic [ref=e30]: CRM ลูกค้า
+      - link " ใบเสนอราคา" [ref=e31] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e32]: 
+        - generic [ref=e33]: ใบเสนอราคา
+      - link " รายงาน" [ref=e34] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e35]: 
+        - generic [ref=e36]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e37] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e38]: 
+        - generic [ref=e39]: ผู้ดูแลระบบ
+      - generic [ref=e40]: ต้นทุนสินค้า
+      - link " สารกาแฟ (Master)" [ref=e41] [cursor=pointer]:
+        - /url: /Admin/Beans
+        - generic [ref=e42]: 
+        - generic [ref=e43]: สารกาแฟ (Master)
+      - link " คำนวณต้นทุน" [ref=e44] [cursor=pointer]:
+        - /url: /Admin/CostCalc
+        - generic [ref=e45]: 
+        - generic [ref=e46]: คำนวณต้นทุน
+      - generic [ref=e47]: การเงิน
+      - link " รายรับ - รายจ่าย" [ref=e48] [cursor=pointer]:
+        - /url: /Admin/Finance
+        - generic [ref=e49]: 
+        - generic [ref=e50]: รายรับ - รายจ่าย
+      - generic [ref=e51]: Facebook & Social
+      - link " Facebook Overview" [ref=e52] [cursor=pointer]:
+        - /url: /Admin/Facebook
+        - generic [ref=e53]: 
+        - generic [ref=e54]: Facebook Overview
+      - link " Messenger Chat" [ref=e55] [cursor=pointer]:
+        - /url: /Admin/Facebook/Messenger
+        - generic [ref=e56]: 
+        - generic [ref=e57]: Messenger Chat
+      - link " Pixel & Conversions" [ref=e58] [cursor=pointer]:
+        - /url: /Admin/Facebook/Pixel
+        - generic [ref=e59]: 
+        - generic [ref=e60]: Pixel & Conversions
+      - link " Social Feed" [ref=e61] [cursor=pointer]:
+        - /url: /Admin/Facebook/Feed
+        - generic [ref=e62]: 
+        - generic [ref=e63]: Social Feed
+    - generic [ref=e64]:
+      - link " ดูเว็บไซต์" [ref=e65] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e66]: 
+        - generic [ref=e67]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e68] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e69]: 
+        - generic [ref=e70]: ออกจากระบบ
+  - generic [ref=e71]:
+    - generic [ref=e72]:
+      - text: 
+      - generic [ref=e73]: Pixel & Conversions API
+      - generic [ref=e74]:
+        - generic [ref=e75]: 
+        - generic [ref=e76]: ผู้ดูแลระบบ
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - link "" [ref=e79] [cursor=pointer]:
+          - /url: /Admin/Facebook
+          - generic [ref=e80]: 
+        - heading " Pixel & Conversions API" [level=5] [ref=e81]:
+          - generic [ref=e82]: 
+          - text: Pixel & Conversions API
+      - generic [ref=e83]:
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - generic [ref=e87]:
+              - generic [ref=e88]: 
+              - generic [ref=e89]: Facebook Pixel (Browser-side)
+            - generic [ref=e90]:
+              - generic [ref=e91]:
+                - generic [ref=e92]:
+                  - generic [ref=e93]: เปิดใช้งาน Pixel
+                  - text: ฝัง Pixel base code บนทุกหน้า
+                - switch [ref=e95] [cursor=pointer]
+              - generic [ref=e96]:
+                - generic [ref=e97]: Pixel ID *
+                - textbox "เช่น 123456789012345" [ref=e98]
+                - text: ดูได้ที่ Meta Events Manager → Data Sources → Pixels
+              - generic [ref=e99]:
+                - generic [ref=e100]:
+                  - generic [ref=e101]: 
+                  - text: Events ที่จะ track อัตโนมัติ
+                - generic [ref=e102]:
+                  - generic [ref=e103]:
+                    - generic [ref=e104]: 
+                    - text: PageView — ทุก request
+                  - generic [ref=e105]:
+                    - generic [ref=e106]: 
+                    - text: Contact — เมื่อ submit ฟอร์ม
+                  - generic [ref=e107]:
+                    - generic [ref=e108]: 
+                    - text: ViewContent — หน้า Index
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - generic [ref=e111]: 
+              - generic [ref=e112]: Conversions API (Server-side) — ทางเลือก
+            - generic [ref=e113]:
+              - alert [ref=e114]:
+                - generic [ref=e115]: 
+                - generic [ref=e116]: Conversions API ช่วยส่ง event จาก server โดยตรง ทำให้ข้อมูลแม่นกว่า browser tracking ที่อาจถูก adblocker บล็อก
+              - generic [ref=e117]:
+                - generic [ref=e118]:
+                  - generic [ref=e119]: 
+                  - generic [ref=e120]: Conversions API Token
+                  - generic [ref=e121]: ⚠️ ยังไม่ตั้งค่า
+                - paragraph [ref=e122]:
+                  - text: Token เก็บใน
+                  - code [ref=e123]: appsettings.json
+                  - text: (ไม่เก็บใน Database เพื่อความปลอดภัย)
+                - generic [ref=e124]: "\"FacebookSecrets\": { \"ConversionsToken\": \"EAAxxxxxxxxxx\", \"InstagramToken\": \"IGQWxxxxxxxxxx\" }"
+          - generic [ref=e125]:
+            - button " ทดสอบ Test Event" [ref=e126] [cursor=pointer]:
+              - generic [ref=e127]: 
+              - text: ทดสอบ Test Event
+            - button " บันทึกการตั้งค่า" [ref=e128] [cursor=pointer]:
+              - generic [ref=e129]: 
+              - text: บันทึกการตั้งค่า
+        - generic [ref=e130]:
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - generic [ref=e133]: 
+              - text: เคล็ดลับ
+            - generic [ref=e134]:
+              - paragraph [ref=e135]:
+                - strong [ref=e136]: "ตรวจสอบ Pixel:"
+                - text: ติดตั้ง
+                - emphasis [ref=e137]: Meta Pixel Helper
+                - text: Chrome extension เพื่อเช็คว่า Pixel ทำงานถูกต้อง
+              - paragraph [ref=e138]:
+                - strong [ref=e139]: "Deduplication:"
+                - text: เมื่อใช้ทั้ง Browser Pixel และ Conversions API พร้อมกัน Meta จะ dedup event อัตโนมัติ
+              - paragraph [ref=e140]:
+                - strong [ref=e141]: "Token Security:"
+                - text: Access Token เก็บเข้ารหัสใน database — ไม่ส่งไปยัง browser
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - generic [ref=e144]: 
+              - text: ลิงก์ที่เกี่ยวข้อง
+            - generic [ref=e145]:
+              - link " Meta Events Manager" [ref=e146] [cursor=pointer]:
+                - /url: https://business.facebook.com/events_manager
+                - generic [ref=e147]: 
+                - text: Meta Events Manager
+              - link " Sharing Debugger" [ref=e148] [cursor=pointer]:
+                - /url: https://developers.facebook.com/tools/debug
+                - generic [ref=e149]: 
+                - text: Sharing Debugger

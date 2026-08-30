@@ -28,6 +28,9 @@
         <a href="/Admin/Portfolios" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "portfolios" ? "active" : "")">
             <i class="bi bi-images"></i><span>แกลเลอรี่</span>
         </a>
+        <a href="/Admin/Menu" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "menu" ? "active" : "")">
+            <i class="bi bi-cup-straw"></i><span>เมนูหน้าร้าน</span>
+        </a>
         <a href="/Admin/Pricing" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "pricing" ? "active" : "")">
             <i class="bi bi-tags"></i><span>ราคา & แพ็คเกจ</span>
         </a>
@@ -68,6 +71,25 @@
         <div class="nav-section-label mt-3">การเงิน</div>
         <a href="/Admin/Finance" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "finance" ? "active" : "")">
             <i class="bi bi-cash-coin"></i><span>รายรับ - รายจ่าย</span>
+        </a>
+        <div class="nav-section-label mt-3">Facebook & Social</div>
+        <a href="/Admin/Facebook" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "facebook" ? "active" : "")">
+            <i class="bi bi-facebook"></i><span>Facebook Overview</span>
+        </a>
+        <a href="/Admin/Messenger" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "messenger-inbox" ? "active" : "")">
+            <i class="bi bi-chat-text-fill"></i><span>Messenger Inbox</span>
+        </a>
+        <a href="/Admin/Facebook/Post" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "fb-post" ? "active" : "")">
+            <i class="bi bi-megaphone-fill"></i><span>สร้างโพส</span>
+        </a>
+        <a href="/Admin/Facebook/Messenger" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "fb-messenger" ? "active" : "")">
+            <i class="bi bi-chat-dots-fill"></i><span>Messenger Chat</span>
+        </a>
+        <a href="/Admin/Facebook/Pixel" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "fb-pixel" ? "active" : "")">
+            <i class="bi bi-graph-up-arrow"></i><span>Pixel & Conversions</span>
+        </a>
+        <a href="/Admin/Facebook/Feed" class="sidebar-link @(ViewData["ActiveMenu"]?.ToString() == "fb-feed" ? "active" : "")">
+            <i class="bi bi-grid-3x2-gap-fill"></i><span>Social Feed</span>
         </a>
     </nav>
     <div class="sidebar-footer">

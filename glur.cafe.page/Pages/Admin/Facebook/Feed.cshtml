@@ -1,0 +1,236 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Facebook.FeedModel
+@{
+    ViewData["Title"] = "Social Feed";
+    ViewData["ActiveMenu"] = "fb-feed";
+}
+
+<div class="d-flex align-items-center gap-2 mb-4">
+    <a href="/Admin/Facebook" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <h5 class="mb-0 fw-bold"><i class="bi bi-grid-3x2-gap-fill me-2" style="color:var(--amber)"></i>Social Feed</h5>
+</div>
+
+<!-- Tabs -->
+<ul class="nav nav-tabs mb-4" id="feedTabs">
+    <li class="nav-item">
+        <a class="nav-link active" id="tab-fb" data-bs-toggle="tab" href="#panel-fb">
+            <i class="bi bi-facebook me-1 text-primary"></i>Facebook Page Feed
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tab-ig" data-bs-toggle="tab" href="#panel-ig">
+            <i class="bi bi-instagram me-1" style="color:#e1306c;"></i>Instagram Feed
+        </a>
+    </li>
+</ul>
+
+<form method="post">
+@Html.AntiForgeryToken()
+<div class="tab-content">
+
+    <!-- ── Facebook Page Feed ── -->
+    <div class="tab-pane fade show active" id="panel-fb">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="admin-card">
+                    <div class="admin-card-header"><i class="bi bi-facebook text-primary me-2"></i>Facebook Page Feed Settings</div>
+                    <div class="p-4">
+                        @if (string.IsNullOrWhiteSpace(Model.FacebookPageId) || string.IsNullOrWhiteSpace(Model.FacebookAppId))
+                        {
+                            <div class="alert alert-warning d-flex gap-2 mb-3">
+                                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mt-1"></i>
+                                <div>
+                                    Page Feed ต้องใช้ <strong>Facebook Page ID</strong> และ <strong>App ID</strong>
+                                    <a href="/Admin/Facebook/Messenger" class="ms-1">→ ตั้งค่าที่ Messenger Settings</a>
+                                </div>
+                            </div>
+                        }
+
+                        <!-- Toggle -->
+                        <div class="mb-4 d-flex align-items-center justify-content-between p-3 rounded-3" style="background:#f8fafc;border:1px solid #e2e8f0;">
+                            <div>
+                                <div class="fw-semibold">เปิดใช้งาน Facebook Page Feed</div>
+                                <small class="text-muted">แสดง posts ล่าสุดบนหน้า Index</small>
+                            </div>
+                            <div class="form-check form-switch mb-0">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                       name="FbPageFeedEnabled" value="true"
+                                       @(Model.FbPageFeedEnabled == "true" ? "checked" : "") style="width:3rem;height:1.5rem;cursor:pointer;" />
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">จำนวน Posts ที่แสดง</label>
+                                <select name="FbPageFeedPostCount" class="form-select">
+                                    @foreach (var n in new[] {"3","5","10"})
+                                    {
+                                        if (Model.FbPageFeedPostCount == n)
+                                        {
+                                            <option value="@n" selected>@n posts</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@n">@n posts</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Facebook Page ID (ปัจจุบัน)</label>
+                                <input type="text" class="form-control font-monospace"
+                                       value="@(string.IsNullOrWhiteSpace(Model.FacebookPageId) ? "ยังไม่ตั้งค่า" : Model.FacebookPageId)"
+                                       readonly disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="admin-card">
+                    <div class="admin-card-header"><i class="bi bi-eye me-2"></i>ตัวอย่างการแสดงผล</div>
+                    <div class="p-3 text-center">
+                        @if (!string.IsNullOrWhiteSpace(Model.FacebookPageId) && !string.IsNullOrWhiteSpace(Model.FacebookAppId))
+                        {
+                            <div id="fb-root"></div>
+                            <div class="fb-page"
+                                 data-href="https://www.facebook.com/profile.php?id=@Model.FacebookPageId"
+                                 data-tabs="timeline"
+                                 data-width="340"
+                                 data-height="250"
+                                 data-small-header="true"
+                                 data-adapt-container-width="true"
+                                 data-hide-cover="false"
+                                 data-show-facepile="false"></div>
+                            <script async defer crossorigin="anonymous"
+                                src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v20.0&appId=@Model.FacebookAppId"></script>
+                        }
+                        else
+                        {
+                            <div class="text-muted small p-3">
+                                <i class="bi bi-image fs-2 d-block mb-2 opacity-25"></i>
+                                กรอก Page ID และ App ID ก่อนเพื่อดูตัวอย่าง
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Instagram Feed ── -->
+    <div class="tab-pane fade" id="panel-ig">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="admin-card">
+                    <div class="admin-card-header"><i class="bi bi-instagram me-2" style="color:#e1306c;"></i>Instagram Feed Settings</div>
+                    <div class="p-4">
+                        <!-- Toggle -->
+                        <div class="mb-4 d-flex align-items-center justify-content-between p-3 rounded-3" style="background:#f8fafc;border:1px solid #e2e8f0;">
+                            <div>
+                                <div class="fw-semibold">เปิดใช้งาน Instagram Feed</div>
+                                <small class="text-muted">แสดงรูปล่าสุดจาก Instagram บนหน้า Index</small>
+                            </div>
+                            <div class="form-check form-switch mb-0">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                       name="InstagramFeedEnabled" value="true"
+                                       @(Model.InstagramFeedEnabled == "true" ? "checked" : "") style="width:3rem;height:1.5rem;cursor:pointer;" />
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Instagram User ID</label>
+                                <input type="text" name="FacebookInstagramUserId" value="@Model.FacebookInstagramUserId"
+                                       class="form-control font-monospace" placeholder="เช่น 17841400455970204" />
+                                <small class="text-muted">ดูได้จาก Graph API Explorer: GET /me?access_token=...</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">จำนวนรูปที่แสดง</label>
+                                <select name="InstagramFeedCount" class="form-select">
+                                    @foreach (var n in new[] {"6","9","12"})
+                                    {
+                                        if (Model.InstagramFeedCount == n)
+                                        {
+                                            <option value="@n" selected>@n รูป</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@n">@n รูป</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Long-lived Access Token</label>
+                                @* Token เก็บใน appsettings.json เพื่อความปลอดภัย ไม่ผ่าน DB *@
+                                <div class="rounded-3 p-3" style="background:#f8fafc;border:1px dashed #cbd5e1;">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <i class="bi bi-shield-lock-fill text-success"></i>
+                                        <span class="fw-semibold small">Instagram Access Token</span>
+                                        @if (Model.InstagramTokenConfigured)
+                                        {
+                                            <span class="badge bg-success">✅ ตั้งค่าแล้ว</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">⚠️ ยังไม่ตั้งค่า</span>
+                                        }
+                                    </div>
+                                    <p class="small text-muted mb-2">
+                                        Token เก็บใน <code>appsettings.json</code> → <code>FacebookSecrets:InstagramToken</code><br />
+                                        ไม่เก็บใน Database เพื่อป้องกัน Token รั่วไหล
+                                    </p>
+                                    <pre class="rounded p-2 small mb-0" style="background:#1e293b;color:#e2e8f0;font-size:.78rem;">"FacebookSecrets": {
+  "InstagramToken": "IGQWxxxxxxxxxx"
+}</pre>
+                                </div>
+                                <small class="text-muted d-block mt-1">⚠️ Token หมดอายุทุก 60 วัน — ต้องอัปเดต appsettings.json แล้ว restart app</small>
+                            </div>
+                        </div>
+
+                        <hr class="my-3" />
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button type="submit" asp-page-handler="TestIg" class="btn btn-outline-teal">
+                                <i class="bi bi-wifi me-1"></i>ทดสอบเชื่อมต่อ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="admin-card">
+                    <div class="admin-card-header"><i class="bi bi-lightbulb me-2 text-warning"></i>วิธีสร้าง Token</div>
+                    <div class="p-3">
+                        <ol class="small text-muted ps-3 mb-3">
+                            <li>ไปที่ <a href="https://developers.facebook.com/tools/explorer" target="_blank" rel="noopener">Graph API Explorer</a></li>
+                            <li>เลือก App → Get User Access Token</li>
+                            <li>Permission: <code>instagram_basic</code>, <code>pages_show_list</code></li>
+                            <li>แปลงเป็น Long-lived Token (60 วัน):
+                                <br /><code class="d-block mt-1 p-2 rounded" style="background:#f1f5f9;font-size:.75rem;word-break:break-all;">
+                                GET /oauth/access_token?grant_type=fb_exchange_token&client_id={app_id}&client_secret={secret}&fb_exchange_token={token}
+                                </code>
+                            </li>
+                        </ol>
+                        <a href="https://developers.facebook.com/tools/explorer" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary w-100">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>Graph API Explorer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr class="my-4" />
+<div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-teal px-4">
+        <i class="bi bi-floppy me-1"></i>บันทึกการตั้งค่า
+    </button>
+</div>
+</form>

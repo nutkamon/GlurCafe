@@ -1,0 +1,615 @@
+- generic [ref=e5]:
+  - banner:
+    - generic [ref=e6]:
+      - generic:
+        - generic:
+          - button [disabled]:
+            - img
+      - link "Facebook" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img [ref=e8]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic:
+          - generic:
+            - generic:
+              - button:
+                - img
+      - generic [ref=e19]:
+        - generic:
+          - img
+        - combobox "ค้นหาบน Facebook" [ref=e20] [cursor=pointer]
+    - navigation "Facebook" [ref=e24]:
+      - list [ref=e25]:
+        - listitem [ref=e26]:
+          - link "หน้าหลัก" [ref=e29] [cursor=pointer]:
+            - /url: /
+            - img [ref=e31]
+        - listitem [ref=e33]:
+          - link "Reels" [ref=e36] [cursor=pointer]:
+            - /url: /reel/?s=tab
+            - img [ref=e38]
+        - listitem [ref=e41]:
+          - link "แดชบอร์ด" [ref=e44] [cursor=pointer]:
+            - /url: /professional_dashboard/?ref=tab_bar
+            - img [ref=e46]
+        - listitem [ref=e49]:
+          - link "Marketplace" [ref=e52] [cursor=pointer]:
+            - /url: /marketplace/?ref=app_tab
+            - img [ref=e54]
+        - listitem [ref=e56]:
+          - link "กลุ่ม" [ref=e59] [cursor=pointer]:
+            - /url: /groups/
+            - img [ref=e61]
+    - navigation "การควบคุมและการตั้งค่าบัญชี" [ref=e64]:
+      - button "เมนู Facebook" [ref=e68] [cursor=pointer]:
+        - img [ref=e69]
+      - generic [ref=e74]:
+        - button "Messenger" [ref=e75] [cursor=pointer]:
+          - img [ref=e76]
+        - button [ref=e78] [cursor=pointer]:
+          - generic [ref=e81]:
+            - generic [ref=e82]: 1 แชทที่ยังไม่ได้อ่าน
+            - generic [ref=e83]: "1"
+      - button "การแจ้งเตือน" [ref=e88] [cursor=pointer]:
+        - img [ref=e89]
+      - button "โปรไฟล์ของคุณ" [ref=e93] [cursor=pointer]:
+        - generic [ref=e94]:
+          - img "โปรไฟล์ของคุณ" [ref=e95]
+          - img [ref=e102]
+  - generic [ref=e109]:
+    - navigation "การนำทางเพจ" [ref=e110]:
+      - generic [ref=e111]:
+        - generic [ref=e114]:
+          - heading "จัดการเพจ" [level=1] [ref=e119]
+          - button "ซ่อนเมนู" [ref=e123] [cursor=pointer]:
+            - img [ref=e124]
+        - generic [ref=e128]:
+          - button "Glur Café" [ref=e133] [cursor=pointer]:
+            - img [ref=e136]
+            - heading "Glur Café" [level=2] [ref=e140]:
+              - generic [ref=e142]: Glur Café
+            - img [ref=e145]
+          - separator [ref=e147]
+          - generic [ref=e149]:
+            - button "แดชบอร์ด" [ref=e153] [cursor=pointer]:
+              - generic [ref=e154]:
+                - img [ref=e156]
+                - generic [ref=e157]:
+                  - generic [ref=e165]: แดชบอร์ด
+                  - img [ref=e169]
+            - button "ข้อมูลเชิงลึก" [ref=e174] [cursor=pointer]:
+              - generic [ref=e175]:
+                - img [ref=e177]
+                - generic [ref=e178]:
+                  - generic [ref=e183]: ข้อมูลเชิงลึก
+                  - img [ref=e187]
+            - button "ตัววางแผน" [ref=e192] [cursor=pointer]:
+              - generic [ref=e195]:
+                - generic [ref=e200]: ตัววางแผน
+                - img [ref=e204]
+            - button "การสร้างรายได้" [ref=e209] [cursor=pointer]:
+              - generic [ref=e212]:
+                - generic [ref=e217]: การสร้างรายได้
+                - img [ref=e221]
+            - link "ศูนย์โฆษณา" [ref=e226] [cursor=pointer]:
+              - /url: /100064048719402/ad_center/?ref_source=www_profile_plus_left_nav_ad_center_button
+              - generic [ref=e227]:
+                - img [ref=e229]
+                - generic [ref=e235]: ศูนย์โฆษณา
+            - link "สร้างโฆษณา" [ref=e239] [cursor=pointer]:
+              - /url: /ad_center/create/consolidatedad/?entry_point=www_pages_product_picker&page_id=1764644990529564
+              - generic [ref=e240]:
+                - img [ref=e242]
+                - generic [ref=e248]: สร้างโฆษณา
+            - button "โปรโมทโพสต์บน Instagram" [ref=e252] [cursor=pointer]:
+              - generic [ref=e255]:
+                - generic [ref=e260]: โปรโมทโพสต์บน Instagram
+                - img [ref=e264]
+            - button "การตั้งค่า" [ref=e269] [cursor=pointer]:
+              - generic [ref=e272]:
+                - generic [ref=e277]: การตั้งค่า
+                - img [ref=e281]
+            - generic [ref=e285]:
+              - generic [ref=e290]:
+                - generic [ref=e293]:
+                  - heading "เครื่องมือเพิ่มเติม" [level=2] [ref=e295]:
+                    - generic [ref=e297]: เครื่องมือเพิ่มเติม
+                  - generic [ref=e302]:
+                    - generic [ref=e303]:
+                      - generic [ref=e304]: รายการสิ่งที่ต้องทำ 2 รายการ
+                      - generic [ref=e305]: "2"
+                    - button "ย่อ" [ref=e306] [cursor=pointer]:
+                      - img [ref=e307]
+                - generic [ref=e311]: จัดการธุรกิจของคุณในแอพต่างๆ ของ Meta
+              - generic [ref=e314]:
+                - link "Meta Verified" [ref=e318] [cursor=pointer]:
+                  - /url: https://business.facebook.com/latest/settings/mv4b/?nav_ref=mv4b_fb_profile_plus_nav_action_section&entry_point=mv4b_fb_profile_plus_nav_action_section&lp_entry_point=mv4b_fb_profile_plus_nav_action_section
+                  - generic [ref=e326]: Meta Verified
+                - link "ศูนย์ข้อมูลลูกค้า" [ref=e330] [cursor=pointer]:
+                  - /url: https://www.facebook.com/latest/leads_center?asset_id=1764644990529564&nav_ref=manage_page_ap_plus_left_nav_leads_center_button
+                  - generic [ref=e333]:
+                    - generic [ref=e338]: ศูนย์ข้อมูลลูกค้า
+                    - img [ref=e342]
+                - link "Meta Business Suite การแจ้งเตือน" [ref=e347] [cursor=pointer]:
+                  - /url: https://www.facebook.com/latest/?asset_id=1764644990529564&nav_ref=manage_page_ap_plus_left_nav_mbs_button
+                  - generic [ref=e350]:
+                    - generic [ref=e356]:
+                      - generic [ref=e358]: Meta Business Suite
+                      - generic [ref=e363]:
+                        - generic [ref=e364]: การแจ้งเตือน
+                        - generic [ref=e365]: "2"
+                    - img [ref=e369]
+                - button "Manus AI" [ref=e374] [cursor=pointer]:
+                  - generic [ref=e377]:
+                    - generic [ref=e382]: Manus AI
+                    - img [ref=e386]
+            - generic [ref=e393]:
+              - generic [ref=e398]: สลับไปใช้เพจ Glur Café เพื่อดำเนินการเพิ่มเติม
+              - button "สลับ" [ref=e400] [cursor=pointer]:
+                - generic [ref=e403]: สลับ
+        - separator [ref=e404]
+        - button "ลงโฆษณา" [ref=e406] [cursor=pointer]:
+          - generic [ref=e407]:
+            - img [ref=e408]
+            - generic [ref=e412]: ลงโฆษณา
+    - main "เนื้อหาของโปรไฟล์เพจ" [ref=e413]:
+      - main [ref=e417]:
+        - generic [ref=e418]:
+          - link "ดูรูปภาพหน้าปกโปรไฟล์" [ref=e429] [cursor=pointer]:
+            - /url: https://www.facebook.com/photo/?fbid=844950570983226&set=a.448305510647736
+          - generic [ref=e437]:
+            - link "Glur Café" [ref=e441] [cursor=pointer]:
+              - /url: https://www.facebook.com/photo/?fbid=555937953217824&set=a.448305500647737&__tn__=%3C
+              - generic [ref=e442]:
+                - img "Glur Café" [ref=e443]
+                - generic [ref=e450]: ตัวระบุสถานะกำลังใช้งาน
+            - generic [ref=e453]:
+              - generic [ref=e455]:
+                - generic [ref=e458]:
+                  - heading "Glur Café" [level=1] [ref=e463]:
+                    - button "Glur Café" [ref=e464] [cursor=pointer]: Glur Café
+                  - generic [ref=e466]:
+                    - link "2.3 พัน การกดถูกใจ" [ref=e467] [cursor=pointer]:
+                      - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                      - strong [ref=e468]: 2.3 พัน
+                      - text: การกดถูกใจ
+                    - text: •
+                    - link "ผู้ติดตาม 2.3 พัน คน" [ref=e469] [cursor=pointer]:
+                      - /url: https://www.facebook.com/glurcoffee/followers/
+                      - text: ผู้ติดตาม
+                      - strong [ref=e470]: 2.3 พัน
+                      - text: คน
+                - generic [ref=e473]:
+                  - button "ส่งข้อความ" [ref=e476] [cursor=pointer]:
+                    - generic [ref=e479]: ส่งข้อความ
+                  - button "ถูกใจแล้ว" [ref=e482] [cursor=pointer]:
+                    - generic [ref=e485]: ถูกใจแล้ว
+                  - button "ค้นหาโปรไฟล์ของ Glur Café" [ref=e488] [cursor=pointer]:
+                    - generic [ref=e491]: ค้นหา
+              - generic [ref=e493]:
+                - text: Glur Café & Coffee Roaster
+                - text: เกอลคาเฟ่ กาแฟสด & โรงคั่วกาแฟ
+              - list "รายละเอียดที่ไฮไลท์" [ref=e497]:
+                - listitem [ref=e498]:
+                  - generic [ref=e499]:
+                    - img [ref=e501]
+                    - button "ร้านกาแฟ" [ref=e502] [cursor=pointer]
+                - listitem [ref=e503]:
+                  - generic [ref=e504]: ฿
+              - list [ref=e509]:
+                - listitem [ref=e510]:
+                  - link "Maytinee Supajak" [ref=e511] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e513]
+                - listitem [ref=e517]:
+                  - link "เปรม จันทวี" [ref=e518] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e520]
+                - listitem [ref=e524]:
+                  - link "Pipatphol Sricharoenchit" [ref=e525] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e527]
+                - listitem [ref=e531]:
+                  - link "Jirakan Chantawee" [ref=e532] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e534]
+                - listitem [ref=e538]:
+                  - link "Sudarat Aup" [ref=e539] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e541]
+                - listitem [ref=e545]:
+                  - link "San Sabye" [ref=e546] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e548]
+                - listitem [ref=e552]:
+                  - link "Pongpon Oip" [ref=e553] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e555]
+                - listitem [ref=e559]:
+                  - link "Thongkam Chan" [ref=e560] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e562]
+                - listitem [ref=e566]:
+                  - link "Tuangtipa Indamra" [ref=e567] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e569]
+                - listitem [ref=e573]:
+                  - link "Kittanai Pinket" [ref=e574] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e576]
+                - listitem [ref=e580]:
+                  - link "เอส โอเล่" [ref=e581] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e583]
+                - listitem [ref=e587]:
+                  - link "กัลยา มณีกอง" [ref=e588] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e590]
+                - listitem:
+                  - link "ดูทุกคน" [ref=e594] [cursor=pointer]:
+                    - /url: https://www.facebook.com/glurcoffee/friends_likes/
+                    - img [ref=e595]
+        - generic [ref=e605]:
+          - tablist [ref=e613]:
+            - generic:
+              - generic:
+                - generic [ref=e615]:
+                  - generic [ref=e616]: เพิ่มเติม
+                  - img [ref=e618]
+                - tab "ทั้งหมด" [selected] [ref=e621] [cursor=pointer]:
+                  - generic [ref=e623]: ทั้งหมด
+                - tab "เกี่ยวกับ" [ref=e625] [cursor=pointer]:
+                  - generic [ref=e627]: เกี่ยวกับ
+                - tab "Reels" [ref=e629] [cursor=pointer]:
+                  - generic [ref=e631]: Reels
+                - tab "รูปภาพ" [ref=e633] [cursor=pointer]:
+                  - generic [ref=e635]: รูปภาพ
+                - tab "ผู้ติดตาม" [ref=e637] [cursor=pointer]:
+                  - generic [ref=e639]: ผู้ติดตาม
+          - button "ตัวเลือกการดูเพิ่มเติมของการตั้งค่าโปรไฟล์" [ref=e643] [cursor=pointer]:
+            - img [ref=e645]
+        - generic [ref=e649]:
+          - generic [ref=e657]:
+            - generic [ref=e663]: สลับไปใช้เพจ Glur Café เพื่อเริ่มจัดการ
+            - button "สลับเลย" [ref=e666] [cursor=pointer]:
+              - generic [ref=e669]: สลับเลย
+          - generic [ref=e671]:
+            - generic [ref=e675]:
+              - generic [ref=e677]:
+                - generic [ref=e681]:
+                  - heading "รายละเอียด" [level=2] [ref=e686]:
+                    - generic [ref=e687]: รายละเอียด
+                  - list "รายละเอียด" [ref=e688]:
+                    - button "94% แนะนำ (17 รีวิว)" [ref=e689] [cursor=pointer]:
+                      - generic [ref=e691]:
+                        - img [ref=e693]
+                        - listitem [ref=e694]:
+                          - generic [ref=e696]: 94% แนะนำ (17 รีวิว)
+                    - generic [ref=e698]:
+                      - img [ref=e700]
+                      - listitem [ref=e701]:
+                        - generic [ref=e703]: ฿
+                    - button "ปิดแล้วตอนนี้" [ref=e704] [cursor=pointer]:
+                      - generic [ref=e706]:
+                        - img [ref=e708]
+                        - listitem [ref=e709]:
+                          - generic [ref=e710]: ปิดแล้วตอนนี้
+                    - generic [ref=e712]:
+                      - img [ref=e714]
+                      - listitem [ref=e715]:
+                        - link "Rangsit, Rangsit, Thailand, 12130" [ref=e718] [cursor=pointer]:
+                          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.bing.com%2Fmaps%2Fdefault.aspx%3Fv%3D2%26pc%3DFACEBK%26mid%3D8100%26where1%3DRangsit%252C%2520Rangsit%252C%2520Thailand%252C%252012130%26FORM%3DFBKPL1%26mkt%3Den-US%26fbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExeWpFRjRSblFIbE52eTd6ZnNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR4ju6PdNsse4-Y6C8H-ufBUr9XykAGs0StGUERPmFhatvp0oSylWb3-wNhvqg_aem_XW9RlFcP7CEFeFh-Bzc97w&h=AUAzA92otDSajTwOu7_kI4xqda8FjbVbH_P0tHypEqHnjpQQOVcyQY25HV_ML2XF_hWVSOMdUjoZyJopxO2ybe0WDBXC-p2WGIH24bj61lyJWI-jy-osoTRiFq3ulHvkSVXkuLAnjx6duLWPql6x
+                - generic [ref=e722]:
+                  - heading "ลิงก์" [level=2] [ref=e727]:
+                    - generic [ref=e728]: ลิงก์
+                  - list "ลิงก์" [ref=e729]:
+                    - generic [ref=e731]:
+                      - img [ref=e733]
+                      - listitem [ref=e734]:
+                        - link "wordpress.com" [ref=e738] [cursor=pointer]:
+                          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fglurcafe.wordpress.com%2F%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExeWpFRjRSblFIbE52eTd6ZnNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6ZCI0rGzpnmaugFYh5Jdi76sbdRCHGr3b2kX6k6F7Qnwna-m6RRzdujccPRA_aem_84PqRHNvH1emK7kk0PWFEw&h=AUC3ltI7Ub4X3xiv-cadTy-jJGHoeBkGHXv1skvjaZi3zlXBdkdTHxTGqQQI65AewHGCOw1tyDEsQCdMqvxAVgPS9H0VPFcD_-KB2Cw8Zqb1byuMf5pE4DRdEFK4LZAHRaHfMxXMMwEaVN_pckXM
+              - status "กำลังโหลด..." [ref=e740]:
+                - list [ref=e747]:
+                  - listitem [ref=e748]
+                  - listitem [ref=e752]
+                  - listitem [ref=e756]
+                  - listitem [ref=e760]
+                  - listitem [ref=e764]
+                  - listitem [ref=e768]
+                  - listitem [ref=e772]
+                  - listitem [ref=e776]
+                  - listitem [ref=e780]
+            - generic [ref=e784]:
+              - generic [ref=e789]:
+                - heading "แนะนำ" [level=2] [ref=e795]:
+                  - generic [ref=e796]: แนะนำ
+                - generic [ref=e800]:
+                  - generic:
+                    - button [disabled]:
+                      - img
+                  - generic [ref=e803]:
+                    - link [ref=e810] [cursor=pointer]:
+                      - /url: https://www.facebook.com/glurcoffee/posts/pfbid0G6fdW3GZsgg2xzoPi3cymA7NNQwKEj2GWpR4AG47aKUQji6g7LTQ8zz8aK8fVXgzl
+                      - generic [ref=e811]:
+                        - generic [ref=e812]:
+                          - link "Glur Café" [ref=e818]:
+                            - /url: https://www.facebook.com/glurcoffee?__tn__=%3C%3C
+                            - generic [ref=e819]:
+                              - img "Glur Café" [ref=e820]
+                              - generic [ref=e825]:
+                                - generic [ref=e828]: ตัวบ่งชี้สถานะออนไลน์
+                                - generic [ref=e829]: กำลังใช้งาน
+                          - generic [ref=e837]:
+                            - heading "Glur Café อยู่ที่ Glur Café" [level=3] [ref=e842]:
+                              - generic [ref=e845]:
+                                - link "Glur Café" [ref=e852]:
+                                  - /url: https://www.facebook.com/glurcoffee?__tn__=-]C
+                                - text: อยู่ที่
+                                - link "Glur Café" [ref=e859]:
+                                  - /url: https://www.facebook.com/glurcoffee?__tn__=-]C
+                            - generic [ref=e862]:
+                              - link "8 พฤษภาคม 2025" [ref=e867]:
+                                - /url: https://www.facebook.com/glurcoffee/posts/pfbid0G6fdW3GZsgg2xzoPi3cymA7NNQwKEj2GWpR4AG47aKUQji6g7LTQ8zz8aK8fVXgzl?__tn__=%2CO
+                              - img "แชร์กับ สาธารณะ" [ref=e871]
+                        - generic [ref=e879]:
+                          - generic [ref=e884]:
+                            - text: 💥 Glur Café💥 ยืนหนึ่งย่านรังสิต !!!
+                            - text: (มีที่จอดรถได้หลายสิบคันไม่ต้องกังวลจ้าา)
+                            - text: "📍 google maps : Glur Coffee & Coffee Roaster"
+                            - text: 📍 https://goo.gl/maps/7BnfHNdW9qBYfMVZ9
+                            - text: ใครกำลังมองหาร้านกาแฟที่สามารถเลือกเมล็ดกาแฟได้ตามชอบ มาเจอกันที่ร้านได้เลยนะครับ
+                            - text: ☕️ มีเมล็ดกาแฟให้เลือกทั้งไทยและต่างประเทศ
+                            - text: มากกว่า 4️⃣0️⃣ชนิด
+                            - text: 🥤เมนูกาแฟ ชา โกโก้ โซดา มีครบหมด
+                            - text: 🍰 ขนมเค้กเบเกอรี่ หอม อร่อย สดใหม่
+                            - text: 🍲 อาหารคาว ของทานเล่น มาฝากท้องกันที่นี่ได้เลย เมนูมีให้เลือกหลากหลาย มาที่เดียวมีครบหมด
+                            - text: 💥ร้านกาแฟเหมาะสำหรับนัดเจอ พบปะเพื่อนเกลอ
+                            - text: บรรยากาศสบายๆ วิวสวนธรรมชาติ ร่มรื่น แต่มีห้องแอร์ด้วยนะ ที่สำคัญราคาสบายกระเป๋ามาก กาแฟเริ่มต้น 40 บาท เท่านั้น!!!💥
+                            - text: 🧧เปิดบริการทุกวันนะจ้า 🧧
+                            - text: ⏱️ เปิด 07:30น. - 17:30น.
+                            - text: 🅿️ จอดรถได้ 30 คัน
+                            - text: ⭐️ กาแฟคั่วกลาง ดีแบบตะคอก
+                            - text: ⭐️⭐️ กาแฟคั่วเข้ม ดีแบบตะโกน
+                            - text: ⭐️⭐️⭐️ กาแฟคั่วเข้ม ดีแบบตะเกียดตะกายย
+                          - generic [ref=e886]:
+                            - img "ไม่มีคำอธิบายรูปภาพ" [ref=e891]
+                            - img "ไม่มีคำอธิบายรูปภาพ" [ref=e896]
+                            - img "ไม่มีคำอธิบายรูปภาพ" [ref=e901]
+                            - img "ไม่มีคำอธิบายรูปภาพ" [ref=e906]
+                    - link [ref=e912] [cursor=pointer]:
+                      - /url: https://www.facebook.com/glurcoffee/posts/pfbid02oa7UBB8CJKgnmC2xd6B2xjdEEjwyzWr7PusVBWN9ifJ9nHQLkAT2NAJdtx7fWQkNl
+                      - generic [ref=e913]:
+                        - generic [ref=e914]:
+                          - link "Glur Café" [ref=e920]:
+                            - /url: https://www.facebook.com/glurcoffee?__tn__=%3C%3C
+                            - generic [ref=e921]:
+                              - img "Glur Café" [ref=e922]
+                              - generic [ref=e927]:
+                                - generic [ref=e930]: ตัวบ่งชี้สถานะออนไลน์
+                                - generic [ref=e931]: กำลังใช้งาน
+                          - generic [ref=e939]:
+                            - heading "Glur Café" [level=3] [ref=e944]:
+                              - link "Glur Café" [ref=e950]:
+                                - /url: https://www.facebook.com/glurcoffee?__tn__=-UC
+                                - generic [ref=e951]: Glur Café
+                            - generic [ref=e954]:
+                              - link "5 พฤษภาคม 2023" [ref=e959]:
+                                - /url: https://www.facebook.com/glurcoffee/posts/pfbid02oa7UBB8CJKgnmC2xd6B2xjdEEjwyzWr7PusVBWN9ifJ9nHQLkAT2NAJdtx7fWQkNl?__tn__=%2CO
+                              - img "แชร์กับ สาธารณะ" [ref=e963]
+                        - generic [ref=e971]:
+                          - generic [ref=e976]:
+                            - text: เมล็ดกาแฟ เกลอคาเฟ่ รังสิต Dark Blend
+                            - text: ผสมผสานเมล็ดกาแฟ สายพันธุ์อาราบิก้าและ โรบัสต้า เกรด A
+                            - text: กระบวนการผลิตเเบบ (Dry Process)
+                            - text: ✔️ขนาด 250 กรัม 120 บาท
+                            - text: ✔️ขนาด 500 กรัม 230 บาท
+                            - text: ✔️ขนาด 1 กิโลกรัม 450 บาท
+                            - text: 🚚 ส่งตรงจากโรงคั่ว ทุกวัน
+                            - text: 4 ระดับ การคั่ว
+                            - text: 🔥คั่วอ่อน
+                            - text: 🔥คั่วกลาง
+                            - text: 🔥คั่วเข้ม
+                            - text: 🔥คั่วเข้มมาก
+                            - text: ☄️มีราคาปลีกเเละส่ง
+                            - text: "Google Map : Glur Cafe Rangsit"
+                            - text: https://goo.gl/maps/VYrhkZ7uisCHF1yc8
+                            - text: "Shopee : https://shope.ee/7KRNxb8Xlv"
+                            - text: "#glurcaferangsit"
+                            - text: "#glurcafé #glurcafe #coffee #coffeeandtea #coffeeinthailand #coffeeinthai #teainthailand #rangsit #tea #slowlifestyle #glurcoffee #กาแฟ #กาแฟสด #รังสิต"
+                            - text: "#สั่งคั่วได้ #SpecialCoffee #PremiumCoffee #ThaiCoffee #ThepSadetCoffee #MaeChanTaiCoffee #KraburiCoffee #กาแฟเทพเสด็จ #กาแฟแม่จันใต้ #กาแฟกระบุรี #โรบัสต้า #อาราบิก้า #Robusta #Arabica #LightRoast #MediumRoast #MediumDarkRoast #DarkRoast #กาแฟคั่วสด #กาแฟคั่วมือ #RoasterM #RangsitCoffeeHandRoast #ArtisanHandRoastCoffee #อุดหนุนเกษตรกรไทย #SupportThaiFarmers"
+                          - generic [ref=e977]:
+                            - img "อาจเป็นรูปภาพของ ถ้วยกาแฟ และ ข้อความพูดว่า \"Premium Coffee Bean DARK BLEND เมล็ดกาแฟ สำหรับร้านกาแฟ Arabica X Robusta PREMIUMBOLAVEN'A เหมาะสำหรับ ร้านกาแฟ กาแฟ กาแฟเข้มสู้นม กาแฟดำเข้มหอม Test Note กาแฟ อาราบิก้า &โรบัสต้า เกรด A เข้มมาก เซ้ม Oกลาง ออ่อน WHFE WHOLE COFFEE Honey ButteAroma Butter Aroma Brown Sugar Chocolate รรงคัวกาแฟ กาแฟสด\"" [ref=e982]
+                            - img "อาจเป็นรูปภาพของ เครื่องชงกาแฟ และ ถ้วยกาแฟ" [ref=e987]
+                            - img "อาจเป็นรูปภาพของ ถ้วยกาแฟ" [ref=e992]
+                            - img "อาจเป็นรูปภาพของ 1 คน และ ข้อความ" [ref=e997]
+                    - link [ref=e1003] [cursor=pointer]:
+                      - /url: https://www.facebook.com/glurcoffee/posts/pfbid0RKgnRg5N7j8FuK96bmCjK6QLrNpp7tLPVVsP7yhAYK5AyJRxBPtEG221aCdhxHM3l
+                      - generic [ref=e1004]:
+                        - generic [ref=e1005]:
+                          - link "Glur Café" [ref=e1011]:
+                            - /url: https://www.facebook.com/glurcoffee?__tn__=%3C%3C
+                            - generic [ref=e1012]:
+                              - img "Glur Café" [ref=e1013]
+                              - generic [ref=e1018]:
+                                - generic [ref=e1021]: ตัวบ่งชี้สถานะออนไลน์
+                                - generic [ref=e1022]: กำลังใช้งาน
+                          - generic [ref=e1030]:
+                            - heading "Glur Café" [level=3] [ref=e1035]:
+                              - link "Glur Café" [ref=e1041]:
+                                - /url: https://www.facebook.com/glurcoffee?__tn__=-UC
+                                - generic [ref=e1042]: Glur Café
+                            - generic [ref=e1045]:
+                              - link "19 มีนาคม 2023" [ref=e1050]:
+                                - /url: https://www.facebook.com/glurcoffee/posts/pfbid0RKgnRg5N7j8FuK96bmCjK6QLrNpp7tLPVVsP7yhAYK5AyJRxBPtEG221aCdhxHM3l?__tn__=%2CO
+                              - img "แชร์กับ สาธารณะ" [ref=e1054]
+                        - generic [ref=e1062]:
+                          - generic [ref=e1067]:
+                            - text: 🀄️ร้านกาแฟสด และ โรงคั่วกาแฟ เกลอคาเฟ่รังสิต 🀄️
+                            - text: ✔️ จำหน่ายเมล็ดกาแฟคั่วทั้งราคาปลีกสำหรับนักดื่ม
+                            - text: ✔️ ราคาส่งสำหรับร้านค้า บรรจุถุงซิปล๊อคติดวาล์วคุณภาพดี!!!
+                            - text: 📍เยี่ยมชมร้านเราได้ ตั้งแต่ 07:30-17:30 น. 📍
+                            - text: "Google Map : Glur Cafe Rangsit"
+                            - text: https://goo.gl/maps/VYrhkZ7uisCHF1yc8
+                            - text: สนใจถามสอบรายละเอียดสินค้า Inbox มาได้สมอครับ
+                            - text: 🧧🧧 รายการสินค้า🧧🧧
+                            - text: "-อาราบิก้าลาว size16-18"
+                            - text: 200กรัม ราคา 150 บาท
+                            - text: 500กรัม ราคา 370 บาท
+                            - text: 1กิโลกรัม ราคา 600 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าไทย เทพเสด็จ Peaberry"
+                            - text: 200กรัม ราคา 150 บาท
+                            - text: 500กรัม ราคา 370 บาท
+                            - text: 1กิโลกรัม ราคา 600 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าไทย เทพเสด็จ AA"
+                            - text: 200กรัม ราคา 150 บาท
+                            - text: 500กรัม ราคา 370 บาท
+                            - text: 1กิโลกรัม ราคา 600 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าไทย ห้วยน้ำดัง (แม่ฮ่องสอน) AA"
+                            - text: 200กรัม ราคา 150 บาท
+                            - text: 500กรัม ราคา 370 บาท
+                            - text: 1กิโลกรัม ราคา 600 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าไทย ห้องสี่เหลี่ยม (ลำปาง) AA"
+                            - text: 200กรัม ราคา 130 บาท
+                            - text: 500กรัม ราคา 350 บาท
+                            - text: 1กิโลกรัม ราคา 550 บาท
+                            - text: "-----------------------"
+                            - text: "-โรบัสต้าเวียดนาม size17-18"
+                            - text: 200กรัม ราคา 120 บาท
+                            - text: 450กรัม ราคา 240 บาท
+                            - text: 1กิโลกรัม ราคา 450 บาท
+                            - text: "-----------------------"
+                            - text: "- อาราบิก้าบราซิล Santos size 17-18"
+                            - text: 200กรัม ราคา 200 บาท
+                            - text: 500กรัม ราคา 500 บาท
+                            - text: 1กิโลกรัม ราคา 1000 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าบราซิล Cerrado"
+                            - text: 200กรัม ราคา 260 บาท
+                            - text: 500กรัม ราคา 550 บาท
+                            - text: 1กิโลกรัม ราคา 1100 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้า ยูนนาน"
+                            - text: 200กรัม ราคา 360 บาท
+                            - text: 500กรัม ราคา 600 บาท
+                            - text: 1กิโลกรัม ราคา 1200 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้า รัฐฉาน พม่า"
+                            - text: 200กรัม ราคา 200 บาท
+                            - text: 500กรัม ราคา 400 บาท
+                            - text: 1กิโลกรัม ราคา 800 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าเอธิโอเปีย"
+                            - text: 200กรัม ราคา 200 บาท
+                            - text: 500กรัม ราคา 500 บาท
+                            - text: 1กิโลกรัม ราคา 1,000 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าคอสตาริก้า"
+                            - text: 200กรัม ราคา 400 บาท
+                            - text: 450กรัม ราคา 750 บาท
+                            - text: 1กิโลกรัม ราคา 1450 บาท
+                            - text: "-----------------------"
+                            - text: "-อาราบิก้าเคนย่า *Specialty Grade AA*"
+                            - text: 200กรัม ราคา 300 บาท
+                            - text: 500กรัม ราคา 650 บาท
+                            - text: 1กิโลกรัม ราคา 1200 บาท
+                            - text: "#glurcaferangsit"
+                            - text: "#glurcafé #glurcafe #coffee #coffeeandtea #coffeeinthailand #coffeeinthai #teainthailand #rangsit #tea #slowlifestyle #glurcoffee #กาแฟ #กาแฟสด #รังสิต"
+                            - text: "#สั่งคั่วได้ #SpecialCoffee #PremiumCoffee #ThaiCoffee #ThepSadetCoffee #MaeChanTaiCoffee #KraburiCoffee #กาแฟเทพเสด็จ #กาแฟแม่จันใต้ #กาแฟกระบุรี #โรบัสต้า #อาราบิก้า #Robusta #Arabica #LightRoast #MediumRoast #MediumDarkRoast #DarkRoast #กาแฟคั่วสด #กาแฟคั่วมือ #RoasterM #RangsitCoffeeHandRoast #ArtisanHandRoastCoffee #อุดหนุนเกษตรกรไทย #SupportThaiFarmers"
+                          - generic [ref=e1069]:
+                            - img "อาจเป็นรูปภาพของ อาหาร และ ข้อความพูดว่า \"ம งคัวกาแฟ เกลอ รังสิต Glur Café\"" [ref=e1074]
+                            - img "อาจเป็นรูปภาพของ ข้อความพูดว่า \"× কবনত ระนอง ขนลาว ขนช่างเคี่ย O ลาวคัวกลาง อินทน ภูเรือ பมய น่าน แม่ฟ้าหลวง Specialty เมล็ดกาแฟให้เลือก Coffee ไทย- ต่างประเทศ กว่า 30 ชนิด\"" [ref=e1079]
+                            - img "อาจเป็นรูปภาพของ ข้อความ" [ref=e1084]
+                            - img "อาจเป็นรูปภาพของ ข้อความ" [ref=e1089]
+                            - generic [ref=e1090]:
+                              - img "อาจเป็นรูปภาพของ ข้อความพูดว่า \"200 G ลาว BOLAVEN Loas Arabica Process Washed Medium Dark GLUR MediumRoast CAFE DarkRoust Bolaven เมล็ดกาแฟลาว Cocoa .Very Fruity ·Pretty Strong GLUR 150฿ CAFE\"" [ref=e1094]
+                              - generic [ref=e1096]: "+17"
+                  - button "รายการถัดไป" [ref=e1099] [cursor=pointer]:
+                    - img [ref=e1100]
+              - generic [ref=e1105]:
+                - heading "โพสต์" [level=2] [ref=e1109]:
+                  - generic [ref=e1110]: โพสต์
+                - button "ตัวกรอง" [ref=e1114] [cursor=pointer]:
+                  - generic [ref=e1115]:
+                    - img [ref=e1116]
+                    - generic [ref=e1119]: ตัวกรอง
+              - generic [ref=e1120]:
+                - article [ref=e1127]:
+                  - generic [ref=e1135]:
+                    - generic [ref=e1137]:
+                      - link "Glur Café" [ref=e1141] [cursor=pointer]:
+                        - /url: https://www.facebook.com/glurcoffee?__cft__[0]=AZYgpNjCW0hs3EYgFvgeZxOfLv1bcADpYguwPD_hWPAz2nx3zFsZKpvcZLoQPYMd3l1anN7B8P9iUOtkLK-p6oLtN-wLA94nYy-ut22elklFANEEyXeFMvJEVyUcViWJOq3OXET8aHX5fLLcdHcKAc4ORIpHElwRrHI4Ff-To0_vrkAolHEGSVdSpaOPG1WEyXM&__tn__=%3C%3C%2CP-R
+                        - generic [ref=e1142]:
+                          - img "Glur Café" [ref=e1143]
+                          - generic [ref=e1148]:
+                            - generic [ref=e1151]: ตัวบ่งชี้สถานะออนไลน์
+                            - generic [ref=e1152]: กำลังใช้งาน
+                      - generic [ref=e1154]:
+                        - heading "Glur Café" [level=3] [ref=e1158]:
+                          - link "Glur Café" [ref=e1163] [cursor=pointer]:
+                            - /url: https://www.facebook.com/glurcoffee?__cft__[0]=AZYgpNjCW0hs3EYgFvgeZxOfLv1bcADpYguwPD_hWPAz2nx3zFsZKpvcZLoQPYMd3l1anN7B8P9iUOtkLK-p6oLtN-wLA94nYy-ut22elklFANEEyXeFMvJEVyUcViWJOq3OXET8aHX5fLLcdHcKAc4ORIpHElwRrHI4Ff-To0_vrkAolHEGSVdSpaOPG1WEyXM&__tn__=-UC%2CP-R
+                            - generic [ref=e1164]: Glur Café
+                        - generic [ref=e1167]:
+                          - link "5 มิถุนายน เวลา 05:21 น." [ref=e1171] [cursor=pointer]:
+                            - /url: https://www.facebook.com/glurcoffee/posts/pfbid02VxtVa2bf7i2fp3JFZNX8v9qzCWFgHW4Df9TKmpAbjvaxY9Xxq14wpaihfdQA41k2l?__cft__[0]=AZYgpNjCW0hs3EYgFvgeZxOfLv1bcADpYguwPD_hWPAz2nx3zFsZKpvcZLoQPYMd3l1anN7B8P9iUOtkLK-p6oLtN-wLA94nYy-ut22elklFANEEyXeFMvJEVyUcViWJOq3OXET8aHX5fLLcdHcKAc4ORIpHElwRrHI4Ff-To0_vrkAolHEGSVdSpaOPG1WEyXM&__tn__=%2CO%2CP-R
+                          - generic [ref=e1173]: ·
+                          - img "แชร์กับ สาธารณะ" [ref=e1178]
+                      - button "การดำเนินการสำหรับโพสต์นี้โดย Glur Café" [ref=e1186] [cursor=pointer]:
+                        - img [ref=e1187]
+                    - generic [ref=e1190]:
+                      - generic [ref=e1197]:
+                        - generic [ref=e1198]:
+                          - generic [ref=e1199]:
+                            - img "😞" [ref=e1201]
+                            - text: ง่วงไม่ไหว? จัดแก้วนี้... ดีดเต็มตา ตื่นเต็มตื่น!
+                            - generic [ref=e1202]: 👁️‍👁️
+                          - generic [ref=e1203]: บ่ายๆ ง่วงตาจะปิด งานกองเต็มโต๊ะ?
+                        - generic [ref=e1205]:
+                          - img "😎" [ref=e1207]
+                          - text: ...
+                          - button "ดูเพิ่มเติม" [ref=e1208] [cursor=pointer]
+                      - 'link "อาจเป็นรูปภาพของ ถ้วยกาแฟ และ ข้อความพูดว่า \"พลังใหม่แห่งกาแฟน่าน: พลัง โรบัสต้าคั่วสด โรบัส ต้า คั่ว สด ศาสตร์การคั่แห่งอนาคต ศาสต ร์การ DOngT っ2た SYEZNUS TENEINRCAST MONe MAST 100% สากสวลยมาย ORIGIN PROFILE: 9.8 NAN ROAST INDEX. CREMA ADVANCE 100% DEEP ORIGIN: PROFILE: .8 NAN ROAST INDEX: CREMA สั่งซื้อเลย สั่ง\"" [ref=e1211] [cursor=pointer]':
+                        - /url: https://www.facebook.com/photo/?fbid=1426529246158686&set=a.448305507314403&__cft__[0]=AZYgpNjCW0hs3EYgFvgeZxOfLv1bcADpYguwPD_hWPAz2nx3zFsZKpvcZLoQPYMd3l1anN7B8P9iUOtkLK-p6oLtN-wLA94nYy-ut22elklFANEEyXeFMvJEVyUcViWJOq3OXET8aHX5fLLcdHcKAc4ORIpHElwRrHI4Ff-To0_vrkAolHEGSVdSpaOPG1WEyXM&__tn__=EH-R
+                        - 'img "อาจเป็นรูปภาพของ ถ้วยกาแฟ และ ข้อความพูดว่า \"พลังใหม่แห่งกาแฟน่าน: พลัง โรบัสต้าคั่วสด โรบัส ต้า คั่ว สด ศาสตร์การคั่แห่งอนาคต ศาสต ร์การ DOngT っ2た SYEZNUS TENEINRCAST MONe MAST 100% สากสวลยมาย ORIGIN PROFILE: 9.8 NAN ROAST INDEX. CREMA ADVANCE 100% DEEP ORIGIN: PROFILE: .8 NAN ROAST INDEX: CREMA สั่งซื้อเลย สั่ง\"" [ref=e1216]'
+                    - generic [ref=e1218]:
+                      - generic [ref=e1219]:
+                        - img [ref=e1221]
+                        - generic [ref=e1224]: โปรโมทโพสต์นี้เพื่อเพิ่มการเข้าถึงสำหรับ Glur Café
+                      - link "โปรโมทโพสต์" [ref=e1226] [cursor=pointer]:
+                        - /url: /ad_center/create/boostpost/?ad_account_id=592222917490816&entry_point=www_profile_plus_timeline_caa_cae_voice&page_id=1764644990529564&target_id=1426529462825331&__cft__[0]=AZYgpNjCW0hs3EYgFvgeZxOfLv1bcADpYguwPD_hWPAz2nx3zFsZKpvcZLoQPYMd3l1anN7B8P9iUOtkLK-p6oLtN-wLA94nYy-ut22elklFANEEyXeFMvJEVyUcViWJOq3OXET8aHX5fLLcdHcKAc4ORIpHElwRrHI4Ff-To0_vrkAolHEGSVdSpaOPG1WEyXM&__tn__=*W-R
+                        - generic [ref=e1229]: โปรโมทโพสต์
+                    - generic [ref=e1232]:
+                      - generic [ref=e1236]:
+                        - generic [ref=e1237]:
+                          - button "ถูกใจ" [ref=e1238] [cursor=pointer]:
+                            - generic [ref=e1244]: "1"
+                          - button "แสดงความรู้สึก" [ref=e1245] [cursor=pointer]:
+                            - img [ref=e1246]
+                        - button "แสดงความคิดเห็น" [ref=e1249] [cursor=pointer]
+                        - button "ส่งลิงก์นี้ให้เพื่อนหรือโพสต์ลงในโปรไฟล์ของคุณ" [ref=e1254] [cursor=pointer]
+                        - toolbar "ดูว่าใครบ้างที่ได้แสดงความรู้สึกต่อเรื่องราวนี้" [ref=e1259]:
+                          - 'button "ถูกใจ: 1 คน" [ref=e1264] [cursor=pointer]'
+                      - generic [ref=e1271]:
+                        - button "เสียงที่ใช้ได้ สลับโปรไฟล์" [ref=e1273] [cursor=pointer]:
+                          - generic [ref=e1274]:
+                            - img [ref=e1275]
+                            - img [ref=e1282]
+                        - generic [ref=e1285]:
+                          - generic [ref=e1288]:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - textbox "แสดงความคิดเห็นในชื่อ กึกก้อง ณัฐกมล จันทวี"
+                                  - generic: แสดงความคิดเห็นในชื่อ กึกก้อง ณัฐกมล จันทวี
+                          - generic [ref=e1289]:
+                            - img [ref=e1291]
+                            - generic [ref=e1294]: คุณกำลังแสดงความคิดเห็นด้วยชื่อ กึกก้อง ณัฐกมล จันทวี
+                - generic [ref=e1296]:
+                  - article [ref=e1297]:
+                    - status "กำลังโหลด..." [ref=e1298]
+                  - article [ref=e1311]:
+                    - status "กำลังโหลด..." [ref=e1312]

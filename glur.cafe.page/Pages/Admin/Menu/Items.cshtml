@@ -1,0 +1,176 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Menu.ItemsModel
+@{
+    ViewData["Title"] = $"สื่อ — {Model.Folder?.Name}";
+    ViewData["ActiveMenu"] = "menu";
+    ViewData["UnreadCount"] = 0;
+}
+
+@if (Model.Folder != null)
+{
+<div class="admin-card">
+    <div class="admin-card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi @Model.Folder.IconClassName me-2"></i>@Model.Folder.Name — สื่อทั้งหมด (@Model.Folder.Items.Count)</span>
+        <a href="/Admin/Menu" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>กลับ
+        </a>
+    </div>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+            <i class="bi bi-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- อัปโหลด -->
+    <form method="post" asp-page-handler="Upload" enctype="multipart/form-data" class="row g-2 align-items-end px-3 py-3 border-bottom">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Folder.Id" />
+        <div class="col-md-8">
+            <label class="form-label small mb-1">อัปโหลดรูป / GIF / วิดีโอ (เลือกได้หลายไฟล์)</label>
+            <input type="file" name="MediaFiles" class="form-control form-control-sm" multiple
+                   accept="image/*,video/mp4,video/webm" />
+            <div class="form-text">รูปจะถูกย่อให้อัตโนมัติ · GIF และวิดีโอ (mp4/webm) จะใช้ไฟล์ต้นฉบับ</div>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-sm btn-teal"><i class="bi bi-cloud-upload me-1"></i>อัปโหลด</button>
+        </div>
+    </form>
+
+    <div class="row g-3 p-3">
+        @foreach (var item in Model.Folder.Items)
+        {
+            var hasMedia = !string.IsNullOrEmpty(item.FilePath);
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    @if (hasMedia && item.MediaType == "video")
+                    {
+                        <video src="@item.FilePath" muted loop playsinline class="card-img-top" style="height:140px;object-fit:cover;" onmouseover="this.play()" onmouseout="this.pause()"></video>
+                    }
+                    else if (hasMedia)
+                    {
+                        <img src="@item.FilePath" class="card-img-top" style="height:140px;object-fit:cover;" alt="" />
+                    }
+                    else
+                    {
+                        <div class="d-flex align-items-center justify-content-center bg-light text-muted card-img-top" style="height:140px;">
+                            <div class="text-center">
+                                <i class="bi @Model.Folder.IconClassName fs-1 d-block"></i>
+                                <small>ยังไม่มีรูป</small>
+                            </div>
+                        </div>
+                    }
+                    <div class="card-body p-2">
+                        <form method="post" asp-page-handler="EditItem" class="mb-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Folder.Id" />
+                            <input type="hidden" name="itemId" value="@item.Id" />
+                            <input type="text" name="Title" class="form-control form-control-sm mb-1"
+                                   value="@item.Title" placeholder="ชื่อเมนู (ไม่บังคับ)" maxlength="100" />
+                            <div class="input-group input-group-sm">
+                                <input type="number" name="Price" class="form-control" step="0.01" min="0"
+                                       value="@(item.Price?.ToString())" placeholder="ราคา" />
+                                <button type="submit" class="btn btn-outline-secondary"><i class="bi bi-check"></i></button>
+                            </div>
+                        </form>
+                        <form method="post" asp-page-handler="UploadItemMedia" enctype="multipart/form-data" class="mb-2">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Folder.Id" />
+                            <input type="hidden" name="itemId" value="@item.Id" />
+                            <div class="input-group input-group-sm">
+                                <input type="file" name="MediaFile" class="form-control" accept="image/*,video/mp4,video/webm" />
+                                <button type="submit" class="btn btn-teal" title="@(hasMedia ? "เปลี่ยนรูป" : "เพิ่มรูป")">
+                                    <i class="bi bi-image"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="d-flex gap-1 align-items-center flex-wrap">
+                            <form method="post" asp-page-handler="Move">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@Model.Folder.Id" />
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <input type="hidden" name="dir" value="-1" />
+                                <button type="submit" class="btn btn-sm btn-outline-secondary" title="เลื่อนขึ้น"><i class="bi bi-arrow-up"></i></button>
+                            </form>
+                            <form method="post" asp-page-handler="Move">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@Model.Folder.Id" />
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <input type="hidden" name="dir" value="1" />
+                                <button type="submit" class="btn btn-sm btn-outline-secondary" title="เลื่อนลง"><i class="bi bi-arrow-down"></i></button>
+                            </form>
+                            <form method="post" asp-page-handler="ToggleReco">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@Model.Folder.Id" />
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <button type="submit" class="btn btn-sm @(item.IsRecommended ? "btn-warning" : "btn-outline-warning")" title="เมนูแนะนำ" style="font-size:0.7rem">
+                                    <i class="bi bi-star-fill"></i>
+                                </button>
+                            </form>
+                            <form method="post" asp-page-handler="ToggleItem">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@Model.Folder.Id" />
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <button type="submit" class="btn btn-sm @(item.IsActive ? "btn-success" : "btn-secondary")" style="font-size:0.7rem">
+                                    @(item.IsActive ? "เปิด" : "ปิด")
+                                </button>
+                            </form>
+                            <form method="post" asp-page-handler="DeleteItem" class="ms-auto" onsubmit="return confirm('ลบสื่อนี้?')">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@Model.Folder.Id" />
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (Model.Folder.Items.Count == 0)
+    {
+        <div class="text-center text-muted py-5">
+            <i class="bi bi-images fs-1 d-block mb-2"></i>
+            ยังไม่มีสื่อในหมวดนี้ — อัปโหลดด้านบนได้เลย
+        </div>
+    }
+</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>@TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["ToastMessage"] != null)
+{
+    <div id="updateToast" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+        <div class="toast show align-items-center text-white bg-success border-0" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">@TempData["ToastMessage"]</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+<script>
+    // Auto-hide toast
+    setTimeout(() => {
+        const toast = document.getElementById('updateToast');
+        if (toast) {
+            const bsToast = new bootstrap.Toast(toast.querySelector('.toast'));
+            bsToast.hide();
+            setTimeout(() => toast.remove(), 500);
+        }
+    }, 3000);
+</script>
+}

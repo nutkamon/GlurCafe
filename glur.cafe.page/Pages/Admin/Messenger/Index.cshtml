@@ -1,0 +1,629 @@
+@page
+@model glur.cafe.page.Pages.Admin.Messenger.IndexModel
+@{
+    ViewData["Title"] = "Messenger Inbox";
+    ViewData["ActiveMenu"] = "messenger-inbox";
+    Layout = "/Pages/Admin/_AdminLayout.cshtml";
+}
+@Html.AntiForgeryToken()
+
+<style>
+.messenger-layout {
+    display: flex;
+    height: calc(100vh - 120px);
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.conv-list {
+    width: 320px;
+    min-width: 280px;
+    border-right: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+}
+.conv-list-header {
+    padding: 16px;
+    border-bottom: 1px solid #e9ecef;
+    background: #f8f9fa;
+}
+.conv-list-header h6 { margin: 0; font-weight: 600; }
+.conv-search {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.conv-search input {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    outline: none;
+}
+.conv-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background 0.15s;
+}
+.conv-item:hover, .conv-item.active { background: #f0fffe; }
+.conv-item.active { border-left: 3px solid var(--teal, #00A59A); }
+.conv-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00A59A, #007A72);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px;
+    flex-shrink: 0;
+}
+.conv-info { flex: 1; margin-left: 10px; min-width: 0; }
+.conv-name { font-weight: 600; font-size: 14px; color: #212529; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.conv-preview { font-size: 12px; color: #6c757d; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.conv-meta { text-align: right; flex-shrink: 0; }
+.conv-time { font-size: 11px; color: #adb5bd; }
+.conv-badge { background: #00A59A; color: #fff; border-radius: 10px; font-size: 11px; padding: 1px 6px; margin-top: 3px; display: inline-block; }
+
+/* Chat area */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.chat-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+}
+.chat-header-info h6 { margin: 0; font-weight: 600; font-size: 15px; }
+.chat-header-info small { color: #6c757d; }
+.chat-header-actions { margin-left: auto; display: flex; gap: 8px; }
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.msg-row { display: flex; gap: 8px; }
+.msg-row.mine { flex-direction: row-reverse; }
+.msg-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00A59A, #007A72);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+}
+.msg-avatar.admin-av { background: linear-gradient(135deg, #C8943A, #a07020); }
+.msg-bubble {
+    max-width: 65%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.msg-row:not(.mine) .msg-bubble {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-bottom-left-radius: 4px;
+}
+.msg-row.mine .msg-bubble {
+    background: #00A59A;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+.msg-time { font-size: 11px; color: #adb5bd; margin-top: 4px; text-align: right; }
+.msg-row:not(.mine) .msg-time { text-align: left; }
+
+/* Input area */
+.chat-input-area {
+    padding: 14px 20px;
+    border-top: 1px solid #e9ecef;
+    background: #fff;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+.chat-input-area textarea {
+    flex: 1;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    max-height: 120px;
+    line-height: 1.4;
+}
+.chat-input-area textarea:focus { border-color: #00A59A; }
+.btn-send {
+    background: #00A59A;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+.btn-send:hover { background: #007A72; }
+
+/* CRM panel */
+.crm-panel {
+    width: 280px;
+    min-width: 260px;
+    border-left: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+.crm-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e9ecef;
+    background: #f8f9fa;
+    font-weight: 600;
+    font-size: 14px;
+}
+.crm-body { padding: 16px; overflow-y: auto; flex: 1; }
+.crm-section { margin-bottom: 16px; }
+.crm-section h6 { font-size: 12px; text-transform: uppercase; color: #6c757d; letter-spacing: 0.5px; margin-bottom: 8px; }
+.crm-info-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+.crm-info-row .label { color: #6c757d; }
+.crm-info-row .value { font-weight: 500; color: #212529; }
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.status-pending { background: #fff3cd; color: #856404; }
+.status-shipped { background: #d1e7dd; color: #0f5132; }
+.status-paid { background: #cfe2ff; color: #084298; }
+.mock-notice {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #856404;
+    margin-bottom: 12px;
+}
+</style>
+
+<div class="messenger-layout">
+    <!-- Conversation List -->
+    <div class="conv-list">
+        <div class="conv-list-header">
+            <h6><i class="bi bi-messenger me-2" style="color:#00A59A"></i>Messenger Inbox</h6>
+        </div>
+        <div class="conv-search">
+            <input type="text" id="convSearch" placeholder="ค้นหาบทสนทนา..." oninput="filterConvs(this.value)" />
+        </div>
+        @if (!Model.WebhookConfigured)
+        {
+            <div style="padding:12px 16px;background:#fff3cd;border-bottom:1px solid #ffc107;font-size:12px;color:#856404;">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                <strong>ยังไม่ได้ตั้งค่า Page Access Token</strong><br/>
+                ไปที่ <a href="/Admin/Facebook/Messenger" class="fw-semibold">Facebook Settings</a> เพื่อตั้งค่า
+            </div>
+        }
+        <div style="overflow-y:auto;flex:1;" id="convListContainer">
+            @if (!Model.Conversations.Any())
+            {
+                <div style="padding:32px 16px;text-align:center;color:#adb5bd;font-size:13px;">
+                    <i class="bi bi-chat-square-dots" style="font-size:2rem;display:block;margin-bottom:8px;"></i>
+                    ยังไม่มีข้อความ<br/>
+                    <small>รอรับข้อความจาก Messenger</small>
+                </div>
+            }
+            @foreach (var conv in Model.Conversations)
+            {
+                var initial = conv.DisplayName.Length > 0 ? conv.DisplayName[0].ToString() : "?";
+                <div class="conv-item @(conv == Model.Conversations.First() ? "active" : "")"
+                     data-psid="@conv.PsId" data-name="@conv.DisplayName"
+                     onclick="selectConv(this, '@conv.PsId', '@conv.DisplayName')">
+                    <div class="conv-avatar">@initial</div>
+                    <div class="conv-info">
+                        <div class="conv-name">@conv.DisplayName</div>
+                        <div class="conv-preview">@(conv.LastMessageText ?? "ยังไม่มีข้อความ")</div>
+                    </div>
+                    <div class="conv-meta">
+                        <div class="conv-time">@conv.LastMessageAt.ToString("HH:mm")</div>
+                        @if (conv.UnreadCount > 0)
+                        {
+                            <div class="conv-badge" id="badge-@conv.PsId">@conv.UnreadCount</div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area">
+        <div class="chat-header">
+            <div class="conv-avatar" id="chatAvatar">?</div>
+            <div class="chat-header-info">
+                <h6 id="chatName">@(Model.Conversations.FirstOrDefault()?.DisplayName ?? "เลือกบทสนทนา")</h6>
+                <small id="chatSub">Facebook Messenger</small>
+            </div>
+            <div class="chat-header-actions">
+                <button class="btn btn-sm btn-outline-success" onclick="createCRM()">
+                    <i class="bi bi-person-plus"></i> สร้าง CRM
+                </button>
+                <button class="btn btn-sm btn-outline-primary" onclick="createOrder()">
+                    <i class="bi bi-receipt"></i> ใบเสนอราคา
+                </button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            @if (!Model.Conversations.Any())
+            {
+                <div class="mock-notice">
+                    <i class="bi bi-info-circle me-1"></i>
+                    รอรับข้อความจาก Messenger — webhook พร้อมแล้วที่ <code>/api/facebook/webhook</code>
+                </div>
+            }
+        </div>
+        <div class="chat-input-area">
+            <div class="d-flex flex-column gap-1 me-1">
+                <button class="btn btn-sm btn-outline-secondary" title="Quick Reply" onclick="quickReply()">
+                    <i class="bi bi-lightning"></i>
+                </button>
+            </div>
+            <textarea id="msgInput" rows="1" placeholder="พิมพ์ข้อความ... (Shift+Enter ขึ้นบรรทัดใหม่)" onkeydown="handleKey(event)"></textarea>
+            <button class="btn-send" id="btnSend" onclick="sendMsg()">
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- CRM Panel -->
+    <div class="crm-panel">
+        <div class="crm-header">
+            <i class="bi bi-person-lines-fill me-2" style="color:#00A59A"></i>ข้อมูลลูกค้า
+        </div>
+        <div class="crm-body">
+            <div class="crm-section">
+                <h6>ข้อมูลติดต่อ</h6>
+                <div class="crm-info-row"><span class="label">ชื่อ</span><span class="value">สมชาย กาแฟรัก</span></div>
+                <div class="crm-info-row"><span class="label">โทร</span><span class="value">081-111-2233</span></div>
+                <div class="crm-info-row"><span class="label">ช่องทาง</span><span class="value"><i class="bi bi-facebook" style="color:#1877f2"></i> Messenger</span></div>
+                <a href="/Admin/Customers" class="btn btn-sm btn-outline-secondary w-100 mt-2">
+                    <i class="bi bi-person me-1"></i>ดูโปรไฟล์ CRM
+                </a>
+            </div>
+            <div class="crm-section">
+                <h6>ออเดอร์ล่าสุด</h6>
+                <div style="background:#f8f9fa;border-radius:8px;padding:10px;font-size:13px;" class="mb-2">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>เมล็ดกาแฟ 1kg</span>
+                        <span class="fw-semibold" id="orderAmount">450฿</span>
+                    </div>
+                    <!-- สถานะชำระเงิน -->
+                    <div class="mb-2">
+                        <div class="text-muted mb-1" style="font-size:11px;">สถานะชำระเงิน</div>
+                        <div class="btn-group w-100" role="group">
+                            <button id="btn-unpaid" type="button"
+                                class="btn btn-sm btn-warning"
+                                onclick="setPayStatus('unpaid')">
+                                <i class="bi bi-clock me-1"></i>ยังไม่ชำระ
+                            </button>
+                            <button id="btn-paid" type="button"
+                                class="btn btn-sm btn-outline-success"
+                                onclick="setPayStatus('paid')">
+                                <i class="bi bi-check-circle me-1"></i>ชำระแล้ว
+                            </button>
+                        </div>
+                    </div>
+                    <!-- สถานะจัดส่ง -->
+                    <div>
+                        <div class="text-muted mb-1" style="font-size:11px;">สถานะจัดส่ง</div>
+                        <div class="btn-group w-100" role="group">
+                            <button id="btn-unshipped" type="button"
+                                class="btn btn-sm btn-secondary"
+                                onclick="setShipStatus('unshipped')">
+                                <i class="bi bi-box-seam me-1"></i>ยังไม่ส่ง
+                            </button>
+                            <button id="btn-shipped" type="button"
+                                class="btn btn-sm btn-outline-primary"
+                                onclick="setShipStatus('shipped')">
+                                <i class="bi bi-truck me-1"></i>ส่งแล้ว
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex gap-1">
+                    <a href="/Admin/Quotations/Create" class="btn btn-sm btn-outline-secondary flex-fill">
+                        <i class="bi bi-plus me-1"></i>สร้างใบเสนอ
+                    </a>
+                    <button type="button" class="btn btn-sm btn-success flex-fill" onclick="openIncomeModal()">
+                        <i class="bi bi-cash-coin me-1"></i>บันทึกรายรับ
+                    </button>
+                </div>
+            </div>
+            <div class="crm-section">
+                <h6>ส่ง Flash Express</h6>
+                <input type="text" id="flashTracking" class="form-control form-control-sm mb-2" placeholder="เลข Tracking เช่น TH123456789" />
+                <select class="form-select form-select-sm mb-2">
+                    <option>ชำระเงินปลายทาง (COD)</option>
+                    <option>โอนเงิน</option>
+                    <option>บัตรเครดิต</option>
+                </select>
+                <button class="btn btn-sm btn-primary w-100" onclick="sendTracking()">
+                    <i class="bi bi-send me-1"></i>แจ้งลูกค้าทาง Messenger
+                </button>
+            </div>
+            <div class="crm-section">
+                <h6>Quick Reply</h6>
+                <div class="d-flex flex-column gap-1">
+                    <button class="btn btn-sm btn-outline-secondary text-start" onclick="setQuickReply('ขอบคุณที่สนใจสินค้าของเรานะคะ ☕')">
+                        ขอบคุณที่สนใจ...
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary text-start" onclick="setQuickReply('สั่งซื้อได้เลยนะคะ แจ้งชื่อ-ที่อยู่จัดส่งได้เลยค่ะ')">
+                        แจ้งที่อยู่ได้เลย...
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary text-start" onclick="setQuickReply('จัดส่งทาง Flash Express ใช้เวลา 1-3 วันทำการค่ะ')">
+                        Flash Express 1-3 วัน...
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: บันทึกรายรับ -->
+<div class="modal fade" id="incomeModal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header py-2" style="background:#00A59A;color:#fff;">
+                <h6 class="modal-title mb-0"><i class="bi bi-cash-coin me-2"></i>บันทึกรายรับ</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" asp-page-handler="SaveTransaction">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label class="form-label small fw-semibold">จำนวนเงิน (บาท) <span class="text-danger">*</span></label>
+                        <input type="number" id="txAmount" name="TxAmount" class="form-control form-control-sm"
+                               placeholder="450" min="1" step="0.01" required />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small fw-semibold">รายละเอียด <span class="text-danger">*</span></label>
+                        <input type="text" name="TxDescription" class="form-control form-control-sm"
+                               placeholder="เช่น ขายเมล็ดกาแฟ 1kg - สมชาย" required />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small fw-semibold">หมวดหมู่</label>
+                        <select name="TxCategory" class="form-select form-select-sm">
+                            <option value="ขายสินค้า">ขายสินค้า</option>
+                            <option value="บริการ">บริการ</option>
+                            <option value="อื่นๆ">อื่นๆ</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small fw-semibold">วันที่</label>
+                        <input type="date" id="txDate" name="TxDate" class="form-control form-control-sm" required />
+                    </div>
+                    <div class="mb-1">
+                        <label class="form-label small fw-semibold">หมายเหตุ</label>
+                        <input type="text" name="TxNote" class="form-control form-control-sm"
+                               placeholder="ไม่บังคับ" />
+                    </div>
+                </div>
+                <div class="modal-footer py-2">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="bi bi-check2 me-1"></i>บันทึก
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────────────
+let currentPsId   = '@(Model.Conversations.FirstOrDefault()?.PsId ?? "")';
+let currentName   = '@(Model.Conversations.FirstOrDefault()?.DisplayName ?? "")';
+let lastMsgId     = 0;
+let pollTimer     = null;
+const csrfToken   = document.querySelector('[name=__RequestVerificationToken]')?.value ?? '';
+
+// ── Init ──────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    if (currentPsId) {
+        loadMessages(currentPsId);
+        startPolling();
+    }
+    // auto-size textarea
+    const ta = document.getElementById('msgInput');
+    ta.addEventListener('input', () => {
+        ta.style.height = 'auto';
+        ta.style.height = Math.min(ta.scrollHeight, 120) + 'px';
+    });
+});
+
+// ── Select conversation ───────────────────────────────────────────────
+function selectConv(el, psid, name) {
+    document.querySelectorAll('.conv-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    currentPsId = psid;
+    currentName = name;
+    document.getElementById('chatName').textContent = name;
+    document.getElementById('chatAvatar').textContent = name[0] ?? '?';
+    document.getElementById('chatMessages').innerHTML = '<div style="text-align:center;padding:20px;color:#adb5bd;font-size:13px;">กำลังโหลด...</div>';
+    lastMsgId = 0;
+    loadMessages(psid);
+    // clear badge
+    const badge = document.getElementById('badge-' + psid);
+    if (badge) badge.remove();
+}
+
+// ── Load messages ─────────────────────────────────────────────────────
+async function loadMessages(psid) {
+    if (!psid) return;
+    try {
+        const resp = await fetch(`?handler=Messages&psid=${encodeURIComponent(psid)}`);
+        if (!resp.ok) return;
+        const msgs = await resp.json();
+        const box  = document.getElementById('chatMessages');
+        box.innerHTML = '';
+        if (!msgs.length) {
+            box.innerHTML = '<div style="text-align:center;padding:20px;color:#adb5bd;font-size:13px;">ยังไม่มีข้อความ</div>';
+            return;
+        }
+        msgs.forEach(m => appendMessage(m));
+        if (msgs.length) lastMsgId = msgs[msgs.length - 1].id;
+        box.scrollTop = box.scrollHeight;
+    } catch(e) { console.error('loadMessages', e); }
+}
+
+function appendMessage(m) {
+    const box  = document.getElementById('chatMessages');
+    const cls  = m.isFromPage ? 'mine' : '';
+    const init = m.isFromPage ? 'G' : (currentName[0] ?? '?');
+    const avCls = m.isFromPage ? 'admin-av' : '';
+    const text = escHtml(m.text ?? '(ไฟล์แนบ)');
+    box.insertAdjacentHTML('beforeend', `
+        <div class="msg-row ${cls}">
+            <div class="msg-avatar ${avCls}">${init}</div>
+            <div>
+                <div class="msg-bubble">${text}</div>
+                <div class="msg-time">${m.sentAt}</div>
+            </div>
+        </div>`);
+}
+
+function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Send message ──────────────────────────────────────────────────────
+async function sendMsg() {
+    if (!currentPsId) { Swal.fire('แจ้งเตือน','กรุณาเลือกบทสนทนาก่อน','warning'); return; }
+    const input = document.getElementById('msgInput');
+    const text  = input.value.trim();
+    if (!text) return;
+
+    const btn = document.getElementById('btnSend');
+    btn.disabled = true;
+    input.value = '';
+    input.style.height = 'auto';
+
+    // Optimistic render
+    const now = new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+    appendMessage({ isFromPage: true, text, sentAt: now });
+    document.getElementById('chatMessages').scrollTop = 99999;
+
+    try {
+        const resp = await fetch('?handler=Send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'RequestVerificationToken': csrfToken
+            },
+            body: new URLSearchParams({ psid: currentPsId, text })
+        });
+        if (!resp.ok) {
+            const err = await resp.json();
+            Swal.fire('ส่งไม่สำเร็จ', err.error ?? 'เกิดข้อผิดพลาด', 'error');
+        }
+    } catch(e) {
+        Swal.fire('ส่งไม่สำเร็จ', e.message, 'error');
+    } finally {
+        btn.disabled = false;
+        input.focus();
+    }
+}
+
+function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+    const ta = document.getElementById('msgInput');
+    ta.style.height = 'auto';
+    ta.style.height = Math.min(ta.scrollHeight, 120) + 'px';
+}
+
+// ── Polling every 8s for new messages / conversation list ─────────────
+function startPolling() {
+    pollTimer = setInterval(async () => {
+        if (!currentPsId) return;
+        try {
+            const resp = await fetch(`?handler=Messages&psid=${encodeURIComponent(currentPsId)}`);
+            if (!resp.ok) return;
+            const msgs = await resp.json();
+            if (!msgs.length) return;
+            const latest = msgs[msgs.length - 1];
+            if (latest.id > lastMsgId) {
+                // append only new messages
+                const newMsgs = msgs.filter(m => m.id > lastMsgId);
+                newMsgs.forEach(m => appendMessage(m));
+                lastMsgId = latest.id;
+                document.getElementById('chatMessages').scrollTop = 99999;
+            }
+        } catch(e) {}
+    }, 8000);
+}
+
+// ── Filter conversations ──────────────────────────────────────────────
+function filterConvs(q) {
+    document.querySelectorAll('.conv-item').forEach(el => {
+        const name = el.dataset.name?.toLowerCase() ?? '';
+        el.style.display = name.includes(q.toLowerCase()) ? '' : 'none';
+    });
+}
+
+// ── Quick reply ───────────────────────────────────────────────────────
+function setQuickReply(text) {
+    document.getElementById('msgInput').value = text;
+    document.getElementById('msgInput').focus();
+}
+function quickReply() { document.getElementById('msgInput').focus(); }
+
+// ── Tracking ──────────────────────────────────────────────────────────
+function sendTracking() {
+    const tracking = document.getElementById('flashTracking').value.trim();
+    if (!tracking) { Swal.fire('แจ้งเตือน','กรุณากรอกเลข Tracking ก่อน','warning'); return; }
+    setQuickReply(`📦 สินค้าของคุณถูกจัดส่งแล้วนะคะ เลข Tracking: ${tracking} ติดตามพัสดุได้ที่ Flash Express ค่ะ ✨`);
+    Swal.fire({icon:'success',title:'พร้อมส่ง!',text:'แก้ไขข้อความแล้วกด Send ได้เลยค่ะ',timer:1500,showConfirmButton:false});
+}
+
+// ── CRM & Order ───────────────────────────────────────────────────────
+function createCRM() { window.location.href = '/Admin/Customers/Create?source=Messenger&name=' + encodeURIComponent(currentName); }
+function createOrder() { window.location.href = '/Admin/Quotations/Create'; }
+
+// ── Payment / Shipping toggle ─────────────────────────────────────────
+let payStatus = 'unpaid';
+function setPayStatus(status) {
+    payStatus = status;
+    document.getElementById('btn-paid').className   = status === 'paid'   ? 'btn btn-sm btn-success' : 'btn btn-sm btn-outline-success';
+    document.getElementById('btn-unpaid').className = status === 'unpaid' ? 'btn btn-sm btn-warning'  : 'btn btn-sm btn-outline-warning';
+}
+let shipStatus = 'unshipped';
+function setShipStatus(status) {
+    shipStatus = status;
+    document.getElementById('btn-shipped').className   = status === 'shipped'   ? 'btn btn-sm btn-primary'   : 'btn btn-sm btn-outline-primary';
+    document.getElementById('btn-unshipped').className = status === 'unshipped' ? 'btn btn-sm btn-secondary' : 'btn btn-sm btn-outline-secondary';
+}
+
+// ── Income modal ──────────────────────────────────────────────────────
+function openIncomeModal() {
+    const amountText = document.getElementById('orderAmount').textContent.replace('฿','').replace(',','');
+    document.getElementById('txAmount').value = amountText;
+    document.getElementById('txDate').value   = new Date().toISOString().split('T')[0];
+    new bootstrap.Modal(document.getElementById('incomeModal')).show();
+}
+</script>

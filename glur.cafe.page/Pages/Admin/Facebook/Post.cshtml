@@ -1,0 +1,350 @@
+@page
+@model glur.cafe.page.Pages.Admin.Facebook.PostModel
+@{
+    ViewData["Title"] = "สร้างโพส Facebook";
+    ViewData["ActiveMenu"] = "fb-post";
+    Layout = "/Pages/Admin/_AdminLayout.cshtml";
+}
+
+<style>
+.post-layout { display: flex; gap: 20px; }
+.post-composer { flex: 1; }
+.post-preview { width: 360px; flex-shrink: 0; }
+
+.composer-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+.composer-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex; align-items: center; gap: 12px;
+}
+.composer-body { padding: 20px; }
+.composer-footer {
+    padding: 14px 20px;
+    border-top: 1px solid #e9ecef;
+    background: #f8f9fa;
+    display: flex; align-items: center; justify-content: space-between;
+}
+
+.caption-area {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 120px;
+    outline: none;
+    line-height: 1.6;
+}
+.caption-area:focus { border-color: #00A59A; }
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+}
+.media-item {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    background: #f8f9fa;
+}
+.media-item:hover { border-color: #00A59A; }
+.media-item.selected { border-color: #00A59A; }
+.media-item.selected::after {
+    content: '✓';
+    position: absolute; top: 6px; right: 6px;
+    background: #00A59A;
+    color: #fff;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+}
+.media-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.media-item-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: #adb5bd; font-size: 12px; gap: 4px;
+}
+
+/* Preview */
+.fb-preview-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+.fb-preview-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 600; font-size: 14px;
+    display: flex; align-items: center; gap: 6px;
+}
+.fb-post-sim {
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 100%;
+}
+.fb-post-top { padding: 12px 16px; display: flex; gap: 10px; align-items: flex-start; }
+.fb-page-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, #00A59A, #007A72);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px; flex-shrink: 0;
+}
+.fb-page-name { font-weight: 700; font-size: 14px; }
+.fb-post-time { font-size: 12px; color: #65676b; }
+.fb-post-caption { padding: 0 16px 12px; font-size: 14px; line-height: 1.6; color: #050505; white-space: pre-wrap; }
+.fb-post-image { width: 100%; background: #f0f2f5; }
+.fb-post-image img { width: 100%; display: block; }
+.fb-post-actions {
+    padding: 8px 16px;
+    border-top: 1px solid #e4e6eb;
+    display: flex; gap: 4px;
+}
+.fb-action-btn {
+    flex: 1; padding: 6px; border-radius: 6px;
+    background: none; border: none;
+    color: #65676b; font-size: 13px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;
+}
+.fb-action-btn:hover { background: #f0f2f5; }
+
+.mock-notice {
+    background: #fff3cd; border: 1px solid #ffc107;
+    border-radius: 8px; padding: 10px 14px;
+    font-size: 12px; color: #856404; margin-bottom: 16px;
+}
+
+.schedule-section {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 16px;
+}
+
+.page-select-card {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.page-select-card:hover, .page-select-card.selected {
+    border-color: #00A59A;
+    background: #f0fffe;
+}
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex align-items-center gap-2">
+        <a href="/Admin/Facebook" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+        <h5 class="mb-0"><i class="bi bi-facebook me-2" style="color:#1877f2"></i>สร้างโพส Facebook</h5>
+    </div>
+</div>
+
+<div class="mock-notice">
+    <i class="bi bi-info-circle me-1"></i>
+    <strong>Mock Mode</strong> — ดูหน้าจอได้ แต่โพสจริงได้หลัง Meta App Review อนุมัติ permission <code>pages_manage_posts</code>
+</div>
+
+<div class="post-layout">
+    <!-- Composer -->
+    <div class="post-composer">
+        <div class="composer-card">
+            <div class="composer-header">
+                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#00A59A,#007A72);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">G</div>
+                <div>
+                    <div style="font-weight:600;font-size:14px">Glur Café</div>
+                    <div style="font-size:12px;color:#6c757d">Facebook Page</div>
+                </div>
+                <div class="ms-auto">
+                    <select class="form-select form-select-sm" style="width:auto">
+                        <option>🌍 สาธารณะ</option>
+                        <option>👥 เพื่อน</option>
+                    </select>
+                </div>
+            </div>
+            <div class="composer-body">
+                <textarea class="caption-area" id="caption" placeholder="เขียนบางอย่าง..." oninput="updatePreview()">☕ กาแฟสดคั่วใหม่ทุกวัน จาก GLUR CAFE โรงคั่วกาแฟของเรา
+
+✅ Arabica Thailand Grade A
+✅ คั่วกลาง - คั่วเข้ม
+✅ จัดส่ง Flash Express ทั่วประเทศ
+
+🛒 สั่งออนไลน์ได้ที่ glurcoffee.com</textarea>
+
+                <div class="mt-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <label class="form-label mb-0 fw-500">เลือกรูปจากแกลเลอรี่</label>
+                        <small class="text-muted">เลือกได้หลายรูป</small>
+                    </div>
+                    <div class="media-grid" id="mediaGrid">
+                        <div class="media-item selected" onclick="toggleMedia(this, 0)" data-src="/img/mock1.jpg">
+                            <div class="media-item-placeholder">
+                                <i class="bi bi-cup-hot" style="font-size:24px;color:#00A59A"></i>
+                                <span>กาแฟ 1</span>
+                            </div>
+                        </div>
+                        <div class="media-item" onclick="toggleMedia(this, 1)">
+                            <div class="media-item-placeholder">
+                                <i class="bi bi-bag" style="font-size:24px;color:#C8943A"></i>
+                                <span>สินค้า 1</span>
+                            </div>
+                        </div>
+                        <div class="media-item" onclick="toggleMedia(this, 2)">
+                            <div class="media-item-placeholder">
+                                <i class="bi bi-images" style="font-size:24px;color:#6c757d"></i>
+                                <span>แกลเลอรี่</span>
+                            </div>
+                        </div>
+                        <div class="media-item" onclick="toggleMedia(this, 3)">
+                            <div class="media-item-placeholder">
+                                <i class="bi bi-cup" style="font-size:24px;color:#00A59A"></i>
+                                <span>กาแฟ 2</span>
+                            </div>
+                        </div>
+                        <div class="media-item" onclick="toggleMedia(this, 4)">
+                            <div class="media-item-placeholder">
+                                <i class="bi bi-star" style="font-size:24px;color:#C8943A"></i>
+                                <span>รีวิว</span>
+                            </div>
+                        </div>
+                        <div class="media-item" style="border:2px dashed #dee2e6;cursor:pointer" onclick="Swal.fire('Mock Mode','เชื่อมจริงจะดึงรูปจาก Gallery ในระบบโดยตรง','info')">
+                            <div class="media-item-placeholder">
+                                <i class="bi bi-plus-lg" style="font-size:24px"></i>
+                                <span>เพิ่มรูป</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-section">
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox" id="scheduleToggle" onchange="toggleSchedule()">
+                        <label class="form-check-label fw-500" for="scheduleToggle">ตั้งเวลาโพส</label>
+                    </div>
+                    <div id="scheduleFields" style="display:none">
+                        <input type="datetime-local" class="form-control form-control-sm" />
+                    </div>
+                </div>
+            </div>
+            <div class="composer-footer">
+                <div class="d-flex gap-2">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="addEmoji('☕')">☕</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="addEmoji('✅')">✅</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="addEmoji('🛒')">🛒</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="addEmoji('📦')">📦</button>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary btn-sm" onclick="Swal.fire('Mock Mode','บันทึก Draft ได้เมื่อเชื่อม API จริง','info')">
+                        <i class="bi bi-save me-1"></i>Draft
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="publishPost()">
+                        <i class="bi bi-facebook me-1"></i>โพสเลย
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="post-preview">
+        <div class="fb-preview-card">
+            <div class="fb-preview-header">
+                <i class="bi bi-eye" style="color:#00A59A"></i>
+                ตัวอย่างโพส
+            </div>
+            <div class="fb-post-sim">
+                <div class="fb-post-top">
+                    <div class="fb-page-avatar">G</div>
+                    <div>
+                        <div class="fb-page-name">Glur Café</div>
+                        <div class="fb-post-time">เดี๋ยวนี้ · <i class="bi bi-globe2"></i></div>
+                    </div>
+                    <div class="ms-auto text-muted" style="font-size:20px">···</div>
+                </div>
+                <div class="fb-post-caption" id="previewCaption">☕ กาแฟสดคั่วใหม่ทุกวัน จาก GLUR CAFE โรงคั่วกาแฟของเรา
+
+✅ Arabica Thailand Grade A
+✅ คั่วกลาง - คั่วเข้ม
+✅ จัดส่ง Flash Express ทั่วประเทศ
+
+🛒 สั่งออนไลน์ได้ที่ glurcoffee.com</div>
+                <div class="fb-post-image" id="previewImage">
+                    <div style="width:100%;height:200px;background:linear-gradient(135deg,#f0fffe,#e0f7f5);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#00A59A">
+                        <i class="bi bi-cup-hot" style="font-size:48px"></i>
+                        <span style="font-size:14px;font-weight:600">รูปที่เลือก</span>
+                    </div>
+                </div>
+                <div class="fb-post-actions">
+                    <button class="fb-action-btn"><i class="bi bi-hand-thumbs-up"></i> ถูกใจ</button>
+                    <button class="fb-action-btn"><i class="bi bi-chat"></i> แสดงความคิดเห็น</button>
+                    <button class="fb-action-btn"><i class="bi bi-share"></i> แชร์</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3 p-3 bg-white rounded-3 shadow-sm">
+            <h6 class="fw-600 mb-2" style="font-size:13px;color:#6c757d;text-transform:uppercase">สถิติโพสล่าสุด</h6>
+            <div class="d-flex justify-content-between mb-2">
+                <span style="font-size:13px">❤️ Reactions</span><span class="fw-600">247</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span style="font-size:13px">💬 Comments</span><span class="fw-600">38</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span style="font-size:13px">↗️ Shares</span><span class="fw-600">15</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span style="font-size:13px">👁️ Reach</span><span class="fw-600">1,842</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function updatePreview() {
+    document.getElementById('previewCaption').textContent = document.getElementById('caption').value;
+}
+function toggleMedia(el, idx) {
+    el.classList.toggle('selected');
+}
+function addEmoji(e) {
+    const ta = document.getElementById('caption');
+    ta.value += e;
+    updatePreview();
+    ta.focus();
+}
+function toggleSchedule() {
+    const show = document.getElementById('scheduleToggle').checked;
+    document.getElementById('scheduleFields').style.display = show ? 'block' : 'none';
+}
+function publishPost() {
+    Swal.fire({
+        title: 'Mock Mode',
+        html: 'โพสจริงได้หลัง Meta App Review อนุมัติ <code>pages_manage_posts</code><br><br>ตอนนี้ระบบรองรับแล้ว รอแค่ token จาก Meta ครับ',
+        icon: 'info',
+        confirmButtonColor: '#00A59A',
+        confirmButtonText: 'เข้าใจแล้ว'
+    });
+}
+</script>

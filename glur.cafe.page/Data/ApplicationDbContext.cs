@@ -27,6 +27,10 @@ namespace glur.cafe.page.Data
         public DbSet<Transaction> Transactions => Set<Transaction>();
         public DbSet<SaleOrder> SaleOrders => Set<SaleOrder>();
         public DbSet<SaleOrderItem> SaleOrderItems => Set<SaleOrderItem>();
+        public DbSet<MessengerConversation> MessengerConversations => Set<MessengerConversation>();
+        public DbSet<MessengerMessage> MessengerMessages => Set<MessengerMessage>();
+        public DbSet<MenuFolder> MenuFolders => Set<MenuFolder>();
+        public DbSet<MenuItem> MenuItems => Set<MenuItem>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,6 +98,25 @@ namespace glur.cafe.page.Data
                 .WithMany(s => s.Items)
                 .HasForeignKey(i => i.SaleOrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<MessengerConversation>().HasIndex(c => c.PsId).IsUnique();
+            modelBuilder.Entity<MessengerConversation>().HasIndex(c => c.LastMessageAt);
+            modelBuilder.Entity<MessengerMessage>()
+                .HasOne(m => m.Conversation)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(m => m.ConversationId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<MessengerMessage>().HasIndex(m => m.ConversationId);
+            modelBuilder.Entity<MessengerMessage>().HasIndex(m => m.MessageId);
+
+            modelBuilder.Entity<MenuFolder>().HasIndex(f => f.DisplayOrder);
+            modelBuilder.Entity<MenuItem>()
+                .HasOne(i => i.Folder)
+                .WithMany(f => f.Items)
+                .HasForeignKey(i => i.FolderId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<MenuItem>().HasIndex(i => i.FolderId);
+            modelBuilder.Entity<MenuItem>().HasIndex(i => i.DisplayOrder);
         }
     }
 }

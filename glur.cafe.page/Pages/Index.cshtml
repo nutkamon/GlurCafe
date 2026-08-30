@@ -2,6 +2,20 @@
 @model IndexModel
 @{
     ViewData["Title"] = "GLUR CAFE — โรงคั่วกาแฟ & กาแฟสด";
+    ViewData["OgTitle"]       = "GLUR CAFE — โรงคั่วกาแฟ & กาแฟสดคุณภาพพรีเมียม";
+    ViewData["OgDescription"] = "GLUR CAFE เกลอ คาเฟ่ โรงคั่วกาแฟ Single Origin คั่วสดทุกวัน Wholesale ทั่วไทย Barista Training";
+}
+@{
+    var _igEnabled  = Model.Site.GetValueOrDefault("InstagramFeedEnabled", "false") == "true";
+    var _igToken    = Model.Site.GetValueOrDefault("FacebookInstagramToken", "");
+    var _igUserId   = Model.Site.GetValueOrDefault("FacebookInstagramUserId", "");
+    var _igCount    = int.TryParse(Model.Site.GetValueOrDefault("InstagramFeedCount", "9"), out var _ic) ? _ic : 9;
+    var _fbFeedOn   = Model.Site.GetValueOrDefault("FbPageFeedEnabled", "false") == "true";
+    var _fbPageId   = Model.Site.GetValueOrDefault("FacebookPageId", "");
+    var _fbAppId    = Model.Site.GetValueOrDefault("FacebookAppId", "");
+    var _pixelOn    = Model.Site.GetValueOrDefault("PixelEnabled", "false") == "true";
+    var _pixelId    = Model.Site.GetValueOrDefault("FacebookPixelId", "");
+    var _igHandle   = Model.Site.GetValueOrDefault("Instagram", "#");
 }
 
 <!-- ======================== HERO SECTION ======================== -->
@@ -547,6 +561,107 @@
         </div>
     </div>
 </section>
+
+@* ======================== FACEBOOK PAGE FEED ======================== *@
+@if (_fbFeedOn && !string.IsNullOrWhiteSpace(_fbPageId) && !string.IsNullOrWhiteSpace(_fbAppId))
+{
+<section id="page-feed" class="section-padding" style="background:var(--clr-cream);">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title"><span class="gradient-text">อัปเดตล่าสุดจาก Facebook</span></h2>
+            <p class="section-subtitle">ติดตามข่าวสาร โปรโมชั่น และเรื่องราวกาแฟสดจาก GLUR CAFE</p>
+        </div>
+        <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <div id="fb-root"></div>
+            <div class="fb-page"
+                 data-href="https://www.facebook.com/profile.php?id=@_fbPageId"
+                 data-tabs="timeline"
+                 data-width="500"
+                 data-height="600"
+                 data-small-header="false"
+                 data-adapt-container-width="true"
+                 data-hide-cover="false"
+                 data-show-facepile="true"></div>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(_fbPageId) && !string.IsNullOrWhiteSpace(Model.Site.GetValueOrDefault("Facebook","#")) && Model.Site.GetValueOrDefault("Facebook","#") != "#")
+        {
+            <div class="text-center mt-4">
+                <a href="@Model.Site.GetValueOrDefault("Facebook","#")" target="_blank" rel="noopener noreferrer"
+                   class="btn btn-hero-outline">
+                    <i class="bi bi-facebook me-2"></i>ดูเพิ่มเติมบน Facebook
+                </a>
+            </div>
+        }
+    </div>
+    <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v20.0&appId=@_fbAppId">
+    </script>
+</section>
+}
+
+@* ======================== INSTAGRAM FEED ======================== *@
+@if (_igEnabled)
+{
+<section id="instagram" class="section-padding" style="background:var(--clr-white);">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">
+                <span class="gradient-text">ติดตามเราบน Instagram</span>
+            </h2>
+            @if (!string.IsNullOrWhiteSpace(_igHandle) && _igHandle != "#")
+            {
+                <p class="section-subtitle">
+                    <a href="@_igHandle" target="_blank" rel="noopener noreferrer"
+                       style="color:var(--clr-teal);font-weight:600;">
+                        <i class="bi bi-instagram me-1"></i>@@glurcafe
+                    </a>
+                </p>
+            }
+        </div>
+        <div id="igFeedGrid" class="ig-feed-grid" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-center py-5" style="grid-column:1/-1;">
+                <div class="spinner-border text-teal" role="status"></div>
+            </div>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(_igHandle) && _igHandle != "#")
+        {
+            <div class="text-center mt-5">
+                <a href="@_igHandle" target="_blank" rel="noopener noreferrer"
+                   class="btn btn-hero-outline">
+                    <i class="bi bi-instagram me-2"></i>ดูเพิ่มเติมบน Instagram
+                </a>
+            </div>
+        }
+    </div>
+</section>
+<script>
+    (async function loadIgFeed() {
+        const grid = document.getElementById('igFeedGrid');
+        if (!grid) return;
+        try {
+            const res  = await fetch('/api/instagram-feed');
+            if (!res.ok) throw new Error(res.status);
+            const items = await res.json();
+            if (!Array.isArray(items) || !items.length) {
+                grid.innerHTML = '<p class="text-center text-muted" style="grid-column:1/-1;">ยังไม่มีรูปภาพ</p>';
+                return;
+            }
+            grid.innerHTML = items.map(item => {
+                const caption = (item.caption || '').slice(0, 80) + (item.caption?.length > 80 ? '…' : '');
+                return `<a href="${item.permalink}" target="_blank" rel="noopener noreferrer" class="ig-feed-item">
+                    <img src="${item.mediaUrl}" alt="Instagram post" loading="lazy" />
+                    <div class="ig-feed-overlay">
+                        <i class="bi bi-instagram me-1"></i>
+                        <span>${caption}</span>
+                    </div>
+                </a>`;
+            }).join('');
+        } catch {
+            grid.innerHTML = '<p class="text-center text-muted small" style="grid-column:1/-1;">ไม่สามารถโหลด Instagram Feed ได้</p>';
+        }
+    })();
+</script>
+}
 
 <!-- ======================== FOOTER ======================== -->
 <footer class="site-footer">

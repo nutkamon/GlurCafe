@@ -1,0 +1,157 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Facebook.IndexModel
+@{
+    ViewData["Title"] = "Facebook & Social";
+    ViewData["ActiveMenu"] = "facebook";
+}
+
+@{
+    string Badge(bool configured, bool enabled)
+    {
+        if (!configured) return "<span class=\"badge bg-danger\">ยังไม่ตั้งค่า</span>";
+        if (!enabled)    return "<span class=\"badge bg-warning text-dark\">ปิดอยู่</span>";
+        return "<span class=\"badge bg-success\">เปิดใช้งาน</span>";
+    }
+}
+
+<div class="row g-4 mb-4">
+    <!-- Messenger -->
+    <div class="col-md-6 col-xl-3">
+        <div class="admin-card mb-0 h-100">
+            <div class="admin-card-header d-flex align-items-center gap-2">
+                <i class="bi bi-chat-dots-fill text-primary"></i>
+                <span>Messenger Chat</span>
+            </div>
+            <div class="p-3 d-flex flex-column gap-2">
+                <div>@Html.Raw(Badge(Model.MessengerConfigured, Model.MessengerEnabled))</div>
+                @if (Model.MessengerConfigured)
+                {
+                    <small class="text-muted">Page ID: @Model.Settings.GetValueOrDefault("FacebookPageId","–").Substring(0, Math.Min(8, Model.Settings.GetValueOrDefault("FacebookPageId","").Length))…</small>
+                }
+                else
+                {
+                    <small class="text-muted">กรอก Facebook Page ID และ App ID ก่อน</small>
+                }
+                <a href="/Admin/Facebook/Messenger" class="btn btn-sm btn-outline-teal mt-auto">
+                    <i class="bi bi-pencil me-1"></i>จัดการ
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pixel -->
+    <div class="col-md-6 col-xl-3">
+        <div class="admin-card mb-0 h-100">
+            <div class="admin-card-header d-flex align-items-center gap-2">
+                <i class="bi bi-graph-up-arrow text-success"></i>
+                <span>Pixel & Conversions API</span>
+            </div>
+            <div class="p-3 d-flex flex-column gap-2">
+                <div>@Html.Raw(Badge(Model.PixelConfigured, Model.PixelEnabled))</div>
+                @if (Model.PixelConfigured)
+                {
+                    <small class="text-muted">Pixel ID: @Model.Settings.GetValueOrDefault("FacebookPixelId","–")</small>
+                    <small class="text-muted">Conversions API: @(Model.ConversionsConfigured ? "✅ ตั้งค่าแล้ว" : "⚠️ ยังไม่มี Token")</small>
+                }
+                else
+                {
+                    <small class="text-muted">กรอก Facebook Pixel ID ก่อน</small>
+                }
+                <a href="/Admin/Facebook/Pixel" class="btn btn-sm btn-outline-teal mt-auto">
+                    <i class="bi bi-pencil me-1"></i>จัดการ
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Feed -->
+    <div class="col-md-6 col-xl-3">
+        <div class="admin-card mb-0 h-100">
+            <div class="admin-card-header d-flex align-items-center gap-2">
+                <i class="bi bi-grid-3x2-gap-fill" style="color:var(--amber)"></i>
+                <span>Social Feed</span>
+            </div>
+            <div class="p-3 d-flex flex-column gap-2">
+                <div class="d-flex gap-2 flex-wrap">
+                    <span>📘 Page Feed: @Html.Raw(Badge(Model.PageFeedConfigured, Model.PageFeedEnabled))</span>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <span>📸 Instagram: @Html.Raw(Badge(Model.IgConfigured, Model.IgEnabled))</span>
+                </div>
+                <a href="/Admin/Facebook/Feed" class="btn btn-sm btn-outline-teal mt-auto">
+                    <i class="bi bi-pencil me-1"></i>จัดการ
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Open Graph -->
+    <div class="col-md-6 col-xl-3">
+        <div class="admin-card mb-0 h-100">
+            <div class="admin-card-header d-flex align-items-center gap-2">
+                <i class="bi bi-share-fill" style="color:var(--teal)"></i>
+                <span>Open Graph (SEO)</span>
+            </div>
+            <div class="p-3 d-flex flex-column gap-2">
+                @{
+                    var ogOk = Model.OgConfigured;
+                    var ogDescOk = !string.IsNullOrWhiteSpace(Model.Settings.GetValueOrDefault("OgDescription"));
+                }
+                <small class="text-muted">OG Image: @(ogOk ? "✅ ตั้งค่าแล้ว" : "⚠️ ยังไม่มี")</small>
+                <small class="text-muted">OG Description: @(ogDescOk ? "✅ มีค่า" : "⚠️ ยังไม่มี")</small>
+                <a href="/Admin/Settings" class="btn btn-sm btn-outline-teal mt-auto">
+                    <i class="bi bi-gear me-1"></i>ไปที่ Settings SEO
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Guide -->
+<div class="admin-card">
+    <div class="admin-card-header">
+        <i class="bi bi-info-circle me-2"></i>คู่มือการตั้งค่า
+    </div>
+    <div class="p-4">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <h6 class="fw-bold mb-2"><i class="bi bi-1-circle-fill text-primary me-2"></i>Messenger Chat Plugin</h6>
+                <ol class="small text-muted ps-3 mb-0">
+                    <li>ไปที่ <a href="https://developers.facebook.com" target="_blank" rel="noopener">developers.facebook.com</a> สร้าง App</li>
+                    <li>เพิ่ม Messenger product ใน App</li>
+                    <li>Whitelist domain เว็บไซต์ใน App Settings</li>
+                    <li>คัดลอก Page ID และ App ID มาใส่ที่ Messenger Settings</li>
+                </ol>
+            </div>
+            <div class="col-md-6">
+                <h6 class="fw-bold mb-2"><i class="bi bi-2-circle-fill text-success me-2"></i>Facebook Pixel</h6>
+                <ol class="small text-muted ps-3 mb-0">
+                    <li>ไปที่ <a href="https://business.facebook.com/events_manager" target="_blank" rel="noopener">Meta Events Manager</a></li>
+                    <li>สร้าง Pixel ใหม่ คัดลอก Pixel ID</li>
+                    <li>สร้าง Conversions API Access Token (optional)</li>
+                    <li>ใส่ค่าที่หน้า Pixel & Conversions</li>
+                </ol>
+            </div>
+            <div class="col-md-6">
+                <h6 class="fw-bold mb-2"><i class="bi bi-3-circle-fill" style="color:var(--amber)"></i><span class="ms-2">Instagram Feed</span></h6>
+                <ol class="small text-muted ps-3 mb-0">
+                    <li>เชื่อม Instagram Business กับ Facebook Page</li>
+                    <li>สร้าง Instagram Graph API Long-lived Token (อายุ 60 วัน)</li>
+                    <li>ใส่ Instagram User ID และ Token ที่หน้า Social Feed</li>
+                    <li>Refresh Token ก่อนหมดอายุจากปุ่มในหน้า Feed</li>
+                </ol>
+            </div>
+            <div class="col-md-6">
+                <h6 class="fw-bold mb-2"><i class="bi bi-4-circle-fill text-info me-2"></i>Open Graph</h6>
+                <ol class="small text-muted ps-3 mb-0">
+                    <li>ไปที่ Admin › ตั้งค่า › กลุ่ม SEO</li>
+                    <li>ใส่ OG Image URL (ขนาดแนะนำ 1200×630px)</li>
+                    <li>ใส่ OG Description คำอธิบายเว็บไซต์</li>
+                    <li>ทดสอบด้วย <a href="https://developers.facebook.com/tools/debug" target="_blank" rel="noopener">Facebook Sharing Debugger</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

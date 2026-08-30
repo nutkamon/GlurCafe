@@ -1,0 +1,202 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - img "GLUR CAFE" [ref=e4]
+      - generic [ref=e5]: GLUR CAFE
+    - navigation [ref=e6]:
+      - generic [ref=e7]: จัดการเนื้อหา
+      - link " แดชบอร์ด" [ref=e8] [cursor=pointer]:
+        - /url: /Admin
+        - generic [ref=e9]: 
+        - generic [ref=e10]: แดชบอร์ด
+      - link " บริการ" [ref=e11] [cursor=pointer]:
+        - /url: /Admin/Services
+        - generic [ref=e12]: 
+        - generic [ref=e13]: บริการ
+      - link " แกลเลอรี่" [ref=e14] [cursor=pointer]:
+        - /url: /Admin/Portfolios
+        - generic [ref=e15]: 
+        - generic [ref=e16]: แกลเลอรี่
+      - link " ราคา & แพ็คเกจ" [ref=e17] [cursor=pointer]:
+        - /url: /Admin/Pricing
+        - generic [ref=e18]: 
+        - generic [ref=e19]: ราคา & แพ็คเกจ
+      - generic [ref=e20]: ข้อมูล
+      - link " ข้อความ" [ref=e21] [cursor=pointer]:
+        - /url: /Admin/Messages
+        - generic [ref=e22]: 
+        - generic [ref=e23]: ข้อความ
+      - link " ตั้งค่า" [ref=e24] [cursor=pointer]:
+        - /url: /Admin/Settings
+        - generic [ref=e25]: 
+        - generic [ref=e26]: ตั้งค่า
+      - generic [ref=e27]: เพิ่มเติม
+      - link " CRM ลูกค้า" [ref=e28] [cursor=pointer]:
+        - /url: /Admin/Customers
+        - generic [ref=e29]: 
+        - generic [ref=e30]: CRM ลูกค้า
+      - link " ใบเสนอราคา" [ref=e31] [cursor=pointer]:
+        - /url: /Admin/Quotations
+        - generic [ref=e32]: 
+        - generic [ref=e33]: ใบเสนอราคา
+      - link " รายงาน" [ref=e34] [cursor=pointer]:
+        - /url: /Admin/Analytics
+        - generic [ref=e35]: 
+        - generic [ref=e36]: รายงาน
+      - link " ผู้ดูแลระบบ" [ref=e37] [cursor=pointer]:
+        - /url: /Admin/Users
+        - generic [ref=e38]: 
+        - generic [ref=e39]: ผู้ดูแลระบบ
+      - generic [ref=e40]: ต้นทุนสินค้า
+      - link " สารกาแฟ (Master)" [ref=e41] [cursor=pointer]:
+        - /url: /Admin/Beans
+        - generic [ref=e42]: 
+        - generic [ref=e43]: สารกาแฟ (Master)
+      - link " คำนวณต้นทุน" [ref=e44] [cursor=pointer]:
+        - /url: /Admin/CostCalc
+        - generic [ref=e45]: 
+        - generic [ref=e46]: คำนวณต้นทุน
+      - generic [ref=e47]: การเงิน
+      - link " รายรับ - รายจ่าย" [ref=e48] [cursor=pointer]:
+        - /url: /Admin/Finance
+        - generic [ref=e49]: 
+        - generic [ref=e50]: รายรับ - รายจ่าย
+    - generic [ref=e51]:
+      - link " ดูเว็บไซต์" [ref=e52] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e53]: 
+        - generic [ref=e54]: ดูเว็บไซต์
+      - link " ออกจากระบบ" [ref=e55] [cursor=pointer]:
+        - /url: /Admin/Logout
+        - generic [ref=e56]: 
+        - generic [ref=e57]: ออกจากระบบ
+  - generic [ref=e58]:
+    - generic [ref=e59]:
+      - text: 
+      - generic [ref=e60]: รายรับ - รายจ่าย
+      - generic [ref=e61]:
+        - generic [ref=e62]: 
+        - generic [ref=e63]: ผู้ดูแลระบบ
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - generic [ref=e69]: 
+            - text: รายรับ
+          - generic [ref=e70]: 0.00 ฿
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]: 
+            - text: ต้นทุนสินค้า
+          - generic [ref=e75]: 500.00 ฿
+          - generic [ref=e76]: ค่าวัตถุดิบ + ค่าแรงงาน
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - generic [ref=e80]: 
+            - text: กำไรขั้นต้น
+          - generic [ref=e81]: "-500.00 ฿"
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]: 
+            - text: ค่าดำเนินงาน
+          - generic [ref=e86]: 0.00 ฿
+          - generic [ref=e87]: ค่าเช่า สาธารณูปโภค ฯลฯ
+        - generic [ref=e89]:
+          - generic [ref=e90]:
+            - generic [ref=e91]: 
+            - text: กำไรสุทธิ
+          - generic [ref=e92]: "-500.00 ฿"
+      - generic [ref=e93]:
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - generic [ref=e97]: 
+            - text: งบกำไร-ขาดทุน — พฤษภาคม 2569
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - generic [ref=e100]: รายรับทั้งหมด
+              - generic [ref=e101]: +0.00 ฿
+            - generic [ref=e102]:
+              - generic [ref=e103]:
+                - generic [ref=e104]: 
+                - text: ต้นทุนสินค้า (COGS)
+              - generic [ref=e105]: −500.00 ฿
+            - generic [ref=e106]:
+              - generic [ref=e107]: กำไรขั้นต้น
+              - generic [ref=e108]: "-500.00 ฿"
+            - generic [ref=e109]:
+              - generic [ref=e110]:
+                - generic [ref=e111]: 
+                - text: ค่าใช้จ่ายดำเนินงาน
+              - generic [ref=e112]: −0.00 ฿
+            - generic [ref=e113]:
+              - generic [ref=e114]: กำไรสุทธิ
+              - generic [ref=e115]: "-500.00 ฿"
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: 
+            - text: สัดส่วนค่าใช้จ่าย
+          - generic [ref=e124]:
+            - generic [ref=e125]:
+              - text: ค่าวัตถุดิบ
+              - generic [ref=e127]: ทุน
+            - generic [ref=e128]: 500.00 ฿ (100%)
+      - generic [ref=e132]:
+        - generic [ref=e133]: 
+        - text: แนวโน้ม 6 เดือนย้อนหลัง
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - combobox [ref=e139]:
+              - option "2570"
+              - option "2569" [selected]
+              - option "2568"
+              - option "2567"
+              - option "2566"
+            - combobox [ref=e140]:
+              - option "มกราคม"
+              - option "กุมภาพันธ์"
+              - option "มีนาคม"
+              - option "เมษายน"
+              - option "พฤษภาคม" [selected]
+              - option "มิถุนายน"
+              - option "กรกฎาคม"
+              - option "สิงหาคม"
+              - option "กันยายน"
+              - option "ตุลาคม"
+              - option "พฤศจิกายน"
+              - option "ธันวาคม"
+            - combobox [ref=e141]:
+              - option "ทั้งหมด" [selected]
+              - option "รายรับ"
+              - option "รายจ่าย"
+            - button " กรอง" [ref=e142] [cursor=pointer]:
+              - generic [ref=e143]: 
+              - text: กรอง
+          - button " เพิ่มรายการ" [ref=e144] [cursor=pointer]:
+            - generic [ref=e145]: 
+            - text: เพิ่มรายการ
+        - text: 
+      - generic [ref=e146]:
+        - generic [ref=e147]: รายการ พฤษภาคม 2569 (1 รายการ)
+        - table [ref=e149]:
+          - rowgroup [ref=e150]:
+            - row "วันที่ ประเภท หมวดหมู่ รายละเอียด หมายเหตุ จำนวนเงิน" [ref=e151]:
+              - columnheader "วันที่" [ref=e152]
+              - columnheader "ประเภท" [ref=e153]
+              - columnheader "หมวดหมู่" [ref=e154]
+              - columnheader "รายละเอียด" [ref=e155]
+              - columnheader "หมายเหตุ" [ref=e156]
+              - columnheader "จำนวนเงิน" [ref=e157]
+              - columnheader [ref=e158]
+          - rowgroup [ref=e159]:
+            - row "27/05/ 2569 รายจ่าย ค่าวัตถุดิบ ซื้อกาแฟ -500.00 " [ref=e160]:
+              - cell "27/05/ 2569" [ref=e161]
+              - cell "รายจ่าย" [ref=e162]:
+                - generic [ref=e163]: รายจ่าย
+              - cell "ค่าวัตถุดิบ" [ref=e164]
+              - cell "ซื้อกาแฟ" [ref=e165]
+              - cell [ref=e166]
+              - cell "-500.00" [ref=e167]
+              - cell "" [ref=e168]:
+                - button "" [ref=e170] [cursor=pointer]:
+                  - generic [ref=e171]: 

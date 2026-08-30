@@ -191,11 +191,179 @@ namespace glur.cafe.page.Data
                 );");
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_SaleOrderItems_SaleOrderId"" ON ""SaleOrderItems"" (""SaleOrderId"");"); } catch { }
 
+            // --- MessengerConversations ---
+            context.Database.ExecuteSqlRaw(@"
+                CREATE TABLE IF NOT EXISTS ""MessengerConversations"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_MessengerConversations"" PRIMARY KEY AUTOINCREMENT,
+                    ""PsId"" TEXT NOT NULL,
+                    ""DisplayName"" TEXT NOT NULL DEFAULT 'ผู้ใช้ Facebook',
+                    ""LastMessageText"" TEXT NULL,
+                    ""LastMessageAt"" TEXT NOT NULL,
+                    ""UnreadCount"" INTEGER NOT NULL DEFAULT 0,
+                    ""CustomerId"" INTEGER NULL,
+                    ""CreatedAt"" TEXT NOT NULL
+                );");
+            try { context.Database.ExecuteSqlRaw(@"CREATE UNIQUE INDEX IF NOT EXISTS ""IX_MessengerConversations_PsId"" ON ""MessengerConversations"" (""PsId"");"); } catch { }
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MessengerConversations_LastMessageAt"" ON ""MessengerConversations"" (""LastMessageAt"");"); } catch { }
+
+            // --- MessengerMessages ---
+            context.Database.ExecuteSqlRaw(@"
+                CREATE TABLE IF NOT EXISTS ""MessengerMessages"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_MessengerMessages"" PRIMARY KEY AUTOINCREMENT,
+                    ""ConversationId"" INTEGER NOT NULL,
+                    ""MessageId"" TEXT NULL,
+                    ""IsFromPage"" INTEGER NOT NULL DEFAULT 0,
+                    ""Text"" TEXT NULL,
+                    ""SentAt"" TEXT NOT NULL,
+                    ""IsRead"" INTEGER NOT NULL DEFAULT 0,
+                    CONSTRAINT ""FK_MessengerMessages_MessengerConversations_ConversationId""
+                        FOREIGN KEY (""ConversationId"") REFERENCES ""MessengerConversations"" (""Id"") ON DELETE CASCADE
+                );");
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MessengerMessages_ConversationId"" ON ""MessengerMessages"" (""ConversationId"");"); } catch { }
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MessengerMessages_MessageId"" ON ""MessengerMessages"" (""MessageId"");"); } catch { }
+
             // --- New columns added by migrations (safe to re-run) ---
             try { context.Database.ExecuteSqlRaw(@"ALTER TABLE ""Quotations"" ADD COLUMN ""CustomerId"" INTEGER NULL;"); } catch { }
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_Quotations_CustomerId"" ON ""Quotations"" (""CustomerId"");"); } catch { }
             try { context.Database.ExecuteSqlRaw(@"ALTER TABLE ""ContactMessages"" ADD COLUMN ""CustomerId"" INTEGER NULL;"); } catch { }
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_ContactMessages_CustomerId"" ON ""ContactMessages"" (""CustomerId"");"); } catch { }
+
+            // --- MenuFolders (หมวดเมนูหน้าร้าน) ---
+            context.Database.ExecuteSqlRaw(@"
+                CREATE TABLE IF NOT EXISTS ""MenuFolders"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_MenuFolders"" PRIMARY KEY AUTOINCREMENT,
+                    ""Name"" TEXT NOT NULL,
+                    ""IconClassName"" TEXT NOT NULL DEFAULT 'bi-cup-hot',
+                    ""DisplayOrder"" INTEGER NOT NULL DEFAULT 0,
+                    ""IsActive"" INTEGER NOT NULL DEFAULT 1,
+                    ""CreatedAt"" TEXT NOT NULL
+                );");
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MenuFolders_DisplayOrder"" ON ""MenuFolders"" (""DisplayOrder"");"); } catch { }
+
+            // --- MenuItems (รูป/วิดีโอในแต่ละหมวด) ---
+            context.Database.ExecuteSqlRaw(@"
+                CREATE TABLE IF NOT EXISTS ""MenuItems"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_MenuItems"" PRIMARY KEY AUTOINCREMENT,
+                    ""FolderId"" INTEGER NOT NULL,
+                    ""FilePath"" TEXT NOT NULL,
+                    ""MediaType"" TEXT NOT NULL DEFAULT 'image',
+                    ""Title"" TEXT NULL,
+                    ""Price"" TEXT NULL,
+                    ""IsRecommended"" INTEGER NOT NULL DEFAULT 0,
+                    ""DisplayOrder"" INTEGER NOT NULL DEFAULT 0,
+                    ""IsActive"" INTEGER NOT NULL DEFAULT 1,
+                    ""CreatedAt"" TEXT NOT NULL,
+                    CONSTRAINT ""FK_MenuItems_MenuFolders_FolderId""
+                        FOREIGN KEY (""FolderId"") REFERENCES ""MenuFolders"" (""Id"") ON DELETE CASCADE
+                );");
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MenuItems_FolderId"" ON ""MenuItems"" (""FolderId"");"); } catch { }
+            try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MenuItems_DisplayOrder"" ON ""MenuItems"" (""DisplayOrder"");"); } catch { }
+            try { context.Database.ExecuteSqlRaw(@"ALTER TABLE ""MenuItems"" ADD COLUMN ""IsRecommended"" INTEGER NOT NULL DEFAULT 0;"); } catch { }
+        }
+
+        /// <summary>
+        /// Ensures the default "Header" menu folder exists (hero carousel source). Safe to run on every startup.
+        /// </summary>
+        public static void EnsureMenuDefaults(ApplicationDbContext context)
+        {
+            if (!context.MenuFolders.Any(f => f.Name == "Header"))
+            {
+                context.MenuFolders.Add(new MenuFolder
+                {
+                    Name          = "Header",
+                    IconClassName = "bi-images",
+                    DisplayOrder  = 0,
+                    IsActive      = true,
+                    CreatedAt     = DateTime.Now
+                });
+                context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Seeds menu folders/items from the POS export (PosMenuSeed) on databases that
+        /// don't have the menu yet (e.g. production after first deploy). Safe to re-run —
+        /// skips when the menu was already imported.
+        /// </summary>
+        public static void EnsurePosMenuImported(ApplicationDbContext context)
+        {
+            if (context.MenuItems.Any()) return; // imported already
+
+            var folderIds = new Dictionary<string, int>();
+            foreach (var f in PosMenuSeed.Folders)
+            {
+                var existing = context.MenuFolders.FirstOrDefault(x => x.Name == f.Name);
+                if (existing != null) { folderIds[f.Name] = existing.Id; continue; }
+
+                var folder = new MenuFolder
+                {
+                    Name          = f.Name,
+                    IconClassName = f.Icon,
+                    DisplayOrder  = f.Order,
+                    IsActive      = f.Active,
+                    CreatedAt     = DateTime.Now
+                };
+                context.MenuFolders.Add(folder);
+                context.SaveChanges();
+                folderIds[f.Name] = folder.Id;
+            }
+
+            foreach (var i in PosMenuSeed.Items)
+            {
+                if (!folderIds.TryGetValue(i.Folder, out var folderId)) continue;
+                context.MenuItems.Add(new MenuItem
+                {
+                    FolderId       = folderId,
+                    FilePath       = "",
+                    MediaType      = "image",
+                    Title          = i.Title,
+                    Price          = i.Price != null && decimal.TryParse(i.Price, out var p) ? p : null,
+                    IsRecommended  = i.Reco,
+                    DisplayOrder   = i.Order,
+                    IsActive       = true,
+                    CreatedAt      = DateTime.Now
+                });
+            }
+            context.SaveChanges();
+        }
+        /// Ensures Facebook & SEO SiteSettings keys exist. Safe to run on every startup.
+        /// </summary>
+        public static void EnsureFacebookSettings(ApplicationDbContext context)
+        {
+            var defaults = new Dictionary<string, (string Value, string Group)>
+            {
+                ["FacebookPageId"]            = ("", "Facebook"),
+                ["FacebookAppId"]             = ("", "Facebook"),
+                ["FacebookPixelId"]           = ("", "Facebook"),
+                ["FacebookInstagramUserId"]   = ("", "Facebook"),
+                ["MessengerEnabled"]          = ("false", "Facebook"),
+                ["MessengerWebhookEnabled"]   = ("false", "Facebook"),
+                ["MessengerThemeColor"]       = ("#00A59A", "Facebook"),
+                ["MessengerGreeting"]         = ("สวัสดี! มีอะไรให้ช่วยไหมครับ? ☕", "Facebook"),
+                ["PixelEnabled"]              = ("false", "Facebook"),
+                ["FbPageFeedEnabled"]         = ("false", "Facebook"),
+                ["FbPageFeedPostCount"]       = ("5", "Facebook"),
+                ["InstagramFeedEnabled"]      = ("false", "Facebook"),
+                ["InstagramFeedCount"]        = ("9", "Facebook"),
+                // Note: FacebookConversionsToken and FacebookInstagramToken are stored in appsettings.json (not DB)
+                ["OgImage"]                   = ("/img/Logo-removebg-preview.png", "SEO"),
+                ["OgSiteName"]               = ("GLUR CAFE", "SEO"),
+                ["OgDescription"]            = ("GLUR CAFE เกลอ คาเฟ่ โรงคั่วกาแฟ & กาแฟสดคุณภาพพรีเมียม Single Origin คั่วสดทุกวัน", "SEO"),
+            };
+
+            foreach (var kv in defaults)
+            {
+                if (!context.SiteSettings.Any(s => s.Key == kv.Key))
+                {
+                    context.SiteSettings.Add(new SiteSetting
+                    {
+                        Key   = kv.Key,
+                        Value = kv.Value.Value,
+                        Group = kv.Value.Group
+                    });
+                }
+            }
+            context.SaveChanges();
         }
 
         public static void UpdateContactSettings(ApplicationDbContext context)

@@ -1,0 +1,128 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model glur.cafe.page.Pages.Admin.Facebook.MessengerModel
+@{
+    ViewData["Title"] = "Messenger Chat Plugin";
+    ViewData["ActiveMenu"] = "fb-messenger";
+}
+
+<div class="d-flex align-items-center gap-2 mb-4">
+    <a href="/Admin/Facebook" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <h5 class="mb-0 fw-bold"><i class="bi bi-chat-dots-fill text-primary me-2"></i>Messenger Chat Plugin</h5>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <!-- Info Banner -->
+        <div class="alert alert-info d-flex gap-2 mb-4" role="alert">
+            <i class="bi bi-info-circle-fill flex-shrink-0 mt-1"></i>
+            <div>
+                <strong>ข้อกำหนด:</strong> ต้องมี Facebook App ที่เปิด Messenger product และ Whitelist domain เว็บไซต์ใน App Settings ก่อน
+                <a href="https://developers.facebook.com/docs/messenger-platform/discovery/customer-chat-plugin" target="_blank" rel="noopener" class="ms-1">อ่านเพิ่มเติม →</a>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div class="admin-card-header">
+                <i class="bi bi-gear me-2"></i>การตั้งค่า
+            </div>
+            <form method="post" class="p-4">
+                @Html.AntiForgeryToken()
+
+                <!-- Toggle -->
+                <div class="mb-4 d-flex align-items-center justify-content-between p-3 rounded-3" style="background:#f8fafc;border:1px solid #e2e8f0;">
+                    <div>
+                        <div class="fw-semibold">เปิดใช้งาน Messenger Chat</div>
+                        <small class="text-muted">แสดง chat widget มุมล่างขวาของเว็บไซต์</small>
+                    </div>
+                    <div class="form-check form-switch mb-0">
+                        <input class="form-check-input" type="checkbox" role="switch" id="messengerEnabled"
+                               name="MessengerEnabled" value="true"
+                               @(Model.MessengerEnabled == "true" ? "checked" : "") style="width:3rem;height:1.5rem;cursor:pointer;" />
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Facebook Page ID <span class="text-danger">*</span></label>
+                        <input type="text" name="FacebookPageId" value="@Model.FacebookPageId"
+                               class="form-control" placeholder="เช่น 123456789012345" />
+                        <small class="text-muted">ดูได้ที่ facebook.com/YOUR_PAGE/about → Page ID</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Facebook App ID <span class="text-danger">*</span></label>
+                        <input type="text" name="FacebookAppId" value="@Model.FacebookAppId"
+                               class="form-control" placeholder="เช่น 987654321098765" />
+                        <small class="text-muted">ดูได้ที่ developers.facebook.com → My Apps</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Theme Color</label>
+                        <div class="d-flex gap-2 align-items-center">
+                            <input type="color" name="MessengerThemeColor" value="@Model.MessengerThemeColor"
+                                   class="form-control form-control-color" style="width:60px;height:40px;" />
+                            <input type="text" id="colorText" value="@Model.MessengerThemeColor"
+                                   class="form-control" style="font-family:monospace;"
+                                   oninput="document.querySelector('[name=MessengerThemeColor]').value=this.value" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">ข้อความต้อนรับ</label>
+                        <input type="text" name="MessengerGreeting" value="@Model.MessengerGreeting"
+                               class="form-control" placeholder="สวัสดี! มีอะไรให้ช่วยไหมครับ? ☕" maxlength="80" />
+                        <small class="text-muted">แสดงเมื่อ user เปิด chat widget (สูงสุด 80 ตัวอักษร)</small>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-teal px-4">
+                        <i class="bi bi-floppy me-1"></i>บันทึกการตั้งค่า
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Side tips -->
+    <div class="col-lg-4">
+        <div class="admin-card">
+            <div class="admin-card-header"><i class="bi bi-lightbulb me-2 text-warning"></i>เคล็ดลับ</div>
+            <div class="p-3">
+                <p class="small text-muted mb-2">
+                    <strong>หา Page ID:</strong><br />
+                    facebook.com/<em>your_page</em>/about → เลื่อนลงมาจะเห็น <em>Page ID</em>
+                </p>
+                <p class="small text-muted mb-2">
+                    <strong>Whitelist Domain:</strong><br />
+                    developers.facebook.com → App → Messenger → Settings → Whitelisted Domains
+                </p>
+                <p class="small text-muted mb-0">
+                    <strong>Theme Color:</strong><br />
+                    แนะนำใช้ <span class="badge" style="background:#00A59A;">#00A59A</span> ตาม brand GLUR CAFE
+                </p>
+            </div>
+        </div>
+        <div class="admin-card mt-3">
+            <div class="admin-card-header"><i class="bi bi-link-45deg me-2"></i>ลิงก์ที่เกี่ยวข้อง</div>
+            <div class="p-3 d-flex flex-column gap-2">
+                <a href="https://developers.facebook.com" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-box-arrow-up-right me-1"></i>Meta for Developers
+                </a>
+                <a href="https://business.facebook.com" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-box-arrow-up-right me-1"></i>Meta Business Suite
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.querySelector('[name=MessengerThemeColor]')?.addEventListener('input', function () {
+        document.getElementById('colorText').value = this.value;
+    });
+</script>
+}

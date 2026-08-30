@@ -1,0 +1,316 @@
+- generic [ref=e5]:
+  - banner:
+    - generic [ref=e6]:
+      - generic:
+        - generic:
+          - button [disabled]:
+            - img
+      - link "Facebook" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img [ref=e8]
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic:
+          - generic:
+            - generic:
+              - button:
+                - img
+      - generic [ref=e19]:
+        - generic:
+          - img
+        - combobox "ค้นหาบน Facebook" [ref=e20] [cursor=pointer]
+    - navigation "Facebook" [ref=e24]:
+      - list [ref=e25]:
+        - listitem [ref=e26]:
+          - link "หน้าหลัก" [ref=e29] [cursor=pointer]:
+            - /url: /
+            - img [ref=e31]
+        - listitem [ref=e33]:
+          - link "Reels" [ref=e36] [cursor=pointer]:
+            - /url: /watch/?ref=tab
+            - img [ref=e38]
+        - listitem [ref=e41]:
+          - link "Marketplace" [ref=e44] [cursor=pointer]:
+            - /url: /marketplace/?ref=app_tab
+            - img [ref=e46]
+        - listitem [ref=e48]:
+          - link "กลุ่ม" [ref=e51] [cursor=pointer]:
+            - /url: /groups/
+            - img [ref=e53]
+        - listitem [ref=e55]:
+          - link "การเล่นเกม" [ref=e58] [cursor=pointer]:
+            - /url: /gaming/play/?store_visit_source=gaming_tab
+            - img [ref=e60]
+        - listitem [ref=e63]:
+          - link "เพิ่มเติม" [ref=e66] [cursor=pointer]:
+            - /url: /bookmarks/
+            - img [ref=e68]
+    - navigation "การควบคุมและการตั้งค่าบัญชี" [ref=e71]:
+      - button "เมนู Facebook" [ref=e75] [cursor=pointer]:
+        - img [ref=e76]
+      - generic [ref=e81]:
+        - button "Messenger, ยังไม่ได้อ่าน 1 ข้อความ" [ref=e82] [cursor=pointer]:
+          - img [ref=e83]
+        - button [ref=e85] [cursor=pointer]:
+          - generic [ref=e88]:
+            - generic [ref=e89]: 1 แชทที่ยังไม่ได้อ่าน
+            - generic [ref=e90]: "1"
+      - button "การแจ้งเตือน" [ref=e95] [cursor=pointer]:
+        - img [ref=e96]
+      - button "โปรไฟล์ของคุณ" [ref=e100] [cursor=pointer]:
+        - generic [ref=e101]:
+          - img "โปรไฟล์ของคุณ" [ref=e102]
+          - img [ref=e109]
+  - generic [ref=e116]:
+    - navigation "การนำทางในการตั้งค่า" [ref=e117]:
+      - generic [ref=e118]:
+        - heading "การตั้งค่าและความเป็นส่วนตัว" [level=1] [ref=e126]
+        - generic [ref=e133]:
+          - generic:
+            - img
+          - combobox "ค้นหาการตั้งค่า" [ref=e134]
+        - generic [ref=e141]:
+          - heading "การตั้งค่าและความเป็นส่วนตัว" [level=2] [ref=e153]:
+            - generic [ref=e155]: การตั้งค่าและความเป็นส่วนตัว
+          - link "โลโก้ Meta ศูนย์บัญชี จัดการการตั้งค่าบัญชีและการใช้งานแบบเชื่อมต่อระหว่างแอพบนเทคโนโลยี Meta รายละเอียดส่วนตัว รหัสผ่านและการรักษาความปลอดภัย การกำหนดลักษณะโฆษณา การตรวจสอบยืนยัน ดูเพิ่มเติมในศูนย์บัญชี" [ref=e166] [cursor=pointer]:
+            - /url: https://accountscenter.facebook.com/?entry_point=app_settings
+            - generic [ref=e168]:
+              - img "โลโก้ Meta" [ref=e170]
+              - generic [ref=e176]:
+                - generic [ref=e178]: ศูนย์บัญชี
+                - generic [ref=e179]: จัดการการตั้งค่าบัญชีและการใช้งานแบบเชื่อมต่อระหว่างแอพบนเทคโนโลยี Meta
+                - generic [ref=e180]:
+                  - generic [ref=e181]:
+                    - img [ref=e183]
+                    - generic [ref=e185]: รายละเอียดส่วนตัว
+                  - generic [ref=e186]:
+                    - img [ref=e188]
+                    - generic [ref=e190]: รหัสผ่านและการรักษาความปลอดภัย
+                  - generic [ref=e191]:
+                    - img [ref=e193]
+                    - generic [ref=e195]: การกำหนดลักษณะโฆษณา
+                  - generic [ref=e196]:
+                    - img [ref=e198]
+                    - generic [ref=e200]: การตรวจสอบยืนยัน
+                  - generic [ref=e203]: ดูเพิ่มเติมในศูนย์บัญชี
+          - generic [ref=e205]:
+            - generic [ref=e212]:
+              - heading "เครื่องมือและแหล่งข้อมูล" [level=2] [ref=e217]:
+                - generic [ref=e219]: เครื่องมือและแหล่งข้อมูล
+              - generic [ref=e224]: เครื่องมือของเราช่วยให้คุณควบคุมและจัดการความเป็นส่วนตัวของคุณได้
+            - link "การตรวจสอบความเป็นส่วนตัว" [ref=e232] [cursor=pointer]:
+              - /url: https://www.facebook.com/privacy/unified_checkup/
+              - generic [ref=e234]:
+                - img [ref=e236]
+                - generic [ref=e241]: การตรวจสอบความเป็นส่วนตัว
+            - link "ศูนย์ครอบครัว" [ref=e249] [cursor=pointer]:
+              - /url: https://familycenter.facebook.com/dashboard/?entrypoint=supervision_settings
+              - generic [ref=e251]:
+                - img [ref=e253]
+                - generic [ref=e258]: ศูนย์ครอบครัว
+            - link "การตั้งค่ากลุ่มเป้าหมายเริ่มต้น" [ref=e266] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/bundled/
+              - generic [ref=e268]:
+                - img [ref=e270]
+                - generic [ref=e275]: การตั้งค่ากลุ่มเป้าหมายเริ่มต้น
+          - generic [ref=e277]:
+            - generic [ref=e284]:
+              - heading "การตั้งค่า" [level=2] [ref=e289]:
+                - generic [ref=e291]: การตั้งค่า
+              - generic [ref=e296]: ปรับแต่งประสบการณ์ของคุณบน Facebook
+            - link "การตั้งค่าการตั้งค่าความรู้สึก" [ref=e303] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=reaction_preferences
+              - generic [ref=e305]:
+                - img [ref=e307]
+                - generic [ref=e312]: การตั้งค่าความรู้สึก
+            - link "การตั้งค่าการแจ้งเตือน" [ref=e319] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=notifications
+              - generic [ref=e321]:
+                - img [ref=e323]
+                - generic [ref=e328]: การแจ้งเตือน
+            - link "การตั้งค่าความช่วยเหลือด้านการเข้าถึง" [ref=e335] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=accessibility
+              - generic [ref=e337]:
+                - img [ref=e339]
+                - generic [ref=e344]: ความช่วยเหลือด้านการเข้าถึง
+            - link "การตั้งค่าภาษาและภูมิภาค" [ref=e351] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=language_and_region
+              - generic [ref=e353]:
+                - img [ref=e355]
+                - generic [ref=e360]: ภาษาและภูมิภาค
+            - link "การตั้งค่าสื่อ" [ref=e367] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=media
+              - generic [ref=e369]:
+                - img [ref=e371]
+                - generic [ref=e376]: สื่อ
+            - link "การตั้งค่าโหมดมืด" [ref=e383] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=dark_mode_category
+              - generic [ref=e385]:
+                - img [ref=e387]
+                - generic [ref=e392]: โหมดมืด
+          - generic [ref=e394]:
+            - generic [ref=e401]:
+              - heading "กลุ่มเป้าหมายและการแสดงผล" [level=2] [ref=e406]:
+                - generic [ref=e408]: กลุ่มเป้าหมายและการแสดงผล
+              - generic [ref=e413]: ควบคุมว่าใครบ้างที่สามารถเห็นสิ่งที่คุณแชร์บน Facebook ได้
+            - link "รายละเอียดโปรไฟล์" [ref=e421] [cursor=pointer]:
+              - /url: https://www.facebook.com/me/about/
+              - generic [ref=e423]:
+                - img [ref=e425]
+                - generic [ref=e430]: รายละเอียดโปรไฟล์
+            - link "การตั้งค่าโหมดมืออาชีพ" [ref=e437] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=professional_settings
+              - generic [ref=e439]:
+                - img [ref=e441]
+                - generic [ref=e446]: โหมดมืออาชีพ
+            - link "การตั้งค่าวิธีที่ผู้อื่นค้นหาและติดต่อคุณ" [ref=e453] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=how_people_find_and_contact_you
+              - generic [ref=e455]:
+                - img [ref=e457]
+                - generic [ref=e462]: วิธีที่ผู้อื่นค้นหาและติดต่อคุณ
+            - link "การตั้งค่าโพสต์" [ref=e469] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=posts
+              - generic [ref=e471]:
+                - img [ref=e473]
+                - generic [ref=e478]: โพสต์
+            - link "การตั้งค่าสตอรี่" [ref=e485] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=stories
+              - generic [ref=e487]:
+                - img [ref=e489]
+                - generic [ref=e494]: สตอรี่
+            - link "การตั้งค่าเพจ" [ref=e501] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=pages
+              - generic [ref=e503]:
+                - img [ref=e505]
+                - generic [ref=e510]: เพจ
+            - link "การตั้งค่าReels" [ref=e517] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=reels
+              - generic [ref=e519]:
+                - img [ref=e521]
+                - generic [ref=e526]: Reels
+            - link "การตั้งค่าผู้ติดตามและเนื้อหาสาธารณะ" [ref=e533] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=followers_and_public_content
+              - generic [ref=e535]:
+                - img [ref=e537]
+                - generic [ref=e542]: ผู้ติดตามและเนื้อหาสาธารณะ
+            - link "การตั้งค่าโปรไฟล์และการแท็ก" [ref=e549] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=profile_and_tagging
+              - generic [ref=e551]:
+                - img [ref=e553]
+                - generic [ref=e558]: โปรไฟล์และการแท็ก
+            - link "การตั้งค่าการบล็อก" [ref=e565] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=blocking
+              - generic [ref=e567]:
+                - img [ref=e569]
+                - generic [ref=e574]: การบล็อก
+          - generic [ref=e576]:
+            - generic [ref=e583]:
+              - heading "การชำระเงิน" [level=2] [ref=e588]:
+                - generic [ref=e590]: การชำระเงิน
+              - generic [ref=e595]: จัดการข้อมูลและกิจกรรมการชำระเงินของคุณ
+            - link "การชำระเงินค่าโฆษณา" [ref=e603] [cursor=pointer]:
+              - /url: https://www.facebook.com/billing_hub/payment_settings/?asset_id=592222917490816&placement=fb_payment_settings
+              - generic [ref=e605]:
+                - img [ref=e607]
+                - generic [ref=e612]: การชำระเงินค่าโฆษณา
+          - generic [ref=e614]:
+            - generic [ref=e621]:
+              - heading "กิจกรรมของคุณ" [level=2] [ref=e626]:
+                - generic [ref=e628]: กิจกรรมของคุณ
+              - generic [ref=e633]: ตรวจสอบกิจกรรมของคุณและเนื้อหาที่แท็กคุณ
+            - link "บันทึกกิจกรรม" [ref=e641] [cursor=pointer]:
+              - /url: https://www.facebook.com/100001093384166/allactivity/?category_key=ALL&entry_point=settings_yfi&should_load_landing_page=1
+              - generic [ref=e643]:
+                - img [ref=e645]
+                - generic [ref=e650]: บันทึกกิจกรรม
+            - link "แอพและเว็บไซต์" [ref=e658] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=applications
+              - generic [ref=e660]:
+                - img [ref=e662]
+                - generic [ref=e667]: แอพและเว็บไซต์
+            - link "การผสานรวมธุรกิจ" [ref=e675] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=business_tools
+              - generic [ref=e677]:
+                - img [ref=e679]
+                - generic [ref=e684]: การผสานรวมธุรกิจ
+            - link "เรียนรู้วิธีจัดการข้อมูลของคุณ" [ref=e692] [cursor=pointer]:
+              - /url: https://www.facebook.com/help/contact/367438723733209
+              - generic [ref=e694]:
+                - img [ref=e696]
+                - generic [ref=e701]: เรียนรู้วิธีจัดการข้อมูลของคุณ
+            - link "WhatsApp" [ref=e709] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/?tab=linked_whatsapp&referrer=comet_pro_mode_setting
+              - generic [ref=e711]:
+                - img [ref=e713]
+                - generic [ref=e718]: WhatsApp
+          - generic [ref=e720]:
+            - generic [ref=e727]:
+              - heading "กิจกรรมของคุณ" [level=2] [ref=e732]:
+                - generic [ref=e734]: กิจกรรมของคุณ
+              - generic [ref=e739]: เข้าถึงบันทึกกิจกรรมและควบคุมพื้นที่เก็บข้อมูลการค้นหาด้วยเสียง
+            - link "เปิดใช้งานเพจอีกครั้ง" [ref=e747] [cursor=pointer]:
+              - /url: https://www.facebook.com/settings/reactivation/
+              - generic [ref=e749]:
+                - img [ref=e751]
+                - generic [ref=e756]: เปิดใช้งานเพจอีกครั้ง
+          - generic [ref=e758]:
+            - heading "มาตรฐานชุมชนและนโยบายด้านกฎหมาย" [level=2] [ref=e770]:
+              - generic [ref=e772]: มาตรฐานชุมชนและนโยบายด้านกฎหมาย
+            - link "ข้อกำหนดในการใช้บริการ" [ref=e782] [cursor=pointer]:
+              - /url: https://www.facebook.com/policies_center/?ref=pf
+              - generic [ref=e784]:
+                - img [ref=e786]
+                - generic [ref=e791]: ข้อกำหนดในการใช้บริการ
+            - link "นโยบายความเป็นส่วนตัว" [ref=e799] [cursor=pointer]:
+              - /url: https://www.facebook.com/privacy/policy/?entry_point=facebook_settings
+              - generic [ref=e801]:
+                - img [ref=e803]
+                - generic [ref=e808]: นโยบายความเป็นส่วนตัว
+            - link "นโยบายคุกกี้" [ref=e816] [cursor=pointer]:
+              - /url: https://www.facebook.com/privacy/policies/cookies/?entry_point=facebook_settings
+              - generic [ref=e818]:
+                - img [ref=e820]
+                - generic [ref=e825]: นโยบายคุกกี้
+            - link "มาตรฐานชุมชน" [ref=e833] [cursor=pointer]:
+              - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2Fcommunity-standards%2F%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExeWpFRjRSblFIbE52eTd6ZnNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7-JAdMOGQgItynOUnPran1Q19wp5TU5KkL4Ec7mtmGBYzoqJTNGbvugj_ITA_aem_HL7l3OHibsWGsdj_zYk8pQ&h=AUCerTSY2WHPXPHjYyorKGSvwPkTlmfuy4JiFdgDpFTAsRF6120N4k64KY2-tOsvVNi0GbQE8oQsvnI7jv_Io8lQpyD6Lnfe4if_NgB2HdlK0NLi-EZ2zYTvvJXym7JAYwGVs9VXpQ8b5-AtWwHRKw
+              - generic [ref=e835]:
+                - img [ref=e837]
+                - generic [ref=e842]: มาตรฐานชุมชน
+    - main "การตั้งค่า" [ref=e843]:
+      - generic [ref=e845]:
+        - generic [ref=e851]:
+          - heading "ค้นหาการตั้งค่าที่คุณต้องการ" [level=2] [ref=e861]:
+            - generic [ref=e863]: ค้นหาการตั้งค่าที่คุณต้องการ
+          - textbox "กล่องป้อนการค้นหาการตั้งค่า" [ref=e866]:
+            - /placeholder: ค้นหาการตั้งค่า
+        - generic [ref=e868]:
+          - generic [ref=e871]:
+            - generic [ref=e872]: การตั้งค่าที่เข้าใช้งานบ่อยที่สุด
+            - generic [ref=e874]:
+              - link "การบล็อก ตรวจสอบคนที่คุณบล็อกก่อนหน้านี้หรือเพิ่มคนลงในรายการที่บล็อกของคุณ" [ref=e877] [cursor=pointer]:
+                - /url: https://www.facebook.com/settings/?tab=blocking
+                - generic [ref=e887]:
+                  - generic [ref=e890]: การบล็อก
+                  - generic [ref=e893]: ตรวจสอบคนที่คุณบล็อกก่อนหน้านี้หรือเพิ่มคนลงในรายการที่บล็อกของคุณ
+              - link "บันทึกกิจกรรม ดูและจัดการกิจกรรมของคุณบน Facebook" [ref=e896] [cursor=pointer]:
+                - /url: https://www.facebook.com/100001093384166/allactivity/?category_key=ALL&entry_point=settings_yfi&should_load_landing_page=1
+                - generic [ref=e906]:
+                  - generic [ref=e909]: บันทึกกิจกรรม
+                  - generic [ref=e912]: ดูและจัดการกิจกรรมของคุณบน Facebook
+              - link "โหมดมืด" [ref=e915] [cursor=pointer]:
+                - /url: https://www.facebook.com/settings/?tab=dark_mode_category
+                - generic [ref=e928]: โหมดมืด
+          - generic [ref=e932]:
+            - heading "มองหาอย่างอื่นอยู่ใช่ไหม" [level=2] [ref=e942]:
+              - generic [ref=e944]: มองหาอย่างอื่นอยู่ใช่ไหม
+            - generic [ref=e946]:
+              - link "ศูนย์ความเป็นส่วนตัว เรียนรู้เพิ่มเติมเกี่ยวกับวิธีจัดการและควบคุมความเป็นส่วนตัวทั่วทั้งผลิตภัณฑ์ในเครือ Meta" [ref=e948] [cursor=pointer]:
+                - /url: /privacy/center/?entry_point=facebook_settings
+                - generic [ref=e957]:
+                  - generic [ref=e959]: ศูนย์ความเป็นส่วนตัว
+                  - generic [ref=e961]: เรียนรู้เพิ่มเติมเกี่ยวกับวิธีจัดการและควบคุมความเป็นส่วนตัวทั่วทั้งผลิตภัณฑ์ในเครือ Meta
+              - link "ศูนย์ช่วยเหลือของ Facebook เรียนรู้เพิ่มเติมเกี่ยวกับประสบการณ์การตั้งค่าฉบับอัพเดตบน Facebook" [ref=e965] [cursor=pointer]:
+                - /url: https://www.facebook.com/help/2127174237420552
+                - generic [ref=e974]:
+                  - generic [ref=e976]: ศูนย์ช่วยเหลือของ Facebook
+                  - generic [ref=e978]: เรียนรู้เพิ่มเติมเกี่ยวกับประสบการณ์การตั้งค่าฉบับอัพเดตบน Facebook

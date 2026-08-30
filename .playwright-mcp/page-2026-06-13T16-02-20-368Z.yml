@@ -1,0 +1,96 @@
+- generic [ref=e2]:
+  - generic:
+    - iframe
+  - generic:
+    - iframe
+  - generic:
+    - iframe
+  - generic:
+    - iframe
+  - generic [ref=e3]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - link "โลโก้ Meta" [ref=e12] [cursor=pointer]:
+          - /url: /?no_redirect=true
+          - img "โลโก้ Meta" [ref=e14]
+        - tablist [ref=e23]:
+          - link "แอพของฉัน" [ref=e24] [cursor=pointer]:
+            - /url: /apps/
+            - generic [ref=e27]: แอพของฉัน
+          - link "การดำเนินการที่จำเป็น" [ref=e28] [cursor=pointer]:
+            - /url: /required-actions/
+            - generic [ref=e31]: การดำเนินการที่จำเป็น
+          - tab "เอกสาร" [ref=e32] [cursor=pointer]:
+            - generic [ref=e35]: เอกสาร
+          - button "เพิ่มเติม" [ref=e37] [cursor=pointer]:
+            - generic [ref=e40]: เพิ่มเติม
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e49]: คำค้นหา
+          - textbox "คำค้นหา" [ref=e60]:
+            - /placeholder: ค้นหา...
+        - link [ref=e63] [cursor=pointer]:
+          - /url: "#"
+        - link "Facebook" [ref=e68] [cursor=pointer]:
+          - /url: "#"
+          - img "Facebook" [ref=e73]
+        - generic [ref=e76]:
+          - heading "บัญชีของคุณ" [level=3] [ref=e77]
+          - generic [ref=e78]:
+            - generic [ref=e83]:
+              - list [ref=e85]:
+                - listitem [ref=e86]:
+                  - generic [ref=e89] [cursor=pointer]:
+                    - generic [ref=e91]:
+                      - generic:
+                        - img
+                      - img "Facebook" [ref=e93]
+                    - generic [ref=e95]:
+                      - generic [ref=e96]: กึกก้อง ณัฐกมล จันทวี
+                      - generic [ref=e97]: nutkamonchantawee@gmail.com
+                    - button "ไปที่การตั้งค่าผู้พัฒนา" [ref=e100]:
+                      - generic [ref=e103]: ไปที่การตั้งค่าผู้พัฒนา
+              - generic [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]: เพิ่มบัญชีอื่น
+                - generic [ref=e114]: คุณจะออกจากระบบบัญชีนี้
+            - button "ออกจากระบบบัญชีนี้" [ref=e116] [cursor=pointer]:
+              - generic [ref=e120]: ออกจากระบบบัญชีนี้
+    - generic [ref=e125]:
+      - heading "สร้างแอพ" [level=1] [ref=e127]
+      - generic [ref=e129]:
+        - list [ref=e141]:
+          - listitem [ref=e142]:
+            - button "รายละเอียดของแอพ สถานะยังไม่เสร็จสมบูรณ์" [ref=e143] [cursor=pointer]:
+              - generic [ref=e148]: รายละเอียดของแอพ
+          - listitem [ref=e149]:
+            - button "กรณีการใช้งาน สถานะรอดำเนินการ" [disabled] [ref=e150]:
+              - generic [ref=e155]: กรณีการใช้งาน
+          - listitem [ref=e156]:
+            - button "ธุรกิจ สถานะรอดำเนินการ" [disabled] [ref=e157]:
+              - generic [ref=e162]: ธุรกิจ
+          - listitem [ref=e163]:
+            - button "ข้อกำหนด สถานะรอดำเนินการ" [disabled] [ref=e164]:
+              - generic [ref=e169]: ข้อกำหนด
+          - listitem [ref=e170]:
+            - button "ภาพรวม สถานะรอดำเนินการ" [disabled] [ref=e171]:
+              - generic [ref=e176]: ภาพรวม
+        - generic [ref=e189]:
+          - generic [ref=e192]:
+            - generic [ref=e195]:
+              - generic [ref=e198]: ชื่อแอพ
+              - generic [ref=e199]: นี่คือชื่อแอพที่จะแสดงในหน้า "แอพของฉัน" และเชื่อมโยงกับ ID แอพของคุณ โดยคุณสามารถเปลี่ยนชื่อทีหลังได้ในการตั้งค่า
+            - generic [ref=e201]:
+              - generic [ref=e205]:
+                - textbox "ชื่อแอพ" [invalid] [ref=e208]: G
+                - generic [ref=e210]: 1/30
+              - generic [ref=e246]: ชื่อแอพ ต้องมีอย่างน้อย 2 ตัวอักษร
+          - generic [ref=e213]:
+            - generic [ref=e216]:
+              - generic [ref=e219]: อีเมลติดต่อของแอพ
+              - generic [ref=e220]: นี่คืออีเมลที่เราจะใช้ติดต่อคุณเกี่ยวกับแอพของคุณ โปรดใช้อีเมลที่คุณตรวจสอบอยู่เป็นประจำ เราอาจติดต่อคุณเกี่ยวกับนโยบาย ข้อจำกัดของแอพ หรือการกู้คืนในกรณีที่แอพของคุณถูกลบหรือตกอยู่ในอันตราย
+            - textbox "อีเมลติดต่อของแอพ" [ref=e229]: nutkamonchantawee@gmail.com
+          - generic [ref=e230]:
+            - button "ยกเลิก" [ref=e232] [cursor=pointer]:
+              - generic [ref=e236]: ยกเลิก
+            - button "ถัดไป" [active] [ref=e238] [cursor=pointer]:
+              - generic [ref=e242]: ถัดไป

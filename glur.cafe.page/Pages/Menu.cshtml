@@ -1,0 +1,256 @@
+@page
+@model glur.cafe.page.Pages.MenuModel
+@{
+    Layout = "_MenuLayout";
+    ViewData["Title"] = Model.SelectedFolder != null ? $"เมนู — {Model.SelectedFolder.Name}" : "เมนู";
+}
+
+<!-- ===== Top bar ===== -->
+<header class="menu-topbar">
+    <div class="d-flex align-items-center gap-2">
+        <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" class="menu-logo" />
+        <div>
+            <div class="menu-brand">GLUR CAFE</div>
+            <div class="menu-sub">เมนูประจำร้าน</div>
+        </div>
+    </div>
+    <a href="/" class="menu-home-link" title="กลับหน้าหลัก"><i class="bi bi-house-door"></i></a>
+</header>
+
+@* ============================================================
+   VIEW 3: หน้ารายการของหมวด (?cat=N)
+   ============================================================ *@
+@if (Model.SelectedFolder != null)
+{
+    <nav class="menu-subbar">
+        <a href="/Menu" class="menu-back" title="กลับ"><i class="bi bi-arrow-left"></i></a>
+        <div class="menu-subbar-title"><i class="bi @Model.SelectedFolder.IconClassName me-2"></i>@Model.SelectedFolder.Name</div>
+        <span class="menu-subbar-count">@Model.SelectedFolder.Items.Count รายการ</span>
+    </nav>
+
+    <main class="menu-main">
+        <section class="menu-section in-view">
+            <div class="menu-cards menu-cards-grid">
+                @{ var g2 = 0; }
+                @foreach (var item in Model.SelectedFolder.Items)
+                {
+                    g2++;
+                    var hasMedia = !string.IsNullOrEmpty(item.FilePath);
+                    <figure class="menu-card" data-full="@item.FilePath" data-type="@item.MediaType">
+                        @if (item.IsRecommended)
+                        {
+                            <span class="menu-card-reco"><i class="bi bi-star-fill"></i> แนะนำ</span>
+                        }
+                        @if (hasMedia && item.MediaType == "video")
+                        {
+                            <video src="@item.FilePath" muted loop playsinline preload="metadata" class="menu-card-media"></video>
+                        }
+                        else if (hasMedia)
+                        {
+                            <img src="@item.FilePath" loading="lazy" class="menu-card-media" alt="@item.Title" />
+                        }
+                        else
+                        {
+                            <div class="menu-card-media menu-card-placeholder grad-@((g2 % 10) + 1)">
+                                <i class="bi @Model.SelectedFolder.IconClassName"></i>
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(item.Title) || item.Price.HasValue)
+                        {
+                            <figcaption class="menu-card-caption">
+                                @if (!string.IsNullOrWhiteSpace(item.Title))
+                                {
+                                    <span class="menu-card-title">@Html.Raw(Html.Encode(item.Title).Replace("|", "<br />"))</span>
+                                }
+                                @if (item.Price.HasValue)
+                                {
+                                    <span class="menu-card-price">฿@item.Price.Value.ToString("0")</span>
+                                }
+                            </figcaption>
+                        }
+                    </figure>
+                }
+            </div>
+        </section>
+    </main>
+}
+else
+{
+    @* ===== Hero Carousel (โฟลเดอร์ Header) ===== *@
+    @if (Model.HeaderItems.Count > 0)
+    {
+        <div id="heroCarousel" class="carousel slide carousel-fade menu-hero" data-bs-ride="carousel" data-bs-interval="6000" data-bs-touch="true">
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.HeaderItems.Count; i++)
+                {
+                    var item = Model.HeaderItems[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        @if (item.MediaType == "video")
+                        {
+                            <video src="@item.FilePath" class="menu-hero-media" autoplay muted loop playsinline></video>
+                        }
+                        else
+                        {
+                            <img src="@item.FilePath" class="menu-hero-media" alt="@item.Title" loading="@(i == 0 ? "eager" : "lazy")" />
+                        }
+                    </div>
+                }
+            </div>
+            <div class="menu-hero-overlay">
+                <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" class="menu-hero-logo" />
+                <div class="menu-hero-title">GOOD COFFEE<br /><span>GOOD MOOD</span></div>
+                <div class="menu-hero-tag">โรงคั่วกาแฟ &amp; กาแฟสด · คั่วสดทุกวัน</div>
+            </div>
+            @if (Model.HeaderItems.Count > 1)
+            {
+                <div class="carousel-indicators menu-hero-indicators">
+                    @for (int i = 0; i < Model.HeaderItems.Count; i++)
+                    {
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-label="สไลด์ @(i + 1)"></button>
+                    }
+                </div>
+            }
+            @if (!Model.IsTv)
+            {
+                <a href="#menuCats" class="menu-hero-scroll" aria-label="เลื่อนลง"><i class="bi bi-chevron-double-down"></i></a>
+            }
+        </div>
+    }
+
+    @* ============================================================
+       VIEW 1: หน้าหมวดหมู่ (default) — เลือกหมวดก่อน
+       VIEW 2: โหมด TV (?tv=1) — แสดงทุกหมวดในหน้าเดียว
+       ============================================================ *@
+    @if (!Model.IsTv)
+    {
+        <main class="menu-main" id="menuCats">
+            <h2 class="menu-section-title px-3" style="padding-top:10px;">
+                <i class="bi bi-grid-3x3-gap"></i>เลือกหมวดหมู่
+            </h2>
+            <div class="menu-cat-grid">
+                @{ var g = 0; }
+                @foreach (var folder in Model.Folders)
+                {
+                    g++;
+                    var thumb = folder.Items.FirstOrDefault(i => !string.IsNullOrEmpty(i.FilePath) && i.MediaType != "video")?.FilePath;
+                    <a href="/Menu?cat=@folder.Id" class="menu-cat-card grad-@((g % 10) + 1) @(thumb != null ? "has-thumb" : "")">
+                        @if (thumb != null)
+                        {
+                            <img src="@thumb" class="menu-cat-thumb" alt="@folder.Name" loading="lazy" />
+                        }
+                        else
+                        {
+                            <i class="bi @folder.IconClassName"></i>
+                        }
+                        <span class="menu-cat-name">@folder.Name</span>
+                        <span class="menu-cat-count">@folder.Items.Count รายการ</span>
+                    </a>
+                }
+            </div>
+
+            @if (Model.HeaderItems.Count == 0 && Model.Folders.Count == 0)
+            {
+                <div class="menu-empty">
+                    <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" style="width:120px;opacity:.6" />
+                    <p class="mt-3">เมนูกำลังเตรียมความพร้อม ☕</p>
+                </div>
+            }
+        </main>
+    }
+    else
+    {
+        <!-- ===== TV mode: chips + ทุกหมวดในหน้าเดียว ===== -->
+        @if (Model.Folders.Count > 0)
+        {
+            <nav class="menu-chips" id="menuChips">
+                @foreach (var folder in Model.Folders)
+                {
+                    <a href="#folder-@folder.Id" class="menu-chip">
+                        <i class="bi @folder.IconClassName me-1"></i>@folder.Name
+                    </a>
+                }
+            </nav>
+        }
+
+        <main class="menu-main">
+            @foreach (var folder in Model.Folders)
+            {
+                <section id="folder-@folder.Id" class="menu-section">
+                    <h2 class="menu-section-title">
+                        <i class="bi @folder.IconClassName me-2"></i>@folder.Name
+                    </h2>
+                    <div class="menu-cards">
+                        @{ var g3 = 0; }
+                        @foreach (var item in folder.Items)
+                        {
+                            g3++;
+                            var hasMedia = !string.IsNullOrEmpty(item.FilePath);
+                            <figure class="menu-card" data-full="@item.FilePath" data-type="@item.MediaType">
+                                @if (item.IsRecommended)
+                                {
+                                    <span class="menu-card-reco"><i class="bi bi-star-fill"></i> แนะนำ</span>
+                                }
+                                @if (hasMedia && item.MediaType == "video")
+                                {
+                                    <video src="@item.FilePath" muted loop playsinline preload="metadata" class="menu-card-media"></video>
+                                }
+                                else if (hasMedia)
+                                {
+                                    <img src="@item.FilePath" loading="lazy" class="menu-card-media" alt="@item.Title" />
+                                }
+                                else
+                                {
+                                    <div class="menu-card-media menu-card-placeholder grad-@((g3 % 10) + 1)">
+                                        <i class="bi @folder.IconClassName"></i>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(item.Title) || item.Price.HasValue)
+                                {
+                                    <figcaption class="menu-card-caption">
+                                        @if (!string.IsNullOrWhiteSpace(item.Title))
+                                        {
+                                            <span class="menu-card-title">@Html.Raw(Html.Encode(item.Title).Replace("|", "<br />"))</span>
+                                        }
+                                        @if (item.Price.HasValue)
+                                        {
+                                            <span class="menu-card-price">฿@item.Price.Value.ToString("0")</span>
+                                        }
+                                    </figcaption>
+                                }
+                            </figure>
+                        }
+                    </div>
+                </section>
+            }
+
+            @if (Model.HeaderItems.Count == 0 && Model.Folders.Count == 0)
+            {
+                <div class="menu-empty">
+                    <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" style="width:120px;opacity:.6" />
+                    <p class="mt-3">เมนูกำลังเตรียมความพร้อม ☕</p>
+                </div>
+            }
+        </main>
+    }
+}
+
+<!-- ===== Footer ===== -->
+<footer class="menu-footer">
+    <div class="fw-semibold mb-1">GLUR CAFE · โรงคั่วกาแฟ &amp; กาแฟสด</div>
+    <div>
+        <i class="bi bi-telephone me-1"></i>@(Model.Site.GetValueOrDefault("Phone", "096-224-5194"))
+        <span class="mx-2">·</span>
+        <i class="bi bi-clock me-1"></i>@(Model.Site.GetValueOrDefault("WorkingHours", "ทุกวัน 07:00 - 17:00"))
+    </div>
+</footer>
+
+<!-- ===== Lightbox ===== -->
+<div class="menu-lightbox" id="menuLightbox">
+    <button type="button" class="menu-lightbox-close" id="lightboxClose" aria-label="ปิด"><i class="bi bi-x-lg"></i></button>
+    <div class="menu-lightbox-content" id="lightboxContent"></div>
+</div>
+
+@if (Model.IsTv)
+{
+    <script>document.body.classList.add('tv-mode');</script>
+}
