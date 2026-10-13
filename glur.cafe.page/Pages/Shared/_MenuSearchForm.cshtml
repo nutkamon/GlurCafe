@@ -1,0 +1,13 @@
+@model string
+
+<form method="get" action="/Menu" class="menu-search" role="search">
+    <label for="menuSearch" class="visually-hidden">ค้นหาเมนู</label>
+    <div class="menu-search-control">
+        <i class="bi bi-search menu-search-icon" aria-hidden="true"></i>
+        <input id="menuSearch" type="search" name="q" value="@Model" maxlength="100"
+               placeholder="ค้นหาเมนู เช่น ลาเต้, มัทฉะ" autocomplete="off" />
+        <button type="submit" class="menu-search-submit" aria-label="ค้นหา">
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </button>
+    </div>
+</form>

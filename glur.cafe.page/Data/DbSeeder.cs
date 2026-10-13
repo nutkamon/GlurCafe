@@ -249,6 +249,8 @@ namespace glur.cafe.page.Data
                     ""MediaType"" TEXT NOT NULL DEFAULT 'image',
                     ""Title"" TEXT NULL,
                     ""Price"" TEXT NULL,
+                    ""Description"" TEXT NULL,
+                    ""Options"" TEXT NULL,
                     ""IsRecommended"" INTEGER NOT NULL DEFAULT 0,
                     ""DisplayOrder"" INTEGER NOT NULL DEFAULT 0,
                     ""IsActive"" INTEGER NOT NULL DEFAULT 1,
@@ -259,6 +261,8 @@ namespace glur.cafe.page.Data
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MenuItems_FolderId"" ON ""MenuItems"" (""FolderId"");"); } catch { }
             try { context.Database.ExecuteSqlRaw(@"CREATE INDEX IF NOT EXISTS ""IX_MenuItems_DisplayOrder"" ON ""MenuItems"" (""DisplayOrder"");"); } catch { }
             try { context.Database.ExecuteSqlRaw(@"ALTER TABLE ""MenuItems"" ADD COLUMN ""IsRecommended"" INTEGER NOT NULL DEFAULT 0;"); } catch { }
+            try { context.Database.ExecuteSqlRaw(@"ALTER TABLE ""MenuItems"" ADD COLUMN ""Description"" TEXT NULL;"); } catch { }
+            try { context.Database.ExecuteSqlRaw(@"ALTER TABLE ""MenuItems"" ADD COLUMN ""Options"" TEXT NULL;"); } catch { }
         }
 
         /// <summary>

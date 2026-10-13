@@ -97,13 +97,16 @@ public class ItemsModel : PageModel
         return RedirectToPage(new { id });
     }
 
-    public async Task<IActionResult> OnPostEditItemAsync(int id, int itemId, string? Title, decimal? Price)
+    public async Task<IActionResult> OnPostEditItemAsync(
+        int id, int itemId, string? Title, decimal? Price, string? Description, string? Options)
     {
         var item = await _db.MenuItems.FirstOrDefaultAsync(i => i.Id == itemId && i.FolderId == id);
         if (item != null)
         {
             item.Title = string.IsNullOrWhiteSpace(Title) ? null : Title.Trim();
             item.Price = Price;
+            item.Description = string.IsNullOrWhiteSpace(Description) ? null : Description.Trim();
+            item.Options = string.IsNullOrWhiteSpace(Options) ? null : Options.Trim();
             await _db.SaveChangesAsync();
         }
         return RedirectToPage(new { id });

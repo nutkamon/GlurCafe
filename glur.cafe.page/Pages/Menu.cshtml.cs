@@ -13,15 +13,34 @@ public class MenuModel : PageModel
 
     public List<MenuItem> HeaderItems { get; set; } = new();
     public List<MenuFolder> Folders { get; set; } = new();
+    public List<MenuItem> SearchResults { get; set; } = new();
     public MenuFolder? SelectedFolder { get; set; }
+    public string? SearchQuery { get; set; }
     public bool IsTv { get; set; }
     public Dictionary<string, string> Site { get; set; } = new();
 
-    public async Task<IActionResult> OnGetAsync(int? cat)
+    public async Task<IActionResult> OnGetAsync(int? cat, string? q)
     {
         IsTv = string.Equals(Request.Query["tv"], "1");
-
         Site = await _db.SiteSettings.ToDictionaryAsync(s => s.Key, s => s.Value);
+
+        SearchQuery = IsTv || string.IsNullOrWhiteSpace(q) ? null : q.Trim();
+        if (SearchQuery is { Length: > 100 }) SearchQuery = SearchQuery[..100];
+        if (SearchQuery != null)
+        {
+            var searchTerm = SearchQuery.ToLowerInvariant();
+            SearchResults = await _db.MenuItems
+                .Include(i => i.Folder)
+                .Where(i => i.IsActive && i.Folder.IsActive && i.Folder.Name != "Header" &&
+                    ((i.Title != null && i.Title.ToLower().Contains(searchTerm)) ||
+                     (i.Description != null && i.Description.ToLower().Contains(searchTerm)) ||
+                     (i.Options != null && i.Options.ToLower().Contains(searchTerm)) ||
+                     i.Folder.Name.ToLower().Contains(searchTerm)))
+                .OrderBy(i => i.Folder.DisplayOrder)
+                .ThenBy(i => i.DisplayOrder)
+                .ToListAsync();
+            return Page();
+        }
 
         HeaderItems = await _db.MenuItems
             .Where(i => i.IsActive && i.FilePath != "" && i.Folder.Name == "Header" && i.Folder.IsActive)

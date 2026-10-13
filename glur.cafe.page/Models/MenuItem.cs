@@ -31,6 +31,14 @@ namespace glur.cafe.page.Models
         [Display(Name = "เมนูแนะนำ")]
         public bool IsRecommended { get; set; }
 
+        [StringLength(500)]
+        [Display(Name = "รายละเอียด")]
+        public string? Description { get; set; }
+
+        [StringLength(500)]
+        [Display(Name = "ตัวเลือก / ขนาด")]
+        public string? Options { get; set; }
+
         [Display(Name = "ลำดับการแสดงผล")]
         public int DisplayOrder { get; set; }
 

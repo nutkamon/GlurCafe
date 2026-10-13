@@ -248,6 +248,87 @@ html { scroll-behavior: smooth; scroll-padding-top: 130px; }
     box-shadow: var(--shadow-glow-teal);
 }
 
+.menu-search {
+    max-width: 1140px;
+    margin: 12px auto 18px;
+    padding: 0 20px;
+}
+.menu-hero-overlay .menu-search {
+    width: min(100%, 500px);
+    margin: 18px 0 0;
+    padding: 0;
+    pointer-events: auto;
+}
+.menu-hero-overlay .menu-search-control {
+    background: rgba(9, 24, 22, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.menu-search-control {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 6px 5px 16px;
+    border: 1px solid rgba(51, 197, 188, 0.38);
+    border-radius: 16px;
+    background: rgba(21, 36, 34, 0.9);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16), inset 0 1px rgba(253, 248, 242, 0.04);
+    transition: var(--transition);
+}
+.menu-search-control:focus-within {
+    border-color: var(--clr-teal-light);
+    box-shadow: 0 0 0 3px rgba(51, 197, 188, 0.12), var(--shadow-glow-teal);
+}
+.menu-search-icon { color: var(--clr-teal-light); font-size: 1.1rem; }
+.menu-search-control input {
+    min-width: 0;
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--clr-cream);
+    font: inherit;
+    font-size: 0.95rem;
+}
+.menu-search-control input::placeholder { color: rgba(253, 248, 242, 0.55); }
+.menu-search-submit {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--gradient-main);
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: 0 3px 12px rgba(0, 165, 154, 0.22);
+}
+.menu-search-page { max-width: 1140px; margin: 0 auto; }
+.menu-search-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 20px 0;
+}
+.menu-search-heading .menu-section-title { padding: 0; }
+.menu-search-count { margin: 8px 0 0 54px; color: rgba(253, 248, 242, 0.66); font-size: 0.85rem; }
+.menu-search-clear {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(253, 248, 242, 0.14);
+    border-radius: 50%;
+    color: var(--clr-cream);
+    text-decoration: none;
+}
+.menu-search-empty { padding: 35px 20px; }
+.menu-search-empty > i { color: var(--clr-teal-light); font-size: 2rem; }
+.menu-search-empty p { margin: 10px 0 0; }
+
 .menu-cards {
     display: flex;
     gap: 16px;
@@ -284,28 +365,59 @@ html { scroll-behavior: smooth; scroll-padding-top: 130px; }
     display: block;
 }
 .menu-card-caption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 30px 14px 12px;
-    background: linear-gradient(to top, rgba(6, 12, 11, 0.92), transparent);
-    color: #fff;
+    padding: 12px 14px 14px;
+    background: linear-gradient(180deg, rgba(21, 36, 34, 0.96), var(--menu-surface));
+    border-top: 1px solid rgba(253, 248, 242, 0.08);
+    color: var(--clr-cream);
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
 }
-.menu-card-title { font-size: 0.95rem; font-weight: 600; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
-.menu-card-price {
-    background: var(--gradient-amber);
-    color: #2b1c0e;
+.menu-card-title {
+    width: 100%;
+    color: var(--clr-cream);
+    font-size: 1rem;
     font-weight: 700;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+.menu-card-description {
+    color: rgba(253, 248, 242, 0.72);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+.menu-card-category {
+    color: var(--clr-teal-light);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.menu-card-options {
+    padding-top: 8px;
+    border-top: 1px solid rgba(253, 248, 242, 0.09);
+    color: var(--clr-amber-light);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+.menu-card-price {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(9, 24, 22, 0.96);
+    border: 1px solid rgba(51, 197, 188, 0.6);
+    color: var(--clr-amber-light);
+    font-weight: 800;
     white-space: nowrap;
-    padding: 2px 12px;
+    padding: 6px 16px;
     border-radius: 999px;
-    font-size: 0.9rem;
-    box-shadow: var(--shadow-glow-amber);
+    font-size: 1.25rem;
+    line-height: 1;
+    align-self: flex-end;
+    box-shadow: 0 0 0 1px rgba(0, 165, 154, 0.12), 0 4px 16px rgba(0, 165, 154, 0.2), inset 0 1px rgba(253, 248, 242, 0.1);
 }
 
 /* ===== Placeholder card (ยังไม่มีรูป) ===== */

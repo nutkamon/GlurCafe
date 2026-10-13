@@ -20,7 +20,79 @@
 @* ============================================================
    VIEW 3: หน้ารายการของหมวด (?cat=N)
    ============================================================ *@
-@if (Model.SelectedFolder != null)
+@if (!string.IsNullOrWhiteSpace(Model.SearchQuery))
+{
+    <main class="menu-main">
+        <div class="menu-search-page">
+            @await Html.PartialAsync("_MenuSearchForm", Model.SearchQuery)
+            <div class="menu-search-heading">
+                <div>
+                    <h1 class="menu-section-title"><i class="bi bi-search"></i>ผลการค้นหา</h1>
+                    <p class="menu-search-count">"@Model.SearchQuery" · @Model.SearchResults.Count รายการ</p>
+                </div>
+                <a href="/Menu" class="menu-search-clear" aria-label="ล้างการค้นหา"><i class="bi bi-x-lg"></i></a>
+            </div>
+            @if (Model.SearchResults.Count == 0)
+            {
+                <div class="menu-empty menu-search-empty">
+                    <i class="bi bi-search"></i>
+                    <p>ไม่พบเมนูที่ตรงกับคำค้นหา</p>
+                </div>
+            }
+            else
+            {
+                <div class="menu-cards menu-cards-grid">
+                    @{ var searchIndex = 0; }
+                    @foreach (var item in Model.SearchResults)
+                    {
+                        searchIndex++;
+                        var hasMedia = !string.IsNullOrEmpty(item.FilePath);
+                        <figure class="menu-card" data-full="@item.FilePath" data-type="@item.MediaType">
+                            @if (item.IsRecommended)
+                            {
+                                <span class="menu-card-reco"><i class="bi bi-star-fill"></i> แนะนำ</span>
+                            }
+                            @if (hasMedia && item.MediaType == "video")
+                            {
+                                <video src="@item.FilePath" muted loop playsinline preload="metadata" class="menu-card-media"></video>
+                            }
+                            else if (hasMedia)
+                            {
+                                <img src="@item.FilePath" loading="lazy" class="menu-card-media" alt="@item.Title" />
+                            }
+                            else
+                            {
+                                <div class="menu-card-media menu-card-placeholder grad-@((searchIndex % 10) + 1)">
+                                    <i class="bi @item.Folder.IconClassName"></i>
+                                </div>
+                            }
+                            <figcaption class="menu-card-caption">
+                                @if (!string.IsNullOrWhiteSpace(item.Title))
+                                {
+                                    <span class="menu-card-title">@Html.Raw(Html.Encode(item.Title).Replace("|", "<br />"))</span>
+                                }
+                                <span class="menu-card-category"><i class="bi @item.Folder.IconClassName me-1"></i>@item.Folder.Name</span>
+                                @if (!string.IsNullOrWhiteSpace(item.Description))
+                                {
+                                    <span class="menu-card-description">@item.Description</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(item.Options))
+                                {
+                                    <span class="menu-card-options">ตัวเลือก: @item.Options</span>
+                                }
+                                @if (item.Price.HasValue)
+                                {
+                                    <span class="menu-card-price">฿@item.Price.Value.ToString("0")</span>
+                                }
+                            </figcaption>
+                        </figure>
+                    }
+                </div>
+            }
+        </div>
+    </main>
+}
+else if (Model.SelectedFolder != null)
 {
     <nav class="menu-subbar">
         <a href="/Menu" class="menu-back" title="กลับ"><i class="bi bi-arrow-left"></i></a>
@@ -29,6 +101,7 @@
     </nav>
 
     <main class="menu-main">
+        @await Html.PartialAsync("_MenuSearchForm", Model.SearchQuery ?? "")
         <section class="menu-section in-view">
             <div class="menu-cards menu-cards-grid">
                 @{ var g2 = 0; }
@@ -61,6 +134,14 @@
                                 @if (!string.IsNullOrWhiteSpace(item.Title))
                                 {
                                     <span class="menu-card-title">@Html.Raw(Html.Encode(item.Title).Replace("|", "<br />"))</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(item.Description))
+                                {
+                                    <span class="menu-card-description">@item.Description</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(item.Options))
+                                {
+                                    <span class="menu-card-options">ตัวเลือก: @item.Options</span>
                                 }
                                 @if (item.Price.HasValue)
                                 {
@@ -100,6 +181,10 @@ else
                 <img src="/img/Logo-removebg-preview.png" alt="GLUR CAFE" class="menu-hero-logo" />
                 <div class="menu-hero-title">GOOD COFFEE<br /><span>GOOD MOOD</span></div>
                 <div class="menu-hero-tag">โรงคั่วกาแฟ &amp; กาแฟสด · คั่วสดทุกวัน</div>
+                @if (!Model.IsTv)
+                {
+                    @await Html.PartialAsync("_MenuSearchForm", Model.SearchQuery ?? "")
+                }
             </div>
             @if (Model.HeaderItems.Count > 1)
             {
@@ -124,6 +209,10 @@ else
     @if (!Model.IsTv)
     {
         <main class="menu-main" id="menuCats">
+            @if (Model.HeaderItems.Count == 0)
+            {
+                @await Html.PartialAsync("_MenuSearchForm", Model.SearchQuery ?? "")
+            }
             <h2 class="menu-section-title px-3" style="padding-top:10px;">
                 <i class="bi bi-grid-3x3-gap"></i>เลือกหมวดหมู่
             </h2>
@@ -210,6 +299,14 @@ else
                                         @if (!string.IsNullOrWhiteSpace(item.Title))
                                         {
                                             <span class="menu-card-title">@Html.Raw(Html.Encode(item.Title).Replace("|", "<br />"))</span>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(item.Description))
+                                        {
+                                            <span class="menu-card-description">@item.Description</span>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(item.Options))
+                                        {
+                                            <span class="menu-card-options">ตัวเลือก: @item.Options</span>
                                         }
                                         @if (item.Price.HasValue)
                                         {

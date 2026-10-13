@@ -75,6 +75,15 @@
                                        value="@(item.Price?.ToString())" placeholder="ราคา" />
                                 <button type="submit" class="btn btn-outline-secondary"><i class="bi bi-check"></i></button>
                             </div>
+                            <details class="menu-item-extra-editor mt-2">
+                                <summary class="small text-muted">รายละเอียดและตัวเลือก</summary>
+                                <label class="form-label small mt-2 mb-1">รายละเอียด</label>
+                                <textarea name="Description" class="form-control form-control-sm mb-2" rows="2" maxlength="500"
+                                          placeholder="เช่น หอมช็อกโกแลต บอดี้นุ่ม">@item.Description</textarea>
+                                <label class="form-label small mb-1">ตัวเลือก / ขนาด</label>
+                                <textarea name="Options" class="form-control form-control-sm" rows="2" maxlength="500"
+                                          placeholder="เช่น ร้อน 55 บาท&#10;เย็น 65 บาท&#10;เพิ่มนมโอ๊ต +15 บาท">@item.Options</textarea>
+                            </details>
                         </form>
                         <form method="post" asp-page-handler="UploadItemMedia" enctype="multipart/form-data" class="mb-2">
                             @Html.AntiForgeryToken()
